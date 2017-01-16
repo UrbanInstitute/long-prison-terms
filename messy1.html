@@ -1,0 +1,29 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<div id = "introGraphic"></div>
+	<div id = "sampleText">
+	<p>With 10-15 admissions per year, and sentences under 2 years, the population does not get out of control.
+	</p>
+	<p>The line chart below could potentially also show admission rate.</p>
+	<p>The bars turning pink when sentence is completed is just a placeholder/sketch. I'd like to see an animation where the dots zoom out in some way (i.e. leave their track), I think.</p>
+	<a href = "messy2.html" class = "nextButton">Next</a>
+	<div id = "lineChart">
+		<div id = "prisonPop">Total prison population: <span></span></div>
+	</div>
+
+	</div>
+
+	<script src="js/vendor/d3.v4.min.js"></script>
+	<script src="js/main.js"></script>
+	<script>
+		var dataPath = "data/messy/sample1.csv"
+		 d3.csv(dataPath, function (error, data) {
+		 	if (error) throw error;
+		 	drawIntro(data, 2000, 40)
+		 });
+	</script>
+</body>
+</html>
