@@ -1,0 +1,28 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<div id = "introGraphic"></div>
+	<div id = "sampleText">
+
+	<p>In this rivetting example of front end policies, the admission rate is slowed to one admission every two years, helping maintain equilibrium.
+	</p>
+
+	<a href = "messy1.html" class = "nextButton">Next</a>
+	<div id = "lineChart">
+		<div id = "prisonPop">Total prison population: <span></span></div>
+	</div>
+	</div>
+
+	<script src="js/vendor/d3.v4.min.js"></script>
+	<script src="js/main.js"></script>
+	<script>
+		var dataPath = "data/simple/sample4.csv"
+		 d3.csv(dataPath, function (error, data) {
+		 	if (error) throw error;
+		 	drawIntro(data, 2500, 12)
+		 });
+	</script>
+</body>
+</html>
