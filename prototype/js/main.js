@@ -62,24 +62,32 @@ function drawIntro(data, YEAR_IN_MS, MAX_BARS){
         return parseFloat(b.admission) - parseFloat(a.admission)
     });
 
+
 	var trackRatio = .4,
 		dotRatio = .7,
 		trackHeight = d3.max([height/data.length, height/MAX_BARS])
 		// trackHeight =height/data.length
 
+	data.forEach(function(datum, ind){
+		// console.log(datum, ind)
+		animateDot(datum, ind)
+	})
+    function animateDot(datum, ind){
+    	console.log(((ind - (data.length  - MAX_BARS))*trackHeight), ind)
 	var track = g
 		.selectAll(".tractGroup")
 		.data(data)
 		.enter()
 		.append("g")
 		.attr("class", "tractGroup inactive")
-		.attr("transform", function(d, i){
-			return "translate(0,"  + ((i - (data.length  - MAX_BARS))*trackHeight) + ")"
+		.attr("transform", function(d){
+			return "translate(0,"  + ((ind - (data.length  - MAX_BARS))*trackHeight) + ")"
 		})
 
 
 
 	track.append("rect")
+		.attr("class", "introMotion")
 		.attr("width", width + "px")
 		.attr("height", (trackHeight*trackRatio) + "px")
 		.attr("y",(1-trackRatio)*.5*trackHeight)
@@ -93,7 +101,7 @@ function drawIntro(data, YEAR_IN_MS, MAX_BARS){
 			})
 
 	track.append("rect")
-		.attr("class", "trackFilled")
+		.attr("class", "trackFilled introMotion")
 		.attr("width", function(d){
 			return (d3.min([0,d.admission]) * -1 / d.sentence)*width + "px"
 		})
@@ -116,7 +124,7 @@ function drawIntro(data, YEAR_IN_MS, MAX_BARS){
 				.attr("width", function(d){ return width * (d.lengthOfStay/d.sentence) + "px" })
 
 	var dot = track.append("circle")
-		.attr("class","dot")
+		.attr("class","dot introMotion")
 		.attr("cx", function(d){
 			return (d3.min([0,d.admission]) * -1 / d.sentence)*width
 		})
@@ -127,7 +135,7 @@ function drawIntro(data, YEAR_IN_MS, MAX_BARS){
 		.transition()
 			.delay(function(d){ return yearsToMS(d.admission)}) 
 			.style("opacity", 1)
-			.attr("class", "dot active")
+			.attr("class", "dot active introMotion")
 			.transition()
 				.duration(function(d){
 					if(d.admission < 0){
@@ -139,7 +147,14 @@ function drawIntro(data, YEAR_IN_MS, MAX_BARS){
 				})
 				.ease(d3.easeLinear)
 				.attr("cx", function(d){ return width * (d.lengthOfStay/d.sentence) })
-				.on("end", function(d, i){
+				.on("start",function(d){
+					console.log(ind)
+				// 	if(i == 0){
+				// 		// console.log("done")
+				// 		d3.selectAll(".introMotion").transition()
+				// 	}
+				})
+				.on("end", function(d){
 					d3.select(this.parentNode)
 						.classed("inactive", true).classed("active", false)
 						.select(".trackFilled")
@@ -173,7 +188,7 @@ function drawIntro(data, YEAR_IN_MS, MAX_BARS){
 					})
 
 				})
-
+}
 	// setTimeout(function(){
 	// 	d3.selectAll("circle").transition();
 	// 	d3.selectAll(".tractGroup").transition();
