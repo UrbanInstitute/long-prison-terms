@@ -8,9 +8,18 @@
 var scrollVis = function() {
   // constants to define the size
   // and margins of the vis area.
-  var width = 600;
-  var height = 520;
-  var margin = {top:0, left:20, bottom:40, right:10};
+  var WIDTH = 500,
+    HEIGHT = 500,
+    margin = {top: 2, right: 25, bottom: 10, left: 25},
+    width = WIDTH - margin.left - margin.right,
+    height = HEIGHT - margin.top - margin.bottom
+
+  var YEAR_IN_MS = 2000,
+    MAX_BARS = 40
+
+  var FILLED_TRACK_COLOR = "#9d9d9d"
+  var EMPTY_TRACK_COLOR = "#e3e3e3"
+  var EXITING_TRACK_COLOR = "#ec008b"
 
   // Keep track of which visualization
   // we are on and which was the last
@@ -20,10 +29,11 @@ var scrollVis = function() {
   var lastIndex = -1;
   var activeIndex = 0;
 
-  // Sizing for the grid visualization
-  var squareSize = 6;
-  var squarePad = 2;
-  var numPerRow = width / (squareSize + squarePad);
+  // sizing constants for intro track
+  var trackRatio = .4,
+    dotRatio = .7
+    
+
 
   // main svg used for visualization
   var svg = null;
@@ -32,51 +42,7 @@ var scrollVis = function() {
   // for displaying visualizations
   var g = null;
 
-  // We will set the domain when the
-  // data is processed.
-  var xBarScale = d3.scale.linear()
-    .range([0, width]);
 
-  // The bar chart display is horizontal
-  // so we can use an ordinal scale
-  // to get width and y locations.
-  var yBarScale = d3.scale.ordinal()
-    .domain([0,1,2])
-    .rangeBands([0, height - 50], 0.1, 0.1);
-
-  // Color is determined just by the index of the bars
-  var barColors = {0: "#008080", 1: "#399785", 2: "#5AAF8C"};
-
-  // The histogram display shows the
-  // first 30 minutes of data
-  // so the range goes from 0 to 30
-  var xHistScale = d3.scale.linear()
-    .domain([0, 30])
-    .range([0, width - 20]);
-
-  var yHistScale = d3.scale.linear()
-    .range([height, 0]);
-
-  // The color translation uses this
-  // scale to convert the progress
-  // through the section into a
-  // color value.
-  var coughColorScale = d3.scale.linear()
-    .domain([0,1.0])
-    .range(["#008080", "red"]);
-
-  // You could probably get fancy and
-  // use just one axis, modifying the
-  // scale, but I will use two separate
-  // ones to keep things easy.
-  var xAxisBar = d3.svg.axis()
-    .scale(xBarScale)
-    .orient("bottom");
-
-  var xAxisHist = d3.svg.axis()
-    .scale(xHistScale)
-    .orient("bottom")
-    .tickFormat(function(d) { return d + " min"; });
 
   // When scrolling to a new section
   // the activation function for that
@@ -98,11 +64,11 @@ var scrollVis = function() {
   var chart = function(selection) {
     selection.each(function(rawData) {
       // create svg and give it a width and height
-      svg = d3.select(this).selectAll("svg").data([wordData]);
+      svg = d3.select(this).selectAll("svg").data([allData]);
       svg.enter().append("svg").append("g");
 
-      svg.attr("width", width + margin.left + margin.right);
-      svg.attr("height", height + margin.top + margin.bottom);
+      svg.attr("width", WIDTH);
+      svg.attr("height", HEIGHT);
 
 
       // this group element will be used to contain all
@@ -111,24 +77,9 @@ var scrollVis = function() {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
       // perform some preprocessing on raw data
-      var wordData = getWords(rawData);
-      // filter to just include filler words
-      var fillerWords = getFillerWords(wordData);
-
-      // get the counts of filler words for the
-      // bar chart display
-      var fillerCounts = groupByWord(fillerWords);
-      // set the bar scale's domain
-      var countMax = d3.max(fillerCounts, function(d) { return d.values;});
-      xBarScale.domain([0,countMax]);
-
-      // get aggregated histogram data
-      var histData = getHistogram(fillerWords);
-      // set histogram's domain
-      var histMax = d3.max(histData, function(d) { return d.y; });
-      yHistScale.domain([0, histMax]);
-
-      setupVis(wordData, fillerCounts, histData);
+      var allData = cleanData(rawData);
+      svg.data([allData])
+      setupVis(allData);
 
       setupSections();
 
@@ -140,129 +91,402 @@ var scrollVis = function() {
    * setupVis - creates initial elements for all
    * sections of the visualization.
    *
-   * @param wordData - data object for each word.
+   * @param allData - data object for each word.
    * @param fillerCounts - nested data that includes
    *  element for each filler word type.
    * @param histData - binned histogram data
    */
-  setupVis = function(wordData, fillerCounts, histData) {
-    // axis
-    g.append("g")
-      .attr("class", "x axis")
-      .attr("transform", "translate(0," + height + ")")
-      .call(xAxisBar);
-    g.select(".x.axis").style("opacity", 0);
+  setupVis = function(allData) {
+    //temp line
+    var data = allData.filter(function(d){return d.step == 1});
+
+    trackHeight = d3.max([height/data.length, height/MAX_BARS])
+
+    //intro background
+    g.append("rect")
+      .attr("class","prisonBG")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("fill", "none")
+      .attr("stroke", "#000000")
+      .style("opacity",0)
 
     // count openvis title
     g.append("text")
       .attr("class", "title openvis-title")
       .attr("x", width / 2)
       .attr("y", height / 3)
-      .text("2013");
+      .text("Intro");
 
     g.append("text")
       .attr("class", "sub-title openvis-title")
       .attr("x", width / 2)
       .attr("y", (height / 3) + (height / 5) )
-      .text("OpenVis Conf");
+      .text("Area chart");
 
     g.selectAll(".openvis-title")
       .attr("opacity", 0);
 
-    // count filler word count title
-    g.append("text")
-      .attr("class", "title count-title highlight")
-      .attr("x", width / 2)
-      .attr("y", height / 3)
-      .text("180");
-
-    g.append("text")
-      .attr("class", "sub-title count-title")
-      .attr("x", width / 2)
-      .attr("y", (height / 3) + (height / 5) )
-      .text("Filler Words");
-
-    g.selectAll(".count-title")
-      .attr("opacity", 0);
-
-    // square grid
-    var squares = g.selectAll(".square").data(wordData);
-    squares.enter()
-      .append("rect")
-      .attr("width", squareSize)
-      .attr("height", squareSize)
-      .attr("fill", "#fff")
-      .classed("square", true)
-      .classed("fill-square", function(d) { return d.filler; })
-      .attr("x", function(d) { return d.x;})
-      .attr("y", function(d) { return d.y;})
-      .attr("opacity", 0);
-
-    // barchart
-    var bars = g.selectAll(".bar").data(fillerCounts);
-    bars.enter()
-      .append("rect")
-      .attr("class", "bar")
-      .attr("x", 0)
-      .attr("y", function(d,i) { return yBarScale(i);})
-      .attr("fill", function(d,i) { return barColors[i]; })
-      .attr("width", 0)
-      .attr("height", yBarScale.rangeBand());
-
-    var barText = g.selectAll(".bar-text").data(fillerCounts);
-    barText.enter()
-      .append("text")
-      .attr("class", "bar-text")
-      .text(function(d) { return d.key + "…"; })
-      .attr("x", 0)
-      .attr("dx", 15)
-      .attr("y", function(d,i) { return yBarScale(i);})
-      .attr("dy", yBarScale.rangeBand() / 1.2)
-      .style("font-size", "110px")
-      .attr("fill", "white")
-      .attr("opacity", 0);
-
-    // histogram
-    var hist = g.selectAll(".hist").data(histData);
-    hist.enter().append("rect")
-      .attr("class", "hist")
-      .attr("x", function(d) { return xHistScale(d.x); })
-      .attr("y", height)
-      .attr("height", 0)
-      .attr("width", xHistScale(histData[0].dx) - 1)
-      .attr("fill", barColors[0])
-      .attr("opacity", 0);
-
-    // cough title
-    g.append("text")
-      .attr("class", "sub-title cough cough-title")
-      .attr("x", width / 2)
-      .attr("y", 60)
-      .text("cough")
-      .attr("opacity", 0);
-
-    // arrowhead from
-    // http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
-    svg.append("defs").append("marker")
-      .attr("id", "arrowhead")
-      .attr("refY", 2)
-      .attr("markerWidth", 6)
-      .attr("markerHeight", 4)
-      .attr("orient", "auto")
-      .append("path")
-      .attr("d", "M 0,0 V 4 L6,2 Z");
-
-    g.append("path")
-      .attr("class", "cough cough-arrow")
-      .attr("marker-end", "url(#arrowhead)")
-      .attr("d", function() {
-        var line = "M " + ((width / 2) - 10) + " " + 80;
-        line += " l 0 " + 230;
-        return line;
+    var singleTrack = g
+      .append("g")
+      .attr("class", "singleTrackGroup")
+      .attr("transform", function(d, i){
+        return "translate(0, " + (height-trackHeight) + ")"
       })
-      .attr("opacity", 0);
+    var slowSingleTrack = g
+      .append("g")
+      .attr("class", "slowSingleTrackGroup")
+      .attr("transform", function(d, i){
+        return "translate(0, " + (height-2*trackHeight) + ")"
+      })
+
+    singleTrack.append("rect")
+      .attr("class", "singleTrackEmpty")
+      .attr("width", width + "px")
+      .attr("height", (trackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("fill", EMPTY_TRACK_COLOR)
+      .style("opacity", 0)
+
+    singleTrack.append("rect")
+      .attr("class", "singleTrackFilled")
+      .attr("width", "0px")
+      .attr("height", (trackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("fill", FILLED_TRACK_COLOR)
+      .style("opacity", 0)
+
+    singleTrack.append("circle")
+      .attr("class","singleDot")
+      .attr("cx", 0)
+      .attr("cy", (1-trackRatio)*.5*trackHeight*1.5)
+      .attr("r", trackHeight * dotRatio * .5)
+      .style("fill", function(){ return dotColor(1) })
+      .style("opacity", 0)
+
+    slowSingleTrack.append("rect")
+      .attr("class", "slowSingleTrackEmpty")
+      .attr("width", width + "px")
+      .attr("height", (trackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("fill", EMPTY_TRACK_COLOR)
+      .style("opacity", 0)
+
+    slowSingleTrack.append("rect")
+      .attr("class", "slowSingleTrackFilled")
+      .attr("width", "0px")
+      .attr("height", (trackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("fill", FILLED_TRACK_COLOR)
+      .style("opacity", 0)
+
+    slowSingleTrack.append("circle")
+      .attr("class","slowSingleDot")
+      .attr("cx", 0)
+      .attr("cy", (1-trackRatio)*.5*trackHeight*1.5)
+      .attr("r", trackHeight * dotRatio * .5)
+      .style("fill", function(){ return dotColor(1) })
+      .style("opacity", 0)
+
+
+
+    //track for all intro animations
+    var track = g
+      .selectAll(".trackGroup")
+      .data(data)
+      .enter()
+      .append("g")
+      .attr("class", "trackGroup inactive visible")
+      .attr("transform", function(d, i){
+        return "translate(0,"  + ((i - (data.length  - MAX_BARS))*trackHeight) + ")"
+      })
+
+    track.append("rect")
+      .attr("class", "introMotion trackEmpty")
+      .attr("width", width + "px")
+      .attr("height", (trackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("fill", EMPTY_TRACK_COLOR)
+      .style("opacity", 0)
+
+    track.append("rect")
+      .attr("class", "trackFilled")
+      .attr("width", function(d){
+        return (d3.min([0,d.admission]) * -1 / d.sentence)*width + "px"
+      })
+      .attr("height", (trackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("fill", FILLED_TRACK_COLOR)
+      .style("opacity", 0)
+
+    var dot = track.append("circle")
+      .attr("class","dot")
+      .attr("cx", function(d){
+        return (d3.min([0,d.admission]) * -1 / d.sentence)*width
+      })
+      .attr("cy", (1-trackRatio)*.5*trackHeight*1.5)
+      .attr("r", trackHeight * dotRatio * .5)
+      .style("fill", function(d){ return dotColor(d.sentence) })
+      .style("opacity", 0)
+
+
   };
 
+  function resetIntro(step){
+    var data = d3.select("svg").data()[0].filter(function(d){return +d.step == +step})
+    .sort(function(a, b) {
+        return parseFloat(b.admission) - parseFloat(a.admission)
+    });
+
+    g
+      .selectAll(".trackGroup")
+      .data(data)
+      .transition()
+      .attr("transform", function(d, i){
+        return "translate(0,"  + ((i - (data.length  - MAX_BARS))*trackHeight) + ")"
+      })
+
+    d3.selectAll(".trackEmpty")
+      .transition()
+      .style("opacity",0)
+    d3.selectAll(".trackFilled")
+    .data(data)
+      .transition()
+      .attr("width", function(d){
+        return (d3.min([0,d.admission]) * -1 / d.sentence)*width + "px"
+      })
+      .style("opacity",0)
+      // .each("end", function(d,i){
+      //   // console.log(i, data.length)
+      // })
+
+    d3.selectAll(".dot")
+    .data(data)
+      .transition()
+      .attr("cx", function(d){
+        return (d3.min([0,d.admission]) * -1 / d.sentence)*width
+      })
+      .style("fill", function(d){ return dotColor(d.sentence) })
+      .style("opacity",0)
+  }
+
+  function animateIntro(step){
+    // pauseAnimation()
+    var data = d3.select("svg").data()[0].filter(function(d){ return +d.step == +step})
+    .sort(function(a, b) {
+        return parseFloat(b.admission) - parseFloat(a.admission)
+    });
+    g.data(data)
+
+    g.selectAll(".openvis-title")
+      .transition()
+      .duration(0)
+      .style("opacity",0)
+
+    g.select(".prisonBG")
+      .transition()
+      .style("opacity",1)
+
+    g
+      .selectAll(".trackGroup")
+      .classed("visible",true)
+      .style("opacity",1)
+      .data(data)
+      .transition()
+      .delay(400)
+      .attr("transform", function(d, i){
+        return "translate(0,"  + ((i - (data.length  - MAX_BARS))*trackHeight) + ")"
+      })
+      .each("end", function(d, i){
+        if(i == data.length-1){
+
+
+d3.selectAll(".trackEmpty")
+.data(data)
+.transition()
+.duration(350)
+.style("opacity",0)
+.transition()
+.delay(function(d){ return yearsToMS(d.admission)}) 
+.style("opacity", function(d){
+  if(+d.sentence == 999){
+    return 0
+  }else{
+    return 1
+  }
+})
+.each("end", function(){
+d3.select(this.parentNode).classed("inactive", false).classed("active", true)
+})
+
+d3.selectAll(".trackFilled")
+.data(data)
+.transition()
+.duration(350)
+.style("fill",FILLED_TRACK_COLOR)
+.attr("width", function(d){
+  // return (d3.min([0,d.admission]) * -1 / d.sentence)*width + "px"
+  return "0px"
+})
+.style("opacity",0)
+
+.transition()
+.delay(function(d){ return yearsToMS(d.admission)}) 
+      .style("opacity", function(d){
+        if(+d.sentence == 999){
+          return 0
+        }else{
+          return 1
+        }
+      })
+.transition()
+.ease("linear")
+.duration(function(d){
+if(d.admission < 0){
+return yearsToMS((d.sentence -(-1 * d.admission)) * d.lengthOfStay/d.sentence)
+}else{
+return yearsToMS(d.lengthOfStay)
+}
+})
+.attr("width", function(d){ return width * (d.lengthOfStay/d.sentence) + "px" })
+
+d3.selectAll(".dot")
+.data(data)
+.transition()
+.duration(350)
+.attr("cx", function(d){
+  // return (d3.min([0,d.admission]) * -1 / d.sentence)*width
+  return 0
+})
+.style("fill", function(d){ return dotColor(d.sentence) })
+.style("opacity",0)
+
+.transition()
+.delay(function(d){ return yearsToMS(d.admission)}) 
+      .style("opacity", function(d){
+        if(+d.sentence == 999){
+          return 0
+        }else{
+          return 1
+        }
+      })
+.attr("class", "dot active")
+.transition()
+.duration(function(d){
+if(d.admission < 0){
+return yearsToMS((d.sentence - (-1 * d.admission)) * d.lengthOfStay/d.sentence)
+}else{
+return yearsToMS(d.lengthOfStay)
+}
+
+})
+.ease("linear")
+.attr("cx", function(d){ return width * (d.lengthOfStay/d.sentence) })
+.each("start",function(d,i){
+if(i == 0){
+pauseAnimation(width)
+}
+})
+.each("end", function(d){
+d3.select(this.parentNode)
+.classed("inactive", true).classed("active", false)
+.select(".trackFilled")
+.transition("fade-out")
+.duration(100)
+.style("fill", EXITING_TRACK_COLOR)
+d3.select(this.parentNode)
+.selectAll("rect")
+.transition("fade-out")
+.delay(200)
+.duration(100)
+.ease("linear")
+.style("opacity",0)
+.each("end", function(){
+// d3.select(this.parentNode).remove()
+d3.select(this.parentNode)
+.classed("visible",false)
+.transition()
+.duration(0)
+.style("opacity",0)
+
+d3.selectAll(".trackGroup")
+.transition("fade-out")
+.duration(200)
+.attr("transform", function(){
+
+var top = this.getBoundingClientRect().top
+var count = 0;
+var gs = d3.selectAll(".trackGroup.visible")
+gs[0].forEach(function(g){
+
+  // var g = g
+  if(g.getBoundingClientRect().top > top){
+    count += 1
+  }
+})
+return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"             
+});
+})
+
+})
+
+        }
+      })
+
+
+
+
+  }
+
+  function dotColor(sentence){
+    // if(sentence >= 5){
+    //   return "#fdbf11"
+    // }else{
+    //   return "#1696d2";
+    // }
+    var ramp=d3.scale.linear().domain([1,20]).range(["#1696d2","#fdbf11"]);
+    return ramp(sentence)
+  }
+  function yearsToMS(year){
+    return d3.max([0,year]) * YEAR_IN_MS
+  }
+
+  function pauseAnimation(width){
+    var bounceLength = 20,
+        pauseDuration = 800;
+    d3.selectAll(".dot")
+      .transition()
+      .ease("expOut")
+      .duration(pauseDuration)
+      .attr("cx", function(d){
+        var cx = ( (width * (d.lengthOfStay/d.sentence)) - parseFloat(d3.select(this).attr("cx")) > bounceLength) ? parseFloat(d3.select(this).attr("cx")) + bounceLength : parseFloat(d3.select(this).attr("cx")) + .5*((width * (d.lengthOfStay/d.sentence)) - +d3.select(this).attr("cx"))
+        return cx
+      })
+      .style("opacity",function(){
+        var o = (d3.select(this).style("opacity") == 0) ? 0 : 1
+        return o
+      })
+
+    d3.selectAll(".trackFilled")
+    .transition()
+    .ease("expOut")
+    .duration(pauseDuration)
+    .attr("width", function(d){
+      var w = ( (width * (d.lengthOfStay/d.sentence)) - parseFloat(d3.select(this).attr("width").replace("px","")) > bounceLength) ? parseFloat(d3.select(this).attr("width").replace("px","")) + bounceLength : parseFloat(d3.select(this).attr("width").replace("px","")) + .5*((width * (d.lengthOfStay/d.sentence)) - +d3.select(this).attr("width").replace("px",""))
+      return w  + "px"
+    })
+    .style("opacity",function(){
+      var o = (d3.select(this).style("opacity") == 0) ? 0 : 1
+      return o
+    })  
+
+    d3.selectAll(".introMotion")
+    .transition()
+    .style("opacity",function(){
+      var o = (d3.select(this).style("opacity") == 0) ? 0 : 1
+      return o
+    })
+  }
   /**
    * setupSections - each section is activated
    * by a separate function. Here we associate
@@ -273,15 +497,15 @@ var scrollVis = function() {
   setupSections = function() {
     // activateFunctions are called each
     // time the active section changes
-    activateFunctions[0] = showTitle;
-    activateFunctions[1] = showFillerTitle;
-    activateFunctions[2] = showGrid;
-    activateFunctions[3] = highlightGrid;
-    activateFunctions[4] = showBar;
-    activateFunctions[5] = showHistPart;
-    activateFunctions[6] = showHistAll;
-    activateFunctions[7] = showCough;
-    activateFunctions[8] = showHistAll;
+    activateFunctions[0] = introAreaChart;
+    activateFunctions[1] = showSingleDot;
+    activateFunctions[2] = admissionsExample;
+    activateFunctions[3] = lengthOfStayExample;
+    activateFunctions[4] = oneYearSentences;
+    activateFunctions[5] = longerSentences;
+    activateFunctions[6] = longerSentencesFasterAdmission;
+    activateFunctions[7] = fewerShortSentences;
+    activateFunctions[8] = shortSentenceEarlyRelease;
 
     // updateFunctions are called while
     // in a particular section to update
@@ -292,7 +516,7 @@ var scrollVis = function() {
     for(var i = 0; i < 9; i++) {
       updateFunctions[i] = function() {};
     }
-    updateFunctions[7] = updateCough;
+    updateFunctions[2] = updateAdmissionsText;
   };
 
   /**
@@ -311,14 +535,20 @@ var scrollVis = function() {
    */
 
   /**
-   * showTitle - initial title
+   * introLineChart - initial title
    *
    * hides: count title
    * (no previous step to hide)
    * shows: intro title
    *
    */
-  function showTitle() {
+
+  function introAreaChart() {
+    hideSingleDot()
+    d3.select(".prisonBG")
+      .transition()
+      .style("opacity",0)
+
     g.selectAll(".count-title")
       .transition()
       .duration(0)
@@ -328,265 +558,189 @@ var scrollVis = function() {
       .transition()
       .duration(600)
       .attr("opacity", 1.0);
+    
   }
 
-  /**
-   * showFillerTitle - filler counts
-   *
-   * hides: intro title
-   * hides: square grid
-   * shows: filler count title
-   *
-   */
-  function showFillerTitle() {
+  function hideSingleDot(){
+    d3.select(".singleTrackEmpty")
+      .transition()
+      .style("opacity", 0)
+      .style("color", EMPTY_TRACK_COLOR)
+
+    d3.select(".singleTrackFilled")
+      .transition()
+      .attr("width", "0px")
+      .transition()
+      .style("opacity",0)
+      .style("color", FILLED_TRACK_COLOR)
+
+     d3.select(".singleDot")
+      .transition()
+      .attr("cx", 0)
+      .transition()
+      .style("opacity",0)
+
+      d3.select(".slowSingleTrackGroup")
+        .transition("reset-single")
+          .attr("transform", function(d, i){
+            return "translate(0, " + (height-2*trackHeight) + ")"
+          })
+      d3.select(".singleTrackGroup")
+        .transition("reset-single")
+          .attr("transform", function(d, i){
+            return "translate(0, " + (height-trackHeight) + ")"
+          })
+
+
+    d3.select(".slowSingleTrackEmpty")
+      .transition()
+      .style("opacity", 0)
+      .style("color", EMPTY_TRACK_COLOR)
+
+    d3.select(".slowSingleTrackFilled")
+      .transition()
+      .attr("width", "0px")
+      .transition()
+      .style("opacity",0)
+      .style("color", FILLED_TRACK_COLOR)
+
+     d3.select(".slowSingleDot")
+      .transition()
+      .attr("cx", 0)
+      .transition()
+      .style("opacity",0)
+
+
+  }
+
+  function showSingleDot(){
+    resetIntro(1)
+
     g.selectAll(".openvis-title")
       .transition()
       .duration(0)
       .attr("opacity", 0);
 
-    g.selectAll(".square")
+    g.select(".prisonBG")
       .transition()
-      .duration(0)
-      .attr("opacity", 0);
+      .style("opacity",1)
 
-    g.selectAll(".count-title")
-      .transition()
-      .duration(600)
-      .attr("opacity", 1.0);
-  }
 
-  /**
-   * showGrid - square grid
-   *
-   * hides: filler count title
-   * hides: filler highlight in grid
-   * shows: square grid
-   *
-   */
-  function showGrid() {
-    g.selectAll(".count-title")
+    d3.select(".singleTrackEmpty")
       .transition()
-      .duration(0)
-      .attr("opacity", 0);
+      .style("opacity", 1)
 
-    g.selectAll(".square")
+    d3.select(".singleTrackFilled")
       .transition()
-      .duration(600)
-      .delay(function(d,i) {
-        return 5 * d.row;
+      .style("opacity",1)
+      .transition()
+      .ease("linear")
+      .delay(400)
+      .duration(1500)
+      .attr("width", function(){ return width + "px"})
+
+     d3.select(".singleDot")
+      .transition()
+      .style("opacity",1)
+      .transition()
+      .delay(400)
+      .duration(1500)
+      .ease("linear")
+      .attr("cx", function(){ return width + "px"})
+      .each("end", function(){
+        d3.select(".singleTrackFilled")
+          .transition("fade-out")
+            .duration(100)
+            .style("fill", EXITING_TRACK_COLOR)
+        d3.select(this)
+          .transition()
+            .delay(200)
+            .duration(100)
+            .ease("linear")
+            .style("opacity",0)
+        d3.select(this.parentNode)
+          .selectAll("rect")
+          .transition("fade-out")
+            .delay(200)
+            .duration(100)
+            .ease("linear")
+            .style("opacity",0)
+
+        d3.select(".slowSingleTrackGroup")
+          .transition()
+            .attr("transform", function(d, i){
+              return "translate(0, " + (height-trackHeight) + ")"
+            })
       })
-      .attr("opacity", 1.0)
-      .attr("fill", "#ddd");
-  }
 
-  /**
-   * highlightGrid - show fillers in grid
-   *
-   * hides: barchart, text and axis
-   * shows: square grid and highlighted
-   *  filler words. also ensures squares
-   *  are moved back to their place in the grid
-   */
-  function highlightGrid() {
-    hideAxis();
-    g.selectAll(".bar")
+    d3.select(".slowSingleTrackEmpty")
       .transition()
-      .duration(600)
-      .attr("width", 0);
+      .style("opacity", 1)
 
-    g.selectAll(".bar-text")
+    d3.select(".slowSingleTrackFilled")
       .transition()
-      .duration(0)
-      .attr("opacity", 0);
-
-
-    g.selectAll(".square")
+      .style("opacity",1)
       .transition()
-      .duration(0)
-      .attr("opacity", 1.0)
-      .attr("fill", "#ddd");
+      .ease("linear")
+      .delay(400)
+      .duration(8500)
+      .attr("width", function(){ return width + "px"})
 
-    // use named transition to ensure
-    // move happens even if other
-    // transitions are interrupted.
-    g.selectAll(".fill-square")
-      .transition("move-fills")
-      .duration(800)
-      .attr("x", function(d,i) {
-        return d.x;
+     d3.select(".slowSingleDot")
+      .transition()
+      .style("opacity",1)
+      .transition()
+      .delay(400)
+      .duration(8500)
+      .ease("linear")
+      .attr("cx", function(){ return width + "px"})
+      .each("end", function(){
+        d3.select(".slowSingleTrackFilled")
+          .transition("fade-out")
+            .duration(100)
+            .style("fill", EXITING_TRACK_COLOR)
+        d3.select(this)
+          .transition()
+            .delay(200)
+            .duration(100)
+            .ease("linear")
+            .style("opacity",0)
+        d3.select(this.parentNode)
+          .selectAll("rect")
+          .transition("fade-out")
+            .delay(200)
+            .duration(100)
+            .ease("linear")
+            .style("opacity",0)
       })
-      .attr("y", function(d,i) {
-        return d.y;
-      });
-
-    g.selectAll(".fill-square")
-      .transition()
-      .duration(800)
-      .attr("opacity", 1.0)
-      .attr("fill", function(d) { return d.filler ? '#008080' : '#ddd'; });
   }
 
-  /**
-   * showBar - barchart
-   *
-   * hides: square grid
-   * hides: histogram
-   * shows: barchart
-   *
-   */
-  function showBar() {
-    // ensure bar axis is set
-    showAxis(xAxisBar);
-
-    g.selectAll(".square")
+  function admissionsExample(){
+    d3.select("#admissionUpdateText")
       .transition()
-      .duration(800)
-      .attr("opacity", 0);
-
-    g.selectAll(".fill-square")
-      .transition()
-      .duration(800)
-      .attr("x", 0)
-      .attr("y", function(d,i) {
-        return yBarScale(i % 3) + yBarScale.rangeBand() / 2;
-      })
-      .transition()
-      .duration(0)
-      .attr("opacity", 0);
-
-    g.selectAll(".hist")
-      .transition()
-      .duration(600)
-      .attr("height", function(d) { return  0; })
-      .attr("y", function(d) { return  height; })
-      .style("opacity", 0);
-
-    g.selectAll(".bar")
-      .transition()
-      .delay(function(d,i) { return 300 * (i + 1);})
-      .duration(600)
-      .attr("width", function(d) { return xBarScale(d.values); });
-
-    g.selectAll(".bar-text")
-      .transition()
-      .duration(600)
-      .delay(1200)
-      .attr("opacity", 1);
+      .delay(7000)
+      .style("opacity",1)
+    hideSingleDot()
+    animateIntro(1)
   }
-
-  /**
-   * showHistPart - shows the first part
-   *  of the histogram of filler words
-   *
-   * hides: barchart
-   * hides: last half of histogram
-   * shows: first half of histogram
-   *
-   */
-  function showHistPart() {
-    // switch the axis to histogram one
-    showAxis(xAxisHist);
-
-    g.selectAll(".bar-text")
-      .transition()
-      .duration(0)
-      .attr("opacity", 0);
-
-    g.selectAll(".bar")
-      .transition()
-      .duration(600)
-      .attr("width", 0);
-
-    // here we only show a bar if
-    // it is before the 15 minute mark
-    g.selectAll(".hist")
-      .transition()
-      .duration(600)
-      .attr("y", function(d) { return (d.x < 15) ? yHistScale(d.y) : height; })
-      .attr("height", function(d) { return (d.x < 15) ? height - yHistScale(d.y) : 0;  })
-      .style("opacity", function(d,i) { return (d.x < 15) ? 1.0 : 1e-6; });
+  function lengthOfStayExample(){
+    animateIntro(2)
   }
-
-  /**
-   * showHistAll - show all histogram
-   *
-   * hides: cough title and color
-   * (previous step is also part of the
-   *  histogram, so we don't have to hide
-   *  that)
-   * shows: all histogram bars
-   *
-   */
-  function showHistAll() {
-    // ensure the axis to histogram one
-    showAxis(xAxisHist);
-
-    g.selectAll(".cough")
-      .transition()
-      .duration(0)
-      .attr("opacity", 0);
-
-    // named transition to ensure
-    // color change is not clobbered
-    g.selectAll(".hist")
-      .transition("color")
-      .duration(500)
-      .style("fill", "#008080");
-
-    g.selectAll(".hist")
-      .transition()
-      .duration(1200)
-      .attr("y", function(d) { return yHistScale(d.y); })
-      .attr("height", function(d) { return  height - yHistScale(d.y);  })
-      .style("opacity", 1.0);
+  function oneYearSentences(){
+    animateIntro(3)
   }
-
-  /**
-   * showCough
-   *
-   * hides: nothing
-   * (previous and next sections are histograms
-   *  so we don't have to hide much here)
-   * shows: histogram
-   *
-   */
-  function showCough() {
-    // ensure the axis to histogram one
-    showAxis(xAxisHist);
-
-    g.selectAll(".hist")
-      .transition()
-      .duration(600)
-      .attr("y", function(d) { return yHistScale(d.y); })
-      .attr("height", function(d) { return  height - yHistScale(d.y);  })
-      .style("opacity", 1.0);
+  function longerSentences(){
+    animateIntro(4)
   }
-
-  /**
-   * showAxis - helper function to
-   * display particular xAxis
-   *
-   * @param axis - the axis to show
-   *  (xAxisHist or xAxisBar)
-   */
-  function showAxis(axis) {
-    g.select(".x.axis")
-      .call(axis)
-      .transition().duration(500)
-      .style("opacity", 1);
+  function longerSentencesFasterAdmission(){
+    animateIntro(5)
   }
-
-  /**
-   * hideAxis - helper function
-   * to hide the axis
-   *
-   */
-  function hideAxis() {
-    g.select(".x.axis")
-      .transition().duration(500)
-      .style("opacity",0);
+  function fewerShortSentences(){
+    animateIntro(6)
   }
-
+  function shortSentenceEarlyRelease(){
+    animateIntro(7)
+  }
   /**
    * UPDATE FUNCTIONS
    *
@@ -606,19 +760,13 @@ var scrollVis = function() {
    * @param progress - 0.0 - 1.0 -
    *  how far user has scrolled in section
    */
-  function updateCough(progress) {
-    g.selectAll(".cough")
-      .transition()
-      .duration(0)
-      .attr("opacity", progress);
 
-    g.selectAll(".hist")
-      .transition("cough")
-      .duration(0)
-      .style("fill", function(d,i) {
-        return (d.x >= 14) ? coughColorScale(progress) : "#008080";
-      });
-  }
+   function updateAdmissionsText(progress){
+    console.log(progress)
+   }
+
+
+
 
   /**
    * DATA FUNCTIONS
@@ -629,7 +777,7 @@ var scrollVis = function() {
    */
 
   /**
-   * getWords - maps raw data to
+   * cleanData - maps raw data to
    * array of data objects. There is
    * one data object for each word in the speach
    * data.
@@ -639,68 +787,13 @@ var scrollVis = function() {
    *
    * @param rawData - data read in from file
    */
-  function getWords(rawData) {
-    return rawData.map(function(d,i) {
-      // is this word a filler word?
-      d.filler = (d.filler === "1") ? true : false;
-      // time in seconds word was spoken
-      d.time = +d.time;
-      // time in minutes word was spoken
-      d.min = Math.floor(d.time / 60);
-
-      // positioning for square visual
-      // stored here to make it easier
-      // to keep track of.
-      d.col = i % numPerRow;
-      d.x = d.col * (squareSize + squarePad);
-      d.row = Math.floor(i / numPerRow);
-      d.y = d.row * (squareSize + squarePad);
-      return d;
+  function cleanData(rawData) {
+    return rawData.sort(function(a, b) {
+        return parseFloat(b.admission) - parseFloat(a.admission)
     });
   }
 
-  /**
-   * getFillerWords - returns array of
-   * only filler words
-   *
-   * @param data - word data from getWords
-   */
-  function getFillerWords(data) {
-    return data.filter(function(d) {return d.filler; });
-  }
-
-  /**
-   * getHistogram - use d3's histogram layout
-   * to generate histogram bins for our word data
-   *
-   * @param data - word data. we use filler words
-   *  from getFillerWords
-   */
-  function getHistogram(data) {
-    // only get words from the first 30 minutes
-    var thirtyMins = data.filter(function(d) { return d.min < 30; });
-    // bin data into 2 minutes chuncks
-    // from 0 - 31 minutes
-    return d3.layout.histogram()
-      .value(function(d) { return d.min; })
-      .bins(d3.range(0,31,2))
-      (thirtyMins);
-  }
-
-  /**
-   * groupByWord - group words together
-   * using nest. Used to get counts for
-   * barcharts.
-   *
-   * @param words
-   */
-  function groupByWord(words) {
-    return d3.nest()
-      .key(function(d) { return d.word; })
-      .rollup(function(v) { return v.length; })
-      .entries(words)
-      .sort(function(a,b) {return b.values - a.values;});
-  }
+ 
 
   /**
    * activate -
@@ -771,5 +864,5 @@ function display(data) {
 }
 
 // load data and display
-d3.tsv("data/words.tsv", display);
+d3.csv("data/sample2.csv", display);
 

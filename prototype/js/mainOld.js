@@ -1,4 +1,5 @@
 function pauseAnimation(width){
+// d3.selectAll(".introMotion").transition()
 var bounceLength = 40;
 d3.selectAll(".dot")
 	.transition()
@@ -37,6 +38,8 @@ d3.selectAll(".introMotion")
 
 
 function drawIntro(data, YEAR_IN_MS, MAX_BARS){
+	// var YEAR_IN_MS = 2500
+	// var MAX_BARS = 12
 	function dotColor(sentence){
 		if(sentence >= 10){
 			return "#fdbf11"
@@ -75,6 +78,7 @@ function drawIntro(data, YEAR_IN_MS, MAX_BARS){
 	var trackRatio = .4,
 		dotRatio = .7,
 		trackHeight = d3.max([height/data.length, height/MAX_BARS])
+		// trackHeight =height/data.length
 
 	var track = g
 		.selectAll(".tractGroup")
@@ -153,6 +157,8 @@ function drawIntro(data, YEAR_IN_MS, MAX_BARS){
 					if(i == 0){
 						console.log(width)
 						pauseAnimation(width)
+						// console.log("done")
+						// d3.selectAll(".introMotion").transition()
 					}
 				})
 				.on("end", function(d){
@@ -183,11 +189,19 @@ function drawIntro(data, YEAR_IN_MS, MAX_BARS){
 									count += 1
 								}
 							})
+							// console.log(count)
 							return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"							
 						});
 					})
 
 				})
+
+	// setTimeout(function(){
+	// 	d3.selectAll("circle").transition();
+	// 	d3.selectAll(".tractGroup").transition();
+	// 	d3.selectAll(".tractGroup rect").transition();
+	// }, 5290)
+
 drawLines()
 }
 
@@ -201,7 +215,12 @@ function drawLines(){
       .append("svg")
       .attr("width", w)
       .attr("height", h)
+ //      .attr("id", "visualization")
+ //      .attr("xmlns", "http://www.w3.org/2000/svg");
+
+ //    var data = d3.range(11).map(function(){return Math.random()*10})
     var data = []
+    // console.log(data)
     var x = d3.scaleLinear().domain([0, 100]).range([0, 100]);
     var y = d3.scaleLinear().domain([0, 40]).range([90, 10]);
     var line = d3.line()
@@ -214,6 +233,15 @@ function drawLines(){
       .attr("stroke-width", "2")
       .attr("fill", "none");
 
+    // var totalLength = path.node().getTotalLength();
+
+    // path
+    //   .attr("stroke-dasharray", totalLength + " " + totalLength)
+    //   .attr("stroke-dashoffset", totalLength)
+    //   .transition()
+    //     .duration(2000)
+    //     // .ease("line)
+    //     .attr("stroke-dashoffset", 0);
 
 
 	setInterval(countPop, 100);
@@ -224,9 +252,17 @@ function drawLines(){
 		}else{
 			d3.select("#prisonPop span").text(pop)
 			data.push(pop)
+			     // totalLength = path.node().getTotalLength();
 			path.transition()
 			.attr("d", line(data))
 		}
+    // path
+    //   .attr("stroke-dasharray", totalLength + " " + totalLength)
+    //   .attr("stroke-dashoffset", totalLength)
+    //   // .transition()
+    //     // .duration(20)
+    //     // .ease("line)
+    //     .attr("stroke-dashoffset", 0);
 
 	}
 }

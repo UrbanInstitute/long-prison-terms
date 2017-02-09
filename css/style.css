@@ -19,7 +19,7 @@
 
 .step {
   margin-bottom: 200px;
-  font-family: "TiemposTextWeb-Regular","Georgia";
+  font-family: "Lato";
   font-size: 16px;
   line-height: 23px;
   color: #767678;
@@ -78,3 +78,18 @@
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+.updateText{
+  opacity: 0;
+}
