@@ -76,21 +76,6 @@ body{
 
 
 
-.highlight {
-  fill: #008080;
-  font-weight: bold;
-}
-
-.cough-arrow {
-  stroke: #000;
-  stroke-width: 4px;
-
-}
-
-
-
-
-
 
 
 
@@ -115,6 +100,10 @@ path.line {
     /*opacity: .2*/
 }
 
+path.line.highlight{
+  stroke: #fdbf11 !important;
+  opacity: 1 !important;
+}
 .axis path,
 .axis line {
     fill: none;
@@ -129,6 +118,13 @@ path.line {
 .lineLabel{
   position: fixed;
   opacity: 0;
+  pointer-events: none;
+  cursor: pointer;
+}
+.lineLabel.highlight{
+  color: #fdbf11 !important;
+  opacity: 1 !important;
+  font-weight: bold;
 }
 #lineLabel_3{
   left: 302px;
@@ -153,26 +149,4 @@ path.line {
   left: 302px;
   bottom: 145px;
   line-height: 13px;
-}
-
-
-
-
-
-}
-
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-
 }

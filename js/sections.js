@@ -58,7 +58,20 @@ var scrollVis = function() {
   // through the section with the current
   // progress through the section.
   var updateFunctions = [];
-
+    d3.selectAll(".lineLabel")
+      .on("mouseover", function(){
+        if(d3.select(this).style("opacity") == 0){
+          return false;
+        }else{
+          d3.select(this)
+            .classed("highlight", true)
+          d3.select(".line.step_" + d3.select(this).attr("data-key"))
+            .classed("highlight", true)
+        }
+      })
+      .on("mouseout", function(){
+        d3.selectAll(".highlight").classed("highlight", false)
+      })
   /**
    * chart
    *
@@ -279,15 +292,28 @@ var scrollVis = function() {
         .entries(lineData);
 
     lineDataNest.forEach(function(d) {
+        var key = d.key
         lineSvg.append("path")
             .attr("class", "line step_" + d.key)
+            .attr("data-key", d.key)
             .attr("d", countline(d.values))
+            .on("mouseover", function(){
+                d3.select(this)
+                  .classed("highlight", true)
+                if(d3.select("#lineLabel_" + key).style("opacity") != 0){
+                  d3.select("#lineLabel_" + key)
+                    .classed("highlight", true)
+                }
+            })
+            .on("mouseout", function(){
+              d3.selectAll(".highlight").classed("highlight", false)
+            })
 
     lineSvg.append("rect")
       .attr("x", 0)
-      .attr("y", 0)
+      .attr("y", -2)
       .attr("width", lineWidth)
-      .attr("height", lineHeight)
+      .attr("height", lineHeight+2)
       .style("fill", "#ffffff")
       .attr("class", "curtain_" + d.key)
 
@@ -302,6 +328,8 @@ var scrollVis = function() {
     lineSvg.append("g")
         .attr("class", "y axis")
         .call(yAxis);
+
+
 
 
 
@@ -353,6 +381,8 @@ var scrollVis = function() {
     .sort(function(a, b) {
         return parseFloat(b.admission) - parseFloat(a.admission)
     });
+
+
     g.data(data)
 
     g.selectAll(".openvis-title")
@@ -369,13 +399,14 @@ var scrollVis = function() {
       .classed("visible",true)
       .style("opacity",1)
       .data(data)
-      .transition()
+      .transition("foo")
+      .duration(350)
       .delay(400)
       .attr("transform", function(d, i){
         return "translate(0,"  + ((i - (data.length  - MAX_BARS))*trackHeight) + ")"
       })
-      .each("end", function(d, i){
-        if(i == data.length-1){
+      // .each("end", function(d, i){
+      //   if(i == data.length-1){
 
 
 d3.selectAll(".trackEmpty")
@@ -401,30 +432,28 @@ d3.selectAll(".trackFilled")
 .transition()
 .duration(350)
 .style("fill",FILLED_TRACK_COLOR)
-.attr("width", function(d){
-  // return (d3.min([0,d.admission]) * -1 / d.sentence)*width + "px"
-  return "0px"
-})
+.attr("width", "0px")
 .style("opacity",0)
 
 .transition()
 .delay(function(d){ return yearsToMS(d.admission)}) 
-      .style("opacity", function(d){
-        if(+d.sentence == 999){
-          return 0
-        }else{
-          return 1
-        }
-      })
+.style("opacity", function(d){
+  if(+d.sentence == 999){
+    return 0
+  }else{
+    return 1
+  }
+})
 .transition()
 .ease("linear")
 .duration(function(d){
-if(d.admission < 0){
-return yearsToMS((d.sentence -(-1 * d.admission)) * d.lengthOfStay/d.sentence)
-}else{
+// if(d.admission < 0){
+// return yearsToMS((d.sentence -(-1 * d.admission)) * d.lengthOfStay/d.sentence)
+// }else{
 return yearsToMS(d.lengthOfStay)
-}
+// }
 })
+
 .attr("width", function(d){ return width * (d.lengthOfStay/d.sentence) + "px" })
 
 d3.selectAll(".dot")
@@ -450,11 +479,11 @@ d3.selectAll(".dot")
 .attr("class", "dot active")
 .transition()
 .duration(function(d){
-if(d.admission < 0){
-return yearsToMS((d.sentence - (-1 * d.admission)) * d.lengthOfStay/d.sentence)
-}else{
+// if(d.admission < 0){
+// return yearsToMS((d.sentence - (-1 * d.admission)) * d.lengthOfStay/d.sentence)
+// }else{
 return yearsToMS(d.lengthOfStay)
-}
+// }
 
 })
 .ease("linear")
@@ -482,12 +511,12 @@ d3.select(this.parentNode)
 // d3.select(this.parentNode).remove()
 d3.select(this.parentNode)
 .classed("visible",false)
-.transition()
+.transition("fade-out")
 .duration(0)
 .style("opacity",0)
 
 d3.selectAll(".trackGroup")
-.transition("fade-out")
+.transition()
 .duration(200)
 .attr("transform", function(){
 
@@ -507,8 +536,8 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
 
 })
 
-        }
-      })
+      //   }
+      // })
 
 
 
@@ -530,6 +559,7 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
       d3.select("#lineLabel_" + k)
         .transition()
         .style("opacity",.2)
+        .style("pointer-events","all")
     }
     for(var k = key+1; k < 8; k++){
       d3.select(".curtain_" + k)
@@ -540,6 +570,7 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
       d3.select("#lineLabel_" + k)
         .transition()
         .style("opacity",0)
+        .style("pointer-events","none")
     }
     d3.select(".line.step_" + key)
         .transition()
@@ -559,17 +590,18 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
         .duration(10)
         .style("opacity",0)
         .transition()
-        .delay(7*YEAR_IN_MS)
+        .delay(8*YEAR_IN_MS)
         .style("opacity",1)
+        .style("pointer-events","all")
   }
   function dotColor(sentence){
-    // if(sentence >= 5){
-    //   return "#fdbf11"
-    // }else{
-    //   return "#1696d2";
-    // }
-    var ramp=d3.scale.linear().domain([1,20]).range(["#1696d2","#fdbf11"]);
-    return ramp(sentence)
+    if(sentence >= 5){
+      return "#fdbf11"
+    }else{
+      return "#1696d2";
+    }
+    // var ramp=d3.scale.linear().domain([1,20]).range(["#1696d2","#fdbf11"]);
+    // return ramp(sentence)
   }
   function yearsToMS(year){
     return d3.max([0,year]) * YEAR_IN_MS
