@@ -14,6 +14,11 @@ var scrollVis = function() {
     width = WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom
 
+  var lineMargin = {top: 30, right: 20, bottom: 30, left: 50},
+    lineWidth = 300 - lineMargin.left - lineMargin.right,
+    lineHeight = 270 - lineMargin.top - lineMargin.bottom;
+
+
   var YEAR_IN_MS = 2000,
     MAX_BARS = 40
 
@@ -42,7 +47,7 @@ var scrollVis = function() {
   // for displaying visualizations
   var g = null;
 
-
+  var lineSvg = null;
 
   // When scrolling to a new section
   // the activation function for that
@@ -76,10 +81,22 @@ var scrollVis = function() {
       g = svg.select("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+
+      lineSvg = d3.select("#lineChart")
+        .append("svg")
+            .attr("width", lineWidth + lineMargin.left + lineMargin.right)
+            .attr("height", lineHeight + lineMargin.top + lineMargin.bottom)
+        .append("g")
+            .attr("transform", 
+                  "translate(" + lineMargin.left + "," + lineMargin.top + ")");
+
+
       // perform some preprocessing on raw data
       var allData = cleanData(rawData);
+      var lineData = rawData[1]
       svg.data([allData])
-      setupVis(allData);
+      lineSvg.data([lineData])
+      setupVis(allData, lineData);
 
       setupSections();
 
@@ -96,7 +113,7 @@ var scrollVis = function() {
    *  element for each filler word type.
    * @param histData - binned histogram data
    */
-  setupVis = function(allData) {
+  setupVis = function(allData, lineData) {
     //temp line
     var data = allData.filter(function(d){return d.step == 1});
 
@@ -229,11 +246,71 @@ var scrollVis = function() {
       .style("fill", function(d){ return dotColor(d.sentence) })
       .style("opacity", 0)
 
+    //line chart
+    d3.select("#lineChart").style("opacity",0)
+
+    var x = d3.scale.linear().range([0, lineWidth]);
+    var y = d3.scale.linear().range([lineHeight, 0]);
+
+    var xAxis = d3.svg.axis().scale(x)
+        .orient("bottom").ticks(5);
+
+    var yAxis = d3.svg.axis().scale(y)
+        .orient("left").ticks(5);
+
+    var countline = d3.svg.line()
+        .x(function(d) { return x(d.time); })
+        .y(function(d) { return y(d.count); });
+
+
+    lineData.forEach(function(d) {
+    d.time = +d.time
+    d.count = +d.count;
+    });
+
+    // Scale the range of the data
+    x.domain(d3.extent(lineData, function(d) { return d.time; }));
+    y.domain([0, d3.max(lineData, function(d) { return d.count; })]); 
+
+    // Nest the entries by step
+    var lineDataNest = d3.nest()
+        .key(function(d) {return d.step;})
+        .sortKeys(d3.descending)
+        .entries(lineData);
+
+    lineDataNest.forEach(function(d) {
+        lineSvg.append("path")
+            .attr("class", "line step_" + d.key)
+            .attr("d", countline(d.values))
+
+    lineSvg.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", lineWidth)
+      .attr("height", lineHeight)
+      .style("fill", "#ffffff")
+      .attr("class", "curtain_" + d.key)
+
+    });
+
+    lineSvg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + lineHeight + ")")
+        .call(xAxis);
+
+    // Add the Y Axis
+    lineSvg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+
+
+
 
   };
 
   function resetIntro(step){
-    var data = d3.select("svg").data()[0].filter(function(d){return +d.step == +step})
+    var data = d3.select("#vis svg").data()[0].filter(function(d){return +d.step == +step})
     .sort(function(a, b) {
         return parseFloat(b.admission) - parseFloat(a.admission)
     });
@@ -272,7 +349,7 @@ var scrollVis = function() {
 
   function animateIntro(step){
     // pauseAnimation()
-    var data = d3.select("svg").data()[0].filter(function(d){ return +d.step == +step})
+    var data = d3.select("#vis svg").data()[0].filter(function(d){ return +d.step == +step})
     .sort(function(a, b) {
         return parseFloat(b.admission) - parseFloat(a.admission)
     });
@@ -438,6 +515,53 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
 
   }
 
+
+
+  function drawBackCurtain(key){
+    for(var k = key-1; k >= 3; k--){
+      d3.select(".curtain_" + k)
+        .transition()
+        .duration(0)
+        .attr("width",0)
+        .attr("x", lineWidth)
+      d3.select(".line.step_" + k)
+        .transition()
+        .style("opacity",.2)
+      d3.select("#lineLabel_" + k)
+        .transition()
+        .style("opacity",.2)
+    }
+    for(var k = key+1; k < 8; k++){
+      d3.select(".curtain_" + k)
+        .transition()
+        .duration(0)
+        .attr("width",lineWidth)
+        .attr("x", 0)
+      d3.select("#lineLabel_" + k)
+        .transition()
+        .style("opacity",0)
+    }
+    d3.select(".line.step_" + key)
+        .transition()
+        .style("opacity",1)
+    d3.select(".curtain_" + key)
+        .transition()
+        .duration(10)
+        .attr("width",lineWidth)
+        .attr("x", 0)
+        .transition()
+        .duration(8.7*YEAR_IN_MS)
+        .ease("linear")
+        .attr("width",0)
+        .attr("x", lineWidth)
+      d3.select("#lineLabel_" + key)
+        .transition()
+        .duration(10)
+        .style("opacity",0)
+        .transition()
+        .delay(7*YEAR_IN_MS)
+        .style("opacity",1)
+  }
   function dotColor(sentence){
     // if(sentence >= 5){
     //   return "#fdbf11"
@@ -725,20 +849,31 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
   }
   function lengthOfStayExample(){
     animateIntro(2)
+    d3.select("#lineChart")
+      .transition()
+      .style("opacity",0)
   }
   function oneYearSentences(){
+    d3.select("#lineChart")
+      .transition()
+      .style("opacity",1)
+    drawBackCurtain(3)
     animateIntro(3)
   }
   function longerSentences(){
+    drawBackCurtain(4)
     animateIntro(4)
   }
   function longerSentencesFasterAdmission(){
+    drawBackCurtain(5)
     animateIntro(5)
   }
   function fewerShortSentences(){
+    drawBackCurtain(6)
     animateIntro(6)
   }
   function shortSentenceEarlyRelease(){
+    drawBackCurtain(7)
     animateIntro(7)
   }
   /**
@@ -788,7 +923,7 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
    * @param rawData - data read in from file
    */
   function cleanData(rawData) {
-    return rawData.sort(function(a, b) {
+    return rawData[0].sort(function(a, b) {
         return parseFloat(b.admission) - parseFloat(a.admission)
     });
   }
@@ -833,13 +968,17 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
  *
  * @param data - loaded tsv data
  */
-function display(data) {
+function display(animationData, lineData) {
   // create a new plot and
   // display it
   var plot = scrollVis();
   d3.select("#vis")
-    .datum(data)
+    .datum([animationData, lineData])
     .call(plot);
+
+  // d3.select("#lineChart")
+  //   .datum(lineData)
+
 
   // setup scroll functionality
   var scroll = scroller()
@@ -864,5 +1003,9 @@ function display(data) {
 }
 
 // load data and display
-d3.csv("data/sample2.csv", display);
+d3.csv("data/introData.csv", function(animationData){
+  d3.csv("data/lineData.csv", function(lineData){
+    display(animationData, lineData)
+  })
+});
 

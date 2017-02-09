@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style> /* set the CSS */
+
+body { font: 12px Arial;}
+
+path { 
+    stroke: #1696d2;
+    stroke-width: 2;
+    fill: none;
+    opacity: .2
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+
+<!-- load the d3.js library -->    
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<script>
+
+// Set the dimensions of the canvas / graph
+var margin = {top: 30, right: 20, bottom: 30, left: 50},
+    width = 300 - margin.left - margin.right,
+    height = 270 - margin.top - margin.bottom;
+
+// Parse the time / time
+// var parsetime = d3.time.format("%b %Y").parse; 
+
+// Set the ranges
+var x = d3.scale.linear().range([0, width]);
+var y = d3.scale.linear().range([height, 0]);
+
+// Define the axes
+var xAxis = d3.svg.axis().scale(x)
+    .orient("bottom").ticks(5);
+
+var yAxis = d3.svg.axis().scale(y)
+    .orient("left").ticks(5);
+
+// Define the line
+var countline = d3.svg.line()
+    .x(function(d) { return x(d.time); })
+    .y(function(d) { return y(d.count); });
+    
+// Adds the svg canvas
+var svg = d3.select("body")
+    .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+        .attr("transform", 
+              "translate(" + margin.left + "," + margin.top + ")");
+
+// Get the data
+d3.csv("data/lineData.csv", function(error, data) {
+    data.forEach(function(d) {
+    d.time = +d.time
+    d.count = +d.count;
+    });
+
+    // Scale the range of the data
+    x.domain(d3.extent(data, function(d) { return d.time; }));
+    y.domain([0, d3.max(data, function(d) { return d.count; })]); 
+
+    // Nest the entries by step
+    var dataNest = d3.nest()
+        .key(function(d) {return d.step;})
+        .sortKeys(d3.descending)
+        .entries(data);
+
+    // Loop through each step / key
+    dataNest.forEach(function(d) {
+        // console.log(d.values)
+        console.log(d.key)
+        if(d.key == 4 || d.key == 6 || d.key == 7 || d.key == 3 || d.key == 5){
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", countline(d.values))
+        }
+            // .on("mouseover", function(){
+              // console.log(d.key)
+            // }) 
+    svg.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", width)
+      .attr("height", height)
+      .style("fill", "#ffffff")
+      .attr("class", "curtain_" + d.key)
+      // .transition()
+      // .duration(8700)
+      // .ease("linear")
+      // .attr("width",0)
+      // .attr("x", width)
+    });
+    // svg.append("rect")
+    //   .attr("x", 0)
+    //   .attr("y", 0)
+    //   .attr("width", width)
+    //   .attr("height", height)
+    //   .style("fill", "#ffffff")
+    //   .transition()
+    //   .duration(8700)
+    //   .ease("linear")
+    //   .attr("width",0)
+    //   .attr("x", width)
+
+    // Add the X Axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    // Add the Y Axis
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+});
+
+function drawBackCurtain(key){
+  d3.select(".curtain_" + key)
+        .transition()
+      .duration(3000)
+      .ease("linear")
+      .attr("width",0)
+      .attr("x", width)
+}
+
+</script>
+</body>

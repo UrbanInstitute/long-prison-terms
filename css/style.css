@@ -1,9 +1,13 @@
-
+body{
+  font-family: Lato;
+}
 .container {
   width: 890px;
 }
 
 #graphic {
+  position: absolute;
+  left: 14px;
   padding-top: 60px;
 }
 
@@ -11,8 +15,9 @@
 #sections {
   position: relative;
   display: inline-block;
-  width: 250px;
+  width: 450px;
   top: 0px;
+  left: 0px;
   z-index: 90;
   padding-bottom: 200px;
 }
@@ -26,7 +31,6 @@
 }
 
 #sections .title {
-  font-family: Arial,Helvetica,"san-serif";
   font-size: 16px;
   font-weight: bold;
   margin-bottom: 2px;
@@ -42,13 +46,24 @@
   display: inline-block;
   position: fixed;
   top: 60px;
+  left: 500px;
   z-index: 1;
   margin-left: 0;
   /* height: 600px; */
   /* width: 600px; */
   /* background-color: #ddd; */
 }
-
+#lineChart{
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  z-index: 1;
+  margin-left: 0;  
+  width: 470px;
+  background-color: white;
+  border-bottom: 20px solid white;
+  bottom: -20px;
+}
 #vis .title {
   font-size:120px;
   text-anchor: middle;
@@ -59,12 +74,7 @@
   text-anchor: middle;
 }
 
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #666;
-  shape-rendering: crispEdges;
-}
+
 
 .highlight {
   fill: #008080;
@@ -92,4 +102,77 @@
 
 .updateText{
   opacity: 0;
+}
+
+
+
+
+
+path.line { 
+    stroke: #1696d2;
+    stroke-width: 2;
+    fill: none;
+    /*opacity: .2*/
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+.y.axis path{
+  display: none;
+}
+
+.lineLabel{
+  position: fixed;
+  opacity: 0;
+}
+#lineLabel_3{
+  left: 302px;
+  bottom: 72px
+}
+#lineLabel_4{
+  left: 302px;
+  bottom: 170px;
+}
+#lineLabel_5{
+  left: 205px;
+  bottom: 231px;
+}
+#lineLabel_6{
+  left: 269px;
+  bottom: 143px;
+  width: 160px;
+  line-height: 13px;
+}
+#lineLabel_7{
+  width: 120px;
+  left: 302px;
+  bottom: 145px;
+  line-height: 13px;
+}
+
+
+
+
+
+}
+
+
+
+
+}
+
+
+
+
+
+}
+
+
+
+
 }
