@@ -93,27 +93,57 @@ body{
 
 
 
-path.line { 
+.introLineChart path.line { 
     stroke: #1696d2;
     stroke-width: 2;
     fill: none;
     /*opacity: .2*/
 }
 
-path.line.highlight{
+.introLineChart path.line.highlight{
   stroke: #fdbf11 !important;
   opacity: 1 !important;
 }
-.axis path,
-.axis line {
+.introLineChart .axis path,
+.introLineChart .axis line {
     fill: none;
     stroke: grey;
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
-.y.axis path{
+.introLineChart .y.axis path{
   display: none;
 }
+
+
+
+.state path.line { 
+    stroke: #1696d2;
+    stroke-width: 2;
+    fill: none;
+    /*opacity: .2*/
+}
+
+
+.state .axis path {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+.state .x.axis text, .state .x.axis line{
+  display: none;
+}
+
+.state .y.axis text, .state .y.axis line{
+  display: none;
+}
+.state .y.axis.AK text, .state .y.axis.AK line{
+  display: block;
+}
+
+
+
 
 .lineLabel{
   position: fixed;
@@ -149,4 +179,17 @@ path.line.highlight{
   left: 302px;
   bottom: 145px;
   line-height: 13px;
+}
+
+
+
+
+
+
+
+#map{
+  position: fixed;
+  top: 20px;
+  left: 200px;
+  opacity: 0;
 }
