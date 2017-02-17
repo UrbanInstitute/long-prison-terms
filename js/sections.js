@@ -307,7 +307,7 @@ var scrollVis = function() {
     });
 
     // Scale the range of the data
-    lineX.domain([2000,2014]);
+    lineX.domain([0,8.7]);
     lineY.domain([0, d3.max(lineData, function(d) { return d.count; })]); 
 
     // Nest the entries by step
@@ -787,10 +787,10 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
         .attr("x", lineWidth)
       d3.select(".line.step_" + k)
         .transition()
-        .style("opacity",.2)
+        .style("opacity",.5)
       d3.select("#lineLabel_" + k)
         .transition()
-        .style("opacity",.2)
+        .style("opacity",.5)
         .style("pointer-events","all")
     }
     for(var k = key+1; k < 8; k++){
