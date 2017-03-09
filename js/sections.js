@@ -8,9 +8,9 @@
 var scrollVis = function() {
   // constants to define the size
   // and margins of the vis area.
-  var WIDTH = 500,
-    HEIGHT = 500,
-    margin = {top: 2, right: 25, bottom: 10, left: 25},
+  var WIDTH = 816,
+    HEIGHT = 665,
+    margin = {top: 2, right: 85, bottom: 10, left: 25},
     width = WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom
 
@@ -33,9 +33,9 @@ var scrollVis = function() {
   var YEAR_IN_MS = 2000,
     MAX_BARS = 40
 
-  var FILLED_TRACK_COLOR = "#9d9d9d"
-  var EMPTY_TRACK_COLOR = "#e3e3e3"
-  var EXITING_TRACK_COLOR = "#ec008b"
+  var FILLED_TRACK_COLOR = "#b3b3b3"
+  var EMPTY_TRACK_COLOR = "#f2f2f2"
+  var EXITING_TRACK_COLOR = "#fdbf11"
 
   // Keep track of which visualization
   // we are on and which was the last
@@ -46,8 +46,8 @@ var scrollVis = function() {
   var activeIndex = 0;
 
   // sizing constants for intro track
-  var trackRatio = .4,
-    dotRatio = .7
+  var trackRatio = .5,
+    dotRatio = .9
     
 
 
@@ -162,8 +162,8 @@ var scrollVis = function() {
       .attr("class","prisonBG")
       .attr("width", width)
       .attr("height", height)
-      .attr("fill", "none")
-      .attr("stroke", "#000000")
+      .attr("fill", "#f2f2f2")
+      .attr("stroke", "none")
       .style("opacity",0)
 
     // count openvis title
@@ -274,13 +274,16 @@ var scrollVis = function() {
       .attr("fill", FILLED_TRACK_COLOR)
       .style("opacity", 0)
 
-    var dot = track.append("circle")
+    var dot = track.append("g")
+      .attr("class","dotGroup")
+      .append("rect")
       .attr("class","dot")
-      .attr("cx", function(d){
-        return (d3.min([0,d.admission]) * -1 / d.sentence)*width
+      .attr("x", function(d){
+        return ( (d3.min([0,d.admission]) * -1 / d.sentence)*width - (trackHeight * dotRatio * .5) )
       })
-      .attr("cy", (1-trackRatio)*.5*trackHeight*1.5)
-      .attr("r", trackHeight * dotRatio * .5)
+      .attr("y", trackHeight*(1-dotRatio)*.5)
+      .attr("height", trackHeight * dotRatio )
+      .attr("width", trackHeight * dotRatio )
       .style("fill", function(d){ return dotColor(d.sentence) })
       .style("opacity", 0)
 
@@ -600,8 +603,9 @@ var scrollVis = function() {
     d3.selectAll(".dot")
     .data(data)
       .transition()
-      .attr("cx", function(d){
-        return (d3.min([0,d.admission]) * -1 / d.sentence)*width
+      .attr("x", function(d){
+        console.log(((d3.min([0,d.admission]) * -1 / d.sentence)*width))
+        return ((d3.min([0,d.admission]) * -1 / d.sentence)*width - (trackHeight * dotRatio * .5))
       })
       .style("fill", function(d){ return dotColor(d.sentence) })
       .style("opacity",0)
@@ -692,7 +696,7 @@ d3.selectAll(".dot")
 .data(data)
 .transition()
 .duration(350)
-.attr("cx", function(d){
+.attr("x", function(d){
   // return (d3.min([0,d.admission]) * -1 / d.sentence)*width
   return 0
 })
@@ -719,14 +723,29 @@ return yearsToMS(d.lengthOfStay)
 
 })
 .ease("linear")
-.attr("cx", function(d){ return width * (d.lengthOfStay/d.sentence) })
+.attr("x", function(d){ return width * (d.lengthOfStay/d.sentence) - (trackHeight * dotRatio * .5)})
 .each("start",function(d,i){
 if(i == 0){
 pauseAnimation(width)
 }
 })
 .each("end", function(d){
+d3.select(this)
+.style("fill", "#fdbf11")
 d3.select(this.parentNode)
+.transition()
+.duration(1000)
+.attr("transform",function(){
+  var xx = this.getBoundingClientRect().left
+  var xy = this.getBoundingClientRect().top
+  var angle = (Math.round(Math.random()) * 2 - 1) * Math.random() * 100
+  var dist = Math.random() * 1000
+  return "translate(" +dist+ ") rotate(" + angle + " " + xx + " " + xy + ")"
+})
+.each("end", function(){
+  d3.select(this).attr("transform","")
+})
+d3.select(this.parentNode.parentNode)
 .classed("inactive", true).classed("active", false)
 .select(".trackFilled")
 .transition("fade-out")
@@ -741,7 +760,7 @@ d3.select(this.parentNode)
 .style("opacity",0)
 .each("end", function(){
 // d3.select(this.parentNode).remove()
-d3.select(this.parentNode)
+d3.select(this.parentNode.parentNode)
 .classed("visible",false)
 .transition("fade-out")
 .duration(0)
@@ -828,15 +847,15 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
   }
   function dotColor(sentence){
     if(sentence >= 5){
-      return "#fdbf11"
+      return "#1696d2"
     }else{
-      return "#1696d2";
+      return "#000000";
     }
     // var ramp=d3.scale.linear().domain([1,20]).range(["#1696d2","#fdbf11"]);
     // return ramp(sentence)
   }
   function yearsToMS(year){
-    return d3.max([0,year]) * YEAR_IN_MS
+    return (d3.max([0,year]) * YEAR_IN_MS) + 100
   }
 
   function pauseAnimation(width){
@@ -846,8 +865,8 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
       .transition()
       .ease("expOut")
       .duration(pauseDuration)
-      .attr("cx", function(d){
-        var cx = ( (width * (d.lengthOfStay/d.sentence)) - parseFloat(d3.select(this).attr("cx")) > bounceLength) ? parseFloat(d3.select(this).attr("cx")) + bounceLength : parseFloat(d3.select(this).attr("cx")) + .5*((width * (d.lengthOfStay/d.sentence)) - +d3.select(this).attr("cx"))
+      .attr("x", function(d){
+        var cx = ( (width * (d.lengthOfStay/d.sentence)) - parseFloat(d3.select(this).attr("x")) > bounceLength) ? parseFloat(d3.select(this).attr("x")) + bounceLength : parseFloat(d3.select(this).attr("x")) + .5*((width * (d.lengthOfStay/d.sentence)) - +d3.select(this).attr("x"))
         return cx
       })
       .style("opacity",function(){
