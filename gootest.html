@@ -193,7 +193,7 @@ html {
     var areaPath =  colonWrapper.append("path")
       .attr("id", "extractedArea")
       .attr("d", area(data))
-      .attr("stroke", "black")
+      .attr("stroke", "#094c6b")
       .attr("stroke-width", "4")
       .attr("fill", "#094c6b")
       .style("opacity","0")
@@ -232,28 +232,50 @@ html {
 			.on("click", function(){
 
 
+
 	leftBorder
 		.transition()
-		.delay(3000)
-		// .duration(2000)
+		.delay(4200)
+		.duration(2000)
 		.attr("y2",y(79526.05109))
+		.each("end", function(){
+			d3.select(this)
+				.transition()
+				.attr("stroke","#094c6b")
+		})
 	rightBorder
 		.transition()
-		.delay(4000)
-		.duration(2000)
+		.delay(7000)
+		.duration(400)
+		.ease("linear")
 		.attr("y2",y(1476847))
+		.each("end", function(){
+			d3.select(this)
+				.transition()
+				.attr("stroke","#094c6b")
+		})
 	d3.select("#extractedLine")
       .transition()
-      	.delay(3400)
+      	.delay(5700)
         .duration(2000)
         .ease("linear")
-        .attr("stroke-dashoffset", 0);
-        				d3.select("#extractedArea")
+        .attr("stroke-dashoffset", 0)
+		.each("end", function(){
+			d3.select(this)
+				.transition()
+				.attr("stroke","#094c6b")
+		})
+	d3.select("#extractedArea")
       .transition()
-      	.delay(4800)
+      	.delay(6100)
         .duration(2000)
         .ease("circleOut")
-        .style("opacity", "1");
+        .style("opacity", "1")
+		.each("end", function(){
+			d3.select(this)
+				.transition()
+				.attr("stroke","#094c6b")
+		})
 
         // d3.select("#bar")
         // 	.transition()
@@ -277,37 +299,81 @@ html {
 						.style("background","none")
 
 
+				var newLoc = (height + topEdge + 10)*.5
 				dummyTopDot
 					.transition()
 						.delay(1000)
+						.duration(1200)
+						.ease("linear")
+						.attr("cy", newLoc)
+						.transition()
+						.duration(0)
 						.style("opacity",0)
 
 				dummyBottomDot
 					.transition()
 						.delay(1000)
+						.duration(1200)
+						.ease("linear")
+						.attr("cy", newLoc)
+						.transition()
+						.duration(0)
 						.style("opacity",0)
+
+
+
+			// var dummyTopDot = dummyWrapper.append("circle")
+			// 	.attr("cx", rightEdge + 10)
+			// 	.attr("cy", topEdge + 10)
+			// 	.attr("r",5)
+			// 	.style("opacity",1)
+			
+			// var dummyBottomDot = dummyWrapper.append("circle")
+			// 	.attr("cx", rightEdge + 10)
+			// 	.attr("cy", topEdge + 45)
+			// 	.attr("r",5)
+			// 	.style("opacity",1)
+
 
 				foo
 					.transition()
-						.delay(1700)
-						.duration(2000)
+						.delay(3050)
+						.duration(2100)
 						.attr("width", width+200)
 						.attr("x",-100)
+		.each("end", function(){
+			d3.select(this)
+				.transition()
+				.delay(2000)
+				.attr("fill","#094c6b")
+		})
 
 				dotTop
+					.attr("cy", newLoc)
 					.transition()
+						.delay(1600)
 						.duration(1000)
+						.ease("linear")
+
 						.attr("r",15)
+						.attr("cy", newLoc+15)
 						.transition()
-							.duration(1900)
+							.duration(1200)
+							.ease("linear")
 							.attr("cy", height + 60)
 
 				dotBottom
+					.attr("cy", newLoc-60)
 					.transition()
+						.delay(1600)
 						.duration(1000)
+						.ease("linear")
+
 						.attr("r",15)
+						.attr("cy", newLoc+15)
 						.transition()
-							.duration(2000)
+							.duration(1200)
+							.ease("linear")
 							.attr("cy", height + 60)
 
 			})
