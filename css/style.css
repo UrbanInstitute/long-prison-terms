@@ -17,7 +17,7 @@ body{
   display: inline-block;
   width: 450px;
   top: 0px;
-  left: 0px;
+  left: 800px;
   z-index: 90;
   padding-bottom: 200px;
 }
@@ -46,7 +46,7 @@ body{
   display: inline-block;
   position: fixed;
   top: 60px;
-  left: 500px;
+  left: 0px;
   z-index: 1;
   margin-left: 0;
   /* height: 600px; */
@@ -59,10 +59,14 @@ body{
   bottom: 20px;
   z-index: 1;
   margin-left: 0;  
-  width: 470px;
-  background-color: white;
-  border-bottom: 20px solid white;
-  bottom: -20px;
+  width: 530px;
+  background: #fff;
+  height: 207px;
+  top: 0px;
+  border-top: 32px solid #fff;
+  border-left: 46px solid #fff;
+  left: 734px;
+  height: 239px;
 }
 #vis .title {
   font-size:120px;

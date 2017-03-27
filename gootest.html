@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<!-- D3.js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+		
+		<style>
+			body {
+				text-align: center;
+			}
+
+
+
+html { 
+  background: url(img/intro-background-01.png);
+    background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+
+}
+#titleText{
+	font-family: Lato;
+	font-size: 72px;
+	width: 100%;
+	top: 40%;
+	position: fixed;
+	text-transform: uppercase;
+	z-index: 2;
+}
+#backgroundBlocker{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	z-index: -1;
+	pointer-events: none;
+	background-color: rgba(255,255,255,0)
+}
+		</style>
+
+	</head>	
+	<body>
+
+		<div id="introAreaContainer"></div>
+		<div id = "titleText"><span>A matter of time</span></div>
+		<div id = "backgroundBlocker"></div>
+
+		<script language="javascript" type="text/javascript">
+
+			///////////////////////////////////////////////////////////////////////////
+			//////////////////// Set up and initiate svg containers ///////////////////
+			///////////////////////////////////////////////////////////////////////////	
+
+			var margin = {
+				top: 10,
+				right: 0,
+				bottom: 10,
+				left: 0
+			};
+			var screenHeight = 900
+			var width = window.innerWidth - margin.left - margin.right - 10,
+				height = Math.min(screenHeight, window.innerHeight - margin.top - margin.bottom - 20);
+						
+			//SVG container
+			var svg = d3.select('#introAreaContainer')
+				.append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+			///////////////////////////////////////////////////////////////////////////
+			/////////////////////// Calculate hexagon variables ///////////////////////
+			///////////////////////////////////////////////////////////////////////////	
+
+			var SQRT3 = Math.sqrt(3),
+				hexRadius = Math.min(width, height)/2,
+				hexWidth = SQRT3 * hexRadius
+			// 	hexHeight = 2 * hexRadius;
+			// var hexagonPoly = [[0,-1],[SQRT3/2,0.5],[0,1],[-SQRT3/2,0.5],[-SQRT3/2,-0.5],[0,-1],[SQRT3/2,-0.5]];
+			// var hexagonPath = "m" + hexagonPoly.map(function(p){ return [p[0]*hexRadius, p[1]*hexRadius].join(','); }).join('l') + "z";
+			
+			///////////////////////////////////////////////////////////////////////////
+			///////////////////////////// Create filter ///////////////////////////////
+			///////////////////////////////////////////////////////////////////////////	
+
+			//SVG filter for the gooey effect
+			//Code taken from http://tympanus.net/codrops/2015/03/10/creative-gooey-effects/
+			var defs = svg.append("defs");
+			var filter = defs.append("filter").attr("id","gooeyCodeFilter");
+			filter.append("feGaussianBlur")
+				.attr("in","SourceGraphic")
+				.attr("stdDeviation","10")
+				//to fix safari: http://stackoverflow.com/questions/24295043/svg-gaussian-blur-in-safari-unexpectedly-lightens-image
+				.attr("color-interpolation-filters","sRGB") 
+				.attr("result","blur");
+			filter.append("feColorMatrix")
+				.attr("in","blur")
+				.attr("mode","matrix")
+				.attr("values","1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9")
+				.attr("result","gooey");
+
+		
+
+			var colonWrapper = svg.append("g")
+				.style("filter", "url(#gooeyCodeFilter)");
+			var dummyWrapper = svg.append("g")
+
+			var rightEdge = d3.select("#titleText").node().getBoundingClientRect().right
+			var topEdge = d3.select("#titleText").node().getBoundingClientRect().top
+
+
+
+			var rightEdge = d3.select("#titleText span").node().getBoundingClientRect().right
+			var topEdge = d3.select("#titleText span").node().getBoundingClientRect().top
+
+			console.log(rightEdge, topEdge)
+
+			var dotTop = colonWrapper.append("circle")
+				.attr("cx", rightEdge + 10)
+				.attr("cy", topEdge + 10)
+				.attr("r",5)
+
+			var dotBottom = colonWrapper.append("circle")
+				.attr("cx", rightEdge + 10)
+				.attr("cy", topEdge + 45)
+				.attr("r",5)
+
+			var dummyTopDot = dummyWrapper.append("circle")
+				.attr("cx", rightEdge + 10)
+				.attr("cy", topEdge + 10)
+				.attr("r",5)
+				.style("opacity",1)
+			
+			var dummyBottomDot = dummyWrapper.append("circle")
+				.attr("cx", rightEdge + 10)
+				.attr("cy", topEdge + 45)
+				.attr("r",5)
+				.style("opacity",1)
+
+
+
+
+			var foo = colonWrapper.append("rect")
+				.attr("x", rightEdge)
+				.attr("y", height+3)
+				.attr("width", 0)
+				.attr("height", 15)
+    var x = d3.scale.linear().domain([1925, 2015]).range([0, width]);
+    var y = d3.scale.linear().domain([1600000,0]).range([0, height]);
+
+   	var leftBorder = dummyWrapper.append("line")
+   		.attr("fill","none")
+   		.attr("stroke-width",8)
+   		.attr("stroke","black")
+   		.attr("x1",0)
+   		.attr("x2",0)
+   		.attr("y1",y(0)+10)
+   		.attr("y2",y(0)+10)
+   	var rightBorder = dummyWrapper.append("line")
+   		.attr("fill","none")
+   		.attr("stroke-width",8)
+   		.attr("stroke","black")
+   		.attr("x1",width)
+   		.attr("x2",width)
+   		.attr("y1",y(0)+10)
+   		.attr("y2",y(0)+10)
+   		
+
+    d3.csv("data/extracted-animation-data.csv", function(error, data){
+    var line = d3.svg.line()
+      .interpolate("cardinal")
+      .x(function(d) {return x(+d.year);})
+      .y(function(d) {return y(+d.pop);})
+
+     var area = d3.svg.area()
+      .interpolate("cardinal")
+      .x(function(d) {return x(+d.year);})
+      .y1(function(d) {return y(+d.pop);})
+      .y0(height+10)
+
+      console.log(data, error)
+
+
+
+    var areaPath =  colonWrapper.append("path")
+      .attr("id", "extractedArea")
+      .attr("d", area(data))
+      .attr("stroke", "black")
+      .attr("stroke-width", "4")
+      .attr("fill", "#094c6b")
+      .style("opacity","0")
+
+    var path = dummyWrapper.append("path")
+      .attr("id", "extractedLine")
+      .attr("d", line(data))
+      .attr("stroke", "black")
+      .attr("stroke-width", "4")
+      .attr("fill", "none");
+
+
+
+    var totalLength = path.node().getTotalLength();
+
+
+
+    path
+      .attr("stroke-dasharray", totalLength + " " + totalLength)
+      .attr("stroke-dashoffset", totalLength)
+
+
+    })
+
+
+// colonWrapper.append("rect")
+// 	.attr("id", "bar")
+// 	.attr("x",0)
+// 	.attr("y",0)
+// 	.attr("width",0)
+// 	.attr("height", height)
+// 	.attr("fill","#1696d2")
+
+
+			d3.select("body")
+			.on("click", function(){
+
+
+	leftBorder
+		.transition()
+		.delay(3000)
+		// .duration(2000)
+		.attr("y2",y(79526.05109))
+	rightBorder
+		.transition()
+		.delay(4000)
+		.duration(2000)
+		.attr("y2",y(1476847))
+	d3.select("#extractedLine")
+      .transition()
+      	.delay(3400)
+        .duration(2000)
+        .ease("linear")
+        .attr("stroke-dashoffset", 0);
+        				d3.select("#extractedArea")
+      .transition()
+      	.delay(4800)
+        .duration(2000)
+        .ease("circleOut")
+        .style("opacity", "1");
+
+        // d3.select("#bar")
+        // 	.transition()
+        // 	.delay(3400)
+        // 	.duration(2000)
+        // 	.attr("width", width)
+
+				d3.select("#titleText")
+					.transition()
+						.delay(1000)
+						.duration(1000)
+						.style("opacity",0)
+				d3.select("#backgroundBlocker")
+					.transition()
+						.delay(1000)
+						.duration(1000)
+						.style("background-color", "rgba(255,255,255,1)")
+				d3.select("html")
+					.transition()
+						.delay(1700)
+						.style("background","none")
+
+
+				dummyTopDot
+					.transition()
+						.delay(1000)
+						.style("opacity",0)
+
+				dummyBottomDot
+					.transition()
+						.delay(1000)
+						.style("opacity",0)
+
+				foo
+					.transition()
+						.delay(1700)
+						.duration(2000)
+						.attr("width", width+200)
+						.attr("x",-100)
+
+				dotTop
+					.transition()
+						.duration(1000)
+						.attr("r",15)
+						.transition()
+							.duration(1900)
+							.attr("cy", height + 60)
+
+				dotBottom
+					.transition()
+						.duration(1000)
+						.attr("r",15)
+						.transition()
+							.duration(2000)
+							.attr("cy", height + 60)
+
+			})
+
+
+
+			///////////////////////////////////////////////////////////////////////////
+			////////////////////// Place circles inside hexagon ///////////////////////
+			///////////////////////////////////////////////////////////////////////////	
+
+		 //    //First append a group for the clip path, then a new group that can be transformed
+			// var circleWrapper = svg.append("g")
+			// 	// .attr("clip-path", "url(#clip")
+			// 	// .style("clip-path", "url(#clip)") //make it work in safari
+			// 	.append("g")
+			// 	.attr("transform", "translate(" + (width/2) + "," + (height/2) + ")")
+			// 	.style("filter", "url(#gooeyCodeFilter)");
+
+			// //Create dataset with random initial positions
+			// randStart = [];
+			// for(var i = 0; i < 30; i++) {
+			// 	randStart.push({
+			// 		rHex: Math.random() * hexWidth,
+			// 		theta: Math.random() * 2 * Math.PI,
+			// 		r: 15 + Math.random() * 25
+			// 	});
+			// }//for i
+
+		 //    var circle = circleWrapper.selectAll(".dots")
+		 //    	.data(randStart)
+		 //    	.enter().append("circle")
+		 //    	.attr("class", "dots")
+		 //    	.attr("cx", function(d) { return d.rHex * Math.cos(d.theta); })
+		 //    	.attr("cy", function(d) { return d.rHex * Math.sin(d.theta); })
+		 //      	.attr("r", function(d,i) { return d.r; })
+		 //      	// .style("fill", "url(#gradientRainbow)")
+			// 	.style("opacity", 1)
+			// 	.each(move);
+
+			// // circle.transition("grow")
+			// // 	.duration(function(d,i) { return Math.random()*2000+500; })
+			// // 	.delay(function(d,i) { return Math.random()*3000;})
+			// // 	.attr("r", function(d,i) { return d.r; });
+
+			// ///////////////////////////////////////////////////////////////////////////
+			// ///////////////////////// Place Hexagon in center /////////////////////////
+			// ///////////////////////////////////////////////////////////////////////////	
+
+			// //Place a hexagon on the scene
+			// // svg.append("path")
+			// // 	.attr("class", "hexagon")
+			// // 	.attr("d", "M" + (width/2) + "," + (height/2) + hexagonPath)
+			// // 	.style("stroke", "#F2F2F2")
+			// // 	.style("stroke-width", "4px")
+			// // 	.style("fill", "none");
+
+			// ///////////////////////////////////////////////////////////////////////////
+			// ////////////////////// Circle movement inside hexagon /////////////////////
+			// ///////////////////////////////////////////////////////////////////////////	
+
+			// //General idea from Maarten Lambrecht's block: http://bl.ocks.org/maartenzam/f35baff17a0316ad4ff6
+			// function move(d) {
+			// 	var currentx = parseFloat(d3.select(this).attr("cx"))
+			// 	var currenty = parseFloat(d3.select(this).attr("cy"))
+			// 	// 	radius = d.r;
+
+			// 	// //Randomly define which quadrant to move next
+			// 	// var sideX = currentx > 0 ? -1 : 1,
+			// 	// 	sideY = Math.random() > 0.5 ? 1 : -1,
+			// 	// 	randSide = Math.random();
+
+			// 	// var newx,
+			// 	// 	newy;
+
+			// 	// //Move new locations along the vertical sides in 33% of the cases
+			// 	// if (randSide > 0.66) {
+			// 	// 	newx = sideX * 0.5 * SQRT3 * hexRadius - sideX*radius;
+			// 	// 	newy = sideY * Math.random() * 0.5 * hexRadius - sideY*radius;
+			// 	// } else {
+			// 	// 	//Choose a new x location randomly, 
+			// 	// 	//the y position will be calculated later to lie on the hexagon border
+			// 	// 	newx = sideX * Math.random() * 0.5 * SQRT3 * hexRadius;
+			// 	// 	//Otherwise calculate the new Y position along the hexagon border 
+			// 	// 	//based on which quadrant the random x and y gave
+			// 	// 	if (sideX > 0 && sideY > 0) {
+			// 	// 		newy = hexRadius - (1/SQRT3)*newx;
+			// 	// 	} else if (sideX > 0 && sideY <= 0) {
+			// 	// 		newy = -hexRadius + (1/SQRT3)*newx;
+			// 	// 	} else if (sideX <= 0 && sideY > 0) {
+			// 	// 		newy = hexRadius + (1/SQRT3)*newx;
+			// 	// 	} else if (sideX <= 0 && sideY <= 0) {
+			// 	// 		newy = -hexRadius - (1/SQRT3)*newx;
+			// 	// 	}//else
+
+			// 	// 	//Take off a bit so it seems that the circles truly only touch the edge
+			// 	// 	var offSetX = radius * Math.cos( 60 * Math.PI/180),
+			// 	// 		offSetY = radius * Math.sin( 60 * Math.PI/180);
+			// 	// 	newx = newx - sideX*offSetX;
+			// 	// 	newy = newy - sideY*offSetY;
+			// 	// }//else
+			// 	var newx = currentx+200
+			// 	var newy = currenty
+
+			// 	//Transition the circle to its new location
+			// 	d3.select(this)
+			// 		.transition("moveing")
+			// 		.duration(3000 + 4000*Math.random())
+			// 		.ease("linear")
+			// 		.attr("cy", newy)
+			// 		.attr("cx", newx)
+			// 		// .each("end", move);
+
+			// }//function move
+
+		</script>
+
+	</body>
+</html>

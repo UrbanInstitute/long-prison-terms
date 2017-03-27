@@ -16,7 +16,7 @@ var scrollVis = function() {
 
   var lineMargin = {top: 30, right: 20, bottom: 30, left: 50},
     lineWidth = 300 - lineMargin.left - lineMargin.right,
-    lineHeight = 270 - lineMargin.top - lineMargin.bottom;
+    lineHeight = 216 - lineMargin.top - lineMargin.bottom;
 
   var pageSize = "large"
   var mapSizes = {
@@ -211,13 +211,18 @@ var scrollVis = function() {
       .attr("fill", FILLED_TRACK_COLOR)
       .style("opacity", 0)
 
-    singleTrack.append("circle")
+    singleTrack.append("g")
+      .attr("class","dotGroup")
+      .append("rect")
       .attr("class","singleDot")
-      .attr("cx", 0)
-      .attr("cy", (1-trackRatio)*.5*trackHeight*1.5)
-      .attr("r", trackHeight * dotRatio * .5)
-      .style("fill", function(){ return dotColor(1) })
+      .attr("x", 0)
+      .attr("y", trackHeight*(1-dotRatio)*.5)
+      .attr("height", trackHeight * dotRatio )
+      .attr("width", trackHeight * dotRatio )
+      .style("fill", function(d){ return dotColor(1) })
       .style("opacity", 0)
+
+
 
     slowSingleTrack.append("rect")
       .attr("class", "slowSingleTrackEmpty")
@@ -235,12 +240,15 @@ var scrollVis = function() {
       .attr("fill", FILLED_TRACK_COLOR)
       .style("opacity", 0)
 
-    slowSingleTrack.append("circle")
+    slowSingleTrack.append("g")
+      .attr("class","dotGroup")
+      .append("rect")
       .attr("class","slowSingleDot")
-      .attr("cx", 0)
-      .attr("cy", (1-trackRatio)*.5*trackHeight*1.5)
-      .attr("r", trackHeight * dotRatio * .5)
-      .style("fill", function(){ return dotColor(1) })
+      .attr("x", 0)
+      .attr("y", trackHeight*(1-dotRatio)*.5)
+      .attr("height", trackHeight * dotRatio )
+      .attr("width", trackHeight * dotRatio )
+      .style("fill", function(d){ return dotColor(1) })
       .style("opacity", 0)
 
 
@@ -611,6 +619,24 @@ var scrollVis = function() {
       .style("opacity",0)
   }
 
+    function flyOut(node){
+    d3.select(node)
+    .style("fill", "#fdbf11")
+    d3.select(node.parentNode)
+    .transition()
+    .duration(1000)
+    .attr("transform",function(){
+    var xx = node.getBoundingClientRect().left
+    var xy = node.getBoundingClientRect().top
+    var angle = (Math.round(Math.random()) * 2 - 1) * Math.random() * 100
+    var dist = Math.random() * 1000
+    return "translate(" +dist+ ") rotate(" + angle + " " + xx + " " + xy + ")"
+    })
+    .each("end", function(){
+    d3.select(node.parentNode).attr("transform","")
+    })
+  }
+
   function animateIntro(step){
     // pauseAnimation()
     var data = d3.select("#vis svg").data()[0].filter(function(d){ return +d.step == +step})
@@ -730,21 +756,7 @@ pauseAnimation(width)
 }
 })
 .each("end", function(d){
-d3.select(this)
-.style("fill", "#fdbf11")
-d3.select(this.parentNode)
-.transition()
-.duration(1000)
-.attr("transform",function(){
-  var xx = this.getBoundingClientRect().left
-  var xy = this.getBoundingClientRect().top
-  var angle = (Math.round(Math.random()) * 2 - 1) * Math.random() * 100
-  var dist = Math.random() * 1000
-  return "translate(" +dist+ ") rotate(" + angle + " " + xx + " " + xy + ")"
-})
-.each("end", function(){
-  d3.select(this).attr("transform","")
-})
+flyOut(this)
 d3.select(this.parentNode.parentNode)
 .classed("inactive", true).classed("active", false)
 .select(".trackFilled")
@@ -866,8 +878,8 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
       .ease("expOut")
       .duration(pauseDuration)
       .attr("x", function(d){
-        var cx = ( (width * (d.lengthOfStay/d.sentence)) - parseFloat(d3.select(this).attr("x")) > bounceLength) ? parseFloat(d3.select(this).attr("x")) + bounceLength : parseFloat(d3.select(this).attr("x")) + .5*((width * (d.lengthOfStay/d.sentence)) - +d3.select(this).attr("x"))
-        return cx
+        var dotx = ( (width * (d.lengthOfStay/d.sentence)) - parseFloat(d3.select(this).attr("x")) > bounceLength) ? parseFloat(d3.select(this).attr("x")) + bounceLength : parseFloat(d3.select(this).attr("x")) + .5*((width * (d.lengthOfStay/d.sentence)) - +d3.select(this).attr("x"))
+        return dotx
       })
       .style("opacity",function(){
         var o = (d3.select(this).style("opacity") == 0) ? 0 : 1
@@ -1014,7 +1026,7 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
 
      d3.select(".singleDot")
       .transition()
-      .attr("cx", 0)
+      .attr("x", 0)
       .transition()
       .style("opacity",0)
 
@@ -1044,7 +1056,7 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
 
      d3.select(".slowSingleDot")
       .transition()
-      .attr("cx", 0)
+      .attr("x", 0)
       .transition()
       .style("opacity",0)
 
@@ -1084,8 +1096,9 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
       .delay(400)
       .duration(1500)
       .ease("linear")
-      .attr("cx", function(){ return width + "px"})
+      .attr("x", function(){ return (width- .5*(trackHeight * dotRatio)) + "px"})
       .each("end", function(){
+        flyOut(this)
         d3.select(".singleTrackFilled")
           .transition("fade-out")
             .duration(100)
@@ -1131,8 +1144,9 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
       .delay(400)
       .duration(8500)
       .ease("linear")
-      .attr("cx", function(){ return width + "px"})
+      .attr("x", function(){ return (width- .5*(trackHeight * dotRatio)) + "px"})
       .each("end", function(){
+        flyOut(this)
         d3.select(".slowSingleTrackFilled")
           .transition("fade-out")
             .duration(100)
