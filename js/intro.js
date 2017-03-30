@@ -819,7 +819,7 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
     // time the active section changes
     activateFunctions[0] = topOfPage;
     activateFunctions[1] = introAreaChart;
-    activateFunctions[2] = function(){};
+    activateFunctions[2] = function(){ console.log("blank step");};
     activateFunctions[3] = showSingleDot;
     activateFunctions[4] = admissionsExample;
     activateFunctions[5] = lengthOfStayExample;
@@ -1366,8 +1366,47 @@ function display(animationData, lineData, areaData) {
   // setup event handling
   scroll.on('active', function(index) {
     // highlight current step text
-    d3.selectAll('.step')
-      .style('opacity',  function(d,i) { return i == index ? 1 : 0.1; });
+    // d3.selectAll('.step')
+      // .style('opacity',  function(d,i) { return i == index ? 1 : 0.1; });
+
+    var stepText = d3.select(d3.selectAll(".step")[0][index]).html()
+
+    // var opacityNew = (index%2 == 0) ? 0 : 1;
+    // var opacityOld = (index%2 == 0) ? 1 : 0;
+
+    console.log(index, stepText)
+
+    if(index%2 == 0){
+      d3.select("#bodyNew")
+        .html(stepText)
+        .transition()
+        .duration(2000)
+        .style("opacity",1)
+
+      d3.select("#bodyOld")
+        // .html(stepText)
+        .transition()
+        .duration(1000)
+        .style("opacity",0)
+        .each("end", function(){
+          d3.select(this).html(stepText)
+        })
+      }else{
+      d3.select("#bodyOld")
+        .html(stepText)
+        .transition()
+        .duration(2000)
+        .style("opacity",1)
+
+      d3.select("#bodyNew")
+        // .html(stepText)
+        .transition()
+        .duration(1000)
+        .style("opacity",0)
+        .each("end", function(){
+          d3.select(this).html(stepText)
+        })
+      }
 
     // activate current section
     plot.activate(index);

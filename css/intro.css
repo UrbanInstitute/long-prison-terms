@@ -33,3 +33,17 @@ html.noBg {
   bottom: 5px;
   position: relative;
 }
+#bodyText{
+  position: fixed;
+    left: 810px;
+    top: 330px;
+    width: 450px;
+}
+#bodyNew, #bodyNew{
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+}
+.step{
+  visibility: hidden;
+}
