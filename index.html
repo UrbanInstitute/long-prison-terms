@@ -4,12 +4,19 @@
   <title>Scrolling Sections</title>
   <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="css/intro.css"/>
 </head>
 <body>
+    <div id = "titleText"><span>A matter of time <i>:</i></span></div>
+    <div id="introAreaContainer"></div>
+    <div id = "backgroundBlocker"></div>
 <div class="container">
+
+
   <div id='graphic'>
     <div id='vis'>
     </div>
+
 
   
     <div id='sections'>
@@ -20,6 +27,12 @@
       <div id = "lineLabel_6" data-key="6" class = "lineLabel">Reduced admission rates for short sentences</div>
       <div id = "lineLabel_7" data-key="7" class = "lineLabel">Early release for short sentences</div>
     </div>
+      <section class="step">
+        <div id = "topGap"></div>
+      </section>
+      <section class="step">
+        <div id = "secondGap"></div>
+      </section>
       <section class="step">
         The U.S. prison population has increased five-fold since the 1970s
       </section>
@@ -52,28 +65,6 @@
 
     </div>
 
-    <div>
-    <div id = "map"></div>
-    <section class = "step">
-    LOS_Mean    
-    </section>
-
-    <section class = "step">
-    LOS_MeanViolent/<br> LOS_MeanAllExceptViol    
-    </section>
-
-    <section class = "step">
-    LOS_MeanTop10  
-    </section>
-
-    <section class = "step">
-    LOS_10plus_Pct 
-    </section>
-
-    <section class = "step">
-    LOS_10plus_Num  
-    </section>
-    </div>
       <div id="extra-space"></div>
 
   </div>
@@ -85,6 +76,6 @@
 <script src="data/stateData.js"></script>
 <script src="js/queue.js"></script>
 <script src="js/scroller.js"></script>
-<script src="js/sections.js"></script>
+<script src="js/intro.js"></script>
 </body>
 </html>
