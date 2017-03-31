@@ -8,8 +8,8 @@
 var scrollVis = function() {
   // constants to define the size
   // and margins of the vis area.
-  var WIDTH = 816,
-    HEIGHT = 665,
+  var WIDTH = 826,
+    HEIGHT = 530,
     margin = {top: 2, right: 85, bottom: 10, left: 25},
     width = WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom
@@ -819,16 +819,16 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
     // time the active section changes
     activateFunctions[0] = topOfPage;
     activateFunctions[1] = introAreaChart;
-    activateFunctions[2] = function(){ console.log("blank step");};
-    activateFunctions[3] = showSingleDot;
-    activateFunctions[4] = admissionsExample;
-    activateFunctions[5] = lengthOfStayExample;
-    activateFunctions[6] = oneYearSentences;
-    activateFunctions[7] = longerSentences;
-    activateFunctions[8] = longerSentencesFasterAdmission;
-    activateFunctions[9] = fewerShortSentences;
-    activateFunctions[10] = shortSentenceEarlyRelease;
-    activateFunctions[11] = hideIntro;
+    // activateFunctions[2] = function(){ console.log("blank step");};
+    activateFunctions[2] = showSingleDot;
+    activateFunctions[3] = admissionsExample;
+    activateFunctions[4] = lengthOfStayExample;
+    activateFunctions[5] = oneYearSentences;
+    activateFunctions[6] = longerSentences;
+    activateFunctions[7] = longerSentencesFasterAdmission;
+    activateFunctions[8] = fewerShortSentences;
+    activateFunctions[9] = shortSentenceEarlyRelease;
+    activateFunctions[10] = hideIntro;
 
 
     // updateFunctions are called while
@@ -861,8 +861,10 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
 
 function topOfPage(){
 d3.select("html")
-.classed("imgBg", true)
-.classed("noBg", false)
+// .classed("imgBg", true)
+// .classed("noBg", false)
+.transition()
+.attr("class","imgBg")
 
 d3.select("#backgroundBlocker")
 .transition()
@@ -962,11 +964,11 @@ d3.select("#backgroundBlocker")
 .duration(1000)
 .style("background-color", "rgba(255,255,255,1)")
 
-setTimeout(function(){
+// setTimeout(function(){
 d3.select("html")
-.classed("imgBg", false)
-.classed("noBg", true)
-}, 1700)
+.transition()
+.attr("class","noBg")
+// }, 1700)
 
 
 
@@ -1097,10 +1099,6 @@ d3.select("#dotBottom")
     resetIntro(1)
     hideAreaChart();
 
-    g.selectAll(".openvis-title")
-      .transition()
-      .duration(0)
-      .attr("opacity", 0);
 
     g.select(".prisonBG")
       .transition()
@@ -1116,7 +1114,7 @@ d3.select("#dotBottom")
       .style("opacity",1)
       .transition()
       .ease("linear")
-      .delay(400)
+      .delay(1400)
       .duration(1500)
       .attr("width", function(){ return width + "px"})
 
@@ -1124,7 +1122,7 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",1)
       .transition()
-      .delay(400)
+      .delay(1400)
       .duration(1500)
       .ease("linear")
       .attr("x", function(){ return (width- .5*(trackHeight * dotRatio)) + "px"})
@@ -1164,7 +1162,7 @@ d3.select("#dotBottom")
       .style("opacity",1)
       .transition()
       .ease("linear")
-      .delay(400)
+      .delay(1400)
       .duration(8500)
       .attr("width", function(){ return width + "px"})
 
@@ -1172,7 +1170,7 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",1)
       .transition()
-      .delay(400)
+      .delay(1400)
       .duration(8500)
       .ease("linear")
       .attr("x", function(){ return (width- .5*(trackHeight * dotRatio)) + "px"})
