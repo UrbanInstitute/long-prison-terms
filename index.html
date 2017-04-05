@@ -2,7 +2,6 @@
 <html>
 <head>
   <title>Scrolling Sections</title>
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
   <link rel="stylesheet" type="text/css" href="css/intro.css"/>
 </head>
@@ -44,12 +43,6 @@
         Imagine one dot moving across the box to the right represents a person's time in prison. The slower the dot, the longer the sentence.
       </section>
       <section class="step">
-        Two main factors affect the overall prison population. The admission rate is a measure of how frequently people enter prison. <span id = "admissionUpdateText" class = "updateText">As the admission rate gets faster and faster, people "stack up" in prison&mdash;entering at a faster rate than they leave.</span>
-      </section>
-      <section class="step">
-        The second main factor is the length of stay in prison. As the lengths of stay get longer and longer, we see a similar "stacking up" of people in prison.
-      </section>
-      <section class="step">
         Imagine if everybody in prison stayed for one year. As new people enter, others are leaving. The population stays relatively stable.
       </section>
       <section class="step">
@@ -76,9 +69,8 @@
 </div>
 
 
-<script src="js/d3.js"></script>
+<script src="js/d3.min.js"></script>
 <script src="data/stateData.js"></script>
-<script src="js/queue.js"></script>
 <script src="js/scroller.js"></script>
 <script src="js/intro.js"></script>
 </body>

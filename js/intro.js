@@ -511,7 +511,6 @@ path
     .data(data)
       .transition()
       .attr("x", function(d){
-        console.log(((d3.min([0,d.admission]) * -1 / d.sentence)*width))
         return ((d3.min([0,d.admission]) * -1 / d.sentence)*width - (trackHeight * dotRatio * .5))
       })
       .style("fill", function(d){ return dotColor(d.sentence) })
@@ -819,16 +818,13 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
     // time the active section changes
     activateFunctions[0] = topOfPage;
     activateFunctions[1] = introAreaChart;
-    // activateFunctions[2] = function(){ console.log("blank step");};
     activateFunctions[2] = showSingleDot;
-    activateFunctions[3] = admissionsExample;
-    activateFunctions[4] = lengthOfStayExample;
-    activateFunctions[5] = oneYearSentences;
-    activateFunctions[6] = longerSentences;
-    activateFunctions[7] = longerSentencesFasterAdmission;
-    activateFunctions[8] = fewerShortSentences;
-    activateFunctions[9] = shortSentenceEarlyRelease;
-    activateFunctions[10] = hideIntro;
+    activateFunctions[3] = oneYearSentences;
+    activateFunctions[4] = longerSentences;
+    activateFunctions[5] = longerSentencesFasterAdmission;
+    activateFunctions[6] = fewerShortSentences;
+    activateFunctions[7] = shortSentenceEarlyRelease;
+    activateFunctions[8] = hideIntro;
 
 
     // updateFunctions are called while
@@ -1196,20 +1192,7 @@ d3.select("#dotBottom")
       })
   }
 
-  function admissionsExample(){
-    d3.select("#admissionUpdateText")
-      .transition()
-      .delay(7000)
-      .style("opacity",1)
-    hideSingleDot()
-    animateIntro(1)
-  }
-  function lengthOfStayExample(){
-    animateIntro(2)
-    d3.select("#lineChart")
-      .transition()
-      .style("opacity",0)
-  }
+
   function oneYearSentences(){
     d3.select("#lineChart")
       .transition()
@@ -1372,7 +1355,6 @@ function display(animationData, lineData, areaData) {
     // var opacityNew = (index%2 == 0) ? 0 : 1;
     // var opacityOld = (index%2 == 0) ? 1 : 0;
 
-    console.log(index, stepText)
 
     if(index%2 == 0){
       d3.select("#bodyNew")
