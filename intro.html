@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scrolling Sections</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="css/intro.css"/>
+</head>
+<body>
+    <div id = "titleText" class = "titleElement">
+      <span>A matter of time <i class = "titleElement">:</i></span>
+      <div id = "subtitleText" class = "titleElement">An Exploration of Time Served in America’s Prisons</div>
+      <img id = "scrollArrow" class = "titleElement" src = "img/scroll-arrow.png" />
+    </div>
+    <div id = "areaChartText">
+      <div id = "areaChartText1">The US incarceration rate has increased five-fold since the <a href = "https://www.nap.edu/catalog/18613/the-growth-of-incarceration-in-the-united-states-exploring-causes">1970s</a>.</div>
+      <div id = "areaChartText2"><span id = "areaChartText2-1">Attempts to end mass incarceration have largely focused on reforms for nonviolent and less serious convictions, but that won’t be enough.</span><span id = "areaChartText2-2"> Here's why.</span></div>
+    </div>
+    <div id="introAreaContainer"></div>
+    <div id = "backgroundBlocker"></div>
+<div class="container">
+
+
+  <div id='graphic'>
+    <div id='vis'>
+    </div>
+
+
+  
+    <div id='sections'>
+    <div id ='lineChart'>
+      <div id = "lineLabel_3" data-key="3" class = "lineLabel">Equilibrium</div>
+      <div id = "lineLabel_4" data-key="4" class = "lineLabel">Longer Sentences</div>
+      <div id = "lineLabel_5" data-key="5" class = "lineLabel">Larger admission rates</div>
+      <div id = "lineLabel_6" data-key="6" class = "lineLabel">Reduced admission rates for short sentences</div>
+      <div id = "lineLabel_7" data-key="7" class = "lineLabel">Early release for short sentences</div>
+    </div>
+      <div id = "bodyText">
+        <div id = "bodyNew"></div>
+        <div id = "bodyOld"></div>
+      </div>
+      <section class="step">
+        <div id = "topGap"></div>
+      </section>
+<!--       <section class="step">
+        <div id = "secondGap"></div>
+      </section> -->
+      <section class="step">
+        <div>&nbsp;</div>
+      </section>
+      <section class="step">
+        <p>
+          One dot moving across the box to the left represents a person’s time in prison. The slower the dot, the longer the prison term. 
+        </p>
+      </section>
+      <section class="step">
+        <p>
+          Imagine if everyone in prison stayed for one year. <span class = "textAppear" id = "appear2-1"> If the rate of people going to prison stays roughly the same, then as new people enter, others leave—and the prison population stays fairly stable.</span>
+        </p>
+      </section>
+      <section class="step">
+        <p>
+          Now imagine if some of these people began to stay longer—say, five or 10 years.<span class = "textAppear" id = "appear3-1"> At first, this doesn’t make much of an impact on the prison population.</span><span class = "textAppear" id = "appear3-2"> But over time, it does.</span>
+        </p>
+        <p>
+          <span class = "textAppear" id = "appear3-3">When people stay longer, they start to stack up.</span>
+        </p>
+      </section>
+      <section class="step">
+        <p>
+          And if more people start serving more time, the combined impact is huge.
+        </p>
+        <p>
+          <span class = "textAppear" id = "appear4-1">These trends are real. In the United States, more people have been going to prison and staying for longer periods of time, largely due to “tough on crime” policies that swept the country in the 1980s and 90s. The prison population boomed as sentences got longer and release policies got more restrictive.</span>
+        </p>
+      </section>
+      <section class="step">
+        <p>
+          Recent efforts to reduce the number of people who are sent to prison in the first place, like alternatives to incarceration for drug offenses, have helped stem the flow in some states and prisons. <span class = "textAppear" id = "appear5-1">But this typically affects only the people who wouldn’t be in prison for very long anyway.</span>
+        </p>
+        <p>
+          <span class = "textAppear" id = "appear5-2">Meanwhile, people who are given the longest sentences continue to enter prisons at a steady pace.</span>
+        </p>
+      </section>
+      <section class="step">
+        <p>
+          Other reforms limit the amount of time people can stay in prison for low-level crimes, but that also doesn’t affect people with the longest prison terms.
+        </p>
+      </section>
+      <section class="step">
+      </section>
+
+    </div>
+
+      <div id="extra-space">
+        <p>
+          This is a problem. So what can be done to solve it?
+        </p>
+        <p>
+          To start, we looked at prison term trends over time in a new way and found that the longest terms are getting longer, particularly for violent offenses. But how long is too long? How long is long enough? And do these long prison terms translate into justice, rehabilitation, and public safety?
+        </p>
+        <p>
+          Efforts to meaningfully reduce the size of the prison population must take those questions into consideration, which may mean rethinking the way we treat people convicted of serious crimes.</p>
+
+      </div>
+
+  </div>
+
+</div>
+
+
+<script src="js/d3.min.js"></script>
+<script src="js/countup.min.js"></script>
+
+<script src="data/stateData.js"></script>
+<script src="js/scroller.js"></script>
+<script src="js/intro.js"></script>
+</body>
+</html>

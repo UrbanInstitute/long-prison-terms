@@ -61,11 +61,10 @@ body{
   z-index: 1;
   margin-left: 0;  
   width: 530px;
-  background: #fff;
+  background: transparent;
   height: 207px;
-  top: 0px;
-  border-top: 32px solid #fff;
-  border-left: 46px solid #fff;
+  top: calc(50% - 250px);
+  border-left: 46px solid transparent;
   left: 734px;
   height: 239px;
 }
@@ -151,7 +150,7 @@ body{
 
 
 .lineLabel{
-  position: fixed;
+  position: absolute;
   opacity: 0;
   pointer-events: none;
   cursor: pointer;
