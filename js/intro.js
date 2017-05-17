@@ -19,11 +19,11 @@ var scrollVis = function() {
     lineHeight = 216 - lineMargin.top - lineMargin.bottom;
 
   var YEAR_IN_MS = 2000,
-    MAX_BARS = 40
+    MAX_BARS = 55
 
   var FILLED_TRACK_COLOR = "#b3b3b3"
-  var EMPTY_TRACK_COLOR = "#f2f2f2"
-  var EXITING_TRACK_COLOR = "#fdbf11"
+  var EMPTY_TRACK_COLOR = "#46abdb"
+  var EXITING_TRACK_COLOR = "#d2d2d2"
 
 
   var areaMargin = {
@@ -155,7 +155,7 @@ var scrollVis = function() {
    */
   setupVis = function(allData, lineData, areaData) {
     //temp line
-    var data = allData.filter(function(d){return d.step == 1});
+    var data = allData.filter(function(d){return d.step == 3});
 
 
     var defs = areaSvg.append("defs");
@@ -386,7 +386,13 @@ var scrollVis = function() {
       .style("opacity", 0)
 
 
-
+    var stackBackground =  g.append("rect")
+      .attr("class","stackBackground")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("fill", EMPTY_TRACK_COLOR)
+      .attr("stroke", "none")
+      .style("opacity",0)
     //track for all intro animations
     var track = g
       .selectAll(".trackGroup")
@@ -403,7 +409,7 @@ var scrollVis = function() {
       .attr("width", width + "px")
       .attr("height", (trackHeight*trackRatio) + "px")
       .attr("y",(1-trackRatio)*.5*trackHeight)
-      .attr("fill", EMPTY_TRACK_COLOR)
+      .attr("fill", "none")
       .style("opacity", 0)
 
     track.append("rect")
@@ -543,7 +549,7 @@ var scrollVis = function() {
 
   function flyOut(node){
     d3.select(node)
-      .style("fill", "#fdbf11")
+      .style("fill", EXITING_TRACK_COLOR)
     d3.select(node.parentNode)
       .transition()
         .duration(1000)
@@ -558,6 +564,26 @@ var scrollVis = function() {
         d3.select(node.parentNode).attr("transform","")
       })
   }
+  function updateStackBackground(pause){
+    var tracks = 0;
+    // var tracks = d3.selectAll(".trackGroup.visible.active")[0].length
+    // console.log(tracks)
+    if(pause){
+      tracks = d3.selectAll(".trackGroup.visible.active")[0].length
+    }else{
+    // var tracks = 0;
+      d3.selectAll(".dot.active").each(function(d){
+        if(d3.select(this).style("opacity") != 0){
+          tracks += 1;
+        }
+      })
+    }
+    d3.select(".stackBackground")
+      .transition()
+      .attr("height", tracks*trackHeight)
+      .attr("y", height - tracks*trackHeight)
+  }
+
 
   function animateIntro(step){
     // pauseAnimation()
@@ -573,6 +599,10 @@ var scrollVis = function() {
     g.select(".prisonBG")
       .transition()
       .style("opacity",1)
+    g.select(".stackBackground")
+      .transition()
+      .style("opacity",1)
+
 
     g
       .selectAll(".trackGroup")
@@ -585,6 +615,7 @@ var scrollVis = function() {
       .attr("transform", function(d, i){
         return "translate(0,"  + ((i - (data.length  - MAX_BARS))*trackHeight) + ")"
       })
+
       // .each("end", function(d, i){
       //   if(i == data.length-1){
 
@@ -606,6 +637,7 @@ d3.selectAll(".trackEmpty")
 .each("end", function(){
 d3.select(this.parentNode).classed("inactive", false).classed("active", true)
 })
+
 
 d3.selectAll(".trackFilled")
 .data(data)
@@ -633,6 +665,7 @@ d3.selectAll(".trackFilled")
 return yearsToMS(d.lengthOfStay)
 // }
 })
+
 
 .attr("width", function(d){ return width * (d.lengthOfStay/d.sentence) + "px" })
 
@@ -669,11 +702,13 @@ return yearsToMS(d.lengthOfStay)
 .ease("linear")
 .attr("x", function(d){ return width * (d.lengthOfStay/d.sentence) - (trackHeight * dotRatio * .5)})
 .each("start",function(d,i){
+  updateStackBackground(false)
 if(i == 0){
 pauseAnimation(width)
 }
 })
 .each("end", function(d){
+updateStackBackground(false);
 flyOut(this)
 d3.select(this.parentNode.parentNode)
 .classed("inactive", true).classed("active", false)
@@ -789,6 +824,7 @@ return "translate(0,"  + ((( MAX_BARS) - 1 -  count)*trackHeight) + ")"
   }
 
   function pauseAnimation(width){
+    updateStackBackground(true);
     var bounceLength = 20,
         pauseDuration = 800;
     d3.selectAll(".dot")
@@ -1014,6 +1050,9 @@ d3.selectAll(".titleElement")
     d3.select(".prisonBG")
       .transition()
       .style("opacity",0)
+    g.select(".stackBackground")
+      .transition()
+      .style("opacity",0)
 
 
 
@@ -1227,6 +1266,7 @@ d3.select("#dotBottom")
     g.select(".prisonBG")
       .transition()
       .style("opacity",1)
+
 
 
     d3.select(".singleTrackEmpty")
