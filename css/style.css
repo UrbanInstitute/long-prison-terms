@@ -42,7 +42,26 @@ body{
 #extra-space {
   height: 300px;
 }
-
+#visTitle{
+  position: fixed;
+  top: calc(50% - 300px);
+  left: 438px;
+  font-size: 28px
+}
+#sampleArrow{
+  position: fixed;
+  top: calc(50% - 266px);
+  left: 648px;
+  font-size: 28px;
+  z-index: 999;
+}
+#sampleArrow img{
+  width: 223px;
+}
+#visTitle span{
+  color: #1696d2;
+  margin-left: 10px;
+}
 #vis {
   display: inline-block;
   position: fixed;

@@ -8,6 +8,8 @@ cw.writerow(["step","time","count"])
 popData = {}
 head = cr.next()
 for row in cr:
+	if float(row[2]) == 0:
+		continue
 	if int(row[3]) not in popData:
 		popData[int(row[3])] = []
 	popData[int(row[3])].append({"admission": float(row[0]), "lengthOfStay": float(row[2]) })
