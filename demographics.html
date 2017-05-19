@@ -27,37 +27,12 @@
 
   <body>
   <!--HEADER -->
+<div ng-include="'template_files/header.html'">
+ 
+</div>
+ <!--END-->
 
-    <div id="header-pinned" class="no-touch wrapper-header">
-  
-       
-          <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
-            <div class="title"><span class="feature-link"><a href="http://www.urban.org/features" class="title-linkback" alt="Urban Institute logo">Features</a> <span>: :</span> </span><a href="index.html" class="title-linkback">A Matter of Time: An Exploration of Time Served in America's Prisons</a>
-            </div>
-            <div class="share-icons">
-                <div class="shareThisP">
-                    <span onclick="toggle_visibility('shareBox');">
-                            <div class="shareThisB"></div>
-                        </span>
-                    <div class="shareThisW" id="shareBox">
-
-                        <div class="addthis_toolbox addthis_default_style  "addthis:title="" addthis:url="">
-                            <a href="#" target="_blank" class="addthis_button_facebook at300b" title="Facebook" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-facebook" style="background-color: rgb(48, 88, 145);"><span class="at_a11y">Share on facebook</span></span></a>
-
-                            <a href="#" target="_blank" class="addthis_button_twitter at300b" title="Tweet" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-twitter" style="background-color: rgb(44, 168, 210);"><span class="at_a11y">Share on twitter</span></span></a>
-
-                            <a href="#" target="_blank" class="addthis_button_email at300b" target="_blank" title="Email" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-email" style="background-color: rgb(115, 138, 141);"><span class="at_a11y">Share on email</span></span></a>
-                            <div class="atclear"></div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-  
-                  
-                    
-         </div>   
-  </div>   
+ <!--NAV-BAR-->
  
         <div class="subnav">
               <ul>           
@@ -89,7 +64,9 @@
                 </ul>
       </div>             
                         
-     
+<!--END-->   
+
+<!--CENTER TEXT-->
 
           
       <div class="full-div">
@@ -108,7 +85,7 @@
           </div>
         </div>
       </div>
-        
+<!--END-->       
 
       
       <div class="wrapper">   
@@ -116,22 +93,32 @@
         <div class="row">
          <div class="right-col">
             <div class="pinned note-container">
-              
-              <img src="img/sidebar.png" width="100%" > 
+              <div class="video-quote"> <!--INSERT VIDEO QUOTE HERE-->
+              “The disparity in sentencing … based on the pigmentation of your skin, it’s quite obvious and evident. … During the crack epidemic, the sentences [were greater] if you got caught with 10 grams of crack, for example, then if you got caught with 10 grams of cocaine. What’s the difference? It’s cocaine. One is cooked, one is not. Who is affected mostly, by them harsh drug sentencing law? The minority communities. Blacks and Hispanics. That’s the reality of it.”
+              </div>
+              <div class="video-author">
+              ELVIN GARCIA
+              </div>
+              <div class="video-author-title">
+              Served a total of 32 years in prison
+              </div>
+             <!-- <img src="img/sidebar.png" width="100%" > -->
             </div>
           </div>
           <div class="left-col">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in metus vel dolor dapibus vehicula id at ipsum. Aenean eget ipsum et mauris accumsan auctor et ut sem. In at imperdiet justo. Sed non nisl placerat, lacinia ex sit amet, rutrum nibh. Aenean cursus nisi et eros tempor volutpat. Mauris tincidunt, massa non vehicula suscipit, orci lectus maximus diam, id imperdiet nisi mauris sit amet ligula. Cras pellentesque condimentum ultrices. Nam sapien lectus, fringilla in ipsum id, varius porta ante. Etiam aliquam neque in arcu accumsan, porta pharetra nisl varius. Proin cursus erat pretium orci fermentum, a ornare mauris imperdiet. Sed vel blandit sapien. Sed scelerisque ex a quam condimentum, at hendrerit turpis scelerisque. Sed scelerisque, ipsum quis tempus finibus, metus magna finibus mauris, ut molestie leo elit quis diam. Aliquam vulputate et nibh quis convallis.</p>
-            <p>Sed et quam mauris. Aliquam a velit non enim mollis convallis quis ut lacus. Pellentesque venenatis lacus in mi accumsan dictum nec ut nibh. Nunc erat sem, pellentesque non convallis sed, tincidunt non magna. Mauris pretium lobortis justo in convallis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ac quam rhoncus, condimentum nibh id, efficitur diam.</p>
-            <p>Suspendisse pellentesque vel orci vitae tempor. Praesent velit mauris, rutrum quis erat vel, consectetur varius nisl. Ut imperdiet sem quis imperdiet efficitur. In condimentum vitae nunc id scelerisque. Donec sagittis tortor metus, a ornare felis mollis id. Nunc tempus sagittis vestibulum. Mauris mollis turpis et velit commodo, ut ultricies velit faucibus. Nulla non euismod mauris, eget elementum nunc. Maecenas fermentum nibh a nunc faucibus mollis. Donec consectetur diam non enim consectetur luctus. Suspendisse scelerisque tristique orci, ac malesuada sapien accumsan at. Maecenas eu augue eu felis tempus suscipit sed quis odio. Proin et tristique risus. Aenean vel nisi ut dui faucibus cursus ut et risus.</p>
-            <p>Pellentesque quis sapien rutrum, tincidunt nibh non, auctor dolor. Duis ac dapibus ex. Mauris non urna eget tortor auctor imperdiet ut sit amet arcu. Donec vehicula sed ipsum eu vulputate. Vivamus dictum augue elementum maximus mollis. Cras et iaculis nisl, in viverra ipsum. Ut vulputate laoreet velit ut interdum. Nam elementum, orci quis suscipit euismod, odio enim tincidunt dui, vitae aliquam orci tellus in ipsum. Morbi non tempor libero. Nullam viverra ipsum in risus sodales placerat. Nunc ac molestie enim. Quisque eget elit semper, gravida ante id, rutrum turpis. Nulla facilisi.</p>
-            <p>Duis imperdiet urna tortor. Phasellus vitae mauris enim. Suspendisse molestie iaculis elit. Mauris feugiat neque eget erat vulputate, non sagittis massa eleifend. In sollicitudin feugiat arcu. Nullam auctor metus quam, in vehicula orci accumsan id. Phasellus vitae ex ligula. Nullam finibus interdum augue, quis mattis metus hendrerit vel. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus nulla odio, commodo eu sapien nec, aliquet feugiat enim. Proin vel dapibus odio.</p>
-            <p>Aliquam volutpat augue elit, quis malesuada mi ullamcorper nec. Sed eu egestas neque, sed dignissim ex. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse velit metus, vulputate ac hendrerit sit amet, consectetur non libero. Morbi lorem diam, fringilla eu dapibus at, finibus nec quam. Aenean sit amet tortor scelerisque, commodo nulla vel, gravida augue. Vestibulum ut justo at dolor finibus pulvinar. Maecenas nec sapien aliquam enim auctor posuere a ac tellus.</p>
-            <p>Nullam ut pretium mauris. In pulvinar ullamcorper nibh, luctus pulvinar sapien tristique sed. Praesent tempus sodales ultrices. Vestibulum mollis enim enim, eget aliquet mauris cursus sed. Fusce semper orci tellus, ac tincidunt sem cursus sed. Integer luctus tristique justo ut venenatis. Duis in enim et lorem vehicula sollicitudin nec nec enim. Donec ullamcorper tempor felis ut elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque tincidunt scelerisque ex a rutrum.</p>
-            <p>Aenean vel magna vel velit lacinia dignissim non id mauris. Morbi velit lacus, maximus vel ultrices ac, facilisis sed nisl. Suspendisse consectetur semper augue a rhoncus. Aliquam facilisis efficitur consequat. Nullam scelerisque mattis malesuada. In ac consequat lorem. Cras ultrices sed urna et auctor. Integer sodales ante sit amet lectus hendrerit finibus. Aenean vel odio quis lorem egestas ultrices id at neque. Aliquam erat volutpat. Nullam ligula quam, egestas consequat gravida ut, dictum eu nibh. Sed convallis egestas sem at commodo. Mauris eleifend dolor sit amet nisl porttitor, eget feugiat diam sollicitudin. Morbi porttitor rhoncus velit, id auctor enim. Duis nisl eros, scelerisque id aliquam eu, sollicitudin a ante.</p>
-            <p>Aliquam pretium bibendum mattis. Pellentesque condimentum ligula id nibh sodales vehicula. Vestibulum ultricies euismod turpis, vitae eleifend odio porttitor eget. Praesent facilisis, mi quis consequat maximus, sapien nulla placerat enim, id tristique augue elit eget leo. In iaculis ex aliquam nibh ultrices dapibus. Donec posuere sollicitudin pharetra. Quisque cursus in metus euismod rhoncus. Curabitur at mauris mi. Sed euismod ligula neque, cursus faucibus elit malesuada a. Vivamus varius, est nec semper luctus, tortor metus posuere velit, in pellentesque magna sapien ut quam. Ut ante mi, vestibulum vitae vehicula eget, faucibus sit amet massa.</p>
-            <p>Phasellus facilisis pharetra ipsum id fringilla. Fusce iaculis id lacus vel fermentum. Integer id ullamcorper arcu. Ut sit amet lobortis risus, aliquet pulvinar risus. Duis non sollicitudin arcu. Curabitur efficitur sit amet lectus id consequat. Etiam dictum, lorem eget cursus blandit, ipsum lacus feugiat justo, at pulvinar nisl ante a massa. Curabitur id nunc id nisl semper tristique sit amet vitae metus.</p>
- 
+            <div class="left-col-header"><!--INSERT LEFT COLUMN TEXT HERE-->
+            Racial disparities in prisons are starkest among those serving the longest term.
+            </div>
+            <p>Black people are incarcerated at a rate over five times that of white people nationwide (and 
+            significantly more, in many states). Though other racial and ethnic groups face disparities in 
+            imprisonment, major data gaps almost certainly underestimate the problem. These same gaps 
+            prevented us looking at the full picture of racial and ethnic inequalities in long prison terms. For this reason, we’ve focused on black-white disparity.
+            </p>
+            <br />
+            <p>Over the past decade, the black incarceration rate has been decreasing, likely as a result of reforms for less serious drug offenses. But those serving the longest terms remain untouched by such policy changes.</p>
+            <br />
+
+            <p>In 35 of the 44 states with complete data, racial disparities among those serving the longest prison terms are even larger than in the overall prison population. For example, nearly half of Pennsylvania’s prison population is black, but among those serving the longest terms, 60 percent are black.</p>
           </div>   
         </div>
       </section>
@@ -166,7 +153,7 @@
       </section>
     </div>
     
-   <div ng-include="'template_files/template.html'">
+   <div ng-include="'template_files/footer.html'">
     
     <!-- <div class="content">     
 

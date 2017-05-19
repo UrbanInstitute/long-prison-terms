@@ -12,7 +12,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body, html {
      color: #000;
      font-family: "Lato",sans-serif;
-     font-size: 16px;
+     font-size: 18px;
      height: 100%;
      line-height: 1.2;
      margin: 0px;
@@ -90,6 +90,7 @@ h3{
     position: fixed;
     top: 51px;
     background-color: #052635;
+    z-index: 100;
 }
 
 
@@ -102,9 +103,9 @@ h3{
   text-align: center;
   border-right: solid 1px #6d6e70;
   margin:0px;
-  width: 11%;
+  width: 12%;
   padding-left: 0px !important;
-    
+
 }
 
 #no-border{
@@ -114,10 +115,10 @@ h3{
 
 .subnav a{
 	
-	font-size:16px;
+	font-size:18px;
 	font-weight: 300;
 	display: block;
-    color: white;
+  color: white;
   padding: 20px 0;
 
 }
@@ -147,6 +148,38 @@ h3{
 
 }
 
+/*Style for left column*/
+.left-col-header {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 2em;
+
+}
+
+
+/*Style for sticky text*/
+.video-quote {
+  margin-top: 1.5em;
+  font-family: Georgia;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.5em;
+}
+
+.video-author {
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 1em;
+}
+
+.video-author-title {
+  font-weight: 200;
+  font-size: 14px;
+  margin-top: .5em;
+  padding-bottom: 2em;
+  border-bottom: solid 1px #d0d2d3;
+
+}
 
 /*Style for menu links*/
 ul#menu li a {
@@ -184,14 +217,9 @@ border-right-color: #222;
     width:1300px;
     margin:0 auto;
     padding-top: 50px;
-    border-top:1px solid #eee;
 }
 
-.wrapper-header {
-  left: 7% !important;
-  background: none !important;
-  width: 75% !important;
-}
+
 
 .full-wrapper{
     width:100%;
@@ -346,7 +374,7 @@ footer .content{
 }
 
 .copyright-footer {
-  margin-left: 7%;
+  margin-left: 1%;
   font-size: 14px;
   padding-bottom: 2em;
 }
@@ -373,7 +401,9 @@ footer .content{
     line-height: 1.3;
 }
 
-
+p {
+  line-height: 1.4em;
+}
 
 footer p {
     font-size: 14px;

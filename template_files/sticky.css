@@ -3,18 +3,19 @@
 
 .left-col {
   float: left;
-  width: 70%;
+  width: 825px;
+  padding-left: 35px;
 
-  padding-left:80px;
 
 }
 
 
 .right-col {
   float: right;
-  width: 27%;
- padding-right: 80px;
+  width: 400px;
+  margin-left: 75px;
  z-index:100;
+ padding-right: 35px;
 
  
   
@@ -23,7 +24,6 @@
 .container {
 
     margin-bottom: 80px;
-    padding:0px 30px;
  
 }
 
