@@ -1,15 +1,15 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app=''>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-     <title>Long Sentences</title>
-   
-<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic,900" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <title>Long Sentences</title>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic,900" rel="stylesheet" type="text/css">
       
 
 
@@ -26,11 +26,12 @@
   </head>
 
   <body>
+  <!--HEADER -->
 
-              <div id="header-pinned" class="no-touch">
+    <div id="header-pinned" class="no-touch wrapper-header">
   
        
-               <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
+          <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
             <div class="title"><span class="feature-link"><a href="http://www.urban.org/features" class="title-linkback" alt="Urban Institute logo">Features</a> <span>: :</span> </span><a href="index.html" class="title-linkback">A Matter of Time: An Exploration of Time Served in America's Prisons</a>
             </div>
             <div class="share-icons">
@@ -55,7 +56,8 @@
   
                   
                     
-         </div>      
+         </div>   
+  </div>   
  
         <div class="subnav">
               <ul>           
@@ -90,28 +92,27 @@
      
 
           
-        <div class="full-div">
-          <div class="center-div-initial">
-            <div class="center-div-header">
-            <b>DEMOGRAPHICS</b> WHO SPENDS THE MOST TIME IN PRISON?
-              <!--INSERT TEXT HERE-->
-            </div>
-            <div class="center-div-large-text">
-            Incarceration affects people and communities unequally, and some of these patterns are even more pronounced among those who spend the most time in prison.
-              <!--INSERT TEXT HERE-->
-            </div>
-            <div class="center-div-small-text">
-            Here, we take a closer look at patterns by race, age, gender, and other characteristics of people serving long prison terms.
-              <!--INSERT TEXT HERE-->
-            </div>
+      <div class="full-div">
+        <div class="center-div-initial">
+          <div class="center-div-header">
+          <b>DEMOGRAPHICS</b> WHO SPENDS THE MOST TIME IN PRISON?
+            <!--INSERT TEXT HERE-->
+          </div>
+          <div class="center-div-large-text">
+          Incarceration affects people and communities unequally, and some of these patterns are even more pronounced among those who spend the most time in prison.
+            <!--INSERT TEXT HERE-->
+          </div>
+          <div class="center-div-small-text">
+          Here, we take a closer look at patterns by race, age, gender, and other characteristics of people serving long prison terms.
+            <!--INSERT TEXT HERE-->
           </div>
         </div>
+      </div>
         
 
       
-          <div class="wrapper"> 
-            
-         <section class="container clearfix">   
+      <div class="wrapper">   
+        <section class="container clearfix">   
         <div class="row">
          <div class="right-col">
             <div class="pinned note-container">
@@ -121,24 +122,21 @@
           </div>
           <div class="left-col">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer in metus vel dolor dapibus vehicula id at ipsum. Aenean eget ipsum et mauris accumsan auctor et ut sem. In at imperdiet justo. Sed non nisl placerat, lacinia ex sit amet, rutrum nibh. Aenean cursus nisi et eros tempor volutpat. Mauris tincidunt, massa non vehicula suscipit, orci lectus maximus diam, id imperdiet nisi mauris sit amet ligula. Cras pellentesque condimentum ultrices. Nam sapien lectus, fringilla in ipsum id, varius porta ante. Etiam aliquam neque in arcu accumsan, porta pharetra nisl varius. Proin cursus erat pretium orci fermentum, a ornare mauris imperdiet. Sed vel blandit sapien. Sed scelerisque ex a quam condimentum, at hendrerit turpis scelerisque. Sed scelerisque, ipsum quis tempus finibus, metus magna finibus mauris, ut molestie leo elit quis diam. Aliquam vulputate et nibh quis convallis.</p>
-<p>Sed et quam mauris. Aliquam a velit non enim mollis convallis quis ut lacus. Pellentesque venenatis lacus in mi accumsan dictum nec ut nibh. Nunc erat sem, pellentesque non convallis sed, tincidunt non magna. Mauris pretium lobortis justo in convallis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ac quam rhoncus, condimentum nibh id, efficitur diam.</p>
-<p>Suspendisse pellentesque vel orci vitae tempor. Praesent velit mauris, rutrum quis erat vel, consectetur varius nisl. Ut imperdiet sem quis imperdiet efficitur. In condimentum vitae nunc id scelerisque. Donec sagittis tortor metus, a ornare felis mollis id. Nunc tempus sagittis vestibulum. Mauris mollis turpis et velit commodo, ut ultricies velit faucibus. Nulla non euismod mauris, eget elementum nunc. Maecenas fermentum nibh a nunc faucibus mollis. Donec consectetur diam non enim consectetur luctus. Suspendisse scelerisque tristique orci, ac malesuada sapien accumsan at. Maecenas eu augue eu felis tempus suscipit sed quis odio. Proin et tristique risus. Aenean vel nisi ut dui faucibus cursus ut et risus.</p>
-<p>Pellentesque quis sapien rutrum, tincidunt nibh non, auctor dolor. Duis ac dapibus ex. Mauris non urna eget tortor auctor imperdiet ut sit amet arcu. Donec vehicula sed ipsum eu vulputate. Vivamus dictum augue elementum maximus mollis. Cras et iaculis nisl, in viverra ipsum. Ut vulputate laoreet velit ut interdum. Nam elementum, orci quis suscipit euismod, odio enim tincidunt dui, vitae aliquam orci tellus in ipsum. Morbi non tempor libero. Nullam viverra ipsum in risus sodales placerat. Nunc ac molestie enim. Quisque eget elit semper, gravida ante id, rutrum turpis. Nulla facilisi.</p>
-<p>Duis imperdiet urna tortor. Phasellus vitae mauris enim. Suspendisse molestie iaculis elit. Mauris feugiat neque eget erat vulputate, non sagittis massa eleifend. In sollicitudin feugiat arcu. Nullam auctor metus quam, in vehicula orci accumsan id. Phasellus vitae ex ligula. Nullam finibus interdum augue, quis mattis metus hendrerit vel. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus nulla odio, commodo eu sapien nec, aliquet feugiat enim. Proin vel dapibus odio.</p>
-<p>Aliquam volutpat augue elit, quis malesuada mi ullamcorper nec. Sed eu egestas neque, sed dignissim ex. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse velit metus, vulputate ac hendrerit sit amet, consectetur non libero. Morbi lorem diam, fringilla eu dapibus at, finibus nec quam. Aenean sit amet tortor scelerisque, commodo nulla vel, gravida augue. Vestibulum ut justo at dolor finibus pulvinar. Maecenas nec sapien aliquam enim auctor posuere a ac tellus.</p>
-<p>Nullam ut pretium mauris. In pulvinar ullamcorper nibh, luctus pulvinar sapien tristique sed. Praesent tempus sodales ultrices. Vestibulum mollis enim enim, eget aliquet mauris cursus sed. Fusce semper orci tellus, ac tincidunt sem cursus sed. Integer luctus tristique justo ut venenatis. Duis in enim et lorem vehicula sollicitudin nec nec enim. Donec ullamcorper tempor felis ut elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque tincidunt scelerisque ex a rutrum.</p>
-<p>Aenean vel magna vel velit lacinia dignissim non id mauris. Morbi velit lacus, maximus vel ultrices ac, facilisis sed nisl. Suspendisse consectetur semper augue a rhoncus. Aliquam facilisis efficitur consequat. Nullam scelerisque mattis malesuada. In ac consequat lorem. Cras ultrices sed urna et auctor. Integer sodales ante sit amet lectus hendrerit finibus. Aenean vel odio quis lorem egestas ultrices id at neque. Aliquam erat volutpat. Nullam ligula quam, egestas consequat gravida ut, dictum eu nibh. Sed convallis egestas sem at commodo. Mauris eleifend dolor sit amet nisl porttitor, eget feugiat diam sollicitudin. Morbi porttitor rhoncus velit, id auctor enim. Duis nisl eros, scelerisque id aliquam eu, sollicitudin a ante.</p>
-<p>Aliquam pretium bibendum mattis. Pellentesque condimentum ligula id nibh sodales vehicula. Vestibulum ultricies euismod turpis, vitae eleifend odio porttitor eget. Praesent facilisis, mi quis consequat maximus, sapien nulla placerat enim, id tristique augue elit eget leo. In iaculis ex aliquam nibh ultrices dapibus. Donec posuere sollicitudin pharetra. Quisque cursus in metus euismod rhoncus. Curabitur at mauris mi. Sed euismod ligula neque, cursus faucibus elit malesuada a. Vivamus varius, est nec semper luctus, tortor metus posuere velit, in pellentesque magna sapien ut quam. Ut ante mi, vestibulum vitae vehicula eget, faucibus sit amet massa.</p>
-<p>Phasellus facilisis pharetra ipsum id fringilla. Fusce iaculis id lacus vel fermentum. Integer id ullamcorper arcu. Ut sit amet lobortis risus, aliquet pulvinar risus. Duis non sollicitudin arcu. Curabitur efficitur sit amet lectus id consequat. Etiam dictum, lorem eget cursus blandit, ipsum lacus feugiat justo, at pulvinar nisl ante a massa. Curabitur id nunc id nisl semper tristique sit amet vitae metus.</p>
-    
-
-               
-          </div>
-         
+            <p>Sed et quam mauris. Aliquam a velit non enim mollis convallis quis ut lacus. Pellentesque venenatis lacus in mi accumsan dictum nec ut nibh. Nunc erat sem, pellentesque non convallis sed, tincidunt non magna. Mauris pretium lobortis justo in convallis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ac quam rhoncus, condimentum nibh id, efficitur diam.</p>
+            <p>Suspendisse pellentesque vel orci vitae tempor. Praesent velit mauris, rutrum quis erat vel, consectetur varius nisl. Ut imperdiet sem quis imperdiet efficitur. In condimentum vitae nunc id scelerisque. Donec sagittis tortor metus, a ornare felis mollis id. Nunc tempus sagittis vestibulum. Mauris mollis turpis et velit commodo, ut ultricies velit faucibus. Nulla non euismod mauris, eget elementum nunc. Maecenas fermentum nibh a nunc faucibus mollis. Donec consectetur diam non enim consectetur luctus. Suspendisse scelerisque tristique orci, ac malesuada sapien accumsan at. Maecenas eu augue eu felis tempus suscipit sed quis odio. Proin et tristique risus. Aenean vel nisi ut dui faucibus cursus ut et risus.</p>
+            <p>Pellentesque quis sapien rutrum, tincidunt nibh non, auctor dolor. Duis ac dapibus ex. Mauris non urna eget tortor auctor imperdiet ut sit amet arcu. Donec vehicula sed ipsum eu vulputate. Vivamus dictum augue elementum maximus mollis. Cras et iaculis nisl, in viverra ipsum. Ut vulputate laoreet velit ut interdum. Nam elementum, orci quis suscipit euismod, odio enim tincidunt dui, vitae aliquam orci tellus in ipsum. Morbi non tempor libero. Nullam viverra ipsum in risus sodales placerat. Nunc ac molestie enim. Quisque eget elit semper, gravida ante id, rutrum turpis. Nulla facilisi.</p>
+            <p>Duis imperdiet urna tortor. Phasellus vitae mauris enim. Suspendisse molestie iaculis elit. Mauris feugiat neque eget erat vulputate, non sagittis massa eleifend. In sollicitudin feugiat arcu. Nullam auctor metus quam, in vehicula orci accumsan id. Phasellus vitae ex ligula. Nullam finibus interdum augue, quis mattis metus hendrerit vel. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus nulla odio, commodo eu sapien nec, aliquet feugiat enim. Proin vel dapibus odio.</p>
+            <p>Aliquam volutpat augue elit, quis malesuada mi ullamcorper nec. Sed eu egestas neque, sed dignissim ex. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse velit metus, vulputate ac hendrerit sit amet, consectetur non libero. Morbi lorem diam, fringilla eu dapibus at, finibus nec quam. Aenean sit amet tortor scelerisque, commodo nulla vel, gravida augue. Vestibulum ut justo at dolor finibus pulvinar. Maecenas nec sapien aliquam enim auctor posuere a ac tellus.</p>
+            <p>Nullam ut pretium mauris. In pulvinar ullamcorper nibh, luctus pulvinar sapien tristique sed. Praesent tempus sodales ultrices. Vestibulum mollis enim enim, eget aliquet mauris cursus sed. Fusce semper orci tellus, ac tincidunt sem cursus sed. Integer luctus tristique justo ut venenatis. Duis in enim et lorem vehicula sollicitudin nec nec enim. Donec ullamcorper tempor felis ut elementum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque tincidunt scelerisque ex a rutrum.</p>
+            <p>Aenean vel magna vel velit lacinia dignissim non id mauris. Morbi velit lacus, maximus vel ultrices ac, facilisis sed nisl. Suspendisse consectetur semper augue a rhoncus. Aliquam facilisis efficitur consequat. Nullam scelerisque mattis malesuada. In ac consequat lorem. Cras ultrices sed urna et auctor. Integer sodales ante sit amet lectus hendrerit finibus. Aenean vel odio quis lorem egestas ultrices id at neque. Aliquam erat volutpat. Nullam ligula quam, egestas consequat gravida ut, dictum eu nibh. Sed convallis egestas sem at commodo. Mauris eleifend dolor sit amet nisl porttitor, eget feugiat diam sollicitudin. Morbi porttitor rhoncus velit, id auctor enim. Duis nisl eros, scelerisque id aliquam eu, sollicitudin a ante.</p>
+            <p>Aliquam pretium bibendum mattis. Pellentesque condimentum ligula id nibh sodales vehicula. Vestibulum ultricies euismod turpis, vitae eleifend odio porttitor eget. Praesent facilisis, mi quis consequat maximus, sapien nulla placerat enim, id tristique augue elit eget leo. In iaculis ex aliquam nibh ultrices dapibus. Donec posuere sollicitudin pharetra. Quisque cursus in metus euismod rhoncus. Curabitur at mauris mi. Sed euismod ligula neque, cursus faucibus elit malesuada a. Vivamus varius, est nec semper luctus, tortor metus posuere velit, in pellentesque magna sapien ut quam. Ut ante mi, vestibulum vitae vehicula eget, faucibus sit amet massa.</p>
+            <p>Phasellus facilisis pharetra ipsum id fringilla. Fusce iaculis id lacus vel fermentum. Integer id ullamcorper arcu. Ut sit amet lobortis risus, aliquet pulvinar risus. Duis non sollicitudin arcu. Curabitur efficitur sit amet lectus id consequat. Etiam dictum, lorem eget cursus blandit, ipsum lacus feugiat justo, at pulvinar nisl ante a massa. Curabitur id nunc id nisl semper tristique sit amet vitae metus.</p>
+ 
+          </div>   
         </div>
       </section>
                 
-                <section class="container clearfix">   
+      <section class="container clearfix">   
         <div class="row">
           <div class="right-col">
             <div class="pinned note-container">
@@ -159,28 +157,18 @@
                     <p>Aenean vel magna vel velit lacinia dignissim non id mauris. Morbi velit lacus, maximus vel ultrices ac, facilisis sed nisl. Suspendisse consectetur semper augue a rhoncus. Aliquam facilisis efficitur consequat. Nullam scelerisque mattis malesuada. In ac consequat lorem. Cras ultrices sed urna et auctor. Integer sodales ante sit amet lectus hendrerit finibus. Aenean vel odio quis lorem egestas ultrices id at neque. Aliquam erat volutpat. Nullam ligula quam, egestas consequat gravida ut, dictum eu nibh. Sed convallis egestas sem at commodo. Mauris eleifend dolor sit amet nisl porttitor, eget feugiat diam sollicitudin. Morbi porttitor rhoncus velit, id auctor enim. Duis nisl eros, scelerisque id aliquam eu, sollicitudin a ante.</p>
                     <p>Aliquam pretium bibendum mattis. Pellentesque condimentum ligula id nibh sodales vehicula. Vestibulum ultricies euismod turpis, vitae eleifend odio porttitor eget. Praesent facilisis, mi quis consequat maximus, sapien nulla placerat enim, id tristique augue elit eget leo. In iaculis ex aliquam nibh ultrices dapibus. Donec posuere sollicitudin pharetra. Quisque cursus in metus euismod rhoncus. Curabitur at mauris mi. Sed euismod ligula neque, cursus faucibus elit malesuada a. Vivamus varius, est nec semper luctus, tortor metus posuere velit, in pellentesque magna sapien ut quam. Ut ante mi, vestibulum vitae vehicula eget, faucibus sit amet massa.</p>
                     <p>Phasellus facilisis pharetra ipsum id fringilla. Fusce iaculis id lacus vel fermentum. Integer id ullamcorper arcu. Ut sit amet lobortis risus, aliquet pulvinar risus. Duis non sollicitudin arcu. Curabitur efficitur sit amet lectus id consequat. Etiam dictum, lorem eget cursus blandit, ipsum lacus feugiat justo, at pulvinar nisl ante a massa. Curabitur id nunc id nisl semper tristique sit amet vitae metus.</p>
-<br>
+                    <br>
                   </div>                   
 
              
               
- </div></section>
- 
- 
-                
-              
-              
-              
-
-              
-               
-
-
-</div>
+        </div>
+      </section>
+    </div>
     
-   <footer>
+   <div ng-include="'template_files/template.html'">
     
-     <div class="content">     
+    <!-- <div class="content">     
 
                 <div id="left">
                     <h2>About the data</h2>
@@ -193,9 +181,10 @@
 
                     
          
+    </div> -->
     </div> 
-    </footer> 
     <script src="template_files/template.html"></script>
+    <script src="template_files/footer.js"></script>
 
 
   <!-- Include jQuery and jquery.pin -->
