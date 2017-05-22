@@ -158,7 +158,7 @@ h3{
 
 
 /*Style for sticky text*/
-.video-quote {
+.sidebar-quote {
   margin-top: 1.5em;
   font-family: Georgia;
   font-style: italic;
@@ -166,13 +166,13 @@ h3{
   line-height: 1.5em;
 }
 
-.video-author {
+.sidebar-quote-author {
   font-weight: 600;
   font-size: 14px;
   margin-top: 1em;
 }
 
-.video-author-title {
+.sidebar-author-title {
   font-weight: 200;
   font-size: 14px;
   margin-top: .5em;
@@ -180,6 +180,46 @@ h3{
   border-bottom: solid 1px #d0d2d3;
 
 }
+
+.audio-subtitle {
+  margin-top: .5em;
+  font-style: italic;
+  font-size: 13px;
+  color: #59595c;
+}
+
+.audio-header {
+  margin-top: 4em;
+  font-size: 9px;
+  font-weight: 700;
+  color: #919395;
+
+}
+
+.audio-author {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.graph-container {
+  height: 400px;
+}
+
+#headline2-image {
+  height: 250px;
+}
+
+.audio-container {
+  height: 163px;
+  background-color: #f2f2f2;
+  margin-bottom: 1em;
+}
+/*Style for audio player*/
+audio {
+  background-color: #000;
+}
+
+
 
 /*Style for menu links*/
 ul#menu li a {
@@ -272,6 +312,7 @@ border-right-color: #222;
   font-size: 20px;
   /**color: #094c6b; **/
   color: #0a4c6a;
+  margin-bottom: 1em;
 }
 
 .center-div-large-text {
