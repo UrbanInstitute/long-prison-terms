@@ -19,7 +19,7 @@ var scrollVis = function() {
     lineHeight = 216 - lineMargin.top - lineMargin.bottom;
 
   var YEAR_IN_MS = 2000,
-    MAX_BARS = 55
+    MAX_BARS = 50
 
   var FILLED_TRACK_COLOR = "#e3e3e3"
   var EMPTY_TRACK_COLOR = "#12719e"
@@ -579,7 +579,7 @@ var scrollVis = function() {
       })
     }
     var comma = d3.format(",")
-    d3.select("#visTitle span").text(comma(tracks*500))
+    d3.select("#visTitle span").text(comma(tracks))
     d3.select(".stackBackground")
       .transition()
       .attr("height", tracks*trackHeight)

@@ -45,7 +45,7 @@ body{
 #visTitle{
   position: fixed;
   top: calc(50% - 300px);
-  left: 438px;
+  left: 497px;
   font-size: 28px
 }
 #sampleArrow{
@@ -59,7 +59,7 @@ body{
   width: 223px;
 }
 #visTitle span{
-  color: #1696d2;
+  color: #ca5800;
   margin-left: 10px;
 }
 #vis {
@@ -117,7 +117,7 @@ body{
 
 
 .introLineChart path.line { 
-    stroke: #1696d2;
+    stroke: #ca5800;
     stroke-width: 2;
     fill: none;
     /*opacity: .2*/
