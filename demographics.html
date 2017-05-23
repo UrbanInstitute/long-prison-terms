@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html lang="en" ng-app=''>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,56 +15,24 @@
 
 
       
-<!--for the header-->      
-<link rel="stylesheet" type="text/css" href="template_files/urban-header.css">
-      
-<!--project style sheet-->
-<link rel="stylesheet" href="template_files/template.css" type="text/css">
+  <!--for the header-->      
+  <link rel="stylesheet" type="text/css" href="template_files/urban-header.css">
+        
+  <!--project style sheet-->
+  <link rel="stylesheet" href="template_files/template.css" type="text/css">
 
-<!--sticky Div style sheet-->
-<link rel="stylesheet" href="template_files/sticky.css" type="text/css">
+  <!--sticky Div style sheet-->
+  <link rel="stylesheet" href="template_files/sticky.css" type="text/css">
   </head>
 
-  <body>
+<body>
+
   <!--HEADER -->
 <div ng-include="'template_files/header.html'">
  
 </div>
  <!--END-->
 
- <!--NAV-BAR-->
- 
-        <div class="subnav">
-              <ul>           
-                <li><a href="">Intro</a></li>
-                <li><a href="">Trends</a></li>
-                <li><a class="hovered-category" href="">Demographics</a></li>
-                <li><a href="">Consequences</a></li>
-                <li><a href="">Policies</a></li>
-                <li><a href="">Alternatives</a></li>
-                <li id="no-border"><a href="">About</a></li>
-              </ul>
-                    </div>
-         </div>      
- 
-                  
-                        
-      <div id="mobilenavcontainer">
-           <label for="show-menu" class="show-menu">Chapters &#9660;</label>
-           <input type="checkbox" id="show-menu" role="button">
-                <ul id="menu">
-
-                  <li><a href="">Intro</a></li>
-                  <li><a href="">Trends</a></li>
-                  <li><a href="">Policies</a></li>
-                  <li><a href="">Consequences</a></li>
-                  <li><a href="">Demographics</a></li>
-                  <li><a href="">Alternatives</a></li>
-                  <li><a href="">About</a></li>
-                </ul>
-      </div>             
-                        
-<!--END-->   
 
 <!--CENTER TEXT-->
 
@@ -87,14 +55,14 @@
       </div>
 <!--END-->       
 
-      <!--SECTION 1-->
+  <!--BEGIN SECTION 1-->
       <div class="wrapper">   
         <section class="container clearfix">   
         <div class="row">
          <div class="right-col">
             <div class="pinned note-container">
               <!--SIDEBAR QUOTE 1-->
-              <div class="sidebar-quote"> <!--INSERT VIDEO QUOTE HERE-->
+              <div class="sidebar-quote" id="quote1"> <!--INSERT VIDEO QUOTE HERE-->
               “The disparity in sentencing … based on the pigmentation of your skin, it’s quite obvious and evident. … During the crack epidemic, the sentences [were greater] if you got caught with 10 grams of crack, for example, then if you got caught with 10 grams of cocaine. What’s the difference? It’s cocaine. One is cooked, one is not. Who is affected mostly, by them harsh drug sentencing law? The minority communities. Blacks and Hispanics. That’s the reality of it.”
               </div>
               <div class="sidebar-quote-author">
@@ -103,54 +71,11 @@
               <div class="sidebar-author-title">
               Served a total of 32 years in prison
               </div>
-              <div class="audio-header">
-                LISTEN TO
-              </div>
-              <div class="audio-author">
-                Elvin Garcia
-              </div>
-              <div class="audio-subtitle">
-                Subtitle on somebody's thoughts on something from one of the recorded interviews.
-              </div>
-              <audio controls>
-<!--                 <source src="horse.ogg" type="audio/ogg">
- -->                <source src="" type="audio/mpeg">
-              </audio>
-             <!-- <img src="img/sidebar.png" width="100%" > -->
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <!--SIDEBARQUOTE 2-->
-              <div class="sidebar-quote"> 
-              “When I got incarcerated, we probably had 400 women. There was only three white females in the facility at that time. …You start seeing those different agendas and wondering why there's not that many [white people].”
-              </div>
-              <div class="sidebar-quote-author">
-              MONICA JAHNER
-              </div>
-              <div class="sidebar-author-title">
-              Served 28 years in prison
-              </div>
-              <div class="audio-header">
-                LISTEN TO
-              </div>
-              <div class="audio-author">
-                Monica Jahner
-              </div>
-              <div class="audio-subtitle">
-                Subtitle on somebody's thoughts on something from one of the recorded interviews.
-              </div>
-              <audio controls>
-<!--                 <source src="horse.ogg" type="audio/ogg">
- -->                <source src="" type="audio/mpeg">
-              </audio>
-             <!-- <img src="img/sidebar.png" width="100%" > -->
             </div>
           </div>
           <div class="left-col">
-            <div class="left-col-header"><!--HEADLINE 1-->
+            <div class="left-col-header"> 
+            <!--HEADLINE 1-->
             Racial disparities in prisons are starkest among those serving the longest term.
             </div>
             <p>Black people are incarcerated at a rate over five times that of white people nationwide (and 
@@ -165,20 +90,43 @@
             <p>In 35 of the 44 states with complete data, racial disparities among those serving the longest prison terms are even larger than in the overall prison population. For example, nearly half of Pennsylvania’s prison population is black, but among those serving the longest terms, 60 percent are black.</p>
             <div class="graph-container">
             </div>
-            <div class="graph-container">
-            </div>
-            <p> While most states have seen a decline in racial disparity among people with shorter prison terms, the story is less consistent among those in prison the longest. In recent years, racial disparity has decreased in at least 42 states for people serving less than 10 years. But in at least 11 states, this disparity actually grew for people serving 10 or more years. Current reforms fail to address these glaring disparities because they largely leave out those serving the longest terms.</p>
           </div>   
         </div>
       </section>
+      <section class="container clearfix">   
+        <div class="row">
+         <div class="right-col">
+            <div class="pinned note-container">
+
+              <!--SIDEBARQUOTE 2-->
+              <div class="sidebar-quote" id="quote2"> 
+              “When I got incarcerated, we probably had 400 women. There was only three white females in the facility at that time. …You start seeing those different agendas and wondering why there's not that many [white people].”
+              </div>
+              <div class="sidebar-quote-author">
+              MONICA JAHNER
+              </div>
+              <div class="sidebar-author-title">
+              Served 28 years in prison
+              </div>
+
+            </div>
+          </div>
+          <div class="left-col">
+            <div class="graph-container">
+            </div>
+            <p> While most states have seen a decline in racial disparity among people with shorter prison terms, the story is less consistent among those in prison the longest. In recent years, racial disparity has decreased in at least 42 states for people serving less than 10 years. But in at least 11 states, this disparity actually grew for people serving 10 or more years. Current reforms fail to address these glaring disparities because they largely leave out those serving the longest terms.</p>
+          </div>
+        </div>
+      </section>
+  <!--END SECTION 1-->
       
-      <!--SECTION 2-->          
+  <!--BEGIN SECTION 2-->          
       <section class="container clearfix">   
         <div class="row">
           <div class="right-col">
             <div class="pinned note-container">
               <!--SIDEBAR QUOTE 3-->
-              <div class="sidebar-quote"> 
+              <div class="sidebar-quote" id="quote3"> 
               “If you go in as a young person, you’re just—you’re stunted. Your growth and your maturing and everything else. You’re just neutral in prison. You don’t really…progress. You don’t get anywhere. That’s dangerous for the community because you’re really no different than when you went in.”
               </div>
               <div class="sidebar-quote-author">
@@ -187,48 +135,6 @@
               <div class="sidebar-author-title">
               Served a total of 36 years in prison
               </div>
-              <div class="audio-header">
-                LISTEN TO
-              </div>
-              <div class="audio-author">
-                Stanley Bailey
-              </div>
-              <div class="audio-subtitle">
-                Subtitle on somebody's thoughts on something from one of the recorded interviews.
-              </div>
-              <audio controls>
-<!--                 <source src="horse.ogg" type="audio/ogg">
- -->                <source src="" type="audio/mpeg">
-              </audio>
-             <!-- <img src="img/sidebar.png" width="100%" > -->
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <!--SIDEBAR QUOTE 4-->
-              <div class="sidebar-quote"> 
-              ““It wasn’t easy. I spent all my youth, my teen years, my youth. I went away at 15, I didn’t get out till I was almost—I was 42….<br/>
-              At 15 ... your mind is not fully developed where you can make the appropriate decision. Your decision-making process hasn’t fully grown as an individual.”
-              </div>
-              <div class="sidebar-quote-author">
-              ELVIN GARCIA
-              </div>
-              <div class="audio-header">
-                LISTEN TO
-              </div>
-              <div class="audio-author">
-                Elvin Garcia
-              </div>
-              <div class="audio-subtitle">
-                Subtitle on somebody's thoughts on something from one of the recorded interviews.
-              </div>
-              <audio controls>
-<!--                 <source src="horse.ogg" type="audio/ogg">
- -->                <source src="" type="audio/mpeg">
-              </audio>
-             <!-- <img src="img/sidebar.png" width="100%" > -->
             </div>
           </div>   
         <div class="left-col">
@@ -244,15 +150,37 @@
           </p>
           <div class="audio-container">
           </div>
+        </div>                   
+        </div>
+
+      </section>
+      <section class="container clearfix">   
+        <div class="row">
+          <div class="right-col">
+            <div class="pinned note-container">
+              <!--SIDEBAR QUOTE 4-->
+              <div class="sidebar-quote" id="quote4"> 
+              ““It wasn’t easy. I spent all my youth, my teen years, my youth. I went away at 15, I didn’t get out till I was almost—I was 42….<br/>
+              At 15 ... your mind is not fully developed where you can make the appropriate decision. Your decision-making process hasn’t fully grown as an individual.”
+              </div>
+              <div class="sidebar-quote-author">
+              ELVIN GARCIA
+              </div>
+            
+            </div>
+          </div>   
+        <div class="left-col">
           <div class="graph-container">
           </div>
           <div class="graph-container">
           </div>
         </div>                   
         </div>
-      </section>
 
-      <!--SECTION 3-->
+      </section>
+<!--END SECTION 2-->          
+        
+<!--BEGIN SECTION 3-->
       <section class="container clearfix">   
         <div class="row">
         <div class="left-col">
@@ -263,14 +191,15 @@
         </div>  
       </div>
     </section>
+<!--END SECTION 3-->          
       
-      <!--SECTION 4-->
+<!--BEGIN SECTION 4-->
       <section class="container clearfix">   
         <div class="row">
           <div class="right-col">
             <div class="pinned note-container">
               <!--SIDEBAR QUOTE 5-->
-              <div class="sidebar-quote"> 
+              <div class="sidebar-quote" id="quote5"> 
               “It’s a man’s world. This is a man’s world overall, but more so in prison.”
               </div>
               <div class="sidebar-quote-author">
@@ -292,52 +221,7 @@
 <!--                 <source src="horse.ogg" type="audio/ogg">
  -->                <source src="" type="audio/mpeg">
               </audio>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <!--SIDEBAR QUOTE 6-->
-              <div class="sidebar-quote"> 
-              “There are a lot of women that are actually [in prison] because of their relationship with a man in one shape, form, or fashion. Women that knew and women that didn’t know. Women that were there similar to mine with the abuse. …I thought my situation was bad, but I really heard some very horrific situations that women went through.”
-              </div>
-              <div class="sidebar-quote-author">
-              RAMONA BRANT
-              </div>
-              <div class="audio-header">
-                LISTEN TO
-              </div>
-              <div class="audio-author">
-                Ramona Brant
-              </div>
-              <div class="audio-subtitle">
-                Subtitle on somebody's thoughts on something from one of the recorded interviews.
-              </div>
-              <audio controls>
-<!--                 <source src="horse.ogg" type="audio/ogg">
- -->                <source src="" type="audio/mpeg">
-              </audio>
-              <!--SIDEBAR QUOTE 7-->
-              <div class="sidebar-quote"> 
-              “Our mothers are the caregivers in most homes throughout the United States, so to lose your mother is… traumatizing. I'm not saying that losing a father isn't traumatizing, but the mother, in most cases, are the breadwinner, the nurturer, the one that provides the bonding, takes them to school, stays with the PTA, does those different kind of things with the kid.”
-              </div>
-              <div class="sidebar-quote-author">
-              MONICA JAHNER
-              </div>
-              <div class="audio-header">
-                LISTEN TO
-              </div>
-              <div class="audio-author">
-                Monica Jahner
-              </div>
-              <div class="audio-subtitle">
-                Subtitle on somebody's thoughts on something from one of the recorded interviews.
-              </div>
-              <audio controls>
-<!--                 <source src="horse.ogg" type="audio/ogg">
- -->                <source src="" type="audio/mpeg">
-              </audio>
+
             </div>
           </div> 
 
@@ -348,6 +232,34 @@
           <p>Women in prison are a rapidly- growing group—and in most states, a growing share have served more than 10 years. In Mississippi, for instance, 8 percent of women in prison had served at least a decade as of 2000; by 2014, that number was 13 percent. In Wisconsin, this figure rose from 1.8 to 6.5 percent during the same time. Across the 44 states we looked at, over 5,500 women had been in prison for at least 10 years.</p>
           <p>Overall, women are most likely to be sent to prison for a property or drug conviction. In the most recent year of data available, only 37 percent of women in prison had a violent conviction, compared with 55 percent of men. But among people serving the longest prison terms, a full 92 percent of women had been convicted of a violent offense—on par with men (91 percent).</p>
           <p>Because they are a relatively small group, little is known about women who serve long prison terms. But ample research shows that women’s experiences before, during, and after prison often differ greatly from men’s. Incarcerated women are much likelier to have experienced abuse before entering prison, and women serving life sentences have reported some of the highest rates of prior abuse.</p>
+
+        </div>  
+      </div>
+    </section>
+    <section class="container clearfix">   
+        <div class="row">
+          <div class="right-col">
+            <div class="pinned note-container">
+              <!--SIDEBAR QUOTE 6-->
+              <div class="sidebar-quote" id="quote6"> 
+              “There are a lot of women that are actually [in prison] because of their relationship with a man in one shape, form, or fashion. Women that knew and women that didn’t know. Women that were there similar to mine with the abuse. …I thought my situation was bad, but I really heard some very horrific situations that women went through.”
+              </div>
+              <div class="sidebar-quote-author">
+              RAMONA BRANT
+              </div>
+             
+              <!--SIDEBAR QUOTE 7-->
+              <div class="sidebar-quote" id="quote7"> 
+              “Our mothers are the caregivers in most homes throughout the United States, so to lose your mother is… traumatizing. I'm not saying that losing a father isn't traumatizing, but the mother, in most cases, are the breadwinner, the nurturer, the one that provides the bonding, takes them to school, stays with the PTA, does those different kind of things with the kid.”
+              </div>
+              <div class="sidebar-quote-author">
+              MONICA JAHNER
+              </div>
+          
+            </div>
+          </div> 
+
+        <div class="left-col">
           <p>Some women serving long sentences for drug offenses may have been charged as accomplices in drug conspiracies as a result of their relationships with men. In some sentencing schemes— especially at the federal level—women may be held equally accountable for crimes committed by their partners, despite having little or no intentional involvement.</p>
           <p>Women are also more susceptible to the challenges that come with being an incarcerated parent: as of 2010, 62 percent of women in state prison had children, compared with 51 percent of men.</p>
           <p>As the number of women serving long prison terms continues to grow, more research is needed to understand how they are uniquely affected by incarceration.</p>
@@ -359,32 +271,21 @@
         </div>  
       </div>
     </section>
+ <!--END SECTION 4-->
 
- <!--SECTION 5-->
+ <!--BEGIN SECTION 5-->
       <section class="container clearfix">   
         <div class="row">
           <div class="right-col">
             <div class="pinned note-container">
               <!--SIDEBAR QUOTE 8-->
-              <div class="sidebar-quote"> 
+              <div class="sidebar-quote" id="quote8"> 
               “Everything that you would normally do in your 20s, I have to do in my 50s. I wanna start a little business. I wanna buy a home. <br/>It's a heavy burden on men when you're reaching your 50s and you're not financially secure…. To still be struggling to get what you need or what you think you want in life. Yeah. That comes into your thought a little bit as you start getting older in prison, definitely.”
               </div>
               <div class="sidebar-quote-author">
               STANLEY BAILEY
               </div>
-              <div class="audio-header">
-                LISTEN TO
-              </div>
-              <div class="audio-author">
-                Stanley Bailey
-              </div>
-              <div class="audio-subtitle">
-                Subtitle on somebody's thoughts on something from one of the recorded interviews.
-              </div>
-              <audio controls>
-<!--                 <source src="horse.ogg" type="audio/ogg">
- -->                <source src="" type="audio/mpeg">
-              </audio>
+             
               <br/>
               <br/>
               <br/>
@@ -392,25 +293,13 @@
               <br/>
               <br/>
               <!--SIDEBAR QUOTE 9-->
-              <div class="sidebar-quote"> 
+              <div class="sidebar-quote" id="quote9"> 
               “I was in prison for 28 years. A lot of my people … that were there when I came in the door are dead. They were older women. … If they don't die from some type of cancer or something, serious disease, they're becoming mentally ill, and … their minds are gone…. I still stay in touch with my people that I believe deserve the second chance just like I was given, but because they're serving first degree life, and they're not eligible for parole, they're just dying in there.”
               </div>
               <div class="sidebar-quote-author">
               MONICA JAHNER
               </div>
-              <div class="audio-header">
-                LISTEN TO
-              </div>
-              <div class="audio-author">
-                Monica Jahner
-              </div>
-              <div class="audio-subtitle">
-                Subtitle on somebody's thoughts on something from one of the recorded interviews.
-              </div>
-              <audio controls>
-<!--                 <source src="horse.ogg" type="audio/ogg">
- -->                <source src="" type="audio/mpeg">
-              </audio>
+            
             </div>
           </div> 
 
@@ -427,6 +316,20 @@
           <p>Health care in prison is also extremely expensive, and elderly people require much more support than their younger peers. The annual cost of incarcerating someone over age 50 is at least twice the cost of incarcerating the average person in prison.</p>
           <p>
           <p>Our aging prison population is one of the clearest signs of a prison system designed to punish people, rather than ensure public safety. Keeping elderly people in prison, especially after they have lost their physical or mental capacities, serves no practical purpose—as demonstrated by the extremely low rates of recidivism among older people who are eventually released.</p>
+
+        </div>  
+      </div>
+
+    </section>
+    <!--CONCLUSION-->
+      <section class="container clearfix">   
+        <div class="row">
+        
+        <div class="left-col">
+          <div class="left-col-header"><!--CONCLUSION HEADLINE-->
+            Reform efforts must consider those who are most affected by long prison terms.
+          </div>
+          <p>Shortening long prison terms will not be enough to fix the criminal justice system. Reforms must increase racial and ethnic equity and not aggravate disparities. Work must be done to include women and their experiences in policy conversations. Policymakers will need to reconsider whether it is sensible or fair to condemn people in their teens or early twenties to long sentences or to hold people in prison well into old age. To fully address these issues, we must take a hard look at the systemic inequalities driving many of these patterns.</p>
 
         </div>  
       </div>
@@ -450,6 +353,8 @@
     </div> -->
     </div> 
     <script src="template_files/footer.js"></script>
+    <script src="template_files/app.js"></script>
+    <script src="template_files/template.js"></script>
 
 
   <!-- Include jQuery and jquery.pin -->

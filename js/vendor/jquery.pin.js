@@ -18,12 +18,10 @@
                 } else {
                     disabled = false;
                 }
-
                 var $container = options.containerSelector ? $this.closest(options.containerSelector) : $(document.body);
                 var offset = $this.offset();
                 var containerOffset = $container.offset();
                 var parentOffset = $this.offsetParent().offset();
-
                 if (!$this.parent().is(".pin-wrapper")) {
                     $this.wrap("<div class='pin-wrapper'>");
                 }
@@ -33,7 +31,7 @@
                   bottom: 0
                 }, options.padding || {});
 
-                $this.data("pin", {
+                $this.data("pin", { 
                     pad: pad,
                     from: (options.containerSelector ? containerOffset.top : offset.top) - pad.top,
                     to: containerOffset.top + $container.height() - $this.outerHeight() - pad.bottom,
@@ -47,6 +45,8 @@
         };
 
         var onScroll = function () {
+
+
             if (disabled) { return; }
 
             scrollY = $window.scrollTop();
@@ -56,8 +56,8 @@
                 var $this = $(elements[i]),
                     data  = $this.data("pin");
 
-                if (!data) { // Removed element
-                  continue;
+                if (!data) { // Removed element 
+                   continue;
                 }
 
                 elmts.push($this); 
@@ -70,8 +70,9 @@
                     continue;
                 }
               
-                if (from < scrollY && to > scrollY) {
-                    !($this.css("position") == "fixed") && $this.css({
+                if (from < scrollY && to > scrollY) { console.log(options.containerSelector)
+
+                    !($this.css("position") == "fixed") && $this.css({ 
                         left: $this.offset().left,
                         top: data.pad.top
                     }).css("position", "fixed");
@@ -79,10 +80,21 @@
                 } else if (scrollY >= to) {
                     $this.css({
                         left: "",
-                        top: to - data.parentTop + data.pad.top
-                    }).css("position", "absolute");
+                        top: to - data.parentTop + data.pad.top,
+                    }).css("position", "absolute")
+                     $this.stop().fadeTo(100, 0);
+
+// $(window).scroll(function () {
+//     $('[id^="quote"]').each(function () {
+//         if ($this.css("position") == "absolute") {console.log($this.css("position"))
+//             $(this).stop().fadeTo(100, 0);
+//         } else {console.log($this.css("position"))
+//             $(this).stop().fadeTo('fast', 1);
+//         }
+//     });
+// });
                     if (options.activeClass) { $this.addClass(options.activeClass); }
-                } else {
+                } else { $this.stop().fadeTo('fast', 1)
                     $this.css({position: "", top: "", left: ""});
                     if (options.activeClass) { $this.removeClass(options.activeClass); }
                 }
