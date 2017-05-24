@@ -11,7 +11,7 @@ var scrollVis = function() {
   var pageSize = "large"
   var mapSizes = {
     "huge": { "width": 900, "height": 1270, "scale": 3800, "translate": [380,220], "chartWidth": 76, "chartMargin": 8},
-    "large": { "width": 900, "height": 1270, "scale": 3100, "translate": [380,220], "chartWidth": 62, "chartMargin": 5},
+    "large": { "width": 750, "height": 600, "scale": 3100, "translate": [300,200], "chartWidth": 62, "chartMargin": 5},
     "medium": { "width": 900, "height": 1270, "scale": 3800, "translate": [380,220], "chartWidth": 76, "chartMargin": 8},
     "small": { "width": 900, "height": 1270, "scale": 3800, "translate": [380,220], "chartWidth": 76, "chartMargin": 8}
   }
@@ -51,7 +51,7 @@ var scrollVis = function() {
     selection.each(function(rawData) {
       // create svg and give it a width and height
 
-      mapSvg = d3.select("#map")
+      mapSvg = d3.select("#vis")
         .append("svg")
             .attr("width", mapWidth + mapMargin.left + mapMargin.right)
             .attr("height", mapHeight + mapMargin.top + mapMargin.bottom)
@@ -121,12 +121,12 @@ var scrollVis = function() {
 
 
 
-        var projection = d3.geo.equirectangular()
+        var projection = d3.geoEquirectangular()
         .scale(mapSizes[pageSize]["scale"])
         .center([-96.03542,41.69553])
         .translate(mapSizes[pageSize]["translate"]);
 
-      var geoPath = d3.geo.path()
+      var geoPath = d3.geoPath()
         .projection(projection);
   var chartWidth = mapSizes[pageSize]["chartWidth"]
   var chartMargin = mapSizes[pageSize]["chartMargin"]
@@ -159,25 +159,35 @@ var scrollVis = function() {
       .attr("height",chartWidth-2*chartMargin)
       .attr("x",chartMargin)
       .attr("y",chartMargin)
-      .style("fill","#e3e3e3") 
+      .style("fill","#b3b3b3") 
+
+    map.append("rect")
+      .attr("width",chartWidth-2*chartMargin)
+      .attr("height",chartWidth-2*chartMargin)
+      .attr("x",chartMargin)
+      .attr("y",chartMargin)
+      .style("fill","#1696d2") 
 
  
 
 
-    var mapX = d3.scale.linear().range([chartMargin, chartWidth-chartMargin]);
-    var mapY = d3.scale.linear().range([chartWidth-chartMargin, chartMargin]);
+    var mapX = d3.scaleLinear().range([chartMargin, chartWidth-chartMargin]);
+    var mapY = d3.scaleLinear().range([chartWidth-chartMargin, chartMargin]);
 
 
     mapX.domain([2000,2014]);
     mapY.domain([0, d3.max(trendsData, function(d) { return d.LOS_Mean; })]); 
 
-    var mapXAxis = d3.svg.axis().scale(mapX)
-        .orient("bottom").outerTickSize(0);
 
-    var mapYAxis = d3.svg.axis().scale(mapY)
-        .orient("left").outerTickSize(0);
 
-    var mapline = d3.svg.line()
+
+    var mapXAxis = d3.axisBottom(mapX)
+            // .outerTickSize(0);
+
+    var mapYAxis = d3.axisLeft(mapY)
+        // .outerTickSize(0);
+
+    var mapline = d3.line()
         .x(function(d) { return mapX(d.Year); })
         .y(function(d) { return mapY(d.LOS_Mean); });
 
@@ -196,7 +206,21 @@ var scrollVis = function() {
        .attr("height",chartWidth-2*chartMargin)
        .attr("x",chartMargin)
        .attr("y",chartMargin)
-       .style("fill","#ffffff")
+       .style("fill","#1696d2")
+
+    map.append("text")
+      .text(function(d){ return d.key })
+      .attr("class", "mapLable standard")
+      .attr("text-anchor", "end")
+      .attr("x",chartWidth+chartMargin - 14)
+      .attr("y",chartWidth+chartMargin - 14)
+    
+    blank.append("text")
+      .text(function(d){ return d.properties.abbr })
+      .attr("class", "mapLable blank")
+      .attr("text-anchor", "end")
+      .attr("x",chartWidth+chartMargin - 14)
+      .attr("y",chartWidth+chartMargin - 14)
 
     map.append("g")
         .attr("class", "x axis")
@@ -228,13 +252,13 @@ var scrollVis = function() {
     var chartWidth = mapSizes[pageSize]["chartWidth"]
     var chartMargin = mapSizes[pageSize]["chartMargin"]
 
-    d3.select("#map svg")
+    d3.select("#vis svg")
       .selectAll(".state")
       .data(trendsDataNest)
 
-    var mapX = d3.scale.linear().range([chartMargin, chartWidth-chartMargin]);
+    var mapX = d3.scaleLinear().range([chartMargin, chartWidth-chartMargin]);
 
-    var mapY = d3.scale.linear().range([chartWidth-chartMargin, chartMargin]);
+    var mapY = d3.scaleLinear().range([chartWidth-chartMargin, chartMargin]);
 
     mapX.domain([2000,2014]);
     // var mapYs = {}
@@ -248,25 +272,25 @@ var scrollVis = function() {
       for(var i = 0; i < trendsDataNest.length; i++){
         var max = d3.max(trendsDataNest[i].values, function(d) { return d[variable]; })
 
-        var my = d3.scale.linear().range([chartWidth-chartMargin, chartMargin])
+        var my = d3.scaleLinear().range([chartWidth-chartMargin, chartMargin])
           .domain([0, max]);
 
         var state = trendsDataNest[i].key
 
-        mlines[state] = d3.svg.line()
+        mlines[state] = d3.line()
           .x(function(d) { return mapX(d.Year); })
           .y(function(d) { return my(d[variable]); });
 
-        yaxes[state] = d3.svg.axis().scale(my)
-          .orient("left")
-          .tickValues([max])
-          .outerTickSize(0);
+        yaxes[state] = d3.axisLeft(my)
+          // .orient("left")
+          // .tickValues([max])
+          // .outerTickSize(0);
 
-      d3.selectAll("#map .y.axis." + state)
+      d3.selectAll("#vis .y.axis." + state)
         .transition()
         .call(yaxes[state])
 
-        d3.selectAll("#map svg ." + alt + ".line." + state)
+        d3.selectAll("#vis svg ." + alt + ".line." + state)
           .transition()
           .style("opacity", opacity)
           .transition()
@@ -276,21 +300,20 @@ var scrollVis = function() {
       }
 
     }else{
-      mapY = d3.scale.linear().range([chartWidth-chartMargin, chartMargin]);
+      mapY = d3.scaleLinear().range([chartWidth-chartMargin, chartMargin]);
       var max = d3.max(trendsData, function(d) { return d[altvar]; })
       mapY.domain([0, max]); 
-      mapline = d3.svg.line()
+      mapline = d3.line()
           .x(function(d) { return mapX(d.Year); })
           .y(function(d) { return mapY(d[variable]); });
-      mapYAxis = d3.svg.axis().scale(mapY)
-        .orient("left")
-        .tickValues([0, max])
-        .outerTickSize(0);
+      mapYAxis = d3.axisLeft(mapY)
+        // .tickValues([0, max])
+        // .outerTickSize(0);
 
-      d3.selectAll("#map .y.axis")
+      d3.selectAll("#vis .y.axis")
         .transition()
         .call(mapYAxis)
-      d3.selectAll("#map svg ." + alt + ".line")
+      d3.selectAll("#vis svg ." + alt + ".line")
           .transition()
           .style("opacity", opacity)
           .transition()
@@ -298,8 +321,8 @@ var scrollVis = function() {
           .attr("d", function(d){ return mapline(d.values)})
 
     }
-    var mapXAxis = d3.svg.axis().scale(mapX)
-        .orient("bottom").outerTickSize(0);
+    var mapXAxis = d3.axisBottom(mapX)
+        // .outerTickSize(0);
 
   }
 
@@ -383,7 +406,7 @@ var scrollVis = function() {
    */
 
   function mapTimeServed(){
-    d3.select("#map")
+    d3.select("#vis")
       .transition()
       .style("opacity",1)
     drawMapLine("LOS_Mean")
@@ -462,16 +485,15 @@ var scrollVis = function() {
    *
    * @param index - index of the activated section
    */
-  chart.activate = function(index) {
+  chart.activate = function (index) {
     activeIndex = index;
     var sign = (activeIndex - lastIndex) < 0 ? -1 : 1;
     var scrolledSections = d3.range(lastIndex + sign, activeIndex + sign, sign);
-    scrolledSections.forEach(function(i) {
+    scrolledSections.forEach(function (i) {
       activateFunctions[i]();
     });
     lastIndex = activeIndex;
   };
-
   /**
    * update
    *
@@ -513,6 +535,14 @@ function display(trendsData) {
 
   // pass in .step selection as the steps
   scroll(d3.selectAll('.step'));
+
+  scroll.on('resized', function(){
+    d3.select("#vis svg").remove()
+    // d3.selectAll(".scatterButton").remove()
+    // d3.select("#buttonContainer").remove()
+    // d3.selectAll(".mapImg").remove()
+    display(trendsData)
+  })
 
   // setup event handling
   scroll.on('active', function(index) {
