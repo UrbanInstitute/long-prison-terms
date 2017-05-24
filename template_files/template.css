@@ -159,7 +159,7 @@ h3{
 
 /*Style for sticky text*/
 .sidebar-quote {
-  margin-top: 1.5em;
+  margin-top: .2em;
   font-family: Georgia;
   font-style: italic;
   font-size: 20px;
@@ -214,6 +214,14 @@ h3{
   height: 163px;
   background-color: #f2f2f2;
   margin-bottom: 1em;
+}
+
+.in-view {
+  opacity: 1;
+}
+
+.note-container {
+  opacity: 0;
 }
 /*Style for audio player*/
 audio {

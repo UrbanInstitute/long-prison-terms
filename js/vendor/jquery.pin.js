@@ -27,7 +27,7 @@
                 }
 
                 var pad = $.extend({
-                  top: 100,
+                  top: 200,
                   bottom: 0
                 }, options.padding || {});
 
@@ -70,19 +70,22 @@
                     continue;
                 }
               
-                if (from < scrollY && to > scrollY) { console.log(options.containerSelector)
+                if (from < scrollY && to > scrollY) { console.log(from + " " + to + " " + scrollY)
 
-                    !($this.css("position") == "fixed") && $this.css({ 
+                    !($this.css("position") == "fixed") && $this.fadeTo(300, 1) && $this.css({ 
                         left: $this.offset().left,
                         top: data.pad.top
-                    }).css("position", "fixed");
+                    }).css("position", "fixed")
+                    
+
                     if (options.activeClass) { $this.addClass(options.activeClass); }
                 } else if (scrollY >= to) {
                     $this.css({
                         left: "",
                         top: to - data.parentTop + data.pad.top,
                     }).css("position", "absolute")
-                     $this.stop().fadeTo(100, 0);
+                     $this.stop().fadeTo(100, 0)
+
 
 // $(window).scroll(function () {
 //     $('[id^="quote"]').each(function () {
@@ -94,7 +97,9 @@
 //     });
 // });
                     if (options.activeClass) { $this.addClass(options.activeClass); }
-                } else { $this.stop().fadeTo('fast', 1)
+                } 
+                else { console.log('last')
+                    $this.stop().fadeTo(100, 0)
                     $this.css({position: "", top: "", left: ""});
                     if (options.activeClass) { $this.removeClass(options.activeClass); }
                 }
