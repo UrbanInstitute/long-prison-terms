@@ -3,7 +3,7 @@
 
 .left-col {
   float: left;
-  width: 825px;
+  width: 48.7%;
   padding-left: 35px;
 
 
@@ -11,11 +11,11 @@
 
 
 .right-col {
-  float: right;
-  width: 400px;
-  margin-left: 75px;
+  width: 30.7%;
  z-index:100;
- padding-right: 35px;
+ position: fixed;
+ top: 20px;
+ left: 57%;
 
  
   

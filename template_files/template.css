@@ -158,6 +158,12 @@ h3{
 
 
 /*Style for sticky text*/
+
+.note-container {
+  opacity: 0;
+  position: absolute;
+  top: 200px;
+}
 .sidebar-quote {
   margin-top: .2em;
   font-family: Georgia;
@@ -220,9 +226,7 @@ h3{
   opacity: 1;
 }
 
-.note-container {
-  opacity: 0;
-}
+
 /*Style for audio player*/
 audio {
   background-color: #000;

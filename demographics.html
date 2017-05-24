@@ -60,9 +60,9 @@
         <section class="container clearfix">   
         <div class="row">
          <div class="right-col">
-            <div class="pinned note-container">
+            <div class="pinned note-container" id="quote1">
               <!--SIDEBAR QUOTE 1-->
-              <div class="sidebar-quote" id="quote1"> <!--INSERT VIDEO QUOTE HERE-->
+              <div class="sidebar-quote"> <!--INSERT VIDEO QUOTE HERE-->
               “The disparity in sentencing … based on the pigmentation of your skin, it’s quite obvious and evident. … During the crack epidemic, the sentences [were greater] if you got caught with 10 grams of crack, for example, then if you got caught with 10 grams of cocaine. What’s the difference? It’s cocaine. One is cooked, one is not. Who is affected mostly, by them harsh drug sentencing law? The minority communities. Blacks and Hispanics. That’s the reality of it.”
               </div>
               <div class="sidebar-quote-author">
@@ -72,10 +72,10 @@
               Served a total of 32 years in prison
               </div>
             </div>
-            <div class="pinned note-container">
+            <div class="pinned note-container" id="quote2">
 
               <!--SIDEBARQUOTE 2-->
-              <div class="sidebar-quote" id="quote2"> 
+              <div class="sidebar-quote"> 
               “When I got incarcerated, we probably had 400 women. There was only three white females in the facility at that time. …You start seeing those different agendas and wondering why there's not that many [white people].”
               </div>
               <div class="sidebar-quote-author">
@@ -86,9 +86,9 @@
               </div>
 
             </div>
-            <div class="pinned note-container">
+            <div class="pinned note-container" id="quote3">
               <!--SIDEBAR QUOTE 3-->
-              <div class="sidebar-quote" id="quote3"> 
+              <div class="sidebar-quote"> 
               “If you go in as a young person, you’re just—you’re stunted. Your growth and your maturing and everything else. You’re just neutral in prison. You don’t really…progress. You don’t get anywhere. That’s dangerous for the community because you’re really no different than when you went in.”
               </div>
               <div class="sidebar-quote-author">
@@ -98,9 +98,9 @@
               Served a total of 36 years in prison
               </div>
             </div>
-            <div class="pinned note-container">
+            <div class="pinned note-container" id="quote4">
               <!--SIDEBAR QUOTE 4-->
-              <div class="sidebar-quote" id="quote4"> 
+              <div class="sidebar-quote"> 
               ““It wasn’t easy. I spent all my youth, my teen years, my youth. I went away at 15, I didn’t get out till I was almost—I was 42….<br/>
               At 15 ... your mind is not fully developed where you can make the appropriate decision. Your decision-making process hasn’t fully grown as an individual.”
               </div>
@@ -109,9 +109,9 @@
               </div>
             
             </div>
-            <div class="pinned note-container">
+            <div class="pinned note-container" id="quote5">
               <!--SIDEBAR QUOTE 5-->
-              <div class="sidebar-quote" id="quote5"> 
+              <div class="sidebar-quote"> 
               “It’s a man’s world. This is a man’s world overall, but more so in prison.”
               </div>
               <div class="sidebar-quote-author">
@@ -135,9 +135,9 @@
               </audio>
 
             </div>
-            <div class="pinned note-container">
+            <div class="pinned note-container" id="quote6">
               <!--SIDEBAR QUOTE 6-->
-              <div class="sidebar-quote" id="quote6"> 
+              <div class="sidebar-quote"> 
               “There are a lot of women that are actually [in prison] because of their relationship with a man in one shape, form, or fashion. Women that knew and women that didn’t know. Women that were there similar to mine with the abuse. …I thought my situation was bad, but I really heard some very horrific situations that women went through.”            
               </div>
               <div class="sidebar-quote-author">
@@ -145,27 +145,27 @@
               </div>
           
             </div>
-            <div class="pinned note-container">
+            <div class="pinned note-container" id="quote7">
               <!--SIDEBAR QUOTE 7-->
-              <div class="sidebar-quote" id="quote7"> 
+              <div class="sidebar-quote"> 
               “Our mothers are the caregivers in most homes throughout the United States, so to lose your mother is… traumatizing. I'm not saying that losing a father isn't traumatizing, but the mother, in most cases, are the breadwinner, the nurturer, the one that provides the bonding, takes them to school, stays with the PTA, does those different kind of things with the kid.”
               </div>
               <div class="sidebar-quote-author">
               MONICA JAHNER
               </div>     
             </div>
-            <div class="pinned note-container">
+            <div class="pinned note-container" id="quote8">
               <!--SIDEBAR QUOTE 8-->
-              <div class="sidebar-quote" id="quote8"> 
+              <div class="sidebar-quote"> 
               “Everything that you would normally do in your 20s, I have to do in my 50s. I wanna start a little business. I wanna buy a home. <br/>It's a heavy burden on men when you're reaching your 50s and you're not financially secure…. To still be struggling to get what you need or what you think you want in life. Yeah. That comes into your thought a little bit as you start getting older in prison, definitely.”
               </div>
               <div class="sidebar-quote-author">
               STANLEY BAILEY
               </div>
             </div>
-            <div class="pinned note-container">
+            <div class="pinned note-container" id="quote9">
               <!--SIDEBAR QUOTE 9-->
-              <div class="sidebar-quote" id="quote9"> 
+              <div class="sidebar-quote"> 
               “I was in prison for 28 years. A lot of my people … that were there when I came in the door are dead. They were older women. … If they don't die from some type of cancer or something, serious disease, they're becoming mentally ill, and … their minds are gone…. I still stay in touch with my people that I believe deserve the second chance just like I was given, but because they're serving first degree life, and they're not eligible for parole, they're just dying in there.”
               </div>
               <div class="sidebar-quote-author">
@@ -271,18 +271,20 @@
          
     </div> -->
     </div> 
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="template_files/footer.js"></script>
     <script src="template_files/app.js"></script>
     <script src="template_files/template.js"></script>
 
 
   <!-- Include jQuery and jquery.pin -->
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="js/vendor/jquery.pin.js"></script>
+<!--     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+ -->    
 
 
     <script>
-      $(".pinned").pin({containerSelector: ".container", minWidth: 900});
+    //  $(".pinned").pin({containerSelector: ".container", minWidth: 900});
     </script>
   
       
