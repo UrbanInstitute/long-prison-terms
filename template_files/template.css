@@ -156,13 +156,27 @@ h3{
 
 }
 
+.conclusion-header {
+  font-weight: 600;
+  font-size: 36px;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
+}
+
+.conclusion-text {
+  font-size: 25px;
+  color: #666666;
+  font-weight: 300;
+  margin-bottom: 2.5em;
+}
+
 
 /*Style for sticky text*/
 
 .note-container {
-  opacity: 0;
   position: absolute;
   top: 200px;
+  opacity: 0;
 }
 .sidebar-quote {
   margin-top: .2em;
@@ -222,9 +236,6 @@ h3{
   margin-bottom: 1em;
 }
 
-.in-view {
-  opacity: 1;
-}
 
 
 /*Style for audio player*/
@@ -456,7 +467,9 @@ footer .content{
 }
 
 p {
-  line-height: 1.4em;
+  line-height: 1.5em;
+  margin-bottom: 1.6em;
+
 }
 
 footer p {
