@@ -21,8 +21,9 @@ window.onscroll = function() {
               .style("opacity", 0)
         quote1
             .transition(t)
+            .duration(10)
                 .style("opacity", 1)
-            .transition()
+            .transition(10)
 
 
 
@@ -33,8 +34,10 @@ window.onscroll = function() {
                   .style("opacity", 0)
             d3.select('.quote2')
                 .transition(t)
+                            .duration(10)
+
                     .style("opacity", 1)
-                .transition()
+                .transition(10)
 
 
 
