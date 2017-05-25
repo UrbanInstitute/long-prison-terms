@@ -21,9 +21,9 @@ window.onscroll = function() {
               .style("opacity", 0)
         quote1
             .transition(t)
-            .duration(10)
+            .duration(100)
                 .style("opacity", 1)
-            .transition(10)
+            .transition()
 
 
 
@@ -34,10 +34,9 @@ window.onscroll = function() {
                   .style("opacity", 0)
             d3.select('.quote2')
                 .transition(t)
-                            .duration(10)
-
+                .duration(150)
                     .style("opacity", 1)
-                .transition(10)
+                .transition()
 
 
 
@@ -46,9 +45,9 @@ window.onscroll = function() {
 
             var t= d3.selectAll(".quote2, .quote4")
                   .style("opacity", 0)
-                  .classed('hi', true)
             d3.select('.quote3')
                 .transition(t)
+                .duration(150)
                     .style("opacity", 1)
                 .transition()
 
@@ -59,6 +58,7 @@ window.onscroll = function() {
                   .style("opacity", 0)
             d3.select('.quote4')
                 .transition(t)
+                .duration(150)
                     .style("opacity", 1)
                 .transition()
 
@@ -69,6 +69,7 @@ window.onscroll = function() {
                   .style("opacity", 0)
             d3.select('.quote5')
                 .transition(t)
+                .duration(150)
                     .style("opacity", 1)
                 .transition()
     } else if(window.scrollY >= 4600 && window.scrollY <4900){ 
@@ -78,6 +79,7 @@ window.onscroll = function() {
                   .style("opacity", 0)
             d3.select('.quote6')
                 .transition(t)
+                .duration(150)
                     .style("opacity", 1)
                 .transition()
     } else if(window.scrollY >= 5100 && window.scrollY <5700){ 
@@ -87,6 +89,7 @@ window.onscroll = function() {
                   .style("opacity", 0)
             d3.select('.quote7')
                 .transition(t)
+                .duration(150)
                     .style("opacity", 1)
                 .transition()
     } else if(window.scrollY >= 5800 && window.scrollY <6300){ 
@@ -96,6 +99,7 @@ window.onscroll = function() {
                   .style("opacity", 0)
             d3.select('.quote8')
                 .transition(t)
+                .duration(150)
                     .style("opacity", 1)
                 .transition()
     } else if(window.scrollY >= 6300 && window.scrollY < 6700){ 
@@ -105,6 +109,7 @@ window.onscroll = function() {
                   .style("opacity", 0)
             d3.select('.quote9')
                 .transition(t)
+                .duration(150)
                     .style("opacity", 1)
                 .transition()
     } 
