@@ -3,29 +3,24 @@
 
 .left-col {
   float: left;
-  width: 70%;
+  width: 825px;
+  padding-left: 35px;
 
-  padding-left:80px;
 
 }
 
 
 .right-col {
-  float: right;
-  width: 27%;
- padding-right: 80px;
+  width: 365px;
  z-index:100;
+ position: fixed;
+ top: 20px;
+ left: 900px;
 
  
   
 }
 
-.container {
-
-    margin-bottom: 80px;
-    padding:0px 30px;
- 
-}
 
 
 @media  (max-width: 900px) {

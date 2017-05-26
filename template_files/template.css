@@ -12,7 +12,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 body, html {
      color: #000;
      font-family: "Lato",sans-serif;
-     font-size: 16px;
+     font-size: 18px;
      height: 100%;
      line-height: 1.2;
      margin: 0px;
@@ -90,6 +90,7 @@ h3{
     position: fixed;
     top: 51px;
     background-color: #052635;
+    z-index: 100;
 }
 
 
@@ -104,7 +105,7 @@ h3{
   margin:0px;
   width: 12%;
   padding-left: 0px !important;
-    
+
 }
 
 #no-border{
@@ -114,10 +115,10 @@ h3{
 
 .subnav a{
 	
-	font-size:16px;
+	font-size:18px;
 	font-weight: 300;
 	display: block;
-    color: white;
+  color: white;
   padding: 20px 0;
 
 }
@@ -146,6 +147,102 @@ h3{
 	font-weight: 300;
 
 }
+
+/*Style for left column*/
+.left-col-header {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 2em;
+
+}
+
+.conclusion-header {
+  font-weight: 600;
+  font-size: 36px;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
+}
+
+.conclusion-text {
+  font-size: 25px;
+  color: #666666;
+  font-weight: 300;
+  margin-bottom: 2.5em;
+}
+
+
+/*Style for sticky text*/
+
+.note-container {
+  position: absolute;
+  top: 200px;
+  opacity: 0;
+}
+.sidebar-quote {
+  margin-top: .2em;
+  font-family: Georgia;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.5em;
+}
+
+.sidebar-quote-author {
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 1em;
+}
+
+.sidebar-author-title {
+  font-weight: 200;
+  font-size: 14px;
+  margin-top: .5em;
+  padding-bottom: 2em;
+
+}
+
+.audio-subtitle {
+  margin-top: .5em;
+  font-style: italic;
+  font-size: 13px;
+  color: #59595c;
+}
+
+.audio-header {
+  margin-top: 2em;
+  font-size: 9px;
+  font-weight: 700;
+  color: #919395;
+  border-top: solid 1px #d0d2d3;
+  padding-top: 1em;
+
+}
+
+.audio-author {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.graph-container {
+  height: 400px;
+}
+
+#headline2-image {
+  height: 250px;
+}
+
+.audio-container {
+  height: 163px;
+  background-color: #f2f2f2;
+  margin-bottom: 1em;
+}
+
+
+
+/*Style for audio player*/
+audio {
+  background-color: #000;
+}
+
 
 
 /*Style for menu links*/
@@ -184,6 +281,14 @@ border-right-color: #222;
     width:1300px;
     margin:0 auto;
     padding-top: 50px;
+}
+
+
+
+.full-wrapper{
+    width:100%;
+    margin:0 auto;
+    padding-top: 20px;
     border-top:1px solid #eee;
 }
 
@@ -231,6 +336,7 @@ border-right-color: #222;
   font-size: 20px;
   /**color: #094c6b; **/
   color: #0a4c6a;
+  margin-bottom: 1em;
 }
 
 .center-div-large-text {
@@ -330,7 +436,13 @@ footer {
 footer .content{
   
     max-width: 1100px;
+}
 
+.copyright-footer {
+  margin-left: 1%;
+  font-size: 14px;
+  padding-bottom: 2em;
+}
     
    
     
@@ -354,7 +466,11 @@ footer .content{
     line-height: 1.3;
 }
 
+p {
+  line-height: 1.5em;
+  margin-bottom: 1.6em;
 
+}
 
 footer p {
     font-size: 14px;
