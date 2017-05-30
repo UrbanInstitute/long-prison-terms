@@ -3,25 +3,47 @@
 
 .left-col {
   float: left;
-  width: 825px;
-  padding-left: 35px;
-
+  width: 63.46%;
+  padding-left: 2.7%;
 
 }
 
 
 .right-col {
-  width: 365px;
+  width: 28.08%;
  z-index:100;
  position: fixed;
  top: 20px;
- left: 900px;
+ left: 69.23%
 
  
   
 }
 
+@media  (max-width: 1200px) {
+  .left-col {
+    width: 66.66%;
+  }
 
+  .right-col {
+    width: 26.25%;
+    left: 70.83%;
+  }
+
+}
+
+
+
+@media  (max-width: 1000px) {
+  .left-col {
+    width: 65%;
+  }
+
+  .right-col {
+    width: 26.5%;
+    left: 70%;
+  }
+}
 
 @media  (max-width: 900px) {
   .right-col { float: none; width: 100%; padding:0px;}

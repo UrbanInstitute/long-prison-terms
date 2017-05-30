@@ -387,7 +387,7 @@ border-right-color: #222;
 
 /***********structure***********/
 .wrapper{
-    width:1300px;
+    width: 100%;
     margin:0 auto;
     padding-top: 50px;
 }
