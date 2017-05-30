@@ -148,7 +148,12 @@ h3{
 
 }
 
+
 /*Style for left column*/
+.section-header {
+  margin-top: 5em;
+  font-size: 36px;
+}
 .left-col-header {
   font-size: 26px;
   font-weight: 600;
@@ -266,10 +271,18 @@ h3{
 
 }
 
+/*STYLES FOR AUDIO DIV*/
 .audio-subtitle {
   margin-top: .5em;
   font-style: italic;
   font-size: 13px;
+  color: #59595c;
+}
+
+.audio-container-subtitle {
+  margin-top: .5em;
+  font-style: italic;
+  font-size: 14px;
   color: #59595c;
 }
 
@@ -288,6 +301,26 @@ h3{
   font-weight: 600;
 }
 
+.audio-container {
+  background-color: #f2f2f2;
+  margin: 1.5em 0;
+}
+
+.audio-container-header {
+  font-size: 9px;
+  font-weight: 700;
+  color: #919395;
+
+}
+
+.audio-info {
+  padding-top: 5.5%;
+  padding-bottom: 5.5%;
+  width: 40%;
+  padding-left: 10%;
+
+}
+
 .graph-container {
   height: 400px;
 }
@@ -300,11 +333,7 @@ h3{
   height: 250px;
 }
 
-.audio-container {
-  height: 163px;
-  background-color: #f2f2f2;
-  margin: 1.5em 0;
-}
+
 
 .policies-graph-container {
   height: 530px;
