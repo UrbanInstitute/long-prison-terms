@@ -228,8 +228,14 @@ h3{
 .next-arrow {
   margin: 70% 0;
   content: url("../img/arrow.png");
+  cursor: pointer;
 }
+.next-arrow:hover {
+  margin: 70% 0;
+  content: url("../img/arrow-hovered.png");
+  cursor: pointer;
 
+}
 
 /*Style for sticky text*/
 

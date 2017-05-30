@@ -2,16 +2,6 @@ console.log(window.scrollY)
 
 var duration = 300; 
 
-var quote1 = d3.select(".quote1");
-    quote2 = d3.select(".quote2"),
-    quote3 = d3.select(".quote3"),
-    quote4 = d3.select(".quote4"),
-    quote5 = d3.select(".quote5"),
-    quote6 = d3.select(".quote6"),
-    quote7 = d3.select(".quote7"),
-    quote8 = d3.select(".quote8"),
-    quote9 = d3.select(".quote9");
-
 var isTransitioning_1 = false,
     isTransitioning_2 = false,
     isTransitioning_3 = false,
@@ -21,17 +11,18 @@ var isTransitioning_1 = false,
     isTransitioning_7 = false,
     isTransitioning_8 = false,
     isTransitioning_9 = false;
+    isTransitioning_10 = false;
 
 window.onscroll = function() {
     console.log(window.scrollY)
-    if(window.scrollY >= 700 && window.scrollY <1200){ 
+ if(window.scrollY >= 1600 && window.scrollY <2500){ console.log('hi')
         //FIRST QUOTE APPEARS
         if (!isTransitioning_1) {
-            quote2
+            d3.select(".pol-quote1")
                 .transition()
                 .duration(duration)
                 .style("opacity", 0)
-            quote1
+            d3.select(".pol-quote1")
                 .transition()
                 .duration(duration)
                     .style("opacity", 1)
@@ -40,14 +31,14 @@ window.onscroll = function() {
 
         }
 
-    } else if(window.scrollY >= 1200 && window.scrollY <2200){ 
+    } else if(window.scrollY >= 2500 && window.scrollY <4800){ 
         //SECOND QUOTE APPEARS
         if (!isTransitioning_2) {
-            d3.selectAll(".quote1, .quote3")
+            d3.selectAll(".pol-quote1, .pol-quote3")
                 .transition()
                 .duration(duration)
                 .style("opacity", 0)
-            d3.select('.quote2')
+            d3.select('.pol-quote2')
                 .transition()
                 .duration(duration)
                     .style("opacity", 1)
@@ -56,14 +47,14 @@ window.onscroll = function() {
             }
 
 
-    } else if(window.scrollY >= 2200 && window.scrollY <3000){  
+    } else if(window.scrollY >= 4800 && window.scrollY <6800){  
         //THIRD QUOTE APPEARS
         if (!isTransitioning_3) {
-            d3.selectAll(".quote2, .quote4")
+            d3.selectAll(".pol-quote2, .pol-quote4")
                 .transition()
                 .duration(duration)
                 .style("opacity", 0)
-            d3.select('.quote3')
+            d3.select('.pol-quote3')
                 .transition()
                 .duration(duration)
                     .style("opacity", 1)
@@ -71,14 +62,14 @@ window.onscroll = function() {
                 .on("end", function(){ isTransitioning_3 = false})
             }
 
-    } else if(window.scrollY >= 3000 && window.scrollY <3400){ 
-    	        //FOURTH QUOTE APPEARS
+    } else if(window.scrollY >= 6800 && window.scrollY <7350){ 
+                //FOURTH QUOTE APPEARS
         if (!isTransitioning_4) {
-           d3.selectAll(".quote3, .quote5")
+           d3.selectAll(".pol-quote3, .pol-quote6")
                 .transition()
                 .duration(duration)
                 .style("opacity", 0)
-            d3.select('.quote4')
+            d3.select('.pol-quote4')
                 .transition()
                 .duration(duration)
                     .style("opacity", 1)
@@ -86,29 +77,14 @@ window.onscroll = function() {
                 .on("end", function(){ isTransitioning_4 = false})
             }
 
-    } else if(window.scrollY >= 4300 && window.scrollY <4600){ 
-    	        //FIFTH QUOTE APPEARS
-        if (!isTransitioning_5) {
-            d3.selectAll(".quote4, .quote6")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.quote5')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_5 = true})
-                .on("end", function(){ isTransitioning_5 = false})
-            }
-
-    } else if(window.scrollY >= 4600 && window.scrollY <4900){ 
+    } else if(window.scrollY >= 7350 && window.scrollY <8300){ 
                 //SIXTH QUOTE APPEARS
         if (!isTransitioning_6) {
-            d3.selectAll(".quote5, .quote7")
+            d3.selectAll(".pol-quote4, .pol-quote7")
                 .transition()
                 .duration(duration)
                 .style("opacity", 0)
-            d3.select('.quote6')
+            d3.select('.pol-quote6')
                 .transition()
                 .duration(duration)
                     .style("opacity", 1)
@@ -116,14 +92,14 @@ window.onscroll = function() {
                 .on("end", function(){ isTransitioning_6 = false})
             }
 
-    } else if(window.scrollY >= 5100 && window.scrollY <5700){ 
+    } else if(window.scrollY >= 8300 && window.scrollY <9300){ 
                 //SEVENTH QUOTE APPEARS
         if (!isTransitioning_7) {
-            d3.selectAll(".quote6, .quote8")
+            d3.selectAll(".pol-quote6, .pol-quote8")
                 .transition()
                 .duration(duration)
                 .style("opacity", 0)
-            d3.select('.quote7')
+            d3.select('.pol-quote7')
                 .transition()
                 .duration(duration)
                     .style("opacity", 1)
@@ -131,14 +107,14 @@ window.onscroll = function() {
                 .on("end", function(){ isTransitioning_7 = false})
             }
 
-    } else if(window.scrollY >= 5800 && window.scrollY <6300){ 
+    } else if(window.scrollY >= 9300 && window.scrollY <10000){ 
                 //EIGHTH QUOTE APPEARS
         if (!isTransitioning_8) {
-            d3.selectAll(".quote7, .quote9")
+            d3.selectAll(".pol-quote7, .pol-quote9")
                 .transition()
                 .duration(duration)
                 .style("opacity", 0)
-            d3.select('.quote8')
+            d3.select('.pol-quote8')
                 .transition()
                 .duration(duration)
                     .style("opacity", 1)
@@ -146,23 +122,38 @@ window.onscroll = function() {
                 .on("end", function(){ isTransitioning_8 = false})
             }
 
-    } else if(window.scrollY >= 6300 && window.scrollY < 6700){ 
+    } else if(window.scrollY >= 10000 && window.scrollY <11100){ 
                 //NINTH QUOTE APPEARS
         if (!isTransitioning_9) {
-            d3.selectAll(".quote8")
+            d3.selectAll(".pol-quote8, .pol-quote10")
                 .transition()
                 .duration(duration)
                 .style("opacity", 0)
-            d3.select('.quote9')
+            d3.select('.pol-quote9')
                 .transition()
                 .duration(duration)
                     .style("opacity", 1)
                 .on("start", function(){ isTransitioning_9 = true})
                 .on("end", function(){ isTransitioning_9 = false})
+            }
+
+    } else if(window.scrollY >= 11100 && window.scrollY < 12400){ 
+                //TENTH QUOTE APPEARS
+        if (!isTransitioning_10) {
+            d3.selectAll(".pol-quote9")
+                .transition()
+                .duration(duration)
+                .style("opacity", 0)
+            d3.select('.pol-quote10')
+                .transition()
+                .duration(duration)
+                    .style("opacity", 1)
+                .on("start", function(){ isTransitioning_10 = true})
+                .on("end", function(){ isTransitioning_10 = false})
         }
 
-    } else {
-    	d3.selectAll(".note-container").style("opacity", 0)
+    }
+     else {
+        d3.selectAll(".note-container").style("opacity", 0)
     }
 };
-
