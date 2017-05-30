@@ -152,7 +152,17 @@ h3{
 .left-col-header {
   font-size: 26px;
   font-weight: 600;
-  margin-bottom: 2em;
+  margin-bottom: 1.5em;
+  margin-top: 5em;
+
+}
+
+/*Style for conclusion section*/
+
+.conclusion-div {
+  margin-left: 21.5%;
+  margin-right: 21.5%;
+  float: left;
 
 }
 
@@ -168,6 +178,56 @@ h3{
   color: #666666;
   font-weight: 300;
   margin-bottom: 2.5em;
+}
+
+/*Style for next page div*/
+
+.next-page-div {
+  width: 56%;
+  float: right;
+  height: 342px;
+  background-color: #094c6b;
+  margin-right: 35px;
+}
+
+.next-page-column-1 {
+  width: 70%;
+  color: #fff;
+  float: left;
+}
+
+.next-page-column-2 {
+  float: left;
+  padding-left: 10%;
+  width: 30%;
+  height: 100%;
+
+}
+
+.next-page-text {
+  margin-top: 17%;
+  padding-left: 15%;
+  font-weight: 300;
+}
+
+.next-page-next-up {
+  font-size: 16px;
+  text-align: right;
+  margin: 5px 0;
+  padding-right: 20px;
+  width: 100%;
+}
+
+.next-page-title {
+  font-size: 48px;
+  text-align: right;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.next-arrow {
+  margin: 70% 0;
+  content: url("../img/arrow.png");
 }
 
 
@@ -226,6 +286,10 @@ h3{
   height: 400px;
 }
 
+.case-study-graph-container {
+  height: 451px;
+}
+
 #headline2-image {
   height: 250px;
 }
@@ -233,7 +297,11 @@ h3{
 .audio-container {
   height: 163px;
   background-color: #f2f2f2;
-  margin-bottom: 1em;
+  margin: 1.5em 0;
+}
+
+.policies-graph-container {
+  height: 530px;
 }
 
 
@@ -321,18 +389,78 @@ border-right-color: #222;
 	background-color: #fff; width: 100%; height: 100%;
 }
 
+blockquote {
+  line-height: 1.5em;
+  position: relative;
+  color: #383838;
+
+}
+
+blockquote:before, blockquote:after {
+    position: relative;
+    font-size: 36px;
+    color: #25a9e0;
+    line-height: .1em;
+
+}
+blockquote:before {
+    top: 8px;
+    content: "\201C";
+}
+blockquote:after {
+    top: 8px;
+    content: "\201D";
+}
+.center-quote-div {
+  margin-right: 10%;
+  margin-left: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  line-height: 1.5em;
+
+}
+.center-case-study-div {
+  margin-right: 10%;
+  margin-left: 10%;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  line-height: 1.5em;
+
+}
+
+.case-study-header {
+  font-size: 26px;
+}
+
+.case-study-state {
+  color: #25a9e0;
+  font-weight: 600;
+}
+
+.quotation-blue {
+  font-size: 36px;
+  color: #25a9e0;
+  font-weight: 500;
+}
+
+.center-quote-author {
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: .9em;
+}
+
 .center-div-initial {
-  width: 50%; 
-  height: 50%;
+  width: 57%; 
   position: absolute;
   top: 25%;
   bottom: 25%;
-  left: 25%;
-  right: 25%;
+  left: 21.5%;
+  right: 21.5%;
 }
 
+
+
 .center-div-header {
-  height: 8.9%;
   font-size: 20px;
   /**color: #094c6b; **/
   color: #0a4c6a;
@@ -468,7 +596,8 @@ footer .content{
 
 p {
   line-height: 1.5em;
-  margin-bottom: 1.6em;
+  margin-bottom: 1.8em;
+  margin-top: 1.8em;
 
 }
 
