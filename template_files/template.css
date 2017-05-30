@@ -255,12 +255,14 @@ h3{
   font-style: italic;
   font-size: 20px;
   line-height: 1.5em;
+  color: #231f20;
 }
 
 .sidebar-quote-author {
   font-weight: 600;
   font-size: 14px;
   margin-top: 1em;
+  color: #4d4d4d;
 }
 
 .sidebar-author-title {
@@ -268,6 +270,7 @@ h3{
   font-size: 14px;
   margin-top: .5em;
   padding-bottom: 2em;
+  color: #5c5859;
 
 }
 
