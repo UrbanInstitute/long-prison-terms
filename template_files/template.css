@@ -74,6 +74,10 @@ h3{
     text-transform: uppercase;
 }
 
+.blue-font {
+  color: #1796d3;
+}
+
 .bold{
     
     font-weight: 700;
@@ -152,8 +156,17 @@ h3{
 /*Style for left column*/
 .section-header {
   margin-top: 5em;
-  font-size: 36px;
+  font-size: 26px;
+  margin-bottom: -4em;
+  color: #094c6b;
 }
+
+.section-header-no-margin{
+  margin-top: 5em;
+  font-size: 26px;
+  color: #094c6b;
+}
+
 .left-col-header {
   font-size: 26px;
   font-weight: 600;
@@ -161,6 +174,12 @@ h3{
   margin-top: 5em;
 
 }
+
+li {
+  line-height: 1.5em;
+  padding: .3em;
+}
+
 
 /*Style for conclusion section*/
 

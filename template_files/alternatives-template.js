@@ -108,7 +108,7 @@ window.onscroll = function() {
                 .on("end", function(){ isTransitioning_9 = false})
             }
 
-    } else if(window.scrollY >= 10500 && window.scrollY < 11200){ 
+    } else if(window.scrollY >= 10500 && window.scrollY < 11100){ 
                 //TENTH QUOTE APPEARS
         if (!isTransitioning_10) {
             d3.selectAll(".alt-quote9")
@@ -123,7 +123,7 @@ window.onscroll = function() {
                 .on("end", function(){ isTransitioning_10 = false})
         }
 
-    } else if(window.scrollY >= 11200){ 
+    } else if(window.scrollY >= 11100 && window.scrollY < 11300){ 
                 //ELEVENTH QUOTE APPEARS
         if (!isTransitioning_11) {
             d3.selectAll(".alt-quote10")
