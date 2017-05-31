@@ -74,7 +74,7 @@ h3{
     text-transform: uppercase;
 }
 
-.blue-font {
+.blue-text {
   color: #1796d3;
 }
 
@@ -542,6 +542,21 @@ blockquote:after {
   
 }
 
+.center-div-author-description {
+  font-size: 18px;
+  color: #666666;
+  margin-left: .5em;
+}
+
+.center-div-quote-author {
+  font-size: 25px;
+  color: #000;
+  margin-top: 1.8em;
+  line-height: 1.4em;
+  
+}
+
+.ce
 
 .text{
     width:500px;
@@ -557,7 +572,20 @@ blockquote:after {
     float:right;
 }
 
+/*photo styles*/
 
+.image-dual {
+  float: left;
+  width: 50%;
+  margin-bottom: 1em;
+}
+
+.photo-caption {
+  font-size: 14px;
+  margin-top: 1em;
+  margin-bottom: 3em;
+  color: #4d4d4d;
+}
 
 /************** general text styles***************/
 
