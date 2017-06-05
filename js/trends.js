@@ -73,6 +73,17 @@ var scrollVis = function() {
   };
 
 
+
+  function hoverState(obj, d){
+    d3.select(obj)
+      .selectAll("rect")
+      .style("fill", "#fdbf11")
+  }
+  function deHoverState(obj, d){
+    d3.select(obj)
+      .selectAll("rect")
+      .style("fill", "#1696d2")
+  }
   /**
    * setupVis - creates initial elements for all
    * sections of the visualization.
@@ -130,6 +141,52 @@ var scrollVis = function() {
         .projection(projection);
   var chartWidth = mapSizes[pageSize]["chartWidth"]
   var chartMargin = mapSizes[pageSize]["chartMargin"]
+
+  var infoR = 9;
+  var infoX = -22;
+  var infoY = 13;
+  var info = mapSvg.append("g")
+    .attr("id", "infoGroup")
+    .attr("transform", "translate(" + infoX + "," + infoY  + ")")
+    .style("opacity",0)
+    .on("mouseover", function(){
+      d3.selectAll(".explainer span").classed("active",true)
+    })
+    .on("mouseout", function(){
+      d3.selectAll(".explainer span").classed("active",false)      
+    })
+  info.append("circle")
+    .attr("r", infoR)
+    .attr("cx",0)
+    .attr("cy", 0)
+    .style("fill","#fdbf11")
+
+  info.append("text")
+    .attr("x",-3)
+    .attr("y",5)
+    .text("i")
+
+
+  var explainerX = 120;
+  var explainerY = 38;
+  d3.select("#vis")
+    .append("div")
+    .attr("class","explainer explainerA")
+    .style("position", "absolute")
+    .style("top",explainerY + "px")
+    .style("left",explainerX + "px")
+    .html("Data for all line charts on the same x and y scales.<br/>Hover on a state for detailed data.")
+  
+  d3.select("#vis")
+    .append("div")
+    .attr("class","explainer explainerB")
+    .style("position", "absolute")
+    .style("top",explainerY + "px")
+    .style("left",explainerX + "px")
+    .style("opacity",0)
+    .html("Data for all states on the same x scale.<br/><span>Y axis scales differ for each state.</span><br/>Hover on a state for detailed data")
+
+
   var map = mapSvg
     .selectAll(".state")
     .data(trendsDataNest)
@@ -141,6 +198,12 @@ var scrollVis = function() {
             return "translate(" + geoPath.centroid(tmp[0]) + ")"
 
         })
+    .on("mouseover", function(d){
+      hoverState(this, d)
+    })
+    .on("mouseout", function(d){
+      deHoverState(this, d)
+    })
 
     var blank = mapSvg
     .selectAll(".blank")
@@ -155,17 +218,17 @@ var scrollVis = function() {
         })
 
     blank.append("rect")
-      .attr("width",chartWidth-2*chartMargin)
-      .attr("height",chartWidth-2*chartMargin)
-      .attr("x",chartMargin)
-      .attr("y",chartMargin)
+      .attr("width",chartWidth-2*chartMargin + 2)
+      .attr("height",chartWidth-2*chartMargin + 2)
+      .attr("x",chartMargin )
+      .attr("y",chartMargin -1)
       .style("fill","#b3b3b3") 
 
     map.append("rect")
-      .attr("width",chartWidth-2*chartMargin)
-      .attr("height",chartWidth-2*chartMargin)
-      .attr("x",chartMargin)
-      .attr("y",chartMargin)
+      .attr("width",chartWidth-2*chartMargin + 2)
+      .attr("height",chartWidth-2*chartMargin +2)
+      .attr("x",chartMargin )
+      .attr("y",chartMargin -1)
       .style("fill","#1696d2") 
 
  
@@ -176,7 +239,7 @@ var scrollVis = function() {
 
 
     mapX.domain([2000,2014]);
-    mapY.domain([0, d3.max(trendsData, function(d) { return d.LOS_Mean; })]); 
+    mapY.domain([0, 10]); 
 
 
 
@@ -202,10 +265,10 @@ var scrollVis = function() {
 
       map.append("rect")
        .attr("class","mapCurtain")
-       .attr("width",chartWidth-2*chartMargin)
-       .attr("height",chartWidth-2*chartMargin)
+       .attr("width",chartWidth-2*chartMargin + 2)
+       .attr("height",chartWidth-2*chartMargin + 2)
        .attr("x",chartMargin)
-       .attr("y",chartMargin)
+       .attr("y",chartMargin -1)
        .style("fill","#1696d2")
 
     map.append("text")
@@ -223,15 +286,15 @@ var scrollVis = function() {
       .attr("y",chartWidth+chartMargin - 14)
 
     map.append("g")
-        .attr("class", "x axis")
+        .attr("class", function(d){ return "x axis " + d.key})
         .attr("transform", "translate(0," + (chartWidth-chartMargin) + ")")
-        .call(mapXAxis);
+        .call(mapXAxis.tickValues([2000,2014]).tickFormat(d3.format(".0f")));
 
     // Add the Y Axis
     map.append("g")
         .attr("class", function(d){ return "y axis " + d.key})
       .attr("transform", "translate(" + chartMargin + ",0)")
-        .call(mapYAxis);
+        .call(mapYAxis.ticks(2,"s"));
 
 
 
@@ -270,7 +333,7 @@ var scrollVis = function() {
     var altvar = (alt == "alt" && hide == "show") ? "LOS_MeanViolent" : variable
     if(variable == "LOS_10plus_Num"){
       for(var i = 0; i < trendsDataNest.length; i++){
-        var max = d3.max(trendsDataNest[i].values, function(d) { return d[variable]; })
+        var max = Math.ceil(d3.max(trendsDataNest[i].values, function(d) { return d[variable]; }))
 
         var my = d3.scaleLinear().range([chartWidth-chartMargin, chartMargin])
           .domain([0, max]);
@@ -288,7 +351,12 @@ var scrollVis = function() {
 
       d3.selectAll("#vis .y.axis." + state)
         .transition()
-        .call(yaxes[state])
+        .call(yaxes[state].tickValues([0,max]).tickFormat(function(d){
+          // d3.format()
+          // console.log(d)
+          if(d == 0) return 0
+          else return ""
+        }))
 
         d3.selectAll("#vis svg ." + alt + ".line." + state)
           .transition()
@@ -301,7 +369,8 @@ var scrollVis = function() {
 
     }else{
       mapY = d3.scaleLinear().range([chartWidth-chartMargin, chartMargin]);
-      var max = d3.max(trendsData, function(d) { return d[altvar]; })
+      var max = Math.ceil(d3.max(trendsData, function(d) { return d[altvar]; }))
+      console.log(max)
       mapY.domain([0, max]); 
       mapline = d3.line()
           .x(function(d) { return mapX(d.Year); })
@@ -312,7 +381,7 @@ var scrollVis = function() {
 
       d3.selectAll("#vis .y.axis")
         .transition()
-        .call(mapYAxis)
+        .call(mapYAxis.tickValues([0,max]).tickFormat(d3.format(".0f")))
       d3.selectAll("#vis svg ." + alt + ".line")
           .transition()
           .style("opacity", opacity)
@@ -425,11 +494,29 @@ var scrollVis = function() {
 
   }
   function map10YearsPercent(){
+    d3.select("#infoGroup")
+      .transition()
+      .style("opacity",0)
+    d3.select(".explainerB")
+      .transition()
+      .style("opacity",0)
+    d3.select(".explainerA")
+      .transition()
+      .style("opacity",1)
     drawBackMapCurtain(0);
     drawMapLine("LOS_10plus_Pct")
 
   }
   function map10YearsNumber(){
+    d3.select("#infoGroup")
+      .transition()
+      .style("opacity",1)
+    d3.select(".explainerB")
+      .transition()
+      .style("opacity",1)
+    d3.select(".explainerA")
+      .transition()
+      .style("opacity",0)
     drawMapLine("LOS_10plus_Num")
 
   }
