@@ -813,7 +813,7 @@ ul#menu {
     }
 .sidebar-quote-mobile {
   display: block;
-  width: 398px;
+  width: 52%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -845,17 +845,23 @@ ul#menu {
   }
 }
 
+@media (max-width: 550px) {
+  .sidebar-quote-mobile {
+    width: 78%;
+  }
+}
+
 @media (max-width: 320px) {
   .container {
-    padding: 0 19px; 
+    padding: 0 20px; 
   }
   .sidebar-quote-mobile {
-    width: 248px;
+    width: 78%;
   }
   .sidebar-div-mobile {
-    margin: 50px -19px;
-    border-left: 19px solid #094c6b;
-    border-right: 19px solid #094c6b;
+    margin: 30px -20px;
+    border-left: 20px solid #094c6b;
+    border-right: 20px solid #094c6b;
   }
 
   .center-div-initial {
