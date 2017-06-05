@@ -20,7 +20,7 @@ window.onscroll = function() {
  if(window.scrollY >= 1600 && window.scrollY <3000){ console.log('hi')
         //FIRST QUOTE APPEARS
         if (!isTransitioning_1) {
-            d3.select(".alt-quote1")
+            d3.select(".alt-quote3")
                 .transition()
                 .duration(duration)
                 .style("opacity", 0)
