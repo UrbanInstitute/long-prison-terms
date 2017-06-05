@@ -286,12 +286,13 @@ li {
   font-size: 14px;
   margin-top: 1em;
   color: #4d4d4d;
+  margin-bottom: .5em;
+
 }
 
 .sidebar-author-title {
   font-weight: 200;
   font-size: 14px;
-  margin-top: .5em;
   padding-bottom: 1.5em;
   color: #5c5859;
 
@@ -317,6 +318,14 @@ li {
   font-weight: 700;
   color: #919395;
   border-top: solid 1px #d0d2d3;
+  padding-top: 4em;
+
+}
+
+.audio-header-alone {
+  font-size: 9px;
+  font-weight: 700;
+  color: #919395;
   padding-top: 4em;
 
 }
