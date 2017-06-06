@@ -25,6 +25,10 @@ ol, ul {
 
 }
 
+.nav-list {
+  padding-left: 0px;
+}
+
 blockquote, q {
      quotes: none;
 }
@@ -94,6 +98,7 @@ h3{
     left: calc(50% - 50px);
     width: 50px;
     animation: MoveUpDown 2s linear infinite;
+    opacity: 0;
 }
 
 /************subnav***************/
@@ -399,7 +404,7 @@ ul#menu li a {
     color: #fff;
     text-decoration: none;
     background-color: #094c6b;
-    height: 36px;
+    height: 45px;
     padding-top: 8px;
 	border-bottom: solid 1px #073e56;
 }
@@ -758,36 +763,52 @@ footer h3, footer h4{
   li {padding-left:0px;}
     .overhalf{margin-right:0px; margin-left:30px; width:70%;}
     
-    
-#mobilenavcontainer {
-width: 100%;
-position: fixed;
-top: 0px;
-height: 45px;
-display: block;  
-    z-index: 11;
-}
-    
-    
-/*Hide checkbox*/
-input[type=checkbox]:unchecked ~ #menu{
-display: none;
-visibility:hidden;
-
-    
-}
-
-/*Show menu when invisible checkbox is checked*/
-input[type=checkbox]:checked ~ #menu{
+  .subnav {
+  display: none;
+  }
+  .show-menu{
     display: block;
-    position: absolute;
-    top: 45px;
-    height: 150px;
-    z-index: 10;
-    width: 20%;
-    left: 0px;
-   
-}
+    width: 100%;
+    position: fixed;
+    text-decoration: none;
+    color: #fff;
+    background: #052635;
+    text-align: left;
+    padding: 10px 30px;   
+    } 
+  #current-page-navbar {
+    display: block;
+  }
+
+  #mobilenavcontainer {
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  height: 45px;
+  display: block;  
+      z-index: 11;
+  }
+      
+      
+  /*Hide checkbox*/
+  input[type=checkbox]:unchecked ~ #menu{
+  display: none;
+  visibility:hidden;
+
+      
+  }
+
+  /*Show menu when invisible checkbox is checked*/
+  input[type=checkbox]:checked ~ #menu{
+      display: block;
+      position: absolute;
+      top: 45px;
+      height: 150px;
+      z-index: 10;
+      width: 20%;
+      left: 0px;
+     
+  }
 
 #current-page-navbar {
   float: right;
@@ -850,22 +871,7 @@ ul#menu {
 .embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 @media (max-width: 768px) {
-  .subnav {
-  display: none;
-  }
-  .show-menu{
-    display: block;
-    width: 100%;
-    position: fixed;
-    text-decoration: none;
-    color: #fff;
-    background: #052635;
-    text-align: left;
-    padding: 10px 30px;   
-    } 
-  #current-page-navbar {
-    display: block;
-  }
+
 
   .container {
     padding: 0 34px; 
@@ -876,12 +882,23 @@ ul#menu {
     border-left: 34px solid #094c6b;
     border-right: 34px solid #094c6b;
   }
+
+  .center-div-initial {
+
+  }
 }
 
 @media (max-width: 550px) {
   .sidebar-quote-mobile {
     width: 78%;
   }
+  input[type=checkbox]:checked ~ #menu{
+    width: 100%;
+   
+}
+
+
+
 }
 
 @media (max-width: 320px) {
