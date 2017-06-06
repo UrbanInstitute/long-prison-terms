@@ -1,15 +1,9 @@
-console.log('hi')
 var page = window.location.pathname.split("/").pop(-1)
 var category = page.slice(0,-5)
 
-var app = angular.module('navList', []);
+var app = angular.module('navList', ["ngRoute"]);
 
-// app.controller("NavCtrl", function($scope, $location) {
-//   $scope.menuClass = function(page) {
-//     var current = $location.path().substring(0); 
-//     return page === current ? "hovered-category" : "";
-//   };
-// });
+
 
 app.controller('navCtrl', ['$scope', function ($scope) {
     $scope.navClass = function (page) {
@@ -17,3 +11,11 @@ app.controller('navCtrl', ['$scope', function ($scope) {
         return page === currentRoute ? 'hovered-category' : '';
     };        
 }]);
+
+
+// app.config(function($routeProvider) {
+//   $routeProvider
+//     .when('/demographics.html', {template: 'demographics.html', controller: DemographicsCtrl})
+//     .when('/consequences.html', {template: 'consequences.html', controller: ConsequencesCtrl});
+// });
+
