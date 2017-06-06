@@ -334,6 +334,7 @@ var scrollVis = function() {
     if(variable == "LOS_10plus_Num"){
       for(var i = 0; i < trendsDataNest.length; i++){
         var max = Math.ceil(d3.max(trendsDataNest[i].values, function(d) { return d[variable]; }))
+        var min = Math.floor(d3.min(trendsDataNest[i].values, function(d) { return d[variable]; }))
 
         var my = d3.scaleLinear().range([chartWidth-chartMargin, chartMargin])
           .domain([0, max]);
@@ -370,14 +371,13 @@ var scrollVis = function() {
     }else{
       mapY = d3.scaleLinear().range([chartWidth-chartMargin, chartMargin]);
       var max = Math.ceil(d3.max(trendsData, function(d) { return d[altvar]; }))
-      console.log(max)
-      mapY.domain([0, max]); 
+      var min = Math.floor(d3.min(trendsData, function(d) { return d[altvar]; }))
+      mapY.domain([0 , max]); 
       mapline = d3.line()
           .x(function(d) { return mapX(d.Year); })
           .y(function(d) { return mapY(d[variable]); });
       mapYAxis = d3.axisLeft(mapY)
-        // .tickValues([0, max])
-        // .outerTickSize(0);
+
 
       d3.selectAll("#vis .y.axis")
         .transition()
