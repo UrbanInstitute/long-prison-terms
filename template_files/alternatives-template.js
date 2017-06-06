@@ -17,7 +17,13 @@ var isTransitioning_1 = false,
 
 window.onscroll = function() {
     console.log(window.scrollY)
- if(window.scrollY >= 1600 && window.scrollY <3000){ console.log('hi')
+    if(window.scrollY < 200){
+        d3.select("#introArrow")
+            .style("opacity", 1)
+    } else if(window.scrollY >= 200) {
+         d3.select("#introArrow")
+            .style("opacity", 0)
+    } else if(window.scrollY >= 1600 && window.scrollY <3000){ console.log('hi')
         //FIRST QUOTE APPEARS
         if (!isTransitioning_1) {
             d3.select(".alt-quote3")

@@ -88,6 +88,14 @@ h3{
    font-style: italic;
 }
 
+#introArrow {
+    position: fixed;
+    bottom: 130px;
+    left: calc(50% - 50px);
+    width: 50px;
+    animation: MoveUpDown 2s linear infinite;
+}
+
 /************subnav***************/
 .subnav{
     width: 100%;
@@ -123,7 +131,7 @@ h3{
 	font-weight: 300;
 	display: block;
   color: white;
-  padding: 8.5% 0;
+  padding: 20px 0;
 
 }
 
@@ -175,7 +183,7 @@ h3{
 
 }
 
-li {
+li.spacing {
   line-height: 1.5em;
   padding: .3em;
 }
@@ -773,13 +781,35 @@ visibility:hidden;
 input[type=checkbox]:checked ~ #menu{
     display: block;
     position: absolute;
-    top: 85px;
-    width: 100%;
+    top: 45px;
     height: 150px;
-       z-index: 10;
+    z-index: 10;
+    width: 20%;
+    left: 0px;
    
 }
+
+#current-page-navbar {
+  float: right;
+  display: none;
+  text-decoration: none;
+  color: #929497;
+  background: #052635;
+  font-size: 7px;
+  font-weight: 800;
+}
     
+.checkbox {
+  display: none;
+}
+
+.current-page-name {
+  color: #1795d2;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5em;
+}
+
 ul#menu {
     float:none;
     display: none; 
@@ -830,10 +860,13 @@ ul#menu {
     text-decoration: none;
     color: #fff;
     background: #052635;
-    text-align: center;
-    padding: 10px 0;   
+    text-align: left;
+    padding: 10px 30px;   
     } 
-    
+  #current-page-navbar {
+    display: block;
+  }
+
   .container {
     padding: 0 34px; 
   }

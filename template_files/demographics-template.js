@@ -1,5 +1,6 @@
 console.log(window.scrollY)
 
+
 var duration = 300; 
 
 var demQuote1 = d3.select(".dem-quote1");
@@ -24,8 +25,13 @@ var isTransitioning_1 = false,
 
 window.onscroll = function() {
     console.log(window.scrollY)
-    /*DEMOGRAPHICS*/
-    if(window.scrollY >= 700 && window.scrollY <1200){ 
+    if(window.scrollY < 200){
+        d3.select("#introArrow")
+            .style("opacity", 1)
+    } else if(window.scrollY >= 200) {
+         d3.select("#introArrow")
+            .style("opacity", 0)
+    } else if(window.scrollY >= 700 && window.scrollY <1200){ 
         //FIRST QUOTE APPEARS
         if (!isTransitioning_1) {
             demQuote2

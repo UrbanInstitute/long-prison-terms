@@ -35,7 +35,6 @@
               <ul class="nav-list">           
                 <li ng-class="navClass('intro')"><a href="intro.html">Intro</a></li>
                 <li ng-class="navClass('trends')"><a href="trends.html">Trends</a></li>
-                <!--<li><a clanavhovered-category" href="">Demographics</a></li>-->
                 <li ng-class="navClass('demographics')"><a href="demographics.html">Demographics</a></li>
                 <li ng-class="navClass('consequences')"><a href="consequences.html">Consequences</a></li>
                 <li ng-class="navClass('policies')"><a href="policies.html">Policies</a></li>
@@ -46,20 +45,32 @@
  
                   
                         
-      <div id="mobilenavcontainer">
-           <label for="show-menu" class="show-menu">Chapters &#9660;</label>
-           <input type="checkbox" id="show-menu" role="button">
+      <div id="mobilenavcontainer" class="show-menu">
+           <label for="show-menu">Chapters &#9660;</label>
+           <input type="checkbox" id="show-menu" class="checkbox" role="button">
                 <ul id="menu">
-
+                <li><a href="intro.html" ng-click="$root.title = 'Intro'">Intro</a></li>
+                <li><a href="trends.html" ng-click="$root.title = 'Trends'">Trends</a></li>
+                <li><a href="demographics.html" ng-click="$root.title = 'Demographics'">Demographics</a></li>
+                <li><a href="consequences.html" ng-click="$root.title = 'Consequences'">Consequences</a></li>
+                <li><a href="policies.html" ng-click="$root.title = 'Policies'">Policies</a></li>
+                <li><a href="alternatives.html" ng-click="$root.title = 'Alternatives'">Alternatives</a></li>
+                <li id="no-border"><a href="about.html" ng-click="$root.title = 'About'">About</a></li>
+<!-- 
                   <li><a href="">Intro</a></li>
                   <li><a href="">Trends</a></li>
                   <li><a href="">Policies</a></li>
                   <li><a href="">Consequences</a></li>
                   <li><a href="">Demographics</a></li>
                   <li><a href="">Alternatives</a></li>
-                  <li><a href="">About</a></li>
+                  <li><a href="">About</a></li> -->
                 </ul>
+            <div id="current-page-navbar">
+            VIEWING <br />
+            <div class="current-page-name"></div>
+            </div>
       </div>  
 
 <!--     <script src="template_files/app.js"></script>
  -->
+
