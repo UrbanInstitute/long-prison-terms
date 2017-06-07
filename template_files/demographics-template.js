@@ -4,15 +4,15 @@ var duration = 300;
 
 var arrowTransitionMin = 200,
     arrowTransitionMax = 1000,
-    transition1Max = 1200,
-    transition2Max = 2200,
-    transition3Max = 3000,
-    transition4Max = 4000,
-    transition5Max = 4600,
-    transition6Max = 5100,
-    transition7Max = 5700,
-    transition8Max = 6300,
-    transition9Max = 6700;
+    transition1Max = 1700,
+    transition2Max = 2600,
+    transition3Max = 3500,
+    transition4Max = 5200,
+    transition5Max = 5800,
+    transition6Max = 6300,
+    transition7Max = 6800,
+    transition8Max = 7200,
+    transition9Max = 7500;
 
 var isTransitioning = [null, false, false, false, false, false, false, false, false, false]
 
