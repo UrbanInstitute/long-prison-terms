@@ -547,6 +547,7 @@ blockquote:after {
   /**color: #094c6b; **/
   color: #0a4c6a;
   margin-bottom: 1em;
+  text-transform: uppercase;
 }
 
 .center-div-large-text {
