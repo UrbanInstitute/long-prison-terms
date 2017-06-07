@@ -2,192 +2,122 @@ console.log(window.scrollY)
 
 var duration = 300; 
 
-var isTransitioning_1 = false,
-    isTransitioning_2 = false,
-    isTransitioning_3 = false,
-    isTransitioning_4 = false,
-    isTransitioning_6 = false,
-    isTransitioning_7 = false,
-    isTransitioning_8 = false,
-    isTransitioning_9 = false;
-    isTransitioning_11 = false,
-    isTransitioning_13 = false;
-    isTransitioning_14 = false;
+var arrowTransitionMin = 200,
+    arrowTransitionMax = 1300,
+    transition1Max = 2700,
+    transition3Max = 4200,
+    transition4Max = 5000,
+    transition4Max = 4000,
+    transition5Max = 4600,
+    transition6Max = 5300,
+    transition2Max = 6600,
+    transition7Max = 7300,
+    transition8Max = 8000,
+    transition9Max = 9900,
+    transition13Max = 10900,
+    transition14Max = 12000
 
+
+var isTransitioning = [null, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+
+function quoteTransition(number) { 
+
+    // var transitionNumber0 = "isTransitioning["] + number
+    // var transitionNumber = eval(transitionNumber0)
+    d3.select(".con-quote" + number)
+        .transition()
+        .duration(duration)
+        .style("opacity", 1)
+        .on("start", function(){ console.log(number); isTransitioning[number] = true })
+        .on("end", function(){ console.log(number); isTransitioning[number] = false })
+        .on("interrupt", function() {isTransitioning[number] = false})
+
+    d3.selectAll(".note-container:not(.con-quote" + number + ")")
+        .transition()
+        .duration(duration)
+        .style("opacity", 0)
+}
 
 window.onscroll = function() {
-    console.log(window.scrollY)
-    if(window.scrollY < 200){
+    if(window.scrollY < arrowTransitionMin){
         d3.select("#introArrow")
             .style("opacity", 1)
-    } else if(window.scrollY >= 200) {
-         d3.select("#introArrow")
+        d3.selectAll(".note-container")
             .style("opacity", 0)
-    } else if(window.scrollY >= 1300 && window.scrollY <2700){ 
-        //SIDEBAR 1 APPEARS
-        if (!isTransitioning_1) {
-            d3.select(".con-quote3")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select(".con-quote1")
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_1 = true})
-                .on("end", function(){ isTransitioning_1 = false})
+    }  else if(window.scrollY >= arrowTransitionMin && window.scrollY <arrowTransitionMax) {
+        //MAKE ARROW DISAPPEAR BEFORE FIRST QUOTE
+        d3.selectAll(".note-container")
+            .style("opacity", 0)
+        d3.select("#introArrow")
+            .style("opacity", 0)
+    } else if(window.scrollY >= arrowTransitionMax && window.scrollY <transition1Max){     
+        //FIRST QUOTE APPEARS
+        if (!isTransitioning[1])  {
+            quoteTransition(1)
+        }  
+ 
+    } else if(window.scrollY >= transition1Max && window.scrollY <transition3Max){  
+        //THIRD QUOTE APPEARS
+        if (!isTransitioning[3]) {
+            quoteTransition(3)
+        } 
+          
 
-        }
+    } else if(window.scrollY >= transition3Max && window.scrollY <transition4Max){  
+        //FOURTH QUOTE APPEARS
+        if (!isTransitioning[4]) {
+            quoteTransition(4)
+        } 
+          
 
-    } else if(window.scrollY >= 2700 && window.scrollY <4200){  
-        //SIDEBAR 3 APPEARS
-        if (!isTransitioning_3) {
-            d3.selectAll(".con-quote1, .con-quote4")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.con-quote3')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_3 = true})
-                .on("end", function(){ isTransitioning_3 = false})
-            }
 
-    }  else if(window.scrollY >= 4200 && window.scrollY <5000){ console.log('hi')
-                //SIDEBAR 4 APPEARS
-        if (!isTransitioning_4) {
-            d3.selectAll(".con-quote3, .con-quote6")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.con-quote4')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_4 = true})
-                .on("end", function(){ isTransitioning_4 = false})
-            }
+    } else if(window.scrollY >= transition4Max && window.scrollY <transition6Max){ 
+                //SIXTH QUOTE APPEARS
+        if (!isTransitioning[6]) {
+            quoteTransition(6)
+        } 
 
-    } else if(window.scrollY >= 5000 && window.scrollY <5300){ 
-                //SIDEBAR 6 APPEARS
-        if (!isTransitioning_6) {
-            d3.selectAll(".con-quote4, .con-quote7")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.con-quote6')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_6 = true})
-                .on("end", function(){ isTransitioning_6 = false})
-            }
 
-    } else if(window.scrollY >= 5300 && window.scrollY <6600){ 
-                //SIEBAR 2 APPEARS
-        if (!isTransitioning_2) {
-            d3.selectAll(".con-quote6, .con-quote7")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.con-quote2')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_2 = true})
-                .on("end", function(){ isTransitioning_2 = false})
-            }
+    } else if(window.scrollY >= transition6Max && window.scrollY <transition2Max){ 
+                //SIDEBAR 2 APPEARS
+        if (!isTransitioning[2]) {
+            quoteTransition(2)
+        } 
 
-    } else if(window.scrollY >= 6600 && window.scrollY <7300){ 
+    } else if(window.scrollY >= transition2Max && window.scrollY <transition7Max){ 
                 //SIDEBAR 7 APPEARS
-        if (!isTransitioning_7) {
-            d3.selectAll(".con-quote2, .con-quote8")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.con-quote7')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_7 = true})
-                .on("end", function(){ isTransitioning_7 = false})
-            }
+        if (!isTransitioning[7]) {
+            quoteTransition(7)
+        } 
 
-    } else if(window.scrollY >= 7300 && window.scrollY < 8000){ 
+    } else if(window.scrollY >= transition7Max && window.scrollY <transition8Max){ 
                 //SIDEBAR 8 APPEARS
-        if (!isTransitioning_8) {
-            d3.selectAll(".con-quote7, .con-quote9")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.con-quote8')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_8 = true})
-                .on("end", function(){ isTransitioning_8 = false})
-        }
+        if (!isTransitioning[8]) {
+            quoteTransition(8)
+        } 
 
-    } else if(window.scrollY >= 8000 && window.scrollY < 9900){ 
+    } else if(window.scrollY >= transition8Max && window.scrollY <transition9Max){ 
                 //SIDEBAR 9 APPEARS
-        if (!isTransitioning_9) {
-            d3.selectAll(".con-quote8, .con-quote13")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.con-quote9')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_9 = true})
-                .on("end", function(){ isTransitioning_9 = false})
-        }
+        if (!isTransitioning[9]) {
+            quoteTransition(9)
+        } 
 
-    } else if(window.scrollY >= 9900 && window.scrollY < 10900){ 
+    } else if(window.scrollY >= transition9Max && window.scrollY <transition13Max){ 
                 //SIDEBAR 13 APPEARS
-        if (!isTransitioning_13) {
-            d3.selectAll(".con-quote9, .con-quote14")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.con-quote13')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_13 = true})
-                .on("end", function(){ isTransitioning_13 = false})
-        }
+        if (!isTransitioning[13]) {
+            quoteTransition(13)
+        } 
 
-    } else if(window.scrollY >= 10900 && window.scrollY < 12000){ 
+    } else if(window.scrollY >= transition13Max && window.scrollY <transition14Max){ 
                 //SIDEBAR 14 APPEARS
-        if (!isTransitioning_14) {
-            d3.selectAll(".con-quote13, .con-quote11")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.con-quote14')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_14 = true})
-                .on("end", function(){ isTransitioning_14 = false})
-        }
-
-    } else if(window.scrollY >= 12000){ 
+        if (!isTransitioning[14]) {
+            quoteTransition(14)
+        } 
+   } else if(window.scrollY >= transition14Max){ 
                 //SIDEBAR 11 APPEARS
-        if (!isTransitioning_11) {
-            d3.selectAll(".con-quote14")
-                .transition()
-                .duration(duration)
-                .style("opacity", 0)
-            d3.select('.con-quote11')
-                .transition()
-                .duration(duration)
-                    .style("opacity", 1)
-                .on("start", function(){ isTransitioning_11 = true})
-                .on("end", function(){ isTransitioning_11 = false})
-        }
+        if (!isTransitioning[11]) {
+            quoteTransition(11)
+        } 
 
     } else {
         d3.selectAll(".note-container").style("opacity", 0)

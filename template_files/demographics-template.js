@@ -25,7 +25,9 @@ function quoteTransition(number) {
         .duration(duration)
         .style("opacity", 1)
         .on("start", function(){ console.log(number); isTransitioning[number] = true })
-        .on("end", function(){ console.log(number); isTransitioning = [null, false, false, false, false, false, false, false, false, false] })
+        .on("end", function(){ console.log(number); isTransitioning[number] = false })
+        .on("interrupt", function() {isTransitioning[number] = false})
+
     d3.selectAll(".note-container:not(.dem-quote" + number + ")")
         .transition()
         .duration(duration)
