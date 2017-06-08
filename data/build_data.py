@@ -19,7 +19,7 @@ for row in cr:
 
 for backwards in range(0,5):
 	step = 7 - backwards
-	for i in range(0,87):
+	for i in range(0,90):
 		t  = i/10.0
 		count = 0
 		for obj in popData[step]:

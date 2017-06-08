@@ -10,7 +10,7 @@ function scroller() {
   var windowHeight;
   var container = d3.select('body');
   // event dispatcher
-  var dispatch = d3.dispatch("active", "progress");
+  var dispatch = d3.dispatch("active", "progress", "resized");
 
   // d3 selection of all the
   // text sections that will
@@ -79,6 +79,7 @@ function scroller() {
       sectionPositions.push(top - startPos);
     });
     containerStart = container.node().getBoundingClientRect().top + window.pageYOffset;
+    dispatch.resized(this)
   }
 
   /**
