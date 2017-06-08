@@ -320,6 +320,45 @@ div.sidebar-quote p {
 
 }
 
+/*STYLES FOR CHARTS*/
+
+.chart-title {
+  font-size: 22px;
+}
+
+.chart-info {
+  font-size: 11px;
+}
+
+.graph-row {
+  margin: 3% 0;
+  width: 100%;
+  float: left;
+}
+
+.graph-div {
+  float: left;
+  width: 50%;
+}
+
+.graph-div img {
+  width: 100%;
+  float: left;
+
+}
+.pie-header {
+  font-size: 22px;
+  text-align: left;
+  margin-bottom: 5%;
+  font-weight: 700;
+}
+.graph-subhead {
+  margin: 0 3%;
+  text-align: center;
+}
+
+
+
 /*STYLES FOR AUDIO DIV*/
 
 .audio-div {
@@ -796,6 +835,17 @@ footer h3, footer h4{
     } 
   #current-page-navbar {
     display: block;
+  }
+  .chart-title {
+  font-size: 18px;
+  }
+
+  .pie-header {
+    font-size: 18px;
+  }
+
+  .chart-info {
+    font-size: 11px;
   }
 
   #mobilenavcontainer {
