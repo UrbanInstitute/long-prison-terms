@@ -282,12 +282,17 @@ li.spacing {
   opacity: 0;
 }
 .sidebar-quote {
-  margin-top: .2em;
   font-family: Georgia;
   font-style: italic;
   font-size: 20px;
   line-height: 1.5em;
   color: #231f20;
+  margin-bottom: 1em;
+}
+
+div.sidebar-quote p {
+  margin-top: .8em;
+  margin-bottom: .8em;
 }
 
 .sidebar-quote-mobile {
@@ -296,22 +301,32 @@ li.spacing {
 
 .sidebar-quote-author {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   margin-top: 1em;
   color: #4d4d4d;
   margin-bottom: .5em;
 
 }
 
+
 .sidebar-author-title {
-  font-weight: 200;
+  margin-top: 1em;
+  font-weight: 400;
   font-size: 14px;
   padding-bottom: 1.5em;
   color: #5c5859;
+  font-style: italic;
+  line-height: 1.7em;
 
 }
 
 /*STYLES FOR AUDIO DIV*/
+
+.audio-div {
+  border-bottom: solid 1px #d0d2d3;
+  padding-bottom: 2.5em;
+  margin-bottom: 1em;
+}
 .audio-subtitle {
   margin-top: .5em;
   font-style: italic;
@@ -330,8 +345,6 @@ li.spacing {
   font-size: 9px;
   font-weight: 700;
   color: #919395;
-  border-top: solid 1px #d0d2d3;
-  padding-top: 4em;
 
 }
 
@@ -476,6 +489,10 @@ blockquote {
   position: relative;
   color: #383838;
 
+}
+
+blockquote br {
+  margin-bottom: 2em;
 }
 
 blockquote:before, blockquote:after {
