@@ -44,9 +44,10 @@ body{
 }
 #visTitle{
   position: fixed;
-  top: calc(50% - 300px);
-  left: 497px;
-  font-size: 28px
+  top: calc(50% - 279px);
+  left: 26px;
+  font-size: 20px;
+  font-weight: bold;
 }
 #sampleArrow{
   position: fixed;
@@ -59,8 +60,9 @@ body{
   width: 223px;
 }
 #visTitle span{
-  color: #ca5800;
-  margin-left: 10px;
+  color: #ec008b;
+  margin-left: 5px;
+  font-weight: normal;
 }
 #vis {
   display: inline-block;
@@ -82,7 +84,7 @@ body{
   width: 530px;
   background: transparent;
   height: 207px;
-  top: calc(50% - 250px);
+  top: calc(50% - 267px);
   border-left: 46px solid transparent;
   left: 734px;
   height: 239px;
@@ -117,7 +119,7 @@ body{
 
 
 .introLineChart path.line { 
-    stroke: #ca5800;
+    stroke: #ec008b;
     stroke-width: 2;
     fill: none;
     /*opacity: .2*/
@@ -136,6 +138,9 @@ body{
 }
 .introLineChart .y.axis path{
   display: none;
+}
+.introLineChart .axis .tick text{
+  font-size: 12px;
 }
 
 
@@ -173,6 +178,7 @@ body{
   opacity: 0;
   pointer-events: none;
   cursor: pointer;
+  font-size: 14px;
 }
 .lineLabel.highlight{
   color: #fdbf11 !important;
@@ -180,30 +186,43 @@ body{
   font-weight: bold;
 }
 #lineLabel_3{
-  left: 302px;
-  bottom: 72px
+  left: 243px;
+  bottom: 91px;
 }
 #lineLabel_4{
-  left: 302px;
-  bottom: 170px;
+  left: 241px;
+  bottom: 207px;
 }
 #lineLabel_5{
-  left: 205px;
-  bottom: 231px;
+  left: 145px;
+  width: 125px;
+  bottom: 215px;
 }
 #lineLabel_6{
-  left: 269px;
-  bottom: 143px;
+  left: 216px;
+  bottom: 136px;
   width: 160px;
   line-height: 13px;
 }
 #lineLabel_7{
   width: 120px;
-  left: 302px;
-  bottom: 145px;
+  left: 243px;
+  bottom: 175px;
   line-height: 13px;
 }
-
+.axisLabel{
+  font-size: 14px;
+  font-style: italic;
+  position: absolute;
+}
+#axisLabelY{
+  left: 27px;
+  top: 13px;
+}
+#axisLabelX{
+  top: 212px;
+  left: 127px;
+}
 
 
 

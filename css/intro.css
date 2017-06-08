@@ -18,6 +18,10 @@ html.noBg {
   -moz-background-size: cover;
   -o-background-size: cover;
 }
+a{
+  color: #1696d2;
+  text-decoration: none;
+}
 #topGap{
   height: 10px;
 }
@@ -89,7 +93,7 @@ html.noBg {
   position: fixed;
   left: 810px;
   top: calc(50% - 20px);
-  width: 450px;
+  width: 350px;
 }
 #bodyNew, #bodyNew{
   opacity: 0;
@@ -100,5 +104,34 @@ html.noBg {
   visibility: hidden;
 }
 .textAppear{
+  opacity: 0;
+}
+
+
+
+#legend{
+  position: fixed;
+  top: calc(50% - 276px);
+  left: 355px;
+  font-size: 14px;
+}
+.legendContainer, .legendContainer div, .legendContainer span{
+  display: inline-block;
+  float: left;
+}
+.legendContainer span{
+  width: 10px;
+  height: 10px;
+  margin-top: 4px;
+  margin-right: 6px;
+}
+#legendOne span{
+  background-color: #000000;
+}
+#legendTen span{
+  margin-left: 50px;
+  background-color: #73bfe2;
+}
+.animationComponents{
   opacity: 0;
 }
