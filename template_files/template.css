@@ -119,7 +119,7 @@ h3{
   display: inline-block;
   text-align: center;
   border-right: solid 1px #6d6e70;
-  margin:0px;
+  margin:  0px 0px 0px -5px; 
   width: 12%;
   padding-left: 0px !important;
 
@@ -282,12 +282,17 @@ li.spacing {
   opacity: 0;
 }
 .sidebar-quote {
-  margin-top: .2em;
   font-family: Georgia;
   font-style: italic;
   font-size: 20px;
   line-height: 1.5em;
   color: #231f20;
+  margin-bottom: 1em;
+}
+
+div.sidebar-quote p {
+  margin-top: .8em;
+  margin-bottom: .8em;
 }
 
 .sidebar-quote-mobile {
@@ -296,22 +301,71 @@ li.spacing {
 
 .sidebar-quote-author {
   font-weight: 600;
-  font-size: 14px;
+  font-size: 18px;
   margin-top: 1em;
   color: #4d4d4d;
   margin-bottom: .5em;
 
 }
 
+
 .sidebar-author-title {
-  font-weight: 200;
+  margin-top: 1em;
+  font-weight: 400;
   font-size: 14px;
   padding-bottom: 1.5em;
   color: #5c5859;
+  font-style: italic;
+  line-height: 1.7em;
 
 }
 
+/*STYLES FOR CHARTS*/
+
+.chart-title {
+  font-size: 22px;
+}
+
+.chart-info {
+  font-size: 11px;
+}
+
+.graph-row {
+  margin: 3% 0;
+  width: 100%;
+  float: left;
+}
+
+.graph-div {
+  float: left;
+  width: 50%;
+}
+
+.graph-div img {
+  width: 100%;
+  float: left;
+
+}
+.pie-header {
+  font-size: 22px;
+  text-align: left;
+  margin-bottom: 5%;
+  font-weight: 700;
+}
+.graph-subhead {
+  margin: 0 3%;
+  text-align: center;
+}
+
+
+
 /*STYLES FOR AUDIO DIV*/
+
+.audio-div {
+  border-bottom: solid 1px #d0d2d3;
+  padding-bottom: 2.5em;
+  margin-bottom: 1em;
+}
 .audio-subtitle {
   margin-top: .5em;
   font-style: italic;
@@ -330,8 +384,6 @@ li.spacing {
   font-size: 9px;
   font-weight: 700;
   color: #919395;
-  border-top: solid 1px #d0d2d3;
-  padding-top: 4em;
 
 }
 
@@ -478,6 +530,10 @@ blockquote {
 
 }
 
+blockquote br {
+  margin-bottom: 2em;
+}
+
 blockquote:before, blockquote:after {
     position: relative;
     font-size: 36px;
@@ -547,6 +603,7 @@ blockquote:after {
   /**color: #094c6b; **/
   color: #0a4c6a;
   margin-bottom: 1em;
+  text-transform: uppercase;
 }
 
 .center-div-large-text {
@@ -745,13 +802,17 @@ footer h3, footer h4{
 
 
 
-@media (max-width: 950px) {
-   
-    .subnav a{
-        font-size:16px;
+@media (max-width: 1100px) {
+   .subnav a{
+    font-size:16px;
     }
 }
 
+@media (max-width: 950px) {
+   .subnav a{
+    font-size:14px;
+    }
+}
 
 
 /*browser windows smaller than 850px*/
@@ -778,6 +839,17 @@ footer h3, footer h4{
     } 
   #current-page-navbar {
     display: block;
+  }
+  .chart-title {
+  font-size: 18px;
+  }
+
+  .pie-header {
+    font-size: 18px;
+  }
+
+  .chart-info {
+    font-size: 11px;
   }
 
   #mobilenavcontainer {
