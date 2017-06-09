@@ -94,6 +94,8 @@ a{
   left: 810px;
   top: calc(50% - 20px);
   width: 350px;
+  font-size: 16px;
+  line-height: 1.35;
 }
 #bodyNew, #bodyNew{
   opacity: 0;
@@ -112,7 +114,7 @@ a{
 #legend{
   position: fixed;
   top: calc(50% - 276px);
-  left: 355px;
+  left: 350px;
   font-size: 14px;
 }
 .legendContainer, .legendContainer div, .legendContainer span{

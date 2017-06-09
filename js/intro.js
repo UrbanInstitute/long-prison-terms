@@ -316,6 +316,14 @@ var scrollVis = function() {
       .attr("stroke", "none")
       .style("opacity",0)
 
+    var stackBackground =  g.append("rect")
+      .attr("class","stackBackground")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("fill", EMPTY_TRACK_COLOR)
+      .attr("stroke", "none")
+      .style("opacity",0)
+
     var singleTrack = g
       .append("g")
       .attr("class", "singleTrackGroup")
@@ -386,13 +394,7 @@ var scrollVis = function() {
       .style("opacity", 0)
 
 
-    var stackBackground =  g.append("rect")
-      .attr("class","stackBackground")
-      .attr("width", width)
-      .attr("height", height)
-      .attr("fill", EMPTY_TRACK_COLOR)
-      .attr("stroke", "none")
-      .style("opacity",0)
+
     //track for all intro animations
     var track = g
       .selectAll(".trackGroup")
@@ -595,7 +597,7 @@ var scrollVis = function() {
       .filter(function(d){ return +d.step == +step})
       .sort(function(a, b) {
         return parseFloat(b.admission) - parseFloat(a.admission)
-  });
+      });
 
 
     g.data(data)
@@ -622,50 +624,50 @@ var scrollVis = function() {
 
 
 
-d3.selectAll(".trackEmpty")
-.data(data)
-.transition()
-.duration(350)
-.style("opacity",0)
-.transition()
-.delay(function(d){ return yearsToMS(d.admission)}) 
-.style("opacity", function(d){
-  if(+d.sentence == 999){
-    return 0
-  }else{
-    return 1
-  }
-})
-.each("end", function(){
-d3.select(this.parentNode).classed("inactive", false).classed("active", true)
-})
+    d3.selectAll(".trackEmpty")
+    .data(data)
+    .transition()
+    .duration(350)
+    .style("opacity",0)
+    .transition()
+    .delay(function(d){ return yearsToMS(d.admission)}) 
+    .style("opacity", function(d){
+      if(+d.sentence == 0){
+        return 0
+      }else{
+        return 1
+      }
+    })
+    .each("end", function(){
+    d3.select(this.parentNode).classed("inactive", false).classed("active", true)
+    })
 
 
-d3.selectAll(".trackFilled")
-.data(data)
-.transition()
-.duration(350)
-.style("fill",FILLED_TRACK_COLOR)
-.attr("width", "0px")
-.style("opacity",0)
-.transition()
-.delay(function(d){ return 350 + yearsToMS(d.admission)}) 
-.style("opacity", function(d){
-  if(+d.sentence == 999){
-    return 0
-  }else{
-    return 1
-  }
-})
-.transition()
-.ease("linear")
-.duration(function(d){
-// if(d.admission < 0){
-// return yearsToMS((d.sentence -(-1 * d.admission)) * d.lengthOfStay/d.sentence)
-// }else{
-return yearsToMS(d.lengthOfStay)
-// }
-})
+    d3.selectAll(".trackFilled")
+    .data(data)
+    .transition()
+    .duration(350)
+    .style("fill",FILLED_TRACK_COLOR)
+    .attr("width", "0px")
+    .style("opacity",0)
+    .transition()
+    .delay(function(d){ return 350 + yearsToMS(d.admission)}) 
+    .style("opacity", function(d){
+      if(+d.sentence == 0){
+        return 0
+      }else{
+        return 1
+      }
+    })
+    .transition()
+    .ease("linear")
+    .duration(function(d){
+    // if(d.admission < 0){
+    // return yearsToMS((d.sentence -(-1 * d.admission)) * d.lengthOfStay/d.sentence)
+    // }else{
+    return yearsToMS(d.lengthOfStay)
+    // }
+    })
 
 
 .attr("width", function(d){
@@ -697,11 +699,10 @@ d3.selectAll(".dot")
 })
 .style("fill", function(d){ return dotColor(d.sentence) })
 .style("opacity",0)
-
 .transition()
 .delay(function(d){ return 350 + yearsToMS(d.admission)}) 
       .style("opacity", function(d){
-        if(+d.sentence == 999){
+        if(+d.sentence == 0){
           return 0
         }else{
           return 1
@@ -826,12 +827,13 @@ pauseAnimation(width)
         .ease("linear")
         .attr("width",0)
         .attr("x", lineWidth)
+      var labelMultiplier = (key == 5) ? 6 : 8;
       d3.select("#lineLabel_" + key)
         .transition()
         .duration(10)
         .style("opacity",0)
         .transition()
-        .delay(8*YEAR_IN_MS)
+        .delay(labelMultiplier*YEAR_IN_MS)
         .style("opacity",1)
         .style("pointer-events","all")
   }
@@ -1299,6 +1301,27 @@ d3.select("#dotBottom")
   function showSingleDot(){
     resetIntro(1)
     hideAreaChart();
+    d3.select(".stackBackground")
+      .transition()
+      .style("opacity",1)
+      .ease("linear")
+      .attr("height", 2*trackHeight)
+      .attr("y", height - 2*trackHeight)
+      .transition()
+      .delay(2900)
+      .ease("linear")
+      .attr("height", 1*trackHeight)
+      .attr("y", height - 1*trackHeight)
+      .transition()
+      .delay(8500 + 1400)
+      .ease("linear")
+      .attr("height", 0*trackHeight)
+      .attr("y", height - 0*trackHeight)
+
+
+    d3.selectAll(".trackEmpty").transition().style("opacity",0)
+    d3.selectAll(".trackFilled").transition().style("opacity",0)
+    d3.selectAll(".dot").transition().style("opacity",0)
     d3.select("#vis")
       .transition()
       .style("opacity",1)
@@ -1321,6 +1344,7 @@ d3.select("#dotBottom")
     d3.select(".singleTrackFilled")
       .transition()
       .style("opacity",1)
+      .style("fill", FILLED_TRACK_COLOR)
       .transition()
       .ease("linear")
       .delay(1400)
@@ -1389,6 +1413,21 @@ d3.select("#dotBottom")
           .transition("fade-out")
             .duration(100)
             .style("fill", EXITING_TRACK_COLOR)
+            .transition()
+            .delay(100)
+            .style("opacity",0)
+        d3.select(".slowSingleTrackEmpty")
+          .transition()
+          .delay(200)
+          .style("opacity",0)
+        d3.select(".singleTrackFilled")
+          .transition()
+          .delay(200)
+          .style("opacity",0)
+        d3.select(".singleTrackEmpty")
+          .transition()
+          .delay(200)
+          .style("opacity",0)
         d3.select(this)
           .transition()
             .delay(200)
@@ -1446,7 +1485,7 @@ d3.select("#dotBottom")
   function longerSentencesFasterAdmission(){
     d3.select("#appear4-1")
       .transition()
-      .delay(2000)
+      .delay(3000)
       .duration(1000)
       .style("opacity",1)
     drawBackCurtain(5)
@@ -1457,7 +1496,7 @@ d3.select("#dotBottom")
       .text("One year sentences")
     d3.select("#legend")
       .transition()
-      .style("left","355px")
+      .style("left","350px")
       .style("opacity",1)
     d3.select("#appear5-1")
       .transition()
@@ -1468,9 +1507,12 @@ d3.select("#dotBottom")
     animateIntro(6)
   }
   function shortSentenceEarlyRelease(){
+    d3.selectAll(".animationComponents")
+      .transition()
+      .style("opacity",1)
     d3.select("#legend")
       .transition()
-      .style("left","350px")
+      .style("left","347px")
       .style("opacity",1)
     d3.select("#legendOne div")
       .text("Six month sentences")
@@ -1484,6 +1526,9 @@ d3.select("#dotBottom")
       .style("opacity",1)
   }
   function hideIntro(){
+    d3.selectAll(".animationComponents")
+      .transition()
+      .style("opacity",0)
     d3.select("#vis")
       .transition()
       .style("opacity",0)
@@ -1608,9 +1653,8 @@ function display(animationData, lineData, areaData) {
   // setup event handling
   scroll.on('resized', function(){
     d3.select("#vis svg").remove()
-    // d3.selectAll(".scatterButton").remove()
-    // d3.select("#buttonContainer").remove()
-    // d3.selectAll(".mapImg").remove()
+    d3.select("#introAreaContainer svg").remove()
+    d3.select("#lineChart svg").remove()
     display(animationData, lineData, areaData)
   })
   scroll.on('active', function(index) {
