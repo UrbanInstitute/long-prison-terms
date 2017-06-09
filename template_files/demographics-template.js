@@ -12,7 +12,7 @@ var arrowTransitionMin = 200,
     transition6Max = 6300,
     transition7Max = 6800,
     transition8Max = 7200,
-    transition9Max = 7500;
+    transition9Max = 7400;
 
 var isTransitioning = [null, false, false, false, false, false, false, false, false, false]
 

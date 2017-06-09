@@ -276,6 +276,10 @@ li.spacing {
 
 /*Style for sticky text*/
 
+.border {
+  border-bottom: solid 1px #d0d2d3;
+}
+
 .note-container {
   position: absolute;
   top: 200px;
@@ -316,7 +320,7 @@ div.sidebar-quote p {
   padding-bottom: 1.5em;
   color: #5c5859;
   font-style: italic;
-  line-height: 1.7em;
+  line-height: 1.5em;
 
 }
 
@@ -400,6 +404,12 @@ div.sidebar-quote p {
   font-weight: 600;
 }
 
+.audio-author-title {
+  font-size: 14px;
+  margin-bottom: 1.1em;
+  margin-top: .3em;
+}
+
 .audio-container {
   background-color: #f2f2f2;
   margin: 1.5em 0;
@@ -415,8 +425,8 @@ div.sidebar-quote p {
 .audio-info {
   padding-top: 5.5%;
   padding-bottom: 5.5%;
-  width: 40%;
-  padding-left: 10%;
+  width: 43%;
+  padding-left: 8%;
 
 }
 
@@ -562,7 +572,7 @@ blockquote:after {
   margin-left: 10%;
   margin-top: 10%;
   margin-bottom: 10%;
-  line-height: 1.5em;
+  line-height: 1em;
 
 }
 

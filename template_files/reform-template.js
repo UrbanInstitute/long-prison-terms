@@ -3,7 +3,7 @@ console.log(window.scrollY)
 var duration = 300; 
 
 var arrowTransitionMin = 200,
-    arrowTransitionMax = 1600,
+    arrowTransitionMax = 1300,
     transition1Max = 3000,
     transition3Max = 4300,
     transition6Max = 5400,
