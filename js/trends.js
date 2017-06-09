@@ -1,4 +1,3 @@
-
 /**
  * scrollVis - encapsulates
  * all the code for the visualization
@@ -78,11 +77,19 @@ var scrollVis = function() {
     d3.select(obj)
       .selectAll("rect")
       .style("fill", "#fdbf11")
+    d3.select(obj)
+      .selectAll("text")
+      .transition()
+      .style("opacity",0)
   }
   function deHoverState(obj, d){
     d3.select(obj)
       .selectAll("rect")
       .style("fill", "#1696d2")
+    d3.select(obj)
+      .selectAll("text")
+      .transition()
+      .style("opacity",1)
   }
   /**
    * setupVis - creates initial elements for all
@@ -109,6 +116,7 @@ var scrollVis = function() {
       d.LOS_MeanTop10 = +d.LOS_MeanTop10
       d.LOS_10plus_Pct = +d.LOS_10plus_Pct
       d.LOS_10plus_Num = +d.LOS_10plus_Num
+      d.LOS_MeanBottom90 = +d.LOS_MeanBottom90;
     });
 
 
@@ -169,6 +177,88 @@ var scrollVis = function() {
 
   var explainerX = 120;
   var explainerY = 38;
+
+  var titleX = 40;
+  var titleY = 0;
+
+  var noteX = 40;
+  var noteY = mapHeight;
+
+  var legendX = explainerX;
+  var legendY = 100;
+
+  d3.select("#vis")
+    .append("div")
+    .attr("class","chartNote")
+    .style("position", "absolute")
+    .style("top",noteY + "px")
+    .style("left",noteX + "px")
+    .html("States shown in grey did not report complete data")
+
+  var legend =   d3.select("#vis")
+    .append("div")
+    .attr("class","legendContainer legendContainerA")
+    .style("position", "absolute")
+    .style("top",legendY + "px")
+    .style("left",legendX + "px")
+
+  legend.append("span")
+    .attr("class", "legendKey alt")
+
+  legend.append("div")
+    .attr("class", "legendText")
+    .html("Violent")
+
+  legend.append("span")
+    .attr("class", "legendKey")
+
+  legend.append("div")
+    .attr("class", "legendText")
+    .html("All except violent")
+
+
+  var legendB =   d3.select("#vis")
+    .append("div")
+    .attr("class","legendContainer legendContainerB")
+    .style("position", "absolute")
+    .style("top",legendY + "px")
+    .style("left",legendX + "px")
+    .style("opacity",0)
+
+  legendB.append("span")
+    .attr("class", "legendKey alt")
+
+  legendB.append("div")
+    .attr("class", "legendText")
+    .html("Top 10%")
+
+  legendB.append("span")
+    .attr("class", "legendKey")
+
+  legendB.append("div")
+    .attr("class", "legendText")
+    .html("Bottom 90%")
+
+
+
+
+  d3.select("#vis")
+    .append("div")
+    .attr("class","chartTitle chartTitleA")
+    .style("position", "absolute")
+    .style("top",titleY + "px")
+    .style("left",titleX + "px")
+    .html("Average time served for all offense categories")
+
+  d3.select("#vis")
+    .append("div")
+    .attr("class","chartTitle chartTitleB")
+    .style("position", "absolute")
+    .style("top",titleY + "px")
+    .style("left",titleX + "px")
+    .html("Average time served by offense type")
+    .style("opacity",0)
+
   d3.select("#vis")
     .append("div")
     .attr("class","explainer explainerA")
@@ -303,8 +393,9 @@ var scrollVis = function() {
   };
 
   function drawMapLine(variable, alt, hide){
-    alt = (typeof(alt) == "undefined") ? "standard" : alt
-    hide = (typeof(hide) == "undefined") ? "show" : hide
+    var bottom = (alt == 2) 
+    var alt = (typeof(alt) == "undefined") ? "standard" : "alt"
+    var hide = (typeof(hide) == "undefined") ? "show" : hide
     var opacity = (hide == "hide") ? 0 : 1
     var trendsData = d3.select("#vis").data()[0][0]
 
@@ -330,7 +421,19 @@ var scrollVis = function() {
     var mapY;
     var mapline;
     var mapYAxis
-    var altvar = (alt == "alt" && hide == "show") ? "LOS_MeanViolent" : variable
+    var altvar;
+    if(variable == "LOS_10plus_Pct"){
+      altvar = variable;
+    }
+    else if(bottom == false && hide == "show"){
+      altvar = "LOS_MeanViolent";
+    }
+    else if(bottom == true && hide == "show"){
+      altvar = "LOS_MeanTop10";
+    }else{
+      altvar = variable;
+      // console.log(altvar)
+    }
     if(variable == "LOS_10plus_Num"){
       for(var i = 0; i < trendsDataNest.length; i++){
         var max = Math.ceil(d3.max(trendsDataNest[i].values, function(d) { return d[variable]; }))
@@ -353,8 +456,6 @@ var scrollVis = function() {
       d3.selectAll("#vis .y.axis." + state)
         .transition()
         .call(yaxes[state].tickValues([0,max]).tickFormat(function(d){
-          // d3.format()
-          // console.log(d)
           if(d == 0) return 0
           else return ""
         }))
@@ -478,22 +579,68 @@ var scrollVis = function() {
     d3.select("#vis")
       .transition()
       .style("opacity",1)
+
+    d3.select(".chartTitleA")
+      .text("Average time served for all offense categories")
+      .transition()
+      .style("opacity",1)
+    d3.select(".chartTitleB")
+      .transition()
+      .style("opacity",0)
+      .on("end", function(){ d3.select(this).html("Average time served by offense type") })
+
+    d3.select(".legendContainerA").transition().style("opacity",0)
+    d3.select(".legendContainerB").transition().style("opacity",0)
+
     drawMapLine("LOS_Mean")
-    drawMapLine("LOS_Mean", "alt", "hide")
+    drawMapLine("LOS_Mean", 1, "hide")
     drawBackMapCurtain(0);
   }
   function mapTimeServedByOffense(){
-    drawMapLine("LOS_MeanAllExceptViol", "alt", "show")
-    drawMapLine("LOS_MeanViolent")
+    d3.select(".chartTitleB")
+      .text("Average time served by offense type")
+      .transition()
+      .style("opacity",1)
+    d3.select(".chartTitleA")
+      .transition()
+      .style("opacity",0)
+      .on("end", function(){ d3.select(this).html("Average time served for all offense categories") })
+
+
+    d3.select(".legendContainerA").transition().style("opacity",1)
+    d3.select(".legendContainerB").transition().style("opacity",0)
+
+    drawMapLine("LOS_MeanAllExceptViol")
+    drawMapLine("LOS_MeanViolent", 1, "show")
 
   }
   function mapTimeServedTop10Percent(){
-    // drawBackMapCurtain(0);
-    drawMapLine("LOS_MeanTop10", "alt", "hide")
-    drawMapLine("LOS_MeanTop10")
+    d3.select(".chartTitleA")
+      .text("Average time served")
+      .transition()
+      .style("opacity",1)
+    d3.select(".chartTitleB")
+      .transition()
+      .style("opacity",0)
+      .on("end", function(){ d3.select(this).html("Share of population serving 10 or more years") })
+
+    d3.select(".legendContainerA").transition().style("opacity",0)
+    d3.select(".legendContainerB").transition().style("opacity",1)
+
+    drawMapLine("LOS_MeanBottom90")
+    drawMapLine("LOS_MeanTop10", 2, "show")
 
   }
   function map10YearsPercent(){
+    d3.select(".chartTitleB")
+      .text("Share of population serving 10 or more years")
+      .transition()
+      .style("opacity",1)
+    d3.select(".chartTitleA")
+      .transition()
+      .style("opacity",0)
+      .on("end", function(){ d3.select(this).html("Population serving 10 or more years") })
+
     d3.select("#infoGroup")
       .transition()
       .style("opacity",0)
@@ -504,10 +651,25 @@ var scrollVis = function() {
       .transition()
       .style("opacity",1)
     drawBackMapCurtain(0);
+
+    d3.select(".legendContainerA").transition().style("opacity",0)
+    d3.select(".legendContainerB").transition().style("opacity",0)
+
+    drawMapLine("LOS_10plus_Pct", 1, "hide")
     drawMapLine("LOS_10plus_Pct")
+
 
   }
   function map10YearsNumber(){
+    d3.select(".chartTitleA")
+      .text("Population serving 10 or more years")
+      .transition()
+      .style("opacity",1)
+    d3.select(".chartTitleB")
+      .transition()
+      .style("opacity",0)
+      .on("end", function(){ d3.select(this).html("Population serving 10 or more years") })
+
     d3.select("#infoGroup")
       .transition()
       .style("opacity",1)

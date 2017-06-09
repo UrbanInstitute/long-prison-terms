@@ -68,6 +68,7 @@ body{
   left: 0px;
   z-index: 1;
   margin-left: 0;
+  cursor: pointer;
   /* height: 600px; */
   /* width: 600px; */
   /* background-color: #ddd; */
@@ -120,8 +121,25 @@ body{
     fill: none;
     /*opacity: .2*/
 }
-
-
+.state path.alt.line{
+  stroke: #a2d4ec;
+}
+.legendKey{
+  width: 15px;
+  height: 5px;
+  background: #000;
+  display: block;
+  float: left;
+  top: 6px;
+  position: relative;
+  margin-right: 5px;
+}
+.legendKey.alt{
+  background: #a2d4ec;
+}
+.legendContainer{
+  width: 150px;
+}
 /*.state .axis path {
     fill: none;
     stroke: grey;
@@ -265,3 +283,12 @@ text.mapLable.blank{
   }
 }
 
+.chartTitle{
+  font-size: 22px;
+  font-weight: bold;
+}
+.chartNote{
+  font-size: 13px;
+  font-style: italic;
+  color: #808080;
+}
