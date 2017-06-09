@@ -5,14 +5,14 @@ var duration = 300;
 var arrowTransitionMin = 200,
     arrowTransitionMax = 1600,
     transition1Max = 2300,
-    transition2Max = 4800,
-    transition3Max = 6500,
-    transition4Max = 7100,
-    transition6Max = 8000,
-    transition7Max = 9300,
-    transition8Max = 10000,
-    transition9Max = 11100,
-    transition10Max = 12400;
+    transition2Max = 3900,
+    transition3Max = 5900,
+    transition4Max = 6500,
+    transition6Max = 7400,
+    transition7Max = 8200,
+    transition8Max = 8800,
+    transition9Max = 9800,
+    transition10Max = 11300;
 
 var isTransitioning = [null, false, false, false, false, false, false, false, false, false, false]
 
@@ -40,6 +40,7 @@ window.onscroll = function() {
             .style("opacity", 1)
         d3.selectAll(".note-container")
             .style("opacity", 0)
+
     } else if(window.scrollY >= arrowTransitionMin && window.scrollY <arrowTransitionMax) { console.log('other')
         //MAKE ARROW DISAPPEAR BEFORE FIRST QUOTE
         d3.selectAll(".note-container")
@@ -111,7 +112,7 @@ window.onscroll = function() {
         } 
         
 
-    } else if(window.scrollY >= transition9Max && window.scrollY < transition10Max){ 
+    } else if(window.scrollY >= transition9Max && window.scrollY < transition10Max){ console.log('10')
                 //TENTH QUOTE APPEARS
         if (!isTransitioning[10]) {
             quoteTransition(10)
