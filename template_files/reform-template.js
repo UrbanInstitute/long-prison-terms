@@ -3,7 +3,7 @@ console.log(window.scrollY)
 var duration = 300; 
 
 var arrowTransitionMin = 200,
-    arrowTransitionMax = 1300,
+    arrowTransitionMax = 1200,
     transition1Max = 3000,
     transition3Max = 4300,
     transition6Max = 5400,
@@ -41,7 +41,7 @@ window.onscroll = function() {
             .style("opacity", 1)
         d3.selectAll(".note-container")
             .style("opacity", 0)
-    } else if(window.scrollY >= arrowTransitionMin && window.scrollY <arrowTransitionMax) {
+    } else if(window.scrollY >= arrowTransitionMin && window.scrollY <arrowTransitionMax) { console.log('1')
         //MAKE ARROW DISAPPEAR BEFORE FIRST QUOTE
         d3.selectAll(".note-container")
             .style("opacity", 0)

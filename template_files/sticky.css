@@ -3,8 +3,9 @@
 
 .left-col {
   float: left;
-  width: 63.46%;
-  padding-left: 2.7%;
+  width: 63.85%;
+  margin-left: 2.7%;
+  max-width: 830px;
 
 }
 
