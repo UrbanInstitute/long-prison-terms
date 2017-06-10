@@ -83,8 +83,8 @@ h3{
     text-transform: uppercase;
 }
 
-.blue-text {
-  color: #1796d3;
+.narratives-next {
+  margin-top: 150px;
 }
 
 .bold{
@@ -127,6 +127,7 @@ h3{
   margin:  0px 0px 0px -5px; 
   width: 12%;
   padding-left: 0px !important;
+  border-bottom: solid 3px #094c6b;
 
 }
 
@@ -141,18 +142,21 @@ h3{
 	font-weight: 300;
 	display: block;
   color: white;
-  padding: 20px 0;
+  padding: 19px 0;
 
 }
 
 .subnav li:hover{ 
       color: #fff;
 	  background-color: #094c6b;
+    border-bottom: solid 3px #25a9e0;
+
 	 
 	 }
 .hovered-category {
   color: #fff;
   background-color: #094c6b;
+
 }
 
 
@@ -207,6 +211,7 @@ li.spacing {
   margin-right: auto;
   max-width: 740px;
   width: 57%;
+  margin-top: 150px;
 
 }
 
@@ -214,7 +219,6 @@ li.spacing {
   font-weight: 600;
   font-size: 36px;
   margin-bottom: 1.5em;
-  margin-top: 1.5em;
 }
 
 .conclusion-text {
@@ -222,6 +226,7 @@ li.spacing {
   color: #666666;
   font-weight: 300;
   margin-bottom: 2.5em;
+  margin-top: 50px;
 }
 
 /*Style for next page div*/
@@ -273,6 +278,8 @@ li.spacing {
   margin: 70% 0;
   content: url("../img/arrow.png");
   cursor: pointer;
+  max-width: 82px;
+  width: 80%;
 }
 .next-arrow:hover {
   margin: 70% 0;
@@ -837,6 +844,10 @@ footer h3, footer h4{
 
 /*browser windows smaller than 850px*/
 @media (max-width: 900px) {
+
+  .copyright-footer {
+    text-align: center;
+  }
   .wrapper {width:100%; padding-top:20px;}
   .content {width:auto; padding:0px 30px}
   .container {width:auto; padding:0px 70px; margin-bottom: 40px;}
@@ -855,7 +866,7 @@ footer h3, footer h4{
     color: #fff;
     background: #052635;
     text-align: left;
-    padding: 10px 30px;   
+    padding: 10px 10px;   
     } 
   #current-page-navbar {
     display: block;
@@ -971,7 +982,8 @@ ul#menu {
   }
 
   .next-page-column-1 {
-    width: 80%;
+    width: 78%;
+    margin-left: 2%;
   }
 
   .next-page-column-2 {
@@ -980,8 +992,9 @@ ul#menu {
   }
 
   .next-arrow {
-    margin: 12% 0;
+    margin: 33% 25%;
     padding-left: 10%;
+    max-width: 54px;
   }
 
   .next-page-text {
