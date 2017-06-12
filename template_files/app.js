@@ -9,8 +9,19 @@ app.controller('navCtrl', ['$scope', function ($scope) {
     $scope.navClass = function (page) {
         var currentRoute = category || 'intro';
         return page === currentRoute ? 'hovered-category' : '';
-    };        
+    }; 
+
 }]);
+
+app.controller('navRightCtrl', ['$scope', function ($scope) {
+    $scope.pageName = category;
+    return $scope.pageName;
+    // function () {
+    //     var currentRoute = category || 'intro';
+    //     return currentRoute;
+    // };        
+}]);
+
 
 
 // app.config(function($routeProvider) {

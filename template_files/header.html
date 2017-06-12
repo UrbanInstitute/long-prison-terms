@@ -28,7 +28,7 @@
                     
          </div>   
 
-        <div class="subnav">
+        <div class="subnav" ng-controller="navCtrl">
             
 <!--          <div class="subnav">
 <ul> -->
@@ -47,7 +47,7 @@
                   
                         
       <div id="mobilenavcontainer" class="show-menu">
-           <label for="show-menu">Chapters &#9660;</label>
+           <label for="show-menu">Chapters <span class="subnav-arrow"></span></label>
            <input type="checkbox" id="show-menu" class="checkbox" role="button">
                 <ul id="menu">
                 <li><a href="intro.html" ng-click="$root.title = 'Intro'">Intro</a></li>
@@ -70,7 +70,9 @@
                 </ul>
             <div id="current-page-navbar">
             VIEWING <br />
-            <div class="current-page-name"></div>
+              <div class="current-page-name" ng-controller="navRightCtrl">
+              {{pageName}}
+              </div>
             </div>
       </div>  
 

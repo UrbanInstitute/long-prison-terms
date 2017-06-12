@@ -122,3 +122,14 @@ window.onscroll = function() {
     }
 };
 
+var nextpage = d3.select(".next-page-div")
+nextpage
+    .on("mouseover", function() {
+        nextpage.select(".next-arrow")
+            .attr("class", "next-arrow-hovered")
+    })
+    .on("mouseout", function() {
+        nextpage.select(".next-arrow-hovered")
+            .attr("class", "next-arrow")
+    })
+
