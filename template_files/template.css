@@ -106,6 +106,9 @@ h3{
     opacity: 0;
 }
 
+.dem-quote5{
+  z-index: 1;
+}
 /************subnav***************/
 .subnav{
     width: 100%;
@@ -181,6 +184,66 @@ h3{
 	font-weight: 300;
 
 }
+
+/*Style for audio player*/
+.audioplayer{
+  width: 350px;
+  height: 60px;
+  margin: auto 0;
+}
+
+.audio-inside-div {
+  display: table;
+}
+
+.audio-bar {
+  float: left;
+  width: 45%;
+}
+
+.pButton{
+
+}
+
+.play{
+  background: url('../img/play.png') ;
+  height:60px; 
+  width: 60px;
+  border: none;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  float:left;
+  outline:none;
+  margin-left: -15px;}
+.pause{
+  background: url('../img/pause.png') ;
+  height:60px; 
+  width: 60px;
+  border: none;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  float:left;
+  outline:none;
+  margin-left: -15px;}
+
+.timeline{
+  width: 300px;
+  height: 13px;
+  margin-top: 23px;
+  float: left;
+  background: rgba(0,0,0,.3);
+  
+}
+.playhead{
+  width: 18px;
+  height: 13px;
+  background: #1696d2;
+
+}
+
+
 
 
 /*Style for left column*/
@@ -440,6 +503,7 @@ div.sidebar-quote p {
 .audio-container {
   background-color: #f2f2f2;
   margin: 1.5em 0;
+  z-index: 2;
 }
 
 .audio-container-header {
@@ -450,10 +514,10 @@ div.sidebar-quote p {
 }
 
 .audio-info {
-  padding-top: 5.5%;
   padding-bottom: 5.5%;
-  width: 43%;
   padding-left: 8%;
+  background-color: #f2f2f2;
+  display: table-cell;
 
 }
 
@@ -479,7 +543,7 @@ div.sidebar-quote p {
 
 /*Style for audio player*/
 audio {
-  background-color: #000;
+  
 }
 
 

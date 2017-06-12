@@ -125,10 +125,15 @@
                 <div class="audio-author">
                   Ramona Brant
                 </div>
-                <audio controls>
-  <!--                 <source src="horse.ogg" type="audio/ogg">
-   -->                <source src="" type="audio/mpeg">
-                </audio>
+            <audio id="clip-dem-5" class="clip" preload="true">
+              <source src="audio_clips/Demographics_5_Ramona_Brant.mp3">
+            </audio>
+            <div id="audioplayer-dem-5" class="audioplayer">
+              <button id="pButton-dem-5" class="pButton play"></button>
+              <div id="timeline-dem-5" class="timeline">    
+                    <div id="playhead-dem-5" class="playhead"></div>
+              </div>
+            </div>
               </div>
               <div class="sidebar-quote"> 
               “It’s a man’s world. This is a man’s world overall, but more so in prison.”
@@ -268,15 +273,28 @@
             </p>
             <!--BEGIN AUDIO BAR-->
             <div class="audio-container">
-              <div class="audio-info">
-                <div class="audio-container-header">
-                  LISTEN TO
+              <div class="audio-inside-div">
+                <div class="audio-info">
+                  <div class="audio-container-header">
+                    LISTEN TO
+                  </div>
+                  <div class="audio-author">
+                    Samantha Harvell, Urban Institute
+                  </div>
+                  <div class="audio-container-subtitle">
+                     Rethinking sentencing for young adults
+                  </div>
                 </div>
-                <div class="audio-author">
-                  Samantha Harvell, Urban Institute
-                </div>
-                <div class="audio-container-subtitle">
-                   Rethinking sentencing for young adults
+                <div class="audio-info">
+                  <audio id="clip-dem-bar1" class="clip" preload="true">
+                    <source src="audio_clips/Demographics_1_Sam_Harvell.mp3">
+                  </audio>
+                  <div id="audioplayer-dem-bar1" class="audioplayer">
+                    <button id="pButton-dem-bar1" class="pButton play"></button>
+                    <div id="timeline-dem-bar1" class="timeline">    
+                          <div id="playhead-dem-bar1" class="playhead"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div> 
@@ -526,6 +544,7 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="template_files/app.js"></script>
     <script src="template_files/demographics-template.js"></script>
+    <script src="template_files/audio.js"></script>
     
 
 
