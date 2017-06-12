@@ -4,28 +4,32 @@ var duration = 300;
 
 var arrowTransitionMin = 200,
     arrowTransitionMax = 1000,
-    transition1Max = 1700,
-    transition2Max = 2600,
-    transition3Max = 3500,
-    transition4Max = 5200,
-    transition5Max = 5800,
-    transition6Max = 6300,
-    transition7Max = 6800,
-    transition8Max = 7200,
-    transition9Max = 7400;
+    conclusionScrollY = 6900;
+
 
 var isTransitioning = [null, false, false, false, false, false, false, false, false, false]
 
+var inViewMin = 350
+
+// var scrollTop = $(window).scrollTop(),
+//     inViewMin = 300,
+//     ffset = ($(".left-col-header").offset().top)
+//     inView = offset - scrollTop;
+
+function getViewMin(element) {
+    var offset = $(element).offset().top,
+        scrollTop = $(window).scrollTop();
+        return offset - scrollTop;
+}
+
 function quoteTransition(number) { 
 
-    // var transitionNumber0 = "isTransitioning["] + number
-    // var transitionNumber = eval(transitionNumber0)
     d3.select(".dem-quote" + number)
         .transition()
         .duration(duration)
         .style("opacity", 1)
-        .on("start", function(){ console.log(number); isTransitioning[number] = true })
-        .on("end", function(){ console.log(number); isTransitioning[number] = false })
+        .on("start", function(){  isTransitioning[number] = true })
+        .on("end", function(){ isTransitioning[number] = false })
         .on("interrupt", function() {isTransitioning[number] = false})
 
     d3.selectAll(".note-container:not(.dem-quote" + number + ")")
@@ -34,7 +38,9 @@ function quoteTransition(number) {
         .style("opacity", 0)
 }
 
-window.onscroll = function() {
+
+
+window.onscroll = function() { 
     if(window.scrollY < arrowTransitionMin){
         d3.select("#introArrow")
             .style("opacity", 1)
@@ -46,7 +52,9 @@ window.onscroll = function() {
             .style("opacity", 0)
         d3.select("#introArrow")
             .style("opacity", 0)
-    } else if(window.scrollY >= arrowTransitionMax && window.scrollY <transition1Max){     
+    } //else if(window.scrollY >= arrowTransitionMax && window.scrollY <transition1Max){
+
+       else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar1") <= inViewMin && getViewMin("#sidebar2") > inViewMin) {
         //FIRST QUOTE APPEARS
         if (!isTransitioning[1])  {
             quoteTransition(1)
@@ -54,7 +62,8 @@ window.onscroll = function() {
  
         
 
-    } else if(window.scrollY >= transition1Max && window.scrollY <transition2Max){ 
+    } //else if(window.scrollY >= transition1Max && window.scrollY <transition2Max){ 
+        else if(getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar2") > inViewMin) {  
         //SECOND QUOTE APPEARS
         if (!isTransitioning[2]) {  
             quoteTransition(2)
@@ -63,7 +72,7 @@ window.onscroll = function() {
  
         
 
-    } else if(window.scrollY >= transition2Max && window.scrollY <transition3Max){  
+    } else if(getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar4") > inViewMin){  
         //THIRD QUOTE APPEARS
         if (!isTransitioning[3]) {
             quoteTransition(3)
@@ -71,44 +80,36 @@ window.onscroll = function() {
             
         
 
-    } else if(window.scrollY >= transition3Max && window.scrollY <transition4Max){ 
+    } else if(getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar4") > inViewMin){  
     	        //FOURTH QUOTE APPEARS
         if (!isTransitioning[4]) {
             quoteTransition(4)
         } 
         
 
-    } else if(window.scrollY >= transition4Max && window.scrollY <transition5Max){ 
+    } else if(getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar6") > inViewMin){  
     	        //FIFTH QUOTE APPEARS
         if (!isTransitioning[5]) {
             quoteTransition(5)
         } 
         
 
-    } else if(window.scrollY >= transition5Max && window.scrollY <transition6Max){ 
+    } else if(getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar5") > inViewMin){  
                 //SIXTH QUOTE APPEARS
         if (!isTransitioning[6]) {
             quoteTransition(6)
         } 
         
 
-    } else if(window.scrollY >= transition6Max && window.scrollY <transition7Max){ 
-                //SEVENTH QUOTE APPEARS
-        if (!isTransitioning[7]) {
-            quoteTransition(7)
-        } 
-        
-
-    } else if(window.scrollY >= transition7Max && window.scrollY <transition8Max){ 
+    }  else if(getViewMin("#sidebar5") <= inViewMin && getViewMin("#sidebar9") > inViewMin){  
                 //EIGHTH QUOTE APPEARS
         if (!isTransitioning[8]) {
-            console.log("foo")
             quoteTransition(8)
         } 
 
         
 
-    } else if(window.scrollY >= transition8Max && window.scrollY < transition9Max){ 
+    } else if(getViewMin("#sidebar9") <= inViewMin && window.scrollY < conclusionScrollY){  
                 //NINTH QUOTE APPEARS
         if (!isTransitioning[9]) {
             quoteTransition(9)
