@@ -314,6 +314,14 @@ li.spacing {
   position: absolute;
   top: 200px;
   opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.note-container.show {
+  z-index: 1;
+  pointer-events: all;
+  opacity: 1;
 }
 .sidebar-quote {
   font-family: Georgia;
@@ -382,14 +390,16 @@ div.sidebar-quote p {
 
 }
 .pie-header {
-  font-size: 22px;
+  font-size: 18px;
   text-align: left;
   margin-bottom: 5%;
   font-weight: 700;
+  text-transform: uppercase;
 }
 .graph-subhead {
   margin: 0 3%;
   text-align: center;
+  height: 40px;
 }
 
 
@@ -725,8 +735,7 @@ blockquote:after {
   max-width: 740px; 
   width: 57%;
   position: absolute;
-  top: 25%;
-  bottom: 25%;
+  top: 273px;
   left: 21.5%;
   right: 21.5%;
 }
@@ -993,7 +1002,7 @@ footer h3, footer h4{
   }
 
   .pie-header {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .chart-info {
