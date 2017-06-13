@@ -1,4 +1,3 @@
-console.log(window.scrollY)
 
 var duration = 300; 
 
@@ -22,8 +21,8 @@ function quoteTransition(number) {
         .transition()
         .duration(duration)
         .style("opacity", 1)
-        .on("start", function(){ console.log(number); isTransitioning[number] = true })
-        .on("end", function(){ console.log(number); isTransitioning[number] = false })
+        .on("start", function(){ isTransitioning[number] = true })
+        .on("end", function(){ isTransitioning[number] = false })
         .on("interrupt", function() {isTransitioning[number] = false})
 
     d3.selectAll(".note-container:not(.pol-quote" + number + ")")
@@ -103,7 +102,6 @@ window.onscroll = function() {
     } else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar8") <= inViewMin && getViewMin("#sidebar9") > inViewMin){
                 //EIGHTH QUOTE APPEARS
         if (!isTransitioning[8]) {
-            console.log("foo")
             quoteTransition(8)
         } 
 
