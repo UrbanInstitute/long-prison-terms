@@ -21,6 +21,8 @@ function quoteTransition(number) {
         .transition()
         .duration(duration)
         .style("opacity", 1)
+        .style("pointer-events", "all")
+        .style("z-index", 1)
         .on("start", function(){ isTransitioning[number] = true })
         .on("end", function(){ isTransitioning[number] = false })
         .on("interrupt", function() {isTransitioning[number] = false})
@@ -29,6 +31,8 @@ function quoteTransition(number) {
         .transition()
         .duration(duration)
         .style("opacity", 0)
+        .style("z-index", -1)
+
 }
 
 
@@ -36,13 +40,21 @@ window.onscroll = function() {
     if(window.scrollY < arrowTransitionMin){ 
         d3.select("#introArrow")
             .style("opacity", 1)
+            .style("z-index", 1)
+
         d3.selectAll(".note-container")
             .style("opacity", 0)
+            .style("pointer-events", "none")
+            .style("z-index", -1)
+
 
     } else if(window.scrollY >= arrowTransitionMin && window.scrollY <arrowTransitionMax) { 
         //MAKE ARROW DISAPPEAR BEFORE FIRST QUOTE
         d3.selectAll(".note-container")
             .style("opacity", 0)
+            .style("pointer-events", "none")
+            .style("z-index", -1)
+
          d3.select("#introArrow")
             .style("opacity", 0)
     } else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar11") <= inViewMin && getViewMin("#sidebar1") > inViewMin){ 
@@ -125,7 +137,10 @@ window.onscroll = function() {
 
     }
      else { 
-        d3.selectAll(".note-container").style("opacity", 0)
+        d3.selectAll(".note-container")
+            .style("opacity", 0)            
+            .style("pointer-events", "none")
+            .style("z-index", -1)
     }
 };
 
