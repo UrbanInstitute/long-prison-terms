@@ -101,17 +101,15 @@ function timeUpdate() {
 
     d3.select(timeCurrent)
         .html(function() {
-            if (formattedTimeCurrent > .59) { console.log(formattedTimeCurrent + .4)
+            if (clip.currentTime > 59) { console.log(formattedTimeCurrent + .4)
                 return (formattedTimeCurrentLarge).replace('.', ':')
             } return formattedTimeCurrent.replace('.', ':')
     })
     d3.select(timeEnd)
          .html(function() {
-            if (formattedTimeEnd > .59) { 
+            if ((duration - clip.currentTime) > 59.5) { console.log((duration - clip.currentTime))
                 return formattedTimeEndLarge.replace('.', ':')
-            }  else if (formattedTimeEnd > .59 && formattedTimeEnd < .6) { 
-                return formattedTimeEndSmall.replace('.', ':')
-            } return formattedTimeEnd.replace('.', ':')
+            }   return formattedTimeEnd.replace('.', ':')
     })
     playhead.style.marginLeft = "0px";
     playhead.style.width = playPercent + "px";
