@@ -185,64 +185,6 @@ h3{
 
 }
 
-/*Style for audio player*/
-.audioplayer{
-  width: 350px;
-  height: 60px;
-  margin: auto 0;
-}
-
-.audio-inside-div {
-  display: table;
-}
-
-.audio-bar {
-  float: left;
-  width: 45%;
-}
-
-.pButton{
-
-}
-
-.play{
-  background: url('../img/play.png') ;
-  height:60px; 
-  width: 60px;
-  border: none;
-  background-size: 50% 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-  float:left;
-  outline:none;
-  margin-left: -15px;}
-.pause{
-  background: url('../img/pause.png') ;
-  height:60px; 
-  width: 60px;
-  border: none;
-  background-size: 50% 50%;
-  background-repeat: no-repeat;
-  background-position: center;
-  float:left;
-  outline:none;
-  margin-left: -15px;}
-
-.timeline{
-  width: 300px;
-  height: 13px;
-  margin-top: 23px;
-  float: left;
-  background: rgba(0,0,0,.3);
-  
-}
-.playhead{
-  width: 18px;
-  height: 13px;
-  background: #1696d2;
-
-}
-
 
 
 
@@ -452,7 +394,68 @@ div.sidebar-quote p {
 
 
 
-/*STYLES FOR AUDIO DIV*/
+
+/*Style for audio player and container*/
+.audioplayer{
+  width: 420px;
+  height: 60px;
+}
+
+.audio-table {
+  display: table;
+  width: 100%;
+}
+
+.audio-bar {
+  float: left;
+  width: 45%;
+}
+
+
+
+.pButton{
+
+}
+
+.play{
+  background: url('../img/play.png') ;
+  height:60px; 
+  width: 60px;
+  border: none;
+  background-size: 60% 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  float:left;
+  outline:none;
+  margin-left: -15px;}
+.pause{
+  background: url('../img/pause.png') ;
+  height:60px; 
+  width: 60px;
+  border: none;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  float:left;
+  outline:none;
+  margin-left: -15px;}
+
+.timeline{
+  width: 360px;
+  height: 13px;
+  margin-top: 23px;
+  float: left;
+  background: rgba(0,0,0,.3);
+  
+}
+.playhead{
+  width: 0px;
+  height: 13px;
+  background: #1696d2;
+
+}
+
+
 
 .audio-div {
   border-bottom: solid 1px #d0d2d3;
@@ -519,6 +522,36 @@ div.sidebar-quote p {
   background-color: #f2f2f2;
   display: table-cell;
 
+}
+
+.audio-cell {
+  background-color: #f2f2f2;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 5% 0% 5% 5%;
+
+}
+
+.left-cell {
+  width: 43%;
+}
+
+.timeCurrent {
+  color: #59595c;
+  font-size: 13px;
+  float: left;
+
+}
+
+.timeEnd {
+  color: #59595c;
+  font-size: 13px;
+  float: right;
+}
+
+.clip-time-row {
+  width: 100%;
+  margin-top: 3px;
 }
 
 .graph-container {

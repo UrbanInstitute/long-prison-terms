@@ -1,9 +1,11 @@
+/*credits to http://alexkatz.me/posts/building-a-custom-html5-audio-player-with-javascript/ */
 var playIDFull,
 playID,
 clip,
 duration,
 pButton,
 playhead,
+timeCurrent,
 timeline;
 
 
@@ -16,6 +18,7 @@ d3.selectAll('.play')
         duration = clip.duration; // Duration of audio clip, calculated here for embedding purposes
         pButton = document.getElementById('pButton' + playIDFull); // play button
         playhead = document.getElementById('playhead' + playIDFull); // playhead
+        timeCurrent = document.getElementById('timeCurrent' + playIDFull); // timeCurrent
         timeline = document.getElementById('timeline' + playIDFull); // timeline
         console.log('timeline' + playIDFull)
     
@@ -39,7 +42,7 @@ timeline.addEventListener("click", function(event) {
 }, false);
 
 // returns click as decimal (.77) of the total timelineWidth
-function clickPercent(event) {
+function clickPercent(event) { 
     return (event.clientX - getPosition(timeline)) / timelineWidth;
 }
 
@@ -89,10 +92,14 @@ function moveplayhead(event) {
 // timeUpdate
 // Synchronizes playhead position with current point in audio
 function timeUpdate() { 
-    var playPercent = timelineWidth * (clip.currentTime / duration);
+    var playPercent = timelineWidth * (clip.currentTime / duration); console.log(clip.currentTime);
+    var formattedTime = (clip.currentTime.toString()/100).toFixed(2)
+    d3.select(timeCurrent)
+        .html(formattedTime.replace('.', ':'))
     playhead.style.marginLeft = "0px";
-    playhead.style.width = 18 + playPercent + "px";
-    if (clip.currentTime == duration) {
+    playhead.style.width = playPercent + "px";
+
+    if (clip.currentTime == duration) { 
         pButton.className = "";
         pButton.className = "play";
     }
@@ -117,7 +124,7 @@ function play() {
 
 // Gets audio file duration
 clip.addEventListener("canplaythrough", function() {
-    duration = clip.duration;
+    duration = clip.duration; 
 }, false);
 
 // getPosition

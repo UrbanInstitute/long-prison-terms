@@ -34,7 +34,6 @@ function quoteTransition(number) {
 
 
 window.onscroll = function() {
-    console.log(window.scrollY)
     if(window.scrollY < arrowTransitionMin){ 
         d3.select("#introArrow")
             .style("opacity", 1)
