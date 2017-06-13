@@ -6,21 +6,21 @@ duration,
 pButton,
 playhead,
 timeCurrent,
+timeEnd,
 timeline;
 
 
 d3.selectAll('.play')
-    .on("click", function() { console.log('hi')
+    .on("click", function() { 
         playID = d3.select(this).attr('id').split('-')
         playIDFull = "-" + playID[1] + "-" + playID[2]
-        console.log(playIDFull);
         clip = document.getElementById('clip' + playIDFull);  // id for audio element
         duration = clip.duration; // Duration of audio clip, calculated here for embedding purposes
         pButton = document.getElementById('pButton' + playIDFull); // play button
         playhead = document.getElementById('playhead' + playIDFull); // playhead
+        timeEnd = document.getElementById('timeEnd' + playIDFull); // timeEnd
         timeCurrent = document.getElementById('timeCurrent' + playIDFull); // timeCurrent
         timeline = document.getElementById('timeline' + playIDFull); // timeline
-        console.log('timeline' + playIDFull)
     
 
 
@@ -93,9 +93,26 @@ function moveplayhead(event) {
 // Synchronizes playhead position with current point in audio
 function timeUpdate() { 
     var playPercent = timelineWidth * (clip.currentTime / duration); console.log(clip.currentTime);
-    var formattedTime = (clip.currentTime.toString()/100).toFixed(2)
+    var formattedTimeCurrent = (clip.currentTime.toString()/100).toFixed(2)
+    var formattedTimeCurrentLarge = ((clip.currentTime + 40).toString()/100).toFixed(2)
+    var formattedTimeEnd = ((duration - clip.currentTime).toString()/100).toFixed(2)
+    var formattedTimeEndLarge = (((duration + 40) - clip.currentTime).toString()/100).toFixed(2)
+    var formattedTimeEndSmall = (((duration - 40) - clip.currentTime).toString()/100).toFixed(2)
+
     d3.select(timeCurrent)
-        .html(formattedTime.replace('.', ':'))
+        .html(function() {
+            if (formattedTimeCurrent > .59) { console.log(formattedTimeCurrent + .4)
+                return (formattedTimeCurrentLarge).replace('.', ':')
+            } return formattedTimeCurrent.replace('.', ':')
+    })
+    d3.select(timeEnd)
+         .html(function() {
+            if (formattedTimeEnd > .59) { 
+                return formattedTimeEndLarge.replace('.', ':')
+            }  else if (formattedTimeEnd > .59 && formattedTimeEnd < .6) { 
+                return formattedTimeEndSmall.replace('.', ':')
+            } return formattedTimeEnd.replace('.', ':')
+    })
     playhead.style.marginLeft = "0px";
     playhead.style.width = playPercent + "px";
 
@@ -113,7 +130,6 @@ function play() {
         // remove play, add pause
         pButton.className = "";
         pButton.className = "pause";
-        console.log(pButton.className)
     } else { // pause clip
         clip.pause();
         // remove pause, add play

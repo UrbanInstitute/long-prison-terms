@@ -32,6 +32,8 @@ ol, ul {
 
 .nav-list {
   padding-left: 0px;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 blockquote, q {
@@ -115,6 +117,7 @@ h3{
     top: 51px;
     background-color: #052635;
     z-index: 100;
+
 }
 
 .subnav-arrow {
@@ -367,6 +370,7 @@ div.sidebar-quote p {
 .chart-title {
   font-size: 22px;
   line-height: 1.2em;
+  margin-bottom: 1em;
 }
 
 .chart-info {
@@ -437,7 +441,9 @@ div.sidebar-quote p {
   background-position: center;
   float:left;
   outline:none;
-  margin-left: -15px;}
+  margin-left: -15px;
+  z-index: 10;
+}
 .pause{
   background: url('../img/pause.png') ;
   height:60px; 
@@ -448,7 +454,10 @@ div.sidebar-quote p {
   background-position: center;
   float:left;
   outline:none;
-  margin-left: -15px;}
+  margin-left: -15px;
+  z-index: 10;
+
+}
 
 .timeline{
   width: 280px;
@@ -456,6 +465,7 @@ div.sidebar-quote p {
   margin-top: 23px;
   float: left;
   background: rgba(0,0,0,.3);
+  z-index: 10;
   
 }
 .playhead{
@@ -996,6 +1006,7 @@ footer h3, footer h4{
     text-align: right;
     margin-right: 15px;
 
+
   }
   .chart-title {
   font-size: 18px;
@@ -1076,6 +1087,12 @@ ul#menu {
   width: 52%;
   margin-left: auto;
   margin-right: auto;
+}
+
+div.sidebar-author-title a {
+    pointer-events: all;
+    cursor: pointer;
+
 }
 
 .sidebar-div-mobile {
