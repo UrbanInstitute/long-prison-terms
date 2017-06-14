@@ -384,7 +384,10 @@ div.sidebar-quote p {
 .graph-div {
   float: left;
   width: 50%;
+  padding: 0 1%;
 }
+
+
 
 .graph-div img {
   width: 100%;

@@ -76,21 +76,28 @@ function timeUpdate() {
     var formattedTimeCurrent = (clip.currentTime.toString()/100).toFixed(2)
     var formattedTimeCurrentLarge = ((clip.currentTime + 40).toString()/100).toFixed(2)
     var formattedTimeEnd = ((duration - clip.currentTime).toString()/100).toFixed(2)
-    var formattedTimeEndLarge = (((duration + 40) - clip.currentTime).toString()/100).toFixed(2)
-    var formattedTimeEndSmall = (((duration - 40) - clip.currentTime).toString()/100).toFixed(2)
+
 
     d3.select(timeCurrent)
         .html(function() {
-            if (clip.currentTime > 59) {
-                return (formattedTimeCurrentLarge).replace('.', ':')
-            } return formattedTimeCurrent.replace('.', ':')
+            // if (clip.currentTime > 59) {
+            //     return (formattedTimeCurrentLarge).replace('.', ':')
+            // } return formattedTimeCurrent.replace('.', ':')
+            if (Math.round(clip.currentTime) % 60) {  
+                if (Math.round(clip.currentTime) % 60 > 9){ 
+                  console.log(Math.floor( clip.currentTime / 60));  return Math.floor( clip.currentTime / 60) + ":" + (Math.round(clip.currentTime) % 60)
+                } console.log( Math.floor(clip.currentTime / 60)); return Math.floor( clip.currentTime / 60) + ":0" + (Math.round(clip.currentTime) % 60) 
+            } console.log(clip.currentTime / 60); return Math.floor( clip.currentTime / 60) + ":00"
+        
     })
     d3.select(timeEnd)
-         .html(function() {
-            if ((duration - clip.currentTime) > 59.5) {
-                return formattedTimeEndLarge.replace('.', ':')
-            }   return formattedTimeEnd.replace('.', ':')
-    })
+        .html(function() { console.log( (duration-clip.currentTime) % 60)
+            if (Math.round(duration-clip.currentTime) % 60) {
+                if (Math.round(duration-clip.currentTime) % 60 > 9){ 
+                    return Math.floor( (duration-clip.currentTime) / 60) + ":" + (Math.round(duration-clip.currentTime) % 60)
+                } return Math.floor( (duration-clip.currentTime) / 60) + ":0" + (Math.round(duration-clip.currentTime) % 60) 
+            } return Math.floor( (duration-clip.currentTime) / 60) + ":00"
+        })
     playhead.style.marginLeft = "0px";
     playhead.style.width = playPercent + "px";
 
