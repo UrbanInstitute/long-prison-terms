@@ -58,15 +58,43 @@
 <!--MAIN CONTENT-->       
 <div id = "dd-content">
   <div class = "dd-hr"></div>
-    <div id = "snapshot-container" class = "snapshot-container table-container">
-      <div class = "dd-title">Snapshot</div><img src = "img/dd-arrow.png" class = "dd-arrow"/>
-    </div>
-    <div class = "dd-table">
-      <table>
-      <tr><td>foo</td><td>bar</td></tr>
-      </table>
-    </div>
+
+  <div id = "snapshot-container" class = "snapshot-container table-container closed">
+    <div class = "dd-title">Demographic snapshot</div><img src = "img/dd-arrow.png" class = "dd-arrow"/>
+  </div>
+  
+  <div class = "dd-table" id = "snapshot-table"></div>
+
+
   <div class = "dd-hr"></div>
+
+
+  <div id = "dd-time-label">Timeseries data</div>
+  <div class = "dd-hr"></div>
+
+  <div id = "time-served-container" class = "time-container table-container closed">
+    <div class = "dd-title">Time served statistics</div><img src = "img/dd-arrow.png" class = "dd-arrow"/>
+  </div>
+
+  <div class = "dd-table" id = "timeserved-table"></div>
+  
+  <div class = "dd-hr"></div>
+
+  <div id = "time-served-container" class = "time-container table-container closed">
+    <div class = "dd-title">Prison population breakdown by time served</div><img src = "img/dd-arrow.png" class = "dd-arrow"/>
+  </div>
+  
+  <div class = "dd-table" id = "breakdown-table"></div>
+  
+  <div class = "dd-hr"></div>
+
+  <div id = "time-served-container" class = "time-container table-container closed">
+    <div class = "dd-title">Demographic trends</div><img src = "img/dd-arrow.png" class = "dd-arrow"/>
+  </div>
+  
+  <div class = "dd-table" id = "trends-table"></div>
+  
+  <div class = "dd-hr" id = "last-hr"></div>
 </div>
 
 
@@ -93,8 +121,10 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="template_files/app.js"></script>
-    <script src="template_files/demographics-template.js"></script>
-    <script src="template_files/audio.js"></script>
+    <script src="js/data.js"></script>
+    <script>
+      initDepot()
+    </script>
     
 
 
