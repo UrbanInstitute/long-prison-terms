@@ -27,12 +27,12 @@ var scrollVis = function() {
 
 
   var areaMargin = {
-  top: 10,
+  top: 160,
   right: 0,
   bottom: 33,
   left: 0
   };
-  var screenHeight = window.innerHeight - 50
+  var screenHeight = window.innerHeight - 200
   var areaWidth = window.innerWidth - areaMargin.left - areaMargin.right - 10,
   areaHeight = Math.min(screenHeight, window.innerHeight - areaMargin.top - areaMargin.bottom - 20);
 
@@ -1122,7 +1122,7 @@ d3.select("#areaChartText2-2")
     d3.select("#areaSvg")
       .append("g")
         .attr("class", "area x axis")
-        .attr("transform", "translate(0," + (parseFloat(areaHeight)+22) + ")")
+        .attr("transform", "translate(0," + (parseFloat(areaHeight)+22 + 150) + ")")
         .transition()
         .delay(4000)
         .duration(1000)
