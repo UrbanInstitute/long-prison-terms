@@ -745,10 +745,10 @@ blockquote:after {
 .center-div-initial {
   max-width: 740px; 
   width: 57%;
-  position: absolute;
-  top: 273px;
-  left: 21.5%;
-  right: 21.5%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 273px;
+
 }
 
 
