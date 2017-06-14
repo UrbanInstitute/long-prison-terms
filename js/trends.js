@@ -78,7 +78,7 @@ var scrollVis = function() {
       .selectAll("rect")
       .style("fill", "#fdbf11")
     d3.select(obj)
-      .selectAll("text")
+      .selectAll(".mapLable")
       .transition()
       .style("opacity",0)
   }
@@ -87,7 +87,7 @@ var scrollVis = function() {
       .selectAll("rect")
       .style("fill", "#1696d2")
     d3.select(obj)
-      .selectAll("text")
+      .selectAll(".mapLable")
       .transition()
       .style("opacity",1)
   }
@@ -814,3 +814,13 @@ function display(trendsData) {
       display(trendsData)
     })
 
+var nextpage = d3.select(".next-page-div")
+nextpage
+    .on("mouseover", function() {
+        nextpage.select(".next-arrow")
+            .attr("class", "next-arrow-hovered")
+    })
+    .on("mouseout", function() {
+        nextpage.select(".next-arrow-hovered")
+            .attr("class", "next-arrow")
+    })

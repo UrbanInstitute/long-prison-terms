@@ -9,6 +9,7 @@
 function scroller() {
 
   var container = d3.select('body');
+
   // event dispatcher
   var dispatch = d3.dispatch('active','resized', 'progress');
 
@@ -111,7 +112,8 @@ function scroller() {
       }
       sectionPositions.push(top - startPos);
     });
-    containerStart = container.node().getBoundingClientRect().top + window.pageYOffset;
+    // console.log(d3.select("body").node())
+    containerStart = d3.select("body").node().getBoundingClientRect().top + window.pageYOffset;
     dispatch.call('resized', this);
   }
 

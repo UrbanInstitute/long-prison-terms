@@ -69,6 +69,8 @@ body{
   z-index: 1;
   margin-left: 0;
   cursor: pointer;
+  opacity: 0;
+  z-index: -1;
   /* height: 600px; */
   /* width: 600px; */
   /* background-color: #ddd; */
