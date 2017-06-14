@@ -73,7 +73,7 @@ window.onscroll = function() {
         
 
     } //else if(window.scrollY >= transition1Max && window.scrollY <transition2Max){ 
-        else if(getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar2") > inViewMin) {  
+        else if(getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar3") > inViewMin) {  
         //SECOND QUOTE APPEARS
         if (!isTransitioning[2]) {  
             quoteTransition(2)
@@ -82,7 +82,7 @@ window.onscroll = function() {
  
         
 
-    } else if(getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar4") > inViewMin){  
+    } else if(getViewMin("#sidebar3") <= inViewMin && getViewMin("#sidebar4") > inViewMin){  
         //THIRD QUOTE APPEARS
         if (!isTransitioning[3]) {
             quoteTransition(3)
@@ -90,28 +90,28 @@ window.onscroll = function() {
             
         
 
-    } else if(getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar4") > inViewMin){  
+    } else if(getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar5") > inViewMin){  
     	        //FOURTH QUOTE APPEARS
         if (!isTransitioning[4]) {
             quoteTransition(4)
         } 
         
 
-    } else if(getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar6") > inViewMin){  
+    } else if(getViewMin("#sidebar5") <= inViewMin && getViewMin("#sidebar6") > inViewMin){  
     	        //FIFTH QUOTE APPEARS
         if (!isTransitioning[5]) {
             quoteTransition(5)
         } 
         
 
-    } else if(getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar5") > inViewMin){  
+    } else if(getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar8") > inViewMin){  
                 //SIXTH QUOTE APPEARS
         if (!isTransitioning[6]) {
             quoteTransition(6)
         } 
         
 
-    }  else if(getViewMin("#sidebar5") <= inViewMin && getViewMin("#sidebar9") > inViewMin){  
+    }  else if(getViewMin("#sidebar8") <= inViewMin && getViewMin("#sidebar9") > inViewMin){  
                 //EIGHTH QUOTE APPEARS
         if (!isTransitioning[8]) {
             quoteTransition(8)
