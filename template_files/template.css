@@ -185,9 +185,48 @@ h3{
 
 }
 
+.about-column {
+  padding-top: 260px;
+  max-width: 740px;
+  width: 57%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
+.about-div {
+  margin-top: 52px;
+}
 
+.about-h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 34px;
 
+}
+
+.methodology-body p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  margin-top: 0px;
+}
+
+.project-credits-body p {
+  font-size: 16px;
+  margin-bottom: 23px;
+  margin-top: 0px;
+  line-height: 1.3
+}
+
+.project-credits-body br {
+  line-height: 1.6;
+}
+
+.about-end {
+  font-size: 18px;
+  font-style: italic;
+  color: #696969;
+  line-height: 1.3;
+}
 /*Style for left column*/
 .section-header {
   margin-top: 5em;
