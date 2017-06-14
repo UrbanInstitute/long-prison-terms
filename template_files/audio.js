@@ -1,27 +1,18 @@
 /*credits to http://alexkatz.me/posts/building-a-custom-html5-audio-player-with-javascript/ */
-var playIDFull,
-playID,
-clip,
-duration,
-pButton,
-playhead,
-timeCurrent,
-timeEnd,
-timeline;
+
 
 
 d3.selectAll('.play')
-    .on("click", function() { 
-        playID = d3.select(this).attr('id').split('-')
-        playIDFull = "-" + playID[1] + "-" + playID[2]
-        clip = document.getElementById('clip' + playIDFull);  // id for audio element
-        duration = clip.duration; // Duration of audio clip, calculated here for embedding purposes
-        pButton = document.getElementById('pButton' + playIDFull); // play button
-        playhead = document.getElementById('playhead' + playIDFull); // playhead
-        timeEnd = document.getElementById('timeEnd' + playIDFull); // timeEnd
-        timeCurrent = document.getElementById('timeCurrent' + playIDFull); // timeCurrent
-        timeline = document.getElementById('timeline' + playIDFull); // timeline
-    
+    .each(function() { 
+        var playID = d3.select(this).attr('id').split('-'),
+            playIDFull = "-" + playID[1] + "-" + playID[2],
+            clip = document.getElementById('clip' + playIDFull),  // id for audio element
+            duration = clip.duration, // Duration of audio clip, calculated here for embedding purposes
+            pButton = document.getElementById('pButton' + playIDFull), // play button
+            playhead = document.getElementById('playhead' + playIDFull), // playhead
+            timeEnd = document.getElementById('timeEnd' + playIDFull), // timeEnd
+            timeCurrent = document.getElementById('timeCurrent' + playIDFull), // timeCurrent
+            timeline = document.getElementById('timeline' + playIDFull); // timeline
 
 
 
@@ -76,23 +67,12 @@ function mouseUp(event) {
 // Moves playhead as user drags
 function moveplayhead(event) {
     playhead.style.marginLeft = "0px"
-//    var newMargLeft = event.clientX - getPosition(timeline);
-// console.log(newMargLeft)
-//     if (newMargLeft >= 0 && newMargLeft <= timelineWidth) { console.log('1')
-//         playhead.style.marginLeft = "0px";
-//     }
-//     if (newMargLeft < 0) { console.log('2')
-//         playhead.style.marginLeft = "0px";
-//     }
-//     if (newMargLeft > timelineWidth) {console.log('3')
-//         playhead.style.marginLeft = "0px";
-//     }
 }
 
 // timeUpdate
 // Synchronizes playhead position with current point in audio
 function timeUpdate() { 
-    var playPercent = timelineWidth * (clip.currentTime / duration); console.log(clip.currentTime);
+    var playPercent = timelineWidth * (clip.currentTime / duration);
     var formattedTimeCurrent = (clip.currentTime.toString()/100).toFixed(2)
     var formattedTimeCurrentLarge = ((clip.currentTime + 40).toString()/100).toFixed(2)
     var formattedTimeEnd = ((duration - clip.currentTime).toString()/100).toFixed(2)
@@ -101,13 +81,13 @@ function timeUpdate() {
 
     d3.select(timeCurrent)
         .html(function() {
-            if (clip.currentTime > 59) { console.log(formattedTimeCurrent + .4)
+            if (clip.currentTime > 59) {
                 return (formattedTimeCurrentLarge).replace('.', ':')
             } return formattedTimeCurrent.replace('.', ':')
     })
     d3.select(timeEnd)
          .html(function() {
-            if ((duration - clip.currentTime) > 59.5) { console.log((duration - clip.currentTime))
+            if ((duration - clip.currentTime) > 59.5) {
                 return formattedTimeEndLarge.replace('.', ':')
             }   return formattedTimeEnd.replace('.', ':')
     })
@@ -124,6 +104,10 @@ function timeUpdate() {
 function play() {
     // start clip
     if (clip.paused) {
+        d3.selectAll(".clip").nodes().forEach(function(c){
+            c.pause();
+        })
+        d3.selectAll(".audioplayer button").classed("pause", false).classed("play", true)
         clip.play();
         // remove play, add pause
         pButton.className = "";
