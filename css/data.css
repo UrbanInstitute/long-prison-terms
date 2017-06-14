@@ -1,0 +1,44 @@
+.center-div-small-text-depot{
+	font-size: 18px;
+	line-height: 1.6;
+}
+.full-div{
+	height: 480px
+}
+
+.table-container{
+	cursor: pointer;
+}
+
+#dd-content{
+	width: calc(100% - 140px);
+    margin-left: 70px;
+}
+.dd-hr{
+	width: 100%;
+    background-color: #f2f2f2;
+    height: 2px;
+}
+.dd-title{
+	font-size: 26px;
+	display: inline-block;
+	font-weight: bold;
+	margin-top: 20px;
+}
+.dd-arrow{
+	margin-left: 20px;
+    width: 16px;
+    display: inline-block;
+    position: relative;
+    top: -5px;
+}
+
+
+
+.dd-table{
+	width: 100%;
+	height: 50px;
+	overflow: hidden;
+	background: blue;
+	margin-bottom: 20px;
+}

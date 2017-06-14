@@ -24,6 +24,8 @@
 
   <!--sticky Div style sheet-->
   <link rel="stylesheet" href="template_files/sticky.css" type="text/css">
+
+  <link rel="stylesheet" href="css/data.css" type="text/css">
   </head>
 
 <body>
@@ -40,18 +42,35 @@
 <!--CENTER TEXT-->
 
           
-      <div class="full-div">
-        <div class="center-div-initial">
-          <div class="center-div-small-text">
-          Here, we take a closer look at patterns of long-term incarceration by race, age, gender, and other characteristics.
-          </div>
-        </div>
-        <img id="introArrow" src="img/scroll-arrow.png">
-      </div>
+<div class="full-div">
+  <div class="center-div-initial">
+    <div class="center-div-header">
+    <strong>DATA</strong>
+    </div>
+    <div class="center-div-small-text-depot">
+    Our analyses for this project use term record data from the <a href = "https://www.bjs.gov/index.cfm?ty=dcdetail&iid=268" target = "_blank">National Corrections Reporting Program</a> (NCRP), available for 44 states and Washington, D.C. <a href = "" target = "_blank">Read our methodology</a> to learn more about these data and our approach to measuring time served in prison.
+    </div>
+  </div>
+</div>
 <!--END-->       
 
 
+<!--MAIN CONTENT-->       
+<div id = "dd-content">
+  <div class = "dd-hr"></div>
+    <div id = "snapshot-container" class = "snapshot-container table-container">
+      <div class = "dd-title">Snapshot</div><img src = "img/dd-arrow.png" class = "dd-arrow"/>
+    </div>
+    <div class = "dd-table">
+      <table>
+      <tr><td>foo</td><td>bar</td></tr>
+      </table>
+    </div>
+  <div class = "dd-hr"></div>
+</div>
 
+
+<!--END MAIN CONTENT-->       
  
 
    <div ng-include="'template_files/footer.html'">
