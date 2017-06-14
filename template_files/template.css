@@ -134,10 +134,11 @@ h3{
     margin: 0px;
 }
 .subnav ul li{
-  display: inline-block;
+  display: block;
+  float: left;
   text-align: center;
   border-right: solid 1px #6d6e70;
-  margin:  0px 0px 0px -5px; 
+  margin:  0px 0px 0px 0px; 
   width: 12%;
   padding-left: 0px !important;
   border-bottom: solid 3px #094c6b;
@@ -158,18 +159,18 @@ h3{
   padding: 19px 0;
 
 }
+#left-nav-item{
+  margin-left: 2%;
+}
 
 .subnav li:hover{ 
-      color: #fff;
+    color: #fff;
 	  background-color: #094c6b;
     border-bottom: solid 3px #25a9e0;
-
-	 
-	 }
+}
 .hovered-category {
   color: #fff;
   background-color: #094c6b;
-
 }
 
 
