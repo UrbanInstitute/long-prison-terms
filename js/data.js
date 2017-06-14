@@ -5,7 +5,7 @@ function initDepot(){
 	var NUMERIC = d3.format(".2f")
 	function buildSnapshotTable(){
 		var table = d3.select("#snapshot-table").append("table")
-		var h1 = table.append("tr")
+		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
 		h1.append("th").attr("rowspan",2).html("Year")
 		h1.append("th").attr("rowspan",2).html("Of state prison population: Percent black")
@@ -15,7 +15,7 @@ function initDepot(){
 		h1.append("th").attr("colspan",4).html("Of those serving longest 10% of prison terms who were incarcerated before age 25:")
 		h1.append("th").html("Of those serving 10 or more years:")
 
-		var h2 = table.append("tr")
+		var h2 = table.append("tr").attr("class", "header_row2")
 		h2.append("th").html("Percent incarcerated before age 25")
 		h2.append("th").html("Percent currently 55 or older")
 		h2.append("th").html("Number of people")
@@ -60,14 +60,14 @@ function initDepot(){
 	}
 	function buildTimeServedTable(){
 		var table = d3.select("#timeserved-table").append("table")
-		var h1 = table.append("tr")
+		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
 		h1.append("th").attr("rowspan",2).html("Year")
 		h1.append("th").attr("colspan",3).html("Mean time served")
 		h1.append("th").attr("rowspan",2).html("90th percentile, time served")
 		h1.append("th").attr("colspan",2).html("Mean time served by decile")
 
-		var h2 = table.append("tr")
+		var h2 = table.append("tr").attr("class", "header_row2")
 		h2.append("th").html("All offenses")
 		h2.append("th").html("Violent offenses")
 		h2.append("th").html("Nonviolent offenses")
@@ -103,7 +103,7 @@ function initDepot(){
 	}
 	function buildBreakdownTable(){
 		var table = d3.select("#breakdown-table").append("table")
-		var h1 = table.append("tr")
+		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
 		h1.append("th").attr("rowspan",2).html("Year")
 		h1.append("th").html("Total population at yearend")
@@ -116,7 +116,7 @@ function initDepot(){
 		h1.append("th").attr("colspan",2).html("25+ years served")
 
 
-		var h2 = table.append("tr")
+		var h2 = table.append("tr").attr("class", "header_row2")
 		h2.append("th").html("Number of people")
 		h2.append("th").html("Number of people")
 		h2.append("th").html("Percent of population")
@@ -182,7 +182,7 @@ function initDepot(){
 	}
 	function buildTrendsTable(){
 		var table = d3.select("#trends-table").append("table")
-		var h1 = table.append("tr")
+		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
 		h1.append("th").attr("rowspan",2).html("Year")
 		h1.append("th").attr("colspan",3).html("Percent black by time served")
@@ -193,7 +193,7 @@ function initDepot(){
 		h1.append("th").attr("rowspan",2).html("Number of women serving 10 or more years")
 		h1.append("th").attr("rowspan",2).html("Percent of women serving 10 or more years")
 
-		var h2 = table.append("tr")
+		var h2 = table.append("tr").attr("class", "header_row2")
 		h2.append("th").html("Total prison population")
 		h2.append("th").html("Less than 10 years")
 		h2.append("th").html("10 or more years")
@@ -239,10 +239,10 @@ function initDepot(){
 
 	var dd_duration = 1500;
 	var HEIGHTS = {
-		"snapshot-table": 1230,
-		"timeserved-table": 11070,
-		"breakdown-table": 11140,
-		"trends-table": 11140
+		"snapshot-table": 1540,
+		"timeserved-table": 14579,
+		"breakdown-table": 14660,
+		"trends-table": 14670
 	}
 
 	d3.selectAll(".table-container")

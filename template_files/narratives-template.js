@@ -2,7 +2,7 @@
 var duration = 300; 
 
 var arrowTransitionMin = 200,
-    arrowTransitionMax = 1300,
+    arrowTransitionMax = 100,
     conclusionScrollY = 11800;
 
 

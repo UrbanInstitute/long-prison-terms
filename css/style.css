@@ -20,7 +20,7 @@ body{
   top: 0px;
   left: 800px;
   z-index: 90;
-  padding-bottom: 200px;
+  padding-bottom: -2000px;
 }
 
 .step {
@@ -79,7 +79,7 @@ body{
   display: inline-block;
   position: fixed;
   bottom: 20px;
-  z-index: 1;
+  z-index: -1;
   margin-left: 0;  
   width: 530px;
   background: transparent;
