@@ -139,7 +139,7 @@ h3{
   text-align: center;
   border-right: solid 1px #6d6e70;
   margin:  0px 0px 0px 0px; 
-  width: 12%;
+  width: 12.5%;
   padding-left: 0px !important;
   border-bottom: solid 3px #094c6b;
 
@@ -158,9 +158,6 @@ h3{
   color: white;
   padding: 19px 0;
 
-}
-#left-nav-item{
-  margin-left: 2%;
 }
 
 .subnav li:hover{ 
