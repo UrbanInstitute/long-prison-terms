@@ -20,7 +20,7 @@ body{
   top: 0px;
   left: 800px;
   z-index: 90;
-  padding-bottom: 200px;
+  padding-bottom: 0px;
 }
 
 .step {

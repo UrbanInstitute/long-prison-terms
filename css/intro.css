@@ -149,3 +149,7 @@ a{
   z-index: 99;
   position: relative;
 }
+.full-wrapper{
+  position: absolute;
+  bottom: -65px;
+}

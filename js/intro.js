@@ -1635,6 +1635,14 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",0)
       .style("z-index",-1)
+    d3.select("#bodyNew")
+      .transition()
+      .style("opacity",0)
+      .style("z-index",-1)
+    d3.select("#bodyOld")
+      .transition()
+      .style("opacity",0)
+      .style("z-index",-1)
   }
 
   /**
