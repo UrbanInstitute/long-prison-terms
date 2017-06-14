@@ -449,7 +449,7 @@ div.sidebar-quote p {
   height:60px; 
   width: 60px;
   border: none;
-  background-size: 50% 50%;
+  background-size: 60% 60%;
   background-repeat: no-repeat;
   background-position: center;
   float:left;
@@ -460,7 +460,7 @@ div.sidebar-quote p {
 }
 
 .timeline{
-  width: 280px;
+  width: 265px;
   height: 13px;
   margin-top: 23px;
   float: left;
