@@ -40,30 +40,9 @@ function quoteTransition(number) {
 
 }
 
-window.onscroll = function() { console.log(window.scrollY)
-    if(window.scrollY < arrowTransitionMin){
-        d3.select("#introArrow")
-            .transition()
-            .duration(100)
-            .style("opacity", 1)
-            .style("z-index", 1)
 
-        d3.selectAll(".note-container")
-            .style("opacity", 0)
-            .style("pointer-events", "none")
-            .style("z-index", -1)
-    }  else if(window.scrollY >= arrowTransitionMin && window.scrollY <arrowTransitionMax) {
-        //MAKE ARROW DISAPPEAR BEFORE FIRST QUOTE
-        d3.selectAll(".note-container")
-            .style("opacity", 0)
-            .style("pointer-events", "none")
-            .style("z-index", -1)
-            
-        d3.select("#introArrow")
-            .transition()
-            .duration(100)
-            .style("opacity", 0)
-    } else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar1") <= inViewMin && getViewMin("#sidebar3") > inViewMin) {
+window.onscroll = function() {
+    if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar1") <= inViewMin && getViewMin("#sidebar3") > inViewMin) {
         //FIRST QUOTE APPEARS
         if (!isTransitioning[1])  {
             quoteTransition(1)
