@@ -505,6 +505,15 @@ div.sidebar-quote p {
   height: 60px;
 }
 
+.audioplayer-full-width{
+  width: 66%;
+  max-width: 420px;
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+}
+
 .audio-table {
   display: table;
   width: 100%;
@@ -515,6 +524,13 @@ div.sidebar-quote p {
   width: 45%;
 }
 
+.audio-bar-text-full-width {
+  width: 66%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5% 0% 0% 0% ;
+}
 
 
 .pButton{
@@ -639,6 +655,13 @@ div.sidebar-quote p {
   display: table-cell;
   vertical-align: middle;
   padding: 5% 0% 5% 5%;
+
+}
+
+.audio-cell-full-width {
+  background-color: #f2f2f2;
+  vertical-align: middle;
+  padding: 0% 0% 0% 0%;
 
 }
 
