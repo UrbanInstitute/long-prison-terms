@@ -2,7 +2,7 @@
 var duration = 300; 
 
 var arrowTransitionMin = 200,
-    arrowTransitionMax = 100,
+    arrowTransitionMax = 500,
     conclusionScrollY = 11800;
 
 
@@ -40,7 +40,7 @@ function quoteTransition(number) {
 
 }
 
-window.onscroll = function() {
+window.onscroll = function() { console.log(window.scrollY)
     if(window.scrollY < arrowTransitionMin){
         d3.select("#introArrow")
             .transition()

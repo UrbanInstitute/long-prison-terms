@@ -758,10 +758,11 @@ border-right-color: #222;
   margin-bottom: 200px;
 }
 
-blockquote {
+blockquote.blockquoteClass {
   line-height: 1.5em;
   position: relative;
   color: #383838;
+  font-size: 20px;
 
 }
 
@@ -792,12 +793,22 @@ blockquote:after {
   line-height: 1.5em;
 
 }
+
+.center-quote-author-title {
+  font-size: 14px;
+  line-height: 1;
+}
 .center-case-study-div {
   margin-right: 10%;
   margin-left: 10%;
   margin-top: 10%;
   margin-bottom: 10%;
   line-height: 1em;
+
+}
+
+.photo-div {
+  margin: 52px 0;
 
 }
 
