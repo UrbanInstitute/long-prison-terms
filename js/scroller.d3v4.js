@@ -113,7 +113,7 @@ function scroller() {
       sectionPositions.push(top - startPos);
     });
     // console.log(d3.select("body").node())
-    containerStart = d3.select("body").node().getBoundingClientRect().top + window.pageYOffset;
+    containerStart = d3.select("body").node().getBoundingClientRect().top + window.pageYOffset + d3.select(".full-div").node().getBoundingClientRect().height;
     dispatch.call('resized', this);
   }
 

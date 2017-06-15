@@ -66,7 +66,7 @@ body{
   position: fixed;
   top: calc(50% - 300px);
   left: 0px;
-  z-index: 1;
+  /*z-index: 1;*/
   margin-left: 0;
   cursor: pointer;
   opacity: 0;
@@ -140,6 +140,7 @@ body{
   background: #a2d4ec;
 }
 .legendContainer{
+  font-size: 16px;
   width: 150px;
 }
 /*.state .axis path {
@@ -180,6 +181,7 @@ body{
 .explainer{
   font-style: italic;
   color: #808080;
+  font-size: 16px;
   /*width: 325px;*/
 }
 .explainer span.active{
@@ -293,4 +295,15 @@ text.mapLable.blank{
   font-size: 13px;
   font-style: italic;
   color: #808080;
+}
+.row{
+  z-index: 99;
+  position: relative;
+}
+.full-wrapper{
+  position: absolute;
+  bottom: -65px;
+}
+.conclusion-div{
+  margin-top: 0;
 }

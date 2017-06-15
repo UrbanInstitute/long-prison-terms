@@ -533,12 +533,13 @@ var scrollVis = function() {
   setupSections = function() {
     // activateFunctions are called each
     // time the active section changes
-
-    activateFunctions[0] = mapTimeServed;
-    activateFunctions[1] = mapTimeServedByOffense
-    activateFunctions[2] = mapTimeServedTop10Percent;
-    activateFunctions[3] = map10YearsPercent;
-    activateFunctions[4] = map10YearsNumber;
+    activateFunctions[0] = hideMap;
+    activateFunctions[1] = mapTimeServed;
+    activateFunctions[2] = mapTimeServedByOffense
+    activateFunctions[3] = mapTimeServedTop10Percent;
+    activateFunctions[4] = map10YearsPercent;
+    activateFunctions[5] = map10YearsNumber;
+    activateFunctions[6] = hideMap;
 
     // updateFunctions are called while
     // in a particular section to update
@@ -575,10 +576,17 @@ var scrollVis = function() {
    *
    */
 
+  function hideMap(){
+    d3.select("#vis")
+      .transition()
+      .style("opacity",0)
+      .style("z-index",-1)    
+  }
   function mapTimeServed(){
     d3.select("#vis")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
 
     d3.select(".chartTitleA")
       .text("Average time served for all offense categories")
@@ -661,6 +669,11 @@ var scrollVis = function() {
 
   }
   function map10YearsNumber(){
+    d3.select("#vis")
+      .transition()
+      .style("opacity",1)
+      .style("z-index",1)
+      
     d3.select(".chartTitleA")
       .text("Population serving 10 or more years")
       .transition()
@@ -795,9 +808,10 @@ function display(trendsData) {
 
   // setup event handling
   scroll.on('active', function(index) {
+    console.log(index)
     // highlight current step text
-    d3.selectAll('.step')
-      .style('opacity',  function(d,i) { return i == index ? 1 : 0.1; });
+    // d3.selectAll('.step')
+    //   .style('opacity',  function(d,i) { return i == index ? 1 : 1; });
 
     // activate current section
     plot.activate(index);
