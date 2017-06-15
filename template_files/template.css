@@ -89,9 +89,6 @@ h3{
     text-transform: uppercase;
 }
 
-.narratives-next {
-  margin-top: 150px;
-}
 
 .bold{
     
@@ -311,7 +308,7 @@ li.spacing {
   margin-left: auto;
   margin-right: auto;
   max-width: 740px;
-  width: 57%;
+  width: 61%;
   margin-top: 150px;
 
 }
@@ -340,6 +337,7 @@ li.spacing {
   margin-right: 35px;
   cursor: pointer;
   pointer-events: all;
+  margin-top: 150px;
 
 }
 
