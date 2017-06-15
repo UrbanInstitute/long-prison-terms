@@ -37,18 +37,7 @@ function quoteTransition(number) {
 
 
 window.onscroll = function() {
-    if(window.scrollY >= arrowTransitionMin && window.scrollY <arrowTransitionMax) { 
-        //MAKE ARROW DISAPPEAR BEFORE FIRST QUOTE
-        d3.selectAll(".note-container")
-            .style("opacity", 0)
-            .style("pointer-events", "none")
-            .style("z-index", -1)
-
-         d3.select("#introArrow")
-            .transition()
-            .duration(100)
-            .style("opacity", 0)
-    } else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar11") <= inViewMin && getViewMin("#sidebar1") > inViewMin){ 
+    if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar11") <= inViewMin && getViewMin("#sidebar1") > inViewMin){ 
         //ELEVENTH SIDEBAR APPEARS
         if (!isTransitioning[11])  {
             quoteTransition(11)
