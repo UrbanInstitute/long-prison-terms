@@ -231,10 +231,10 @@ function initDepot(){
 		})
 	}
 
-	buildSnapshotTable();
-	buildTimeServedTable();
-	buildBreakdownTable();
-	buildTrendsTable();
+	// buildSnapshotTable();
+	// buildTimeServedTable();
+	// buildBreakdownTable();
+	// buildTrendsTable();
 
 
 	var dd_duration = 1500;
