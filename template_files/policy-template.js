@@ -39,6 +39,8 @@ function quoteTransition(number) {
 window.onscroll = function() {
     if(window.scrollY < arrowTransitionMin){ 
         d3.select("#introArrow")
+            .transition()
+            .duration(100)
             .style("opacity", 1)
             .style("z-index", 1)
 
@@ -56,6 +58,8 @@ window.onscroll = function() {
             .style("z-index", -1)
 
          d3.select("#introArrow")
+            .transition()
+            .duration(100)
             .style("opacity", 0)
     } else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar11") <= inViewMin && getViewMin("#sidebar1") > inViewMin){ 
         //ELEVENTH SIDEBAR APPEARS
