@@ -59,7 +59,61 @@ var scrollVis = function() {
                   "translate(" + mapMargin.left + "," + mapMargin.top + ")");
 
 
+// <defs>
+//     <filter id="blurFilter2" y="-10" height="40" x="-10" width="150">
+//         <feOffset in="SourceAlpha" dx="3" dy="3" result="offset2" />
+//         <feGaussianBlur in="offset2" stdDeviation="3"  result="blur2"/>
 
+//         <feMerge>
+//             <feMergeNode in="blur2" />
+//             <feMergeNode in="SourceGraphic" />
+//         </feMerge>
+//     </filter>
+// </defs>
+      var chartWidth = mapSizes[pageSize]["chartWidth"]
+      var chartMargin = mapSizes[pageSize]["chartMargin"]
+
+  
+      var defs = mapSvg.append("defs");
+      var filterLeft = defs.append("filter")
+        .attr("id", "drop-shadow-left")
+        .attr("height", "130%");
+      filterLeft.append("feGaussianBlur")
+          .attr("in", "SourceAlpha")
+          .attr("stdDeviation", 5)
+      filterLeft.append("feOffset")
+          .attr("dx", -5)
+          .attr("dy", 5)
+      filterLeft.append("feComponentTransfer")
+          .append("feFuncA")
+          .attr("type", "linear")
+          .attr("slope",.2)
+
+      var feMergeLeft = filterLeft.append("feMerge");
+
+      feMergeLeft.append("feMergeNode")
+      feMergeLeft.append("feMergeNode")
+          .attr("in", "SourceGraphic");
+
+      var filterRight = defs.append("filter")
+        .attr("id", "drop-shadow-right")
+        .attr("height", "130%");
+      filterRight.append("feGaussianBlur")
+          .attr("in", "SourceAlpha")
+          .attr("stdDeviation", 5)
+      filterRight.append("feOffset")
+          .attr("dx", 5)
+          .attr("dy", 5)
+      filterRight.append("feComponentTransfer")
+          .append("feFuncA")
+          .attr("type", "linear")
+          .attr("slope",.2)
+
+      var feMergeRight = filterRight.append("feMerge");
+
+      feMergeRight.append("feMergeNode")
+      feMergeRight.append("feMergeNode")
+          .attr("in", "SourceGraphic");
 
       // perform some preprocessing on raw data
       var trendsData = rawData[0]
@@ -74,6 +128,25 @@ var scrollVis = function() {
 
 
   function hoverState(obj, d){
+    console.log(d, activeIndex ,obj)
+    var chartWidth = mapSizes[pageSize]["chartWidth"]
+    var chartMargin = mapSizes[pageSize]["chartMargin"]
+
+    var tt = mapSvg.append("g")
+      .attr("transform", d3.select(obj).attr("transform") + " translate(" + (chartMargin-2) + " , " + (chartMargin + chartWidth-3) + ")")
+    tt.append("rect")
+      .attr("id", "mapTooltip")
+      .attr("width", (chartWidth )*3)
+      .attr("height", (chartWidth )*3)
+      .style("fill","#fff")
+      .style("filter","url(#drop-shadow-right)")
+
+
+      // .attr("x", obj.getBoundingClientRect().left)
+      // .attr("y", obj.getBoundingClientRect().bottom)
+
+
+
     d3.select(obj)
       .selectAll("rect")
       .style("fill", "#fdbf11")
@@ -83,6 +156,7 @@ var scrollVis = function() {
       .style("opacity",0)
   }
   function deHoverState(obj, d){
+    d3.select("#mapTooltip").remove()
     d3.select(obj)
       .selectAll("rect")
       .style("fill", "#1696d2")
@@ -378,7 +452,14 @@ var scrollVis = function() {
     map.append("g")
         .attr("class", function(d){ return "x axis " + d.key})
         .attr("transform", "translate(0," + (chartWidth-chartMargin) + ")")
-        .call(mapXAxis.tickValues([2000,2014]).tickFormat(d3.format(".0f")));
+        .call(mapXAxis.tickValues([2000,2014]).tickFormat(
+          // d3.format(".0f")) 
+          function(t){
+            // console.log(t)
+            if(t == 2000){ return "'00"}
+            else{ return "'14"}
+          }
+        ));
 
     // Add the Y Axis
     map.append("g")
@@ -436,7 +517,7 @@ var scrollVis = function() {
     }
     if(variable == "LOS_10plus_Num"){
       for(var i = 0; i < trendsDataNest.length; i++){
-        var max = Math.ceil(d3.max(trendsDataNest[i].values, function(d) { return d[variable]; }))
+        var max = Math.ceil(1.1* d3.max(trendsDataNest[i].values, function(d) { return d[variable]; }))
         var min = Math.floor(d3.min(trendsDataNest[i].values, function(d) { return d[variable]; }))
 
         var my = d3.scaleLinear().range([chartWidth-chartMargin, chartMargin])

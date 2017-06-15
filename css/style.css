@@ -160,7 +160,7 @@ body{
     shape-rendering: crispEdges;
 }
 .state .x.axis text, .state .x.axis line{
-  display: none;
+  display: block;
 }
 
 .state .y.axis text, .state .y.axis line{
