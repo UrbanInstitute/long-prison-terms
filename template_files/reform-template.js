@@ -3,7 +3,7 @@ var duration = 300;
 
 var arrowTransitionMin = 200,
     arrowTransitionMax = 1200,
-    conclusionScrollY = 11300;
+    conclusionScrollY = 12000;
 
 var isTransitioning = [null, false, false, false, false, false, false, false, false]
 

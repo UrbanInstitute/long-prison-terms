@@ -21,8 +21,9 @@ body, html {
 
 }
 
-ol, ul {
-
+.left-col ul {
+  padding: 10px 90px 25px 55px;
+  margin: 0;
 }
 
 .container {
@@ -297,7 +298,7 @@ h3{
 
 li.spacing {
   line-height: 1.5em;
-  padding: .3em;
+  padding-bottom: 15px;
 }
 
 
@@ -549,7 +550,7 @@ div.sidebar-quote p {
 }
 
 .timeline{
-  width: 265px;
+  width: 285px;
   height: 13px;
   margin-top: 23px;
   float: left;
