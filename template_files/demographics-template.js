@@ -3,7 +3,7 @@
 var duration = 300; 
 
 var arrowTransitionMin = 200,
-    arrowTransitionMax = 1000,
+    arrowTransitionMax = 700,
     conclusionScrollY = 6900;
 
 
@@ -44,7 +44,7 @@ function quoteTransition(number) {
 
 
 window.onscroll = function() { 
-    if(window.scrollY < arrowTransitionMin){
+    if(window.scrollY < arrowTransitionMin){console.log(window.scrollY)
         d3.select("#introArrow")
             .transition()
             .duration(100)
@@ -55,7 +55,7 @@ window.onscroll = function() {
             .style("opacity", 0)
             .style("pointer-events", "none")
             .style("z-index", -1)
-    }  else if(window.scrollY >= arrowTransitionMin && window.scrollY <arrowTransitionMax) {
+    }  else if(window.scrollY >= arrowTransitionMin && window.scrollY <arrowTransitionMax) { console.log(window.scrollY)
         //MAKE ARROW DISAPPEAR BEFORE FIRST QUOTE
         d3.selectAll(".note-container")
             .style("opacity", 0)
