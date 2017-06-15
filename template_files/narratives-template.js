@@ -2,8 +2,8 @@
 var duration = 300; 
 
 var arrowTransitionMin = 200,
-    arrowTransitionMax = 100,
-    conclusionScrollY = 11800;
+    arrowTransitionMax = 500,
+    conclusionScrollY = 12800;
 
 
 var isTransitioning = [null, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
@@ -39,6 +39,7 @@ function quoteTransition(number) {
         .style("z-index", -1)
 
 }
+
 
 window.onscroll = function() {
     if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar1") <= inViewMin && getViewMin("#sidebar3") > inViewMin) {
@@ -101,7 +102,7 @@ window.onscroll = function() {
 
     } else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar14") <= inViewMin && getViewMin("#sidebar11") > inViewMin) {
                 //SIDEBAR 14 APPEARS
-        if (!isTransitioning[14]) {
+        if (!isTransitioning[14]) { console.log(window.scrollY)
             quoteTransition(14)
         } 
    } else if(getViewMin("#sidebar11") <= inViewMin && window.scrollY < conclusionScrollY){  
