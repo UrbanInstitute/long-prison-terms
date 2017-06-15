@@ -213,6 +213,7 @@ h3{
     text-align: center;
     text-transform: uppercase;
     font-size: 15px;
+    border: solid 1px #e1e1e1;
 }
 
 .data_button span:hover{
