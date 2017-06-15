@@ -29,6 +29,7 @@ clip.addEventListener("timeupdate", timeUpdate, false);
 // // makes timeline clickable
 timeline.addEventListener("click", function(event) {
     moveplayhead(event);
+    console.log(duration)
     clip.currentTime = duration * clickPercent(event);
 }, false);
 
@@ -80,23 +81,26 @@ function timeUpdate() {
 
     d3.select(timeCurrent)
         .html(function() {
-            // if (clip.currentTime > 59) {
-            //     return (formattedTimeCurrentLarge).replace('.', ':')
-            // } return formattedTimeCurrent.replace('.', ':')
-            if (Math.round(clip.currentTime) % 60) {  
+            if (Math.round(clip.currentTime) % 60 != 0)  {  
                 if (Math.round(clip.currentTime) % 60 > 9){ 
-                  console.log(Math.floor( clip.currentTime / 60));  return Math.floor( clip.currentTime / 60) + ":" + (Math.round(clip.currentTime) % 60)
-                } console.log( Math.floor(clip.currentTime / 60)); return Math.floor( clip.currentTime / 60) + ":0" + (Math.round(clip.currentTime) % 60) 
-            } console.log(clip.currentTime / 60); return Math.floor( clip.currentTime / 60) + ":00"
+                  return Math.floor( clip.currentTime / 60) + ":" + (Math.round(clip.currentTime) % 60)
+                } 
+                return Math.floor( clip.currentTime / 60) + ":0" + (Math.round(clip.currentTime) % 60) 
+            }
+            return Math.floor( clip.currentTime / 60) + ":00"
         
     })
     d3.select(timeEnd)
-        .html(function() { console.log( (duration-clip.currentTime) % 60)
-            if (Math.round(duration-clip.currentTime) % 60) {
+        .html(function() { 
+            if (Math.round(duration-clip.currentTime) % 60 != 0) {
                 if (Math.round(duration-clip.currentTime) % 60 > 9){ 
                     return Math.floor( (duration-clip.currentTime) / 60) + ":" + (Math.round(duration-clip.currentTime) % 60)
-                } return Math.floor( (duration-clip.currentTime) / 60) + ":0" + (Math.round(duration-clip.currentTime) % 60) 
-            } return Math.floor( (duration-clip.currentTime) / 60) + ":00"
+                }else{
+                    return Math.floor( (duration-clip.currentTime) / 60) + ":0" + (Math.round(duration-clip.currentTime) % 60)
+                }
+            }else{
+                return Math.ceil( (Math.floor( (duration-clip.currentTime)) / 60)) + ":00"
+            }
         })
     playhead.style.marginLeft = "0px";
     playhead.style.width = playPercent + "px";
