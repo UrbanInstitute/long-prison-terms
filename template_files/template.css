@@ -192,13 +192,13 @@ h3{
 /**DATA BUTTON**/
 
 .button-div {
-  width: 50%;
+  width: 100%;
   padding-top: 25px;
-  padding-left: 7px;
+  padding-bottom: 30px;
+  float: left;
 }
 .data_button {
-    margin-bottom: 30px;
-    padding: 5 10 5 10px;
+    padding: 5 10 5 0px;
     float: left;
     margin-right: 10px;
     background-color: #000;
