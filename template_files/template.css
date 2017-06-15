@@ -105,11 +105,22 @@ h3{
 
 #introArrow {
     position: relative;
-    bottom: -300px;
+    bottom: -150px;
     left: calc(50% - 50px);
     width: 50px;
-    animation: MoveUpDown 2s linear infinite;
-    opacity: 0;
+    animation: MoveUpDownMain 2s linear infinite;
+    opacity: 1;
+}
+@keyframes MoveUpDownMain {
+  0% {
+    bottom: -150px;
+  }
+  50% {
+    bottom: -160px;
+  }
+  100% {
+    bottom: -150;
+  }
 }
 
 .dem-quote5{
