@@ -100,8 +100,8 @@ h3{
 }
 
 #introArrow {
-    position: fixed;
-    bottom: 130px;
+    position: relative;
+    bottom: -300px;
     left: calc(50% - 50px);
     width: 50px;
     animation: MoveUpDown 2s linear infinite;
