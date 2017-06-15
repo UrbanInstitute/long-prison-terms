@@ -1,10 +1,6 @@
 
 var duration = 300; 
 
-var arrowTransitionMin = 200,
-    arrowTransitionMax = 900,
-    conclusionScrollY = 11300;
-
 var isTransitioning = [null, false, false, false, false, false, false, false, false, false, false]
 
 var inViewMin = 350
@@ -37,91 +33,76 @@ function quoteTransition(number) {
 
 
 window.onscroll = function() {
-    if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar11") <= inViewMin && getViewMin("#sidebar1") > inViewMin){ 
-        //ELEVENTH SIDEBAR APPEARS
-        if (!isTransitioning[11])  {
-            quoteTransition(11)
-        }  
- 
-    }  else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar1") <= inViewMin && getViewMin("#sidebar2") > inViewMin){ 
-        //FIRST QUOTE APPEARS
-        if (!isTransitioning[1])  {
-            quoteTransition(1)
-        }  
- 
-
-        //SECOND QUOTE APPEARS
-
-    }  else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar3") > inViewMin){
-        //SECOND QUOTE APPEARS
-        if (!isTransitioning[2]) {  
-            quoteTransition(2)
-        } 
-
-            
-
-    }  else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar3") <= inViewMin && getViewMin("#sidebar4") > inViewMin){
-        //THIRD QUOTE APPEARS
-        if (!isTransitioning[3]) {
-            quoteTransition(3)
-        } 
-            
-
-    }  else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar6") > inViewMin){
-                //FOURTH QUOTE APPEARS
-        if (!isTransitioning[4]) {
-            quoteTransition(4)
-        }  
-            
-
-    }  else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar7") > inViewMin){
-                //SIXTH QUOTE APPEARS
-        if (!isTransitioning[6]) {
-            quoteTransition(6)
-        } 
-        
-            
-
-    }  else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar7") <= inViewMin && getViewMin("#sidebar8") > inViewMin){
-                //SEVENTH QUOTE APPEARS
-        if (!isTransitioning[7]) {
-            quoteTransition(7)
-        } 
-        
-              
-            
-
-    } else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar8") <= inViewMin && getViewMin("#sidebar9") > inViewMin){
-                //EIGHTH QUOTE APPEARS
-        if (!isTransitioning[8]) {
-            quoteTransition(8)
-        } 
-
-              
-            
-
-    }  else if (window.scrollY >= arrowTransitionMax && getViewMin("#sidebar9") <= inViewMin && getViewMin("#sidebar10") > inViewMin){
-                //NINTH QUOTE APPEARS
-        if (!isTransitioning[9]) {
-            quoteTransition(9)
-        } 
-        
-
-    } else if(getViewMin("#sidebar10") <= inViewMin && window.scrollY < conclusionScrollY){  
-                //TENTH QUOTE APPEARS
-        if (!isTransitioning[10]) {
-            quoteTransition(10)
-        } 
-        
-              
-
-    }
-     else { 
+    if(
+        d3.select(".left-col").node().getBoundingClientRect().bottom <= d3.select(".pol-quote10").node().getBoundingClientRect().bottom ||
+        d3.select(".left-col").node().getBoundingClientRect().top >= d3.select(".pol-quote10").node().getBoundingClientRect().top
+        ){
         d3.selectAll(".note-container")
             .style("opacity", 0)            
             .style("pointer-events", "none")
             .style("z-index", -1)
     }
+    else if (getViewMin("#sidebar11") <= inViewMin && getViewMin("#sidebar1") > inViewMin){ 
+        //ELEVENTH SIDEBAR APPEARS
+        if (!isTransitioning[11])  {
+            quoteTransition(11)
+        }  
+    }
+    else if (getViewMin("#sidebar1") <= inViewMin && getViewMin("#sidebar2") > inViewMin){ 
+        //FIRST QUOTE APPEARS
+        if (!isTransitioning[1])  {
+            quoteTransition(1)
+        }  
+    } 
+    else if (getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar3") > inViewMin){
+        //SECOND QUOTE APPEARS
+        if (!isTransitioning[2]) {  
+            quoteTransition(2)
+        } 
+    }
+    else if (getViewMin("#sidebar3") <= inViewMin && getViewMin("#sidebar4") > inViewMin){
+        //THIRD QUOTE APPEARS
+        if (!isTransitioning[3]) {
+            quoteTransition(3)
+        } 
+    } 
+    else if (getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar6") > inViewMin){
+        //FOURTH QUOTE APPEARS
+        if (!isTransitioning[4]) {
+            quoteTransition(4)
+        }  
+    }
+    else if (getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar7") > inViewMin){
+        //SIXTH QUOTE APPEARS
+        if (!isTransitioning[6]) {
+            quoteTransition(6)
+        } 
+    } 
+    else if (getViewMin("#sidebar7") <= inViewMin && getViewMin("#sidebar8") > inViewMin){
+        //SEVENTH QUOTE APPEARS
+        if (!isTransitioning[7]) {
+            quoteTransition(7)
+        } 
+    }
+    else if (getViewMin("#sidebar8") <= inViewMin && getViewMin("#sidebar9") > inViewMin){
+        //EIGHTH QUOTE APPEARS
+        if (!isTransitioning[8]) {
+            quoteTransition(8)
+        } 
+    } 
+    else if (getViewMin("#sidebar9") <= inViewMin && getViewMin("#sidebar10") > inViewMin){
+        //NINTH QUOTE APPEARS
+        if (!isTransitioning[9]) {
+            quoteTransition(9)
+        }
+    }
+    else if(getViewMin("#sidebar10") <= inViewMin && window.scrollY){  
+        //TENTH QUOTE APPEARS
+        if (!isTransitioning[10]) {
+            quoteTransition(10)
+        } 
+    }
+
 };
 
 var nextpage = d3.select(".next-page-div")
