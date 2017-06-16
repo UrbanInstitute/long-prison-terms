@@ -115,9 +115,9 @@ a{
 
 #legend{
   position: fixed;
-  top: calc(50% - 276px);
-  left: 320px;
-  font-size: 14px;
+  top: calc(50% - 169px);
+  left: 26px;
+  font-size: 13px;
 }
 .legendContainer, .legendContainer div, .legendContainer span{
   display: inline-block;
@@ -133,7 +133,7 @@ a{
   background-color: #000000;
 }
 #legendTen span{
-  margin-left: 50px;
+  margin-left: 20px;
   background-color: #73bfe2;
 }
 .animationComponents{
@@ -153,8 +153,11 @@ a{
 }
 
 .step p{
-  font-size: 22px !important;
-  line-height: 35px !important;
+  font-size: 20px !important;
+  line-height: 28px !important;
+  color:  #696969 !important;
+}
+.step p strong{
   color:  #000 !important;
 }
 .step {
@@ -167,4 +170,8 @@ a{
 #secondGap{
   margin-bottom: 3000px;
   opacity: 0 !important;
+}
+
+#sections {
+  width: 350px !important;
 }

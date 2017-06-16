@@ -8,18 +8,18 @@
 var scrollVis = function() {
   // constants to define the size
   // and margins of the vis area.
-  var WIDTH = 400,
-    HEIGHT = 500,
+  var WIDTH = 420,
+    HEIGHT = 517,
     margin = {top: 72, right: 5, bottom: 10, left: 25},
     width = WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom
 
-  var lineMargin = {top: 80, right: 60, bottom: 30, left: 50},
-    lineWidth = 400 - lineMargin.left - lineMargin.right,
-    lineHeight = 500 - lineMargin.top - lineMargin.bottom;
+  var lineMargin = {top: 75, right: 60, bottom: 30, left: 30},
+    lineWidth = 390 - lineMargin.left - lineMargin.right,
+    lineHeight = 537 - lineMargin.top - lineMargin.bottom;
 
   var YEAR_IN_MS = 2000,
-    MAX_BARS = 55
+    MAX_BARS = 60
 
   var FILLED_TRACK_COLOR = "#e3e3e3"
   var EMPTY_TRACK_COLOR = "#12719e"
@@ -47,8 +47,8 @@ var scrollVis = function() {
   var activeIndex = 0;
 
   // sizing constants for intro track
-  var trackRatio = .8,
-    dotRatio = 1.2
+  var trackRatio = .65,
+    dotRatio = .8
     
 
 
@@ -466,7 +466,7 @@ var scrollVis = function() {
         .orient("bottom").ticks(5);
 
     var lineYAxis = d3.svg.axis().scale(lineY)
-        .orient("left").ticks(5);
+        .orient("left").ticks(8);
 
     var countline = d3.svg.line()
         .x(function(d) { return lineX(d.time); })
@@ -480,7 +480,7 @@ var scrollVis = function() {
 
     // Scale the range of the data
     lineX.domain([0,9]);
-    lineY.domain([0, d3.max(lineData, function(d) { return d.count; })]); 
+    lineY.domain([0, 60]); 
 
     // Nest the entries by step
     var lineDataNest = d3.nest()
@@ -856,7 +856,7 @@ pauseAnimation(width)
         .attr("x", 0)
         .transition()
         .delay(1000)
-        .duration(9.1*YEAR_IN_MS)
+        .duration(8.7*YEAR_IN_MS)
         .ease("linear")
         .attr("width",0)
         .attr("x", lineWidth)
@@ -1338,6 +1338,9 @@ d3.select("#dotBottom")
   }
 
   function showSingleDot(){
+    d3.selectAll(".axisLabel")
+      .transition()
+      .style("opacity",0)
     resetIntro(1)
     hideAreaChart();
     d3.select(".stackBackground")
@@ -1506,6 +1509,9 @@ d3.select("#dotBottom")
 
 
   function oneYearSentences(){
+    d3.selectAll(".axisLabel")
+      .transition()
+      .style("opacity",1)
     hideSingleDot();
     d3.selectAll(".animationComponents")
       .transition()
@@ -1533,7 +1539,6 @@ d3.select("#dotBottom")
       .text("One year prison terms")
     d3.select("#legend")
       .transition()
-      .style("left","320px")
       .style("opacity",1)
       .style("z-index",1)
     drawBackCurtain(6)
@@ -1546,7 +1551,6 @@ d3.select("#dotBottom")
       .style("z-index",1)
     d3.select("#legend")
       .transition()
-      .style("left","317px")
       .style("opacity",1)
       .style("z-index",1)
     d3.select("#legendOne div")
