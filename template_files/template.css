@@ -201,10 +201,10 @@ h3{
 /**DATA BUTTON**/
 
 .button-div {
+  display: inline-block;
   width: 100%;
-  padding-top: 25px;
-  padding-bottom: 30px;
-  float: left;
+  padding-top: 20px;
+  padding-bottom: 35px;
 }
 .data_button {
     padding: 5 10 5 0px;
@@ -221,7 +221,7 @@ h3{
     padding: 12px;
     text-align: center;
     text-transform: uppercase;
-    font-size: 15px;
+    font-size: 13px;
     border: solid 1px #e1e1e1;
 }
 
@@ -272,7 +272,7 @@ h3{
   font-size: 18px;
   font-style: italic;
   color: #696969;
-  line-height: 1.3;
+  line-height: 1.5;
 }
 /*Style for left column*/
 .section-header {
@@ -311,13 +311,14 @@ li.spacing {
   max-width: 740px;
   width: 61%;
   margin-top: 150px;
-
+}
+.conclusion-div.reform-conclusion{
+  padding-bottom: 150px;
 }
 
 .conclusion-header {
   font-weight: 600;
   font-size: 36px;
-  margin-bottom: 1.5em;
 }
 
 .conclusion-text {
@@ -325,7 +326,10 @@ li.spacing {
   color: #666666;
   font-weight: 300;
   margin-bottom: 2.5em;
-  margin-top: 50px;
+  margin-top: 25px;
+}
+.bottom-p{
+  margin-bottom: 0px;
 }
 
 /*Style for next page div*/
@@ -366,7 +370,6 @@ li.spacing {
   font-size: 16px;
   text-align: right;
   margin: 5px 0;
-  padding-right: 20px;
   width: 100%;
 }
 
@@ -419,7 +422,7 @@ li.spacing {
   font-size: 20px;
   line-height: 1.5em;
   color: #231f20;
-  margin-bottom: 1em;
+  margin-bottom: 35px;
 }
 
 div.sidebar-quote p {
@@ -436,13 +439,11 @@ div.sidebar-quote p {
   font-size: 18px;
   margin-top: 1em;
   color: #4d4d4d;
-  margin-bottom: .5em;
-
 }
 
 
 .sidebar-author-title {
-  margin-top: 1em;
+  margin-top: 10px;
   font-weight: 400;
   font-size: 14px;
   padding-bottom: 1.5em;
@@ -465,7 +466,7 @@ div.sidebar-quote p {
 }
 
 .graph-row {
-  margin: 3% 0;
+  margin: 65px 0px 0px 0px;
   width: 100%;
   float: left;
 }
@@ -493,7 +494,6 @@ div.sidebar-quote p {
 .graph-subhead {
   margin: 0 3%;
   text-align: center;
-  height: 40px;
 }
 
 
@@ -570,7 +570,7 @@ div.sidebar-quote p {
   height: 13px;
   margin-top: 23px;
   float: left;
-  background: rgba(0,0,0,.3);
+  background: rgba(0,0,0,.2);
   z-index: 10;
   
 }
@@ -792,9 +792,9 @@ border-right-color: #222;
 }
 
 blockquote.blockquoteClass {
-  line-height: 1.5em;
+  line-height: 1.6;
   position: relative;
-  color: #383838;
+  color: #000;
   font-size: 20px;
 
 }
@@ -1079,7 +1079,11 @@ footer h3, footer h4{
     margin-bottom: 1em;
 }
 
-
+@media (max-width: 1300px) {
+  .sidebar-quote{
+    font-size: 18px;
+  }
+}
 
 @media (max-width: 1100px) {
    .subnav a{
