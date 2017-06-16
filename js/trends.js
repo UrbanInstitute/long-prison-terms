@@ -129,15 +129,21 @@ var scrollVis = function() {
         filter;
 
     if(state == "ME" || state == "NH" || state == "RI" || state == "MA" || state == "DE" || state == "NY" || state == "NJ" || state == "MD" || state == "DC" || state == "FL" ){
-      ttX = -1*(chartWidth *3) - chartMargin -2
+      if(activeIndex == 1 ){ ttX = -1*(chartWidth *2)  -2 }
+      else if(activeIndex == 3 || activeIndex == 2){ ttX = -1*(chartWidth *3)  -2 }
+      else if(activeIndex == 4){ ttX = -1*(chartWidth *2.5)  -2 }
+      else{ ttX = -1*(chartWidth *2.7) -2 } 
       filter = "url(#drop-shadow-left)"
     }else{
       ttX = chartMargin -2
       filter = "url(#drop-shadow-right)"
     }
-
     if(state == "CA" || state == "UT" || state == "CO" || state == "NE" || state == "MO" || state == "KY" || state == "WV" || state == "MD" || state == "DE" || state == "AZ" ||  state == "NM" || state == "KS" || state == "TN" || state == "NC" || state == "SC" || state == "DC" || state == "OK" || state == "MS" || state == "AL" || state == "GA" || state == "TX" || state == "FL"){
-      ttY = -1*(chartWidth *4)  -2
+      // ttY = -1*(chartWidth *4)  -2
+      if(activeIndex == 1 ){ ttY = -1*(chartWidth *3)  -2 }
+      else if(activeIndex == 3 || activeIndex == 2){ ttY = -1*(chartWidth *4)  -2 }
+      else if(activeIndex == 4){ ttY = -1*(chartWidth *2.5)  -2 }
+      else{ ttY = -1*(chartWidth *3.7) -2 } 
     }else{
       ttY = chartMargin + chartWidth-3;
     }

@@ -65,7 +65,7 @@ body{
 #vis {
   display: inline-block;
   position: fixed;
-  top: calc(50% - 300px);
+  top: calc(50% - 222px);
   left: 0px;
   /*z-index: 1;*/
   margin-left: 0;
