@@ -8,18 +8,18 @@
 var scrollVis = function() {
   // constants to define the size
   // and margins of the vis area.
-  var WIDTH = 826,
+  var WIDTH = 400,
     HEIGHT = 500,
-    margin = {top: 2, right: 85, bottom: 10, left: 25},
+    margin = {top: 72, right: 5, bottom: 10, left: 25},
     width = WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom
 
-  var lineMargin = {top: 30, right: 60, bottom: 30, left: 50},
-    lineWidth = 300 - lineMargin.left - lineMargin.right,
-    lineHeight = 216 - lineMargin.top - lineMargin.bottom;
+  var lineMargin = {top: 80, right: 60, bottom: 30, left: 50},
+    lineWidth = 400 - lineMargin.left - lineMargin.right,
+    lineHeight = 500 - lineMargin.top - lineMargin.bottom;
 
   var YEAR_IN_MS = 2000,
-    MAX_BARS = 85
+    MAX_BARS = 55
 
   var FILLED_TRACK_COLOR = "#e3e3e3"
   var EMPTY_TRACK_COLOR = "#12719e"
@@ -511,7 +511,7 @@ var scrollVis = function() {
       .attr("y", -2)
       .attr("width", lineWidth)
       .attr("height", lineHeight+2)
-      .style("fill", "#f2f2f2")
+      .style("fill", "#ffffff")
       .attr("class", "curtain_" + d.key)
 
     });
