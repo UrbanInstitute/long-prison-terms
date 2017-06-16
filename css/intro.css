@@ -108,9 +108,7 @@ a{
   position: absolute;
   top: 0px;
 }
-.step{
-  visibility: hidden;
-}
+
 .textAppear{
   /*opacity: 0;*/
 	/*z-index:-1;*/
@@ -155,4 +153,13 @@ a{
 }
 .conclusion-div{
   margin-top: 0;
+}
+
+.step p{
+  font-size: 22px !important;
+  line-height: 30px !important;
+  color:  #000 !important;
+}
+.step {
+  margin-bottom: 600px;
 }

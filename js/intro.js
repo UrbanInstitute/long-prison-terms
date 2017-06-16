@@ -47,8 +47,8 @@ var scrollVis = function() {
   var activeIndex = 0;
 
   // sizing constants for intro track
-  var trackRatio = .5,
-    dotRatio = .9
+  var trackRatio = .8,
+    dotRatio = 1.2
     
 
 
@@ -1598,14 +1598,14 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",0)
       .style("z-index",-1)
-    d3.select("#bodyNew")
-      .transition()
-      .style("opacity",0)
-      .style("z-index",-1)
-    d3.select("#bodyOld")
-      .transition()
-      .style("opacity",0)
-      .style("z-index",-1)
+    // d3.select("#bodyNew")
+    //   .transition()
+    //   .style("opacity",0)
+    //   .style("z-index",-1)
+    // d3.select("#bodyOld")
+    //   .transition()
+    //   .style("opacity",0)
+    //   .style("z-index",-1)
   }
 
   /**
@@ -1736,41 +1736,41 @@ function display(animationData, lineData, areaData) {
     // var opacityOld = (index%2 == 0) ? 1 : 0;
 
 
-    if(index%2 == 0){
-      d3.select("#bodyNew")
-        .html(stepText)
-        .transition()
-        .duration(2000)
-        .style("opacity",1)
-        .style("z-index",1)
+    // if(index%2 == 0){
+    //   d3.select("#bodyNew")
+    //     .html(stepText)
+    //     .transition()
+    //     .duration(2000)
+    //     .style("opacity",1)
+    //     .style("z-index",1)
 
-      d3.select("#bodyOld")
-        // .html(stepText)
-        .transition()
-        .duration(1000)
-        .style("opacity",0)
-        .style("z-index",-1)
-        .each("end", function(){
-          d3.select(this).html(stepText)
-        })
-      }else{
-      d3.select("#bodyOld")
-        .html(stepText)
-        .transition()
-        .duration(2000)
-        .style("opacity",1)
-        .style("z-index",1)
+    //   d3.select("#bodyOld")
+    //     // .html(stepText)
+    //     .transition()
+    //     .duration(1000)
+    //     .style("opacity",0)
+    //     .style("z-index",-1)
+    //     .each("end", function(){
+    //       d3.select(this).html(stepText)
+    //     })
+    //   }else{
+    //   d3.select("#bodyOld")
+    //     .html(stepText)
+    //     .transition()
+    //     .duration(2000)
+    //     .style("opacity",1)
+    //     .style("z-index",1)
 
-      d3.select("#bodyNew")
-        // .html(stepText)
-        .transition()
-        .duration(1000)
-        .style("opacity",0)
-        .style("z-index",-1)
-        .each("end", function(){
-          d3.select(this).html(stepText)
-        })
-      }
+    //   d3.select("#bodyNew")
+    //     // .html(stepText)
+    //     .transition()
+    //     .duration(1000)
+    //     .style("opacity",0)
+    //     .style("z-index",-1)
+    //     .each("end", function(){
+    //       d3.select(this).html(stepText)
+    //     })
+    //   }
 
     // activate current section
     plot.activate(index);
