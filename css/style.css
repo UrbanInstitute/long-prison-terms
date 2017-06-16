@@ -18,13 +18,13 @@ body{
   display: inline-block;
   width: 450px;
   top: 0px;
-  left: 800px;
+  left: 850px;
   z-index: 90;
-  padding-bottom: 200px;
+  padding-bottom: -2000px;
 }
 
 .step {
-  margin-bottom: 1000px;
+  margin-bottom: 1800px;
   font-family: "Lato";
   font-size: 16px;
   line-height: 23px;
@@ -44,9 +44,9 @@ body{
 }
 #visTitle{
   position: fixed;
-  top: calc(50% - 279px);
+  top: calc(50% - 207px);
   left: 26px;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: bold;
 }
 #sampleArrow{
@@ -67,7 +67,7 @@ body{
 #vis {
   display: inline-block;
   position: fixed;
-  top: calc(50% - 250px);
+  top: calc(50% - 217.5px);
   left: 0px;
   z-index: 1;
   margin-left: 0;
@@ -76,18 +76,17 @@ body{
   /* background-color: #ddd; */
 }
 #lineChart{
-  display: inline-block;
-  position: fixed;
-  bottom: 20px;
-  z-index: 1;
-  margin-left: 0;  
-  width: 530px;
-  background: transparent;
-  height: 207px;
-  top: calc(50% - 267px);
-  border-left: 46px solid transparent;
-  left: 734px;
-  height: 239px;
+    display: inline-block;
+    position: fixed;
+    z-index: -1;
+    margin-left: 0;
+    width: 530px;
+    background: transparent;
+    height: 207px;
+     top: calc(50% - 217.5px); 
+    border-left: 46px solid transparent;
+    left: 370px;
+    height: 239px;
 }
 #vis .title {
   font-size:120px;
@@ -160,7 +159,7 @@ body{
     shape-rendering: crispEdges;
 }
 .state .x.axis text, .state .x.axis line{
-  display: none;
+  display: block;
 }
 
 .state .y.axis text, .state .y.axis line{
@@ -186,28 +185,29 @@ body{
   font-weight: bold;
 }
 #lineLabel_3{
-  left: 243px;
-  bottom: 91px;
+  left: 263px;
+  bottom: -159px;
 }
 #lineLabel_4{
-  left: 241px;
-  bottom: 207px;
+  left: 228px;
+  bottom: 22px;
+  width: 80px;
 }
 #lineLabel_5{
-  left: 145px;
-  width: 125px;
-  bottom: 215px;
+  left: 125px;
+  width: 105px;
+  bottom: 55px;
 }
 #lineLabel_6{
-  left: 216px;
-  bottom: 140px;
+  left: 256px;
+  bottom: -82px;
   width: 100px;
   line-height: 13px;
 }
 #lineLabel_7{
-  width: 120px;
-  left: 243px;
-  bottom: 175px;
+  width: 80px;
+  left: 313px;
+  bottom: -30px;
   line-height: 13px;
 }
 .axisLabel{
@@ -216,12 +216,14 @@ body{
   position: absolute;
 }
 #axisLabelY{
-  left: 27px;
-  top: 13px;
+  left: 7px;
+  top: 47px;
+  opacity: 0;
 }
 #axisLabelX{
-  top: 212px;
-  left: 127px;
+  top: 532px;
+  left: 172px;
+  opacity: 0;
 }
 
 

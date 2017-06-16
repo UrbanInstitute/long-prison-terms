@@ -21,12 +21,24 @@ body, html {
 
 }
 
-ol, ul {
+.left-col ul {
+  padding: 10px 90px 25px 55px;
+  margin: 0;
+}
 
+.container {
+  padding: 0 30px;
+}
+
+.row {
+  width: 100%;
+  float: left;
 }
 
 .nav-list {
   padding-left: 0px;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 blockquote, q {
@@ -78,9 +90,6 @@ h3{
     text-transform: uppercase;
 }
 
-.blue-text {
-  color: #1796d3;
-}
 
 .bold{
     
@@ -93,14 +102,27 @@ h3{
 }
 
 #introArrow {
-    position: fixed;
-    bottom: 130px;
+    position: relative;
+    bottom: -150px;
     left: calc(50% - 50px);
     width: 50px;
-    animation: MoveUpDown 2s linear infinite;
-    opacity: 0;
+    animation: MoveUpDownMain 2s linear infinite;
+    opacity: 1;
+}
+@keyframes MoveUpDownMain {
+  0% {
+    bottom: -150px;
+  }
+  50% {
+    bottom: -160px;
+  }
+  100% {
+    bottom: -150;
+  }
 }
 
+.dem-quote5{
+}
 /************subnav***************/
 .subnav{
     width: 100%;
@@ -108,20 +130,31 @@ h3{
     top: 51px;
     background-color: #052635;
     z-index: 100;
+
 }
 
+.subnav-arrow {
+  content: url("../img/arrow-menu-mobile.png"); 
+    max-width: 9.25px; 
+    max-height: 5px;
+    position: absolute;
+    top: 16px;
+    left: 85px;
+}
 
 .subnav ul{
     text-align: center;
     margin: 0px;
 }
 .subnav ul li{
-  display: inline-block;
+  display: block;
+  float: left;
   text-align: center;
   border-right: solid 1px #6d6e70;
-  margin:  0px 0px 0px -5px; 
-  width: 12%;
+  margin:  0px 0px 0px 0px; 
+  width: 12.5%;
   padding-left: 0px !important;
+  border-bottom: solid 3px #094c6b;
 
 }
 
@@ -136,15 +169,15 @@ h3{
 	font-weight: 300;
 	display: block;
   color: white;
-  padding: 20px 0;
+  padding: 19px 0;
 
 }
 
 .subnav li:hover{ 
-      color: #fff;
+    color: #fff;
 	  background-color: #094c6b;
-	 
-	 }
+    border-bottom: solid 3px #25a9e0;
+}
 .hovered-category {
   color: #fff;
   background-color: #094c6b;
@@ -165,7 +198,82 @@ h3{
 
 }
 
+/**DATA BUTTON**/
 
+.button-div {
+  display: inline-block;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 35px;
+}
+.data_button {
+    padding: 5 10 5 0px;
+    float: left;
+    margin-right: 10px;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.data_button span {
+    color: #fff;
+    background-color: #000;
+    padding: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 13px;
+    border: solid 1px #e1e1e1;
+}
+
+.data_button span:hover{
+  background-color: #1696d2;
+  color: white;
+}
+
+
+/**ABOUT PAGE**/
+.about-column {
+  padding-top: 224px;
+  max-width: 740px;
+  width: 57%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-div {
+  margin-top: 52px;
+}
+
+.about-h2 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 34px;
+
+}
+
+.methodology-body p {
+  font-size: 16px;
+  margin-bottom: 15px;
+  margin-top: 0px;
+}
+
+.project-credits-body p {
+  font-size: 16px;
+  margin-bottom: 23px;
+  margin-top: 0px;
+  line-height: 1.3
+}
+
+.project-credits-body br {
+  line-height: 1.6;
+}
+
+.about-end {
+  font-size: 18px;
+  font-style: italic;
+  color: #696969;
+  line-height: 1.5;
+}
 /*Style for left column*/
 .section-header {
   margin-top: 5em;
@@ -190,24 +298,27 @@ h3{
 
 li.spacing {
   line-height: 1.5em;
-  padding: .3em;
+  padding-bottom: 15px;
 }
 
 
 /*Style for conclusion section*/
 
-.conclusion-div {
-  margin-left: 21.5%;
-  margin-right: 21.5%;
-  float: left;
 
+.conclusion-div {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 740px;
+  width: 61%;
+  margin-top: 150px;
+}
+.conclusion-div.reform-conclusion{
+  padding-bottom: 150px;
 }
 
 .conclusion-header {
   font-weight: 600;
   font-size: 36px;
-  margin-bottom: 1.5em;
-  margin-top: 1.5em;
 }
 
 .conclusion-text {
@@ -215,6 +326,10 @@ li.spacing {
   color: #666666;
   font-weight: 300;
   margin-bottom: 2.5em;
+  margin-top: 25px;
+}
+.bottom-p{
+  margin-bottom: 0px;
 }
 
 /*Style for next page div*/
@@ -225,6 +340,10 @@ li.spacing {
   height: 342px;
   background-color: #094c6b;
   margin-right: 35px;
+  cursor: pointer;
+  pointer-events: all;
+  margin-top: 150px;
+
 }
 
 .next-page-column-1 {
@@ -251,7 +370,6 @@ li.spacing {
   font-size: 16px;
   text-align: right;
   margin: 5px 0;
-  padding-right: 20px;
   width: 100%;
 }
 
@@ -265,13 +383,16 @@ li.spacing {
 .next-arrow {
   margin: 70% 0;
   content: url("../img/arrow.png");
+  max-width: 82px;
+  width: 80%;
   cursor: pointer;
 }
-.next-arrow:hover {
-  margin: 70% 0;
+.next-arrow-hovered {
   content: url("../img/arrow-hovered.png");
+  margin: 70% 0;
+  max-width: 82px;
+  width: 80%;
   cursor: pointer;
-
 }
 
 /*Style for sticky text*/
@@ -284,6 +405,16 @@ li.spacing {
   position: absolute;
   top: 200px;
   opacity: 0;
+  z-index: -1;
+  pointer-events: none;
+  padding-right: 30px;
+  padding-left: 60px;
+}
+
+.note-container.show {
+  z-index: 1;
+  pointer-events: all;
+  opacity: 1;
 }
 .sidebar-quote {
   font-family: Georgia;
@@ -291,7 +422,7 @@ li.spacing {
   font-size: 20px;
   line-height: 1.5em;
   color: #231f20;
-  margin-bottom: 1em;
+  margin-bottom: 35px;
 }
 
 div.sidebar-quote p {
@@ -308,13 +439,11 @@ div.sidebar-quote p {
   font-size: 18px;
   margin-top: 1em;
   color: #4d4d4d;
-  margin-bottom: .5em;
-
 }
 
 
 .sidebar-author-title {
-  margin-top: 1em;
+  margin-top: 10px;
   font-weight: 400;
   font-size: 14px;
   padding-bottom: 1.5em;
@@ -328,6 +457,8 @@ div.sidebar-quote p {
 
 .chart-title {
   font-size: 22px;
+  line-height: 1.2em;
+  margin-bottom: 1em;
 }
 
 .chart-info {
@@ -335,7 +466,7 @@ div.sidebar-quote p {
 }
 
 .graph-row {
-  margin: 3% 0;
+  margin: 65px 0px 0px 0px;
   width: 100%;
   float: left;
 }
@@ -343,7 +474,10 @@ div.sidebar-quote p {
 .graph-div {
   float: left;
   width: 50%;
+  padding: 0 1%;
 }
+
+
 
 .graph-div img {
   width: 100%;
@@ -351,10 +485,11 @@ div.sidebar-quote p {
 
 }
 .pie-header {
-  font-size: 22px;
+  font-size: 18px;
   text-align: left;
   margin-bottom: 5%;
   font-weight: 700;
+  text-transform: uppercase;
 }
 .graph-subhead {
   margin: 0 3%;
@@ -363,7 +498,90 @@ div.sidebar-quote p {
 
 
 
-/*STYLES FOR AUDIO DIV*/
+
+/*Style for audio player and container*/
+.audioplayer{
+  width: 330px;
+  height: 60px;
+}
+
+.audioplayer-full-width{
+  width: 66%;
+  max-width: 420px;
+  height: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+}
+
+.audio-table {
+  display: table;
+  width: 100%;
+}
+
+.audio-bar {
+  float: left;
+  width: 45%;
+}
+
+.audio-bar-text-full-width {
+  width: 66%;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5% 0% 0% 0% ;
+}
+
+
+.pButton{
+
+}
+
+.play{
+  background: url('../img/play.png') ;
+  height:60px; 
+  width: 60px;
+  border: none;
+  background-size: 60% 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  float:left;
+  outline:none;
+  margin-left: -15px;
+  z-index: 10;
+}
+.pause{
+  background: url('../img/pause.png') ;
+  height:60px; 
+  width: 60px;
+  border: none;
+  background-size: 60% 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  float:left;
+  outline:none;
+  margin-left: -15px;
+  z-index: 10;
+
+}
+
+.timeline{
+  width: 285px;
+  height: 13px;
+  margin-top: 23px;
+  float: left;
+  background: rgba(0,0,0,.2);
+  z-index: 10;
+  
+}
+.playhead{
+  width: 0px;
+  height: 13px;
+  background: #1696d2;
+
+}
+
+
 
 .audio-div {
   border-bottom: solid 1px #d0d2d3;
@@ -382,6 +600,7 @@ div.sidebar-quote p {
   font-style: italic;
   font-size: 14px;
   color: #59595c;
+  line-height: 1.2em;
 }
 
 .audio-header {
@@ -413,6 +632,7 @@ div.sidebar-quote p {
 .audio-container {
   background-color: #f2f2f2;
   margin: 1.5em 0;
+  z-index: 2;
 }
 
 .audio-container-header {
@@ -423,11 +643,48 @@ div.sidebar-quote p {
 }
 
 .audio-info {
-  padding-top: 5.5%;
   padding-bottom: 5.5%;
-  width: 43%;
   padding-left: 8%;
+  background-color: #f2f2f2;
+  display: table-cell;
 
+}
+
+.audio-cell {
+  background-color: #f2f2f2;
+  display: table-cell;
+  vertical-align: middle;
+  padding: 5% 0% 5% 5%;
+
+}
+
+.audio-cell-full-width {
+  background-color: #f2f2f2;
+  vertical-align: middle;
+  padding: 0% 0% 0% 0%;
+
+}
+
+.left-cell {
+  width: 43%;
+}
+
+.timeCurrent {
+  color: #59595c;
+  font-size: 13px;
+  float: left;
+
+}
+
+.timeEnd {
+  color: #59595c;
+  font-size: 13px;
+  float: right;
+}
+
+.clip-time-row {
+  width: 100%;
+  margin-top: 3px;
 }
 
 .graph-container {
@@ -452,7 +709,7 @@ div.sidebar-quote p {
 
 /*Style for audio player*/
 audio {
-  background-color: #000;
+  
 }
 
 
@@ -490,7 +747,7 @@ border-right-color: #222;
 
 /***********structure***********/
 .wrapper{
-    width: 100%;
+    max-width: 1300px;
     margin:0 auto;
     padding-top: 50px;
 }
@@ -529,14 +786,16 @@ border-right-color: #222;
 }
 
 .full-div {
-	
-	background-color: #fff; width: 100%; height: 100%;
+	background-color: #fff;
+  width: 100%;
+  margin-bottom: 200px;
 }
 
-blockquote {
-  line-height: 1.5em;
+blockquote.blockquoteClass {
+  line-height: 1.6;
   position: relative;
-  color: #383838;
+  color: #000;
+  font-size: 20px;
 
 }
 
@@ -567,12 +826,22 @@ blockquote:after {
   line-height: 1.5em;
 
 }
+
+.center-quote-author-title {
+  font-size: 14px;
+  line-height: 1;
+}
 .center-case-study-div {
   margin-right: 10%;
   margin-left: 10%;
   margin-top: 10%;
   margin-bottom: 10%;
   line-height: 1em;
+
+}
+
+.photo-div {
+  margin: 52px 0;
 
 }
 
@@ -594,16 +863,16 @@ blockquote:after {
 .center-quote-author {
   font-size: 16px;
   font-weight: 600;
-  margin-top: .9em;
+  margin-top: 9px;
 }
 
 .center-div-initial {
-  width: 57%; 
-  position: absolute;
-  top: 25%;
-  bottom: 25%;
-  left: 21.5%;
-  right: 21.5%;
+  max-width: 740px; 
+  width: 57%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 273px;
+
 }
 
 
@@ -810,7 +1079,11 @@ footer h3, footer h4{
     margin-bottom: 1em;
 }
 
-
+@media (max-width: 1300px) {
+  .sidebar-quote{
+    font-size: 18px;
+  }
+}
 
 @media (max-width: 1100px) {
    .subnav a{
@@ -827,8 +1100,11 @@ footer h3, footer h4{
 
 /*browser windows smaller than 850px*/
 @media (max-width: 900px) {
+
+  .copyright-footer {
+    text-align: center;
+  }
   .wrapper {width:100%; padding-top:20px;}
-  .content {width:auto; padding:0px 30px}
   .container {width:auto; padding:0px 70px; margin-bottom: 40px;}
   ul {margin-left: 15px;}
   li {padding-left:0px;}
@@ -845,17 +1121,27 @@ footer h3, footer h4{
     color: #fff;
     background: #052635;
     text-align: left;
-    padding: 10px 30px;   
+    padding: 10px 10px;   
     } 
   #current-page-navbar {
     display: block;
+    float: right;
+    text-decoration: none;
+    color: #929497;
+    background: #052635;
+    font-size: 7px;
+    font-weight: 800;
+    text-align: right;
+    margin-right: 15px;
+
+
   }
   .chart-title {
   font-size: 18px;
   }
 
   .pie-header {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .chart-info {
@@ -892,15 +1178,6 @@ footer h3, footer h4{
      
   }
 
-#current-page-navbar {
-  float: right;
-  display: none;
-  text-decoration: none;
-  color: #929497;
-  background: #052635;
-  font-size: 7px;
-  font-weight: 800;
-}
     
 .checkbox {
   display: none;
@@ -911,6 +1188,9 @@ footer h3, footer h4{
   font-size: 13px;
   font-weight: 700;
   line-height: 1.5em;
+  text-transform: capitalize;
+  text-align: right;
+
 }
 
 ul#menu {
@@ -937,6 +1217,12 @@ ul#menu {
   margin-right: auto;
 }
 
+div.sidebar-author-title a {
+    pointer-events: all;
+    cursor: pointer;
+
+}
+
 .sidebar-div-mobile {
   border-left: 70px solid #094c6b;
   border-right: 70px solid #094c6b;
@@ -954,7 +1240,40 @@ ul#menu {
 
 @media (max-width: 768px) {
 
+  .next-page-div {
+    width: 100%;
+    margin-right: 0px;
+    height: 180px;
+  }
 
+  .next-page-column-1 {
+    width: 78%;
+    margin-left: 2%;
+  }
+
+  .next-page-column-2 {
+    width: 20%;
+    padding-left: 0%;
+  }
+
+  .next-arrow {
+    margin: 33% 25%;
+    padding-left: 10%;
+    max-width: 54px;
+  }
+
+  .next-page-text {
+    margin-top: 3%;
+    padding-left: 2%;
+  }
+
+  .next-page-next-up {
+    font-size: 14px;
+  }
+
+  .next-page-title {
+    font-size: 28px;
+  }
   .container {
     padding: 0 34px; 
   }

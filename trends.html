@@ -1,14 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="navList">
 <head>
-  <title>Scrolling Sections</title>
+
+    <title>A Matter of Time: Trends</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" type="text/css" href="css/style.css"/>
   <link rel="stylesheet" type="text/css" href="css/trends.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic,900" rel="stylesheet" type="text/css">
+    <!--for the header-->      
+    <link rel="stylesheet" type="text/css" href="template_files/urban-header.css">
+          
+    <!--project style sheet-->
+    <link rel="stylesheet" href="template_files/template.css" type="text/css">
+
+    <!--sticky Div style sheet-->
+    <link rel="stylesheet" href="template_files/sticky.css" type="text/css">
 </head>
+
 <body>
+    <div id="header-pinned" class="no-touch">
+  
+       
+          <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
+            <div class="title"><span class="feature-link"><a href="http://www.urban.org/features" class="title-linkback" alt="Urban Institute logo">Features</a> <span>: :</span> </span><a href="intro.html" class="title-linkback">A Matter of Time: An Exploration of Time Served in America's Prisons</a>
+            </div>
+            <div class="share-icons">
+                <div class="shareThisP">
+                    <span onclick="toggle_visibility('shareBox');">
+                            <div class="shareThisB"></div>
+                        </span>
+                    <div class="shareThisW" id="shareBox">
+
+                        <div class="addthis_toolbox addthis_default_style  "addthis:title="" addthis:url="">
+                            <a href="#" target="_blank" class="addthis_button_facebook at300b" title="Facebook" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-facebook" style="background-color: rgb(48, 88, 145);"><span class="at_a11y">Share on facebook</span></span></a>
+
+                            <a href="#" target="_blank" class="addthis_button_twitter at300b" title="Tweet" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-twitter" style="background-color: rgb(44, 168, 210);"><span class="at_a11y">Share on twitter</span></span></a>
+
+                            <a href="#" target="_blank" class="addthis_button_email at300b" target="_blank" title="Email" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-email" style="background-color: rgb(115, 138, 141);"><span class="at_a11y">Share on email</span></span></a>
+                            <div class="atclear"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+  
+                  
+                    
+         </div>   
+
+        <div class="subnav">
+            
+<!--          <div class="subnav">
+<ul> -->
+              <ul class="nav-list">           
+                <li id="left-nav-item"><a href="intro.html">Intro</a></li>
+                <li class = "hovered-category"><a href="trends.html">Trends</a></li>
+                <li><a href="demographics.html">Demographics</a></li>
+                <li><a href="narratives.html">Narratives</a></li>
+                <li><a href="policies.html">Policies</a></li>
+                <li><a href="reform.html">Reform</a></li>
+                <li><a href="about.html">About</a></li>
+                <li id="no-border"><a href="data.html">Data</a></li>
+              </ul>
+        </div>
+ 
+                  
+                        
+      <div id="mobilenavcontainer" class="show-menu">
+           <label for="show-menu">Chapters <span class="subnav-arrow"></span></label>
+           <input type="checkbox" id="show-menu" class="checkbox" role="button">
+                <ul id="menu">
+                <li><a href="intro.html">Intro</a></li>
+                <li class = "hovered-category"><a href="trends.html">Trends</a></li>
+                <li><a href="demographics.html">Demographics</a></li>
+                <li><a href="narratives.html">Narratives</a></li>
+                <li><a href="policies.html">Policies</a></li>
+                <li><a href="reform.html">Reform</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="data.html">Data</a></li>
+
+
+                </ul>
+            <div id="current-page-navbar">
+            VIEWING <br />
+              <div class="current-page-name" ng-controller="navRightCtrl">
+              Trends
+              </div>
+            </div>
+      </div>  
+
+
+
+
 <div id = "isMobile"></div>
 <div id = "isPhone"></div>
 <div id = "isShort"></div>
 <div id = "sectionIndex" data-index="0"></div>
+
+<!--CENTER TEXT-->
+
+          
+      <div class="full-div">
+        <div class="center-div-initial">
+          <div class="center-div-header">
+          <strong>Trends </strong>| The Hidden Story of Rising Time Served
+          </div>
+          <div class="center-div-large-text">
+          What is a &ldquo;long&rdquo; prison term? Any amount of time spent in prison can feel long, but some terms are truly extreme.
+          </div>
+          <div class="center-div-small-text">
+          To better understand long prison terms, we took a <a href = "about.html" target = "_blank">new approach</a> to measuring how much time people spend in US prisons. We looked at annual snapshots of prison populations to see how long people had been in prison so far and compared those snapshots over time. This allowed us to include time served by people who are usually overlooked by more traditional methods.
+          </div>
+          <div class="center-div-small-text">
+          Then, because state policies greatly influence sentencing and release, we looked at the top 10 percent of people serving the longest prison terms in each state. We also tracked changes among people serving terms of 10 years or more. By either measure, the longest prison terms have been growing in both length and number. 
+          </div>
+        </div>
+        <img id="introArrow" src="img/scroll-arrow.png">
+      </div>
+<!--END-->   
 <div class="container">
   <div id='graphic'>
     <div id='vis'>
@@ -19,17 +132,18 @@
 
 
     <div>
+    <section class = "step"></section>
     <!-- <div id = "map"></div> -->
     <section class = "step">
     <div class="title">On average, people are spending more time in prison.</div>
       <p>
-        These graphs represent a year-end snapshot of the average number of years that people in state prisons have been incarcerated so far. Many will go on to serve considerably more time.
+        These graphs represent a <a href = "about.html" target = "_blank">year-end snapshot</a> of the average number of years that people in state prisons have been incarcerated so far. Many will go on to serve considerably more time.
       </p> 
       <p>
-       Each state&rsquo;s story is unique, but we found a consistent upward trend in the amount of time people spend in state prisons. Since 2000, the average time served has risen in all 44 states (including the District of Columbia) that reported complete data to the National Corrections Reporting Program. 
+       Each state&rsquo;s story is unique, but we found a consistent upward trend in the amount of time people spend in state prisons. Since 2000, the average time served has risen in all 44 states (including the District of Columbia) that reported complete data to the <a href = "https://www.bjs.gov/index.cfm?ty=dcdetail&iid=268" target = "_blank">National Corrections Reporting Program</a>. 
       </p> 
       <p>
-        In some states, this rise began years earlier. But these recent trends suggest that most states are still feeling the effects of policy decisions from the 1980s and ‘90s that were designed to keep people in prison longer.
+        In some states, this rise began years earlier. But these recent trends suggest that most states are still feeling the effects of policy decisions from the <a href = "policies.html" target = "_blank">1980s and &rsquo;90s</a> that were designed to keep people in prison longer.
       </p> 
     </section>
 
@@ -55,7 +169,7 @@
         For many states, this represents a staggering increase. In Michigan, for example, the average time served among the top 10 percent was 10 years in 1989. In 2013, the top 10 percent had served 26 years—a 160 percent increase. California saw its average among this group rise from 9.7 years to 24.9 between 1992 and 2014. In nearly half the states we looked at, the average time served by this group has risen by more than 5 years since 2000.
       </p> 
       <p>
-        These steep increases over time and the variation across states points to the power of state-specific policy decisions.
+        These steep increases over time and the variation across states points to the power of <a href = "policies.html" target = "_blank">state-specific policy decisions</a>.
       </p>     
       </section>
 
@@ -65,7 +179,7 @@
         In 35 states, at least 1 in 10 people in prison have been there for a decade or more, according to the most recent data available. In California and Michigan, nearly 1 in 4 people have served at least 10 years.
       </p> 
       <p>
-        In some states, this group may be growing mainly because fewer people are serving short terms. This trend is to be expected in states that have cut admissions and/or prison time for low-level offenses. For example, California&rsquo;s Public Safety Realignment Act of 2011 sentenced thousands of people convicted of lesser offenses to county jails and probation, radically shifting the makeup of its prisons toward people with more serious convictions.
+        In some states, this group may be growing mainly because fewer people are serving short terms. This trend is to be expected in states that have cut admissions and/or prison time for low-level offenses. For example, California&rsquo;s <a href = "http://www.cdcr.ca.gov/realignment/.html" target = "_blank">Public Safety Realignment Act of 2011</a> sentenced thousands of people convicted of lesser offenses to county jails and probation, radically shifting the makeup of its prisons toward people with more serious convictions.
       </p> 
       </section>
 
@@ -78,18 +192,61 @@
         Tens of thousands of people nationwide are serving these long sentences, and many will stay much longer.
       </p>     
       </section>
+      <section class = "step"></section>
     </div>
-      <div id="extra-space"></div>
+    
+
+  </div>
+    <div class="row">
+      <div class="conclusion-div">
+        <div class="conclusion-header">
+        <!--CONCLUSION HEADLINE-->
+          We can’t tackle mass incarceration without addressing long prison terms.
+        </div>
+        <p class="conclusion-text">These trends have consequences. As more people spend more time in prison, <a href = "reform.html" target = "_blank">states spend millions</a> housing an <a href = "demographics.html" target = "_blank">aging prison population</a> despite evidence that many of these people could be safely released. People serving long prison terms <a href = "narratives.html" target = "_blank">leave families behind</a>, a cost that <a href = "demographics.html" target = "_blank">communities of color</a> disproportionately bear. Many who finally return after a lifetime in prison find they are <a href = "narratives.html" target = "_blank">wholly unprepared</a> to live in a world so different from the one they knew.</p>
+        <p class="conclusion-text bottom-p">
+        These trends aren’t accidental. Most can be traced back to <a href = "policies.html" target = "_blank">specific policy decisions</a> made decades ago that still influence our criminal justice system. That these trends vary so much across states suggests that the growth in time served is driven by state-level decisionmaking. States grappling with expanding prison populations will see their efforts to curb mass incarceration fall short unless reforms include those serving the longest prison terms.
+        </p>
+      </div>
+      <div class="next-page-div">
+        <a href="demographics.html"> 
+        <div class="next-page-column-1">
+          <div class="next-page-text">
+            Who spends the most time in prison? Here, we take a closer look at patterns of long-term incarceration by race, age, gender, and other characteristics.
+          </div>
+          <div class="next-page-next-up">
+            NEXT UP
+          </div>
+          <div class="next-page-title">
+            Demographics
+          </div>
+        </div>
+        <div class="next-page-column-2">
+        <div class="next-arrow"></div>
+        </div>
+        </a>
+      </div>
+      <div class="full-wrapper">
+        <div class="copyright-footer">
+        Copyright &copy; <a href="http://www.urban.org" target="_blank">Urban Instuitute 2017</a>. <a href="http://www.urban.org" target="_blank">View this project on Github</a>.
+        </div>
+      </div>
+    </div>
+
 
   </div>
 
 </div>
+</div>
 
 
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script src="js/vendor/d3.v4.js"></script>
 <script src="data/stateData.js"></script>
 <script src="js/trends-vars.js"></script>
 <script src="js/scroller.d3v4.js"></script>
 <script src="js/trends.js"></script>
+<!-- <script src="template_files/app.js"></script> -->
+<script src="js/vendor/header.js"></script>  
 </body>
 </html>

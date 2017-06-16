@@ -8,18 +8,19 @@
 var scrollVis = function() {
   // constants to define the size
   // and margins of the vis area.
-  var WIDTH = 826,
-    HEIGHT = 500,
-    margin = {top: 2, right: 85, bottom: 10, left: 25},
+
+  var WIDTH = 420,
+    HEIGHT = 517,
+    margin = {top: 72, right: 5, bottom: 10, left: 25},
     width = WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom
 
-  var lineMargin = {top: 30, right: 60, bottom: 30, left: 50},
-    lineWidth = 300 - lineMargin.left - lineMargin.right,
-    lineHeight = 216 - lineMargin.top - lineMargin.bottom;
+  var lineMargin = {top: 75, right: 60, bottom: 30, left: 30},
+    lineWidth = 390 - lineMargin.left - lineMargin.right,
+    lineHeight = 537 - lineMargin.top - lineMargin.bottom;
 
   var YEAR_IN_MS = 2000,
-    MAX_BARS = 40
+    MAX_BARS = 60
 
   var FILLED_TRACK_COLOR = "#e3e3e3"
   var EMPTY_TRACK_COLOR = "#12719e"
@@ -27,12 +28,12 @@ var scrollVis = function() {
 
 
   var areaMargin = {
-  top: 10,
+  top: 160,
   right: 0,
   bottom: 33,
   left: 0
   };
-  var screenHeight = window.innerHeight - 50
+  var screenHeight = window.innerHeight - 200
   var areaWidth = window.innerWidth - areaMargin.left - areaMargin.right - 10,
   areaHeight = Math.min(screenHeight, window.innerHeight - areaMargin.top - areaMargin.bottom - 20);
 
@@ -47,8 +48,8 @@ var scrollVis = function() {
   var activeIndex = 0;
 
   // sizing constants for intro track
-  var trackRatio = .5,
-    dotRatio = .9
+  var trackRatio = .65,
+    dotRatio = .8
     
 
 
@@ -62,6 +63,8 @@ var scrollVis = function() {
   var lineSvg = null;
 
   var areaSvg = null;
+
+  var breadCrumbSvg = null;
 
   // When scrolling to a new section
   // the activation function for that
@@ -114,9 +117,18 @@ var scrollVis = function() {
             .attr("class","introLineChart")
             .attr("width", lineWidth + lineMargin.left + lineMargin.right)
             .attr("height", lineHeight + lineMargin.top + lineMargin.bottom)
+            .style("z-index",-1)
         .append("g")
             .attr("transform", 
                   "translate(" + lineMargin.left + "," + lineMargin.top + ")");
+
+
+      breadCrumbSvg = d3.select("#breadCrumb")
+        .append("svg")
+            .attr("class","introLineChart")
+            .attr("width", 16)
+            .attr("height", window.innerHeight)
+        .append("g")
 
       areaSvg = d3.select('#introAreaContainer')
         .append("svg")
@@ -153,8 +165,35 @@ var scrollVis = function() {
    *  element for each filler word type.
    * @param histData - binned histogram data
    */
+
   setupVis = function(allData, lineData, areaData) {
     //temp line
+
+    breadCrumbSvg
+      .style("opacity",0)
+    breadCrumbSvg.append("rect")
+      .attr("width",1)
+      .attr("height", 0)
+      .style("fill","#d2d2d2")
+      .attr("x",8)
+      .attr("y",0)
+    for(var i = 1; i < 7; i++){
+      breadCrumbSvg.append("circle")
+        .attr("class", "crumb")
+        .attr("id", "crumb" + i)
+        .datum(i)
+        .attr("cx", 8)
+        .attr("cy", 0)
+        .attr("r",6.5)
+        .on("click", function(d){
+          $('html,body').animate({
+                scrollTop: $($(".step")[d]).offset().top + 200
+            }, 2000, 'swing');
+        })
+
+    }
+
+
     var data = allData.filter(function(d){return d.step == 3});
 
 
@@ -183,29 +222,31 @@ var scrollVis = function() {
 
     var dotTop = colonWrapper.append("circle")
       .attr("id", "dotTop")
-      .attr("cx", rightEdge -18)
-      .attr("cy", topEdge + 13)
+      .attr("cx", rightEdge -18 +8)
+      .attr("cy", topEdge + 13 - 141)
       .attr("r",5)
 
     var dotBottom = colonWrapper.append("circle")
       .attr("id", "dotBottom")
-      .attr("cx", rightEdge - 18)
-      .attr("cy", topEdge + 43)
+      .attr("cx", rightEdge - 18 +8)
+      .attr("cy", topEdge + 43 - 141)
       .attr("r",5)
 
     var dummyTopDot = dummyWrapper.append("circle")
       .attr("id", "dummyTopDot")
-      .attr("cx", rightEdge  -18)
-      .attr("cy", topEdge + 13)
+      .attr("cx", rightEdge  -18 +8)
+      .attr("cy", topEdge + 13 -141)
       .attr("r",5)
       .style("opacity",1)
+      .style("z-index",1)
 
     var dummyBottomDot = dummyWrapper.append("circle")
       .attr("id", "dummyBottomDot")
-      .attr("cx", rightEdge - 18)
-      .attr("cy", topEdge + 43)
+      .attr("cx", rightEdge - 18 + 8)
+      .attr("cy", topEdge + 43 -141)
       .attr("r",5)
       .style("opacity",1)
+      .style("z-index",1)
 
     var areChartBaseline = colonWrapper.append("rect")
       .attr("id", "areChartBaseline")
@@ -285,6 +326,7 @@ var scrollVis = function() {
   popText
     .attr("transform", "translate(10," + (y(79526)) + ")")
     // .style("opacity",0)
+    // .style("z-index",-1)
 
   popText
     // .append("polygon")
@@ -295,6 +337,7 @@ var scrollVis = function() {
       .attr("stroke","#000")
       .attr("stroke-width", "4")
     .style("opacity",0)
+    .style("z-index",-1)
 
 
     var totalLength = path.node().getTotalLength();
@@ -306,6 +349,7 @@ var scrollVis = function() {
 
 
     trackHeight = d3.max([height/data.length, height/MAX_BARS])
+    singleTrackHeight = trackHeight * 2.5;
 
     //intro background
     g.append("rect")
@@ -315,6 +359,7 @@ var scrollVis = function() {
       .attr("fill", "#f2f2f2")
       .attr("stroke", "none")
       .style("opacity",0)
+      .style("z-index",-1)
 
     var stackBackground =  g.append("rect")
       .attr("class","stackBackground")
@@ -323,75 +368,82 @@ var scrollVis = function() {
       .attr("fill", EMPTY_TRACK_COLOR)
       .attr("stroke", "none")
       .style("opacity",0)
+      .style("z-index",-1)
 
     var singleTrack = g
       .append("g")
       .attr("class", "singleTrackGroup")
       .attr("transform", function(d, i){
-        return "translate(0, " + (height-trackHeight) + ")"
+        return "translate(0, " + (height-singleTrackHeight) + ")"
       })
     var slowSingleTrack = g
       .append("g")
       .attr("class", "slowSingleTrackGroup")
       .attr("transform", function(d, i){
-        return "translate(0, " + (height-2*trackHeight) + ")"
+        return "translate(0, " + (height-2*singleTrackHeight) + ")"
       })
 
     singleTrack.append("rect")
       .attr("class", "singleTrackEmpty singleDotElement")
       .attr("width", width + "px")
-      .attr("height", (trackHeight*trackRatio) + "px")
-      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("height", (singleTrackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*singleTrackHeight)
       .attr("fill", EMPTY_TRACK_COLOR)
       .style("opacity", 0)
+      .style("z-index",-1)
 
     singleTrack.append("rect")
       .attr("class", "singleTrackFilled singleDotElement")
       .attr("width", "0px")
-      .attr("height", (trackHeight*trackRatio) + "px")
-      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("height", (singleTrackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*singleTrackHeight)
       .attr("fill", FILLED_TRACK_COLOR)
       .style("opacity", 0)
+      .style("z-index",-1)
 
     singleTrack.append("g")
       .attr("class","dotGroup")
       .append("rect")
       .attr("class","singleDot singleDotElement")
       .attr("x", 0)
-      .attr("y", trackHeight*(1-dotRatio)*.5)
-      .attr("height", trackHeight * dotRatio )
-      .attr("width", trackHeight * dotRatio )
+      .attr("y", singleTrackHeight*(1-dotRatio)*.5)
+      .attr("height", singleTrackHeight * dotRatio )
+      .attr("width", singleTrackHeight * dotRatio )
       .style("fill", function(d){ return dotColor(1) })
       .style("opacity", 0)
+      .style("z-index",-1)
 
 
 
     slowSingleTrack.append("rect")
       .attr("class", "slowSingleTrackEmpty singleDotElement")
       .attr("width", width + "px")
-      .attr("height", (trackHeight*trackRatio) + "px")
-      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("height", (singleTrackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*singleTrackHeight)
       .attr("fill", EMPTY_TRACK_COLOR)
       .style("opacity", 0)
+      .style("z-index",-1)
 
     slowSingleTrack.append("rect")
       .attr("class", "slowSingleTrackFilled singleDotElement")
       .attr("width", "0px")
-      .attr("height", (trackHeight*trackRatio) + "px")
-      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("height", (singleTrackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*singleTrackHeight)
       .attr("fill", FILLED_TRACK_COLOR)
       .style("opacity", 0)
+      .style("z-index",-1)
 
     slowSingleTrack.append("g")
       .attr("class","dotGroup")
       .append("rect")
       .attr("class","slowSingleDot singleDotElement")
       .attr("x", 0)
-      .attr("y", trackHeight*(1-dotRatio)*.5)
-      .attr("height", trackHeight * dotRatio )
-      .attr("width", trackHeight * dotRatio )
+      .attr("y", singleTrackHeight*(1-dotRatio)*.5)
+      .attr("height", singleTrackHeight * dotRatio )
+      .attr("width", singleTrackHeight * dotRatio )
       .style("fill", function(d){ return dotColor(1) })
       .style("opacity", 0)
+      .style("z-index",-1)
 
 
 
@@ -413,6 +465,7 @@ var scrollVis = function() {
       .attr("y",(1-trackRatio)*.5*trackHeight)
       .attr("fill", "none")
       .style("opacity", 0)
+      .style("z-index",-1)
 
     track.append("rect")
       .attr("class", "trackFilled")
@@ -423,6 +476,7 @@ var scrollVis = function() {
       .attr("y",(1-trackRatio)*.5*trackHeight)
       .attr("fill", FILLED_TRACK_COLOR)
       .style("opacity", 0)
+      .style("z-index",-1)
 
     var dot = track.append("g")
       .attr("class","dotGroup")
@@ -436,9 +490,12 @@ var scrollVis = function() {
       .attr("width", trackHeight * dotRatio )
       .style("fill", function(d){ return dotColor(d.sentence) })
       .style("opacity", 0)
+      .style("z-index",-1)
 
     //line chart
-    d3.select("#lineChart").style("opacity",0)
+    d3.select("#lineChart")
+      .style("opacity",0)
+      .style("z-index",-1)
 
     var lineX = d3.scale.linear().range([0, lineWidth]);
     var lineY = d3.scale.linear().range([lineHeight, 0]);
@@ -447,7 +504,7 @@ var scrollVis = function() {
         .orient("bottom").ticks(5);
 
     var lineYAxis = d3.svg.axis().scale(lineY)
-        .orient("left").ticks(5);
+        .orient("left").ticks(8);
 
     var countline = d3.svg.line()
         .x(function(d) { return lineX(d.time); })
@@ -461,7 +518,7 @@ var scrollVis = function() {
 
     // Scale the range of the data
     lineX.domain([0,9]);
-    lineY.domain([0, d3.max(lineData, function(d) { return d.count; })]); 
+    lineY.domain([0, 60]); 
 
     // Nest the entries by step
     var lineDataNest = d3.nest()
@@ -531,6 +588,7 @@ var scrollVis = function() {
     d3.selectAll(".trackEmpty")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
     d3.selectAll(".trackFilled")
     .data(data)
       .transition()
@@ -538,6 +596,7 @@ var scrollVis = function() {
         return (d3.min([0,d.admission]) * -1 / d.sentence)*width + "px"
       })
       .style("opacity",0)
+      .style("z-index",-1)
 
     d3.selectAll(".dot")
     .data(data)
@@ -547,6 +606,7 @@ var scrollVis = function() {
       })
       .style("fill", function(d){ return dotColor(d.sentence) })
       .style("opacity",0)
+      .style("z-index",-1)
   }
 
   function flyOut(node){
@@ -568,10 +628,42 @@ var scrollVis = function() {
         d3.select(node.parentNode).attr("transform","")
       })
   }
+  function showBreadcrumbs(){
+      breadCrumbSvg
+        .transition()
+        .duration(100)
+        .style("opacity",1)
+      breadCrumbSvg.select("rect")
+        .transition()
+        .duration(1000)
+        .delay(100)
+        .attr("height", window.innerHeight)
+      breadCrumbSvg.selectAll("circle")
+        .transition()
+        .duration(1000)
+        .delay(100)
+        .attr("cy", function(d){
+          var crumbStart = window.innerHeight*.5 - 217.5 +  80
+          return crumbStart + (d-1)*64.5
+        })
+  }
+  function hideBreadCrumbs(){
+      breadCrumbSvg
+        .transition()
+        .delay(1000)
+        .duration(100)
+        .style("opacity",0)
+      breadCrumbSvg.select("rect")
+        .transition()
+        .duration(1000)
+        .attr("height", 0)
+      breadCrumbSvg.selectAll("circle")
+        .transition()
+        .duration(1000)
+        .attr("cy", 0)
+  }
   function updateStackBackground(pause){
     var tracks = 0;
-    // var tracks = d3.selectAll(".trackGroup.visible.active")[0].length
-    // console.log(tracks)
     if(pause){
       tracks = d3.selectAll(".trackGroup.visible.active")[0].length
     }else{
@@ -605,15 +697,18 @@ var scrollVis = function() {
     g.select(".prisonBG")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
     g.select(".stackBackground")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
 
 
     g
       .selectAll(".trackGroup")
       .classed("visible",true)
       .style("opacity",1)
+      .style("z-index",1)
       .data(data)
       .transition("foo")
       .duration(350)
@@ -629,6 +724,7 @@ var scrollVis = function() {
     .transition()
     .duration(350)
     .style("opacity",0)
+    .style("z-index",-1)
     .transition()
     .delay(function(d){ return yearsToMS(d.admission)}) 
     .style("opacity", function(d){
@@ -650,6 +746,7 @@ var scrollVis = function() {
     .style("fill",FILLED_TRACK_COLOR)
     .attr("width", "0px")
     .style("opacity",0)
+    .style("z-index",-1)
     .transition()
     .delay(function(d){ return 350 + yearsToMS(d.admission)}) 
     .style("opacity", function(d){
@@ -684,7 +781,6 @@ d3.selectAll(".dot")
   return 0
 })
 .each("start", function(d,i){
-  // console.log(i)
   if(i == 0){
     var comma = d3.format(",")
     d3.select("#visTitle span").text(0)
@@ -694,11 +790,13 @@ d3.selectAll(".dot")
       .attr("height", 0)
       .attr("y", height)
       .style("opacity",1)
+      .style("z-index",1)
 
   }
 })
 .style("fill", function(d){ return dotColor(d.sentence) })
 .style("opacity",0)
+.style("z-index",-1)
 .transition()
 .delay(function(d){ return 350 + yearsToMS(d.admission)}) 
       .style("opacity", function(d){
@@ -753,12 +851,14 @@ pauseAnimation(width)
     .duration(duration1)
     .ease("linear")
     .style("opacity",0)
+    .style("z-index",-1)
     .each("end", function(){
       d3.select(this.parentNode.parentNode)
         .classed("visible",false)
         .transition("fade-out")
         .duration(0)
         .style("opacity",0)
+        .style("z-index",-1)
 
       d3.selectAll(".trackGroup")
         .transition()
@@ -816,6 +916,7 @@ pauseAnimation(width)
     d3.select(".line.step_" + key)
         .transition()
         .style("opacity",1)
+        .style("z-index",1)
     d3.select(".curtain_" + key)
         .transition()
         .duration(10)
@@ -823,7 +924,7 @@ pauseAnimation(width)
         .attr("x", 0)
         .transition()
         .delay(1000)
-        .duration(9.1*YEAR_IN_MS)
+        .duration(8.7*YEAR_IN_MS)
         .ease("linear")
         .attr("width",0)
         .attr("x", lineWidth)
@@ -835,6 +936,7 @@ pauseAnimation(width)
         .transition()
         .delay(labelMultiplier*YEAR_IN_MS)
         .style("opacity",1)
+        .style("z-index",1)
         .style("pointer-events","all")
   }
   function dotColor(sentence){
@@ -854,24 +956,6 @@ pauseAnimation(width)
     updateStackBackground(true);
     var bounceLength = 20,
         pauseDuration = 800;
-    // d3.selectAll(".dot")
-    //   .transition()
-    //   .ease("expOut")
-    //   .duration(pauseDuration)
-    //   .attr("x", function(d){
-    //     var dotx;
-    //     if(+d.sentence == 0){
-    //       dotx = 0;
-    //     }else{
-    //       dotx = ( (width * (d.lengthOfStay/d.sentence)) - parseFloat(d3.select(this).attr("x")) > bounceLength) ? parseFloat(d3.select(this).attr("x")) + bounceLength : parseFloat(d3.select(this).attr("x")) + .5*((width * (d.lengthOfStay/d.sentence)) - +d3.select(this).attr("x"))
-    //     }
-    //     // console.log(dotx)
-    //     return dotx + "px"
-    //   })
-    //   .style("opacity",function(){
-    //     var o = (d3.select(this).style("opacity") == 0) ? 0 : 1
-    //     return o
-    //   })
 
     d3.selectAll(".trackFilled")
     .transition()
@@ -970,19 +1054,28 @@ hideAreaChart();
     d3.select("#lineChart")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
 
 d3.selectAll(".titleElement")
   .transition()
   .style("opacity",1)
+  .style("z-index",1)
 // d3.select("#titleText span i")
 // .transition()
 // .style("opacity",1)
+// .style("z-index",1)
 }
 
   function introAreaChart() {
+    hideBreadCrumbs()
    d3.select("#vis")
     .transition()
     .style("opacity",0)
+    .style("z-index",-1)
+   d3.select("#areaSvg")
+    .transition()
+    .style("opacity",1)
+    .style("z-index",2)
 
 var x = d3.scale.linear().domain([1925, 2015]).range([0, areaWidth]);
 var y = d3.scale.linear().domain([1600000,0]).range([0, areaHeight]);
@@ -996,27 +1089,7 @@ function translateAlong(path) {
   };
 }
 
-d3.select("#areaChartText")
-  .transition()
-  .style("opacity", 1)
 
-d3.select("#areaChartText1")
-  .transition()
-  .duration(1000)
-  .delay(5000)
-  .style("opacity",1)
-
-d3.select("#areaChartText2-1")
-  .transition()
-  .duration(1000)
-  .delay(7000)
-  .style("opacity",1)
-
-d3.select("#areaChartText2-2")
-  .transition()
-  .duration(2000)
-  .delay(9500)
-  .style("opacity",1)
 
   d3.select("#popTextNum")
     .transition()
@@ -1044,15 +1117,18 @@ d3.select("#areaChartText2-2")
 }, 5700)
   
     // .style("opacity",0)
+    // .style("z-index",-1)
 
   d3.select("#popTextCircle")
     .transition()
     .delay(5000)
     .style("opacity",1)
+    .style("z-index",1)
     .transition()
     .delay(8000)
     .attr("stroke","#094c6b")
     // .style("opacity",0)
+    // .style("z-index",-1)
   d3.select("#popText")
       .transition()
         .delay(5700)
@@ -1066,6 +1142,7 @@ d3.select("#areaChartText2-2")
     d3.select("#lineChart")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
 
 
 
@@ -1076,7 +1153,7 @@ d3.select("#areaChartText2-2")
     d3.select("#areaSvg")
       .append("g")
         .attr("class", "area x axis")
-        .attr("transform", "translate(0," + (parseFloat(areaHeight)+22) + ")")
+        .attr("transform", "translate(0," + (parseFloat(areaHeight)+22 + 150) + ")")
         .transition()
         .delay(4000)
         .duration(1000)
@@ -1086,7 +1163,7 @@ var rightEdge = d3.select("#titleText span").node().getBoundingClientRect().righ
 var topEdge = d3.select("#titleText span").node().getBoundingClientRect().top
 d3.select("#areaSvg")
 .transition()
-.style("opacity","1")
+.style("opacity",1)
 d3.selectAll(".titleElement")
 .transition()
 .style("opacity","0")
@@ -1096,9 +1173,11 @@ d3.selectAll(".titleElement")
     d3.select(".prisonBG")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
     g.select(".stackBackground")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
 
 
 
@@ -1182,6 +1261,7 @@ d3.select("#dummyTopDot")
 .transition()
 .duration(0)
 .style("opacity",0)
+.style("z-index",-1)
 
 d3.select("#dummyBottomDot")
 .transition()
@@ -1192,6 +1272,7 @@ d3.select("#dummyBottomDot")
 .transition()
 .duration(0)
 .style("opacity",0)
+.style("z-index",-1)
 
 d3.select("#areChartBaseline")
 .transition()
@@ -1240,16 +1321,19 @@ d3.select("#dotBottom")
     d3.select("#areaSvg")
       .transition()
       .style("opacity", 0)
+      // .style("z-index",-1)
 
-    d3.select("#areaChartText")
-      .transition()
-      .style("opacity", 0)
+    // d3.select("#areaChartText")
+    //   .transition()
+    //   .style("opacity", 0)
+    //   .style("z-index",-1)
   }
 
   function hideSingleDot(){
     d3.select(".singleTrackEmpty")
       .transition()
       .style("opacity", 0)
+      .style("z-index",-1)
       .style("color", EMPTY_TRACK_COLOR)
 
     d3.select(".singleTrackFilled")
@@ -1257,6 +1341,7 @@ d3.select("#dotBottom")
       .attr("width", "0px")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
       .style("color", FILLED_TRACK_COLOR)
 
      d3.select(".singleDot")
@@ -1264,22 +1349,24 @@ d3.select("#dotBottom")
       .attr("x", 0)
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
 
       d3.select(".slowSingleTrackGroup")
         .transition("reset-single")
           .attr("transform", function(d, i){
-            return "translate(0, " + (height-2*trackHeight) + ")"
+            return "translate(0, " + (height-2*singleTrackHeight) + ")"
           })
       d3.select(".singleTrackGroup")
         .transition("reset-single")
           .attr("transform", function(d, i){
-            return "translate(0, " + (height-trackHeight) + ")"
+            return "translate(0, " + (height-singleTrackHeight) + ")"
           })
 
 
     d3.select(".slowSingleTrackEmpty")
       .transition()
       .style("opacity", 0)
+      .style("z-index",-1)
       .style("color", EMPTY_TRACK_COLOR)
 
     d3.select(".slowSingleTrackFilled")
@@ -1287,6 +1374,7 @@ d3.select("#dotBottom")
       .attr("width", "0px")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
       .style("color", FILLED_TRACK_COLOR)
 
      d3.select(".slowSingleDot")
@@ -1294,29 +1382,43 @@ d3.select("#dotBottom")
       .attr("x", 0)
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
 
 
   }
 
   function showSingleDot(){
+    showBreadcrumbs()
+    d3.select("#lineChart")
+      .style("opacity",0)
+      .style("z-index",-1)
+
+    d3.selectAll(".axisLabel")
+      .transition()
+      .style("opacity",0)
     resetIntro(1)
     hideAreaChart();
+        d3.select("#areaSvg")
+      .transition()
+      .style("opacity", 0)
+      .style("pointer-events","none")
     d3.select(".stackBackground")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
       .ease("linear")
-      .attr("height", 2*trackHeight)
-      .attr("y", height - 2*trackHeight)
+      .attr("height", 2*singleTrackHeight)
+      .attr("y", height - 2*singleTrackHeight)
       .transition()
       .delay(2900)
       .ease("linear")
-      .attr("height", 1*trackHeight)
-      .attr("y", height - 1*trackHeight)
+      .attr("height", 1*singleTrackHeight)
+      .attr("y", height - 1*singleTrackHeight)
       .transition()
       .delay(8500 + 1400)
       .ease("linear")
-      .attr("height", 0*trackHeight)
-      .attr("y", height - 0*trackHeight)
+      .attr("height", 0*singleTrackHeight)
+      .attr("y", height - 0*singleTrackHeight)
 
 
     d3.selectAll(".trackEmpty").transition().style("opacity",0)
@@ -1325,25 +1427,30 @@ d3.select("#dotBottom")
     d3.select("#vis")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
 
     d3.selectAll(".animationComponents")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
 
 
     g.select(".prisonBG")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
 
 
 
     d3.select(".singleTrackEmpty")
       .transition()
-      .style("opacity", 1)
+      .style("opacity", 0)
+      .style("z-index",1)
 
     d3.select(".singleTrackFilled")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
       .style("fill", FILLED_TRACK_COLOR)
       .transition()
       .ease("linear")
@@ -1354,23 +1461,29 @@ d3.select("#dotBottom")
      d3.select(".singleDot")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
       .transition()
       .delay(1400)
       .duration(1500)
       .ease("linear")
-      .attr("x", function(){ return (width- .5*(trackHeight * dotRatio)) + "px"})
+      .attr("x", function(){ return (width- .5*(singleTrackHeight * dotRatio)) + "px"})
       .each("end", function(){
         flyOut(this)
         d3.select(".singleTrackFilled")
           .transition("fade-out")
-            .duration(100)
+            .duration(500)
             .style("fill", EXITING_TRACK_COLOR)
+            .each("end", function(){
+              d3.select(this)
+                .style("fill",EMPTY_TRACK_COLOR)
+            })
         d3.select(this)
           .transition()
             .delay(200)
             .duration(100)
             .ease("linear")
             .style("opacity",0)
+            .style("z-index",-1)
         d3.select(this.parentNode)
           .selectAll("rect")
           .transition("fade-out")
@@ -1378,21 +1491,24 @@ d3.select("#dotBottom")
             .duration(100)
             .ease("linear")
             .style("opacity",0)
+            .style("z-index",-1)
 
         d3.select(".slowSingleTrackGroup")
           .transition()
             .attr("transform", function(d, i){
-              return "translate(0, " + (height-trackHeight) + ")"
+              return "translate(0, " + (height-singleTrackHeight) + ")"
             })
       })
 
     d3.select(".slowSingleTrackEmpty")
       .transition()
-      .style("opacity", 1)
+      .style("opacity", 0)
+      .style("z-index",1)
 
     d3.select(".slowSingleTrackFilled")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
       .transition()
       .ease("linear")
       .delay(1400)
@@ -1402,11 +1518,12 @@ d3.select("#dotBottom")
      d3.select(".slowSingleDot")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
       .transition()
       .delay(1400)
       .duration(8500)
       .ease("linear")
-      .attr("x", function(){ return (width- .5*(trackHeight * dotRatio)) + "px"})
+      .attr("x", function(){ return (width- .5*(singleTrackHeight * dotRatio)) + "px"})
       .each("end", function(){
         flyOut(this)
         d3.select(".slowSingleTrackFilled")
@@ -1416,24 +1533,29 @@ d3.select("#dotBottom")
             .transition()
             .delay(100)
             .style("opacity",0)
+            .style("z-index",-1)
         d3.select(".slowSingleTrackEmpty")
           .transition()
           .delay(200)
           .style("opacity",0)
+          .style("z-index",-1)
         d3.select(".singleTrackFilled")
           .transition()
           .delay(200)
           .style("opacity",0)
+          .style("z-index",-1)
         d3.select(".singleTrackEmpty")
           .transition()
           .delay(200)
           .style("opacity",0)
+          .style("z-index",-1)
         d3.select(this)
           .transition()
             .delay(200)
             .duration(100)
             .ease("linear")
             .style("opacity",0)
+            .style("z-index",-1)
         d3.select(this.parentNode)
           .selectAll("rect")
           .transition("fade-out")
@@ -1441,103 +1563,96 @@ d3.select("#dotBottom")
             .duration(100)
             .ease("linear")
             .style("opacity",0)
+            .style("z-index",-1)
       })
   }
 
 
   function oneYearSentences(){
-    hideSingleDot();
-    d3.select("#appear2-1")
+    d3.selectAll(".axisLabel")
       .transition()
-      .delay(5000)
-      .duration(1000)
       .style("opacity",1)
-
+    hideSingleDot();
     d3.selectAll(".animationComponents")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
 
     d3.select("#lineChart")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
+      .style("z-index",1)
     drawBackCurtain(3)
     animateIntro(3)
   }
   function longerSentences(){
-    d3.select("#appear3-1")
-      .transition()
-      .delay(2000)
-      .duration(1000)
-      .style("opacity",1)
-    d3.select("#appear3-2")
-      .transition()
-      .delay(5000)
-      .duration(1000)
-      .style("opacity",1)
-    d3.select("#appear3-3")
-      .transition()
-      .delay(11000)
-      .duration(1000)
-      .style("opacity",1)
     drawBackCurtain(4)
     animateIntro(4)
   }
   function longerSentencesFasterAdmission(){
-    d3.select("#appear4-1")
-      .transition()
-      .delay(3000)
-      .duration(1000)
-      .style("opacity",1)
     drawBackCurtain(5)
     animateIntro(5)
   }
   function fewerShortSentences(){
     d3.select("#legendOne div")
-      .text("One year sentences")
+      .text("One year prison terms")
     d3.select("#legend")
       .transition()
-      .style("left","350px")
       .style("opacity",1)
-    d3.select("#appear5-1")
-      .transition()
-      .delay(5000)
-      .duration(1000)
-      .style("opacity",1)
+      .style("z-index",1)
     drawBackCurtain(6)
     animateIntro(6)
   }
   function shortSentenceEarlyRelease(){
+    showBreadcrumbs();
     d3.selectAll(".animationComponents")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
     d3.select("#legend")
       .transition()
-      .style("left","347px")
       .style("opacity",1)
+      .style("z-index",1)
     d3.select("#legendOne div")
-      .text("Six month sentences")
+      .text("Six month prison terms")
     drawBackCurtain(7)
     animateIntro(7)
     d3.select("#vis")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
     d3.select("#lineChart")
       .transition()
       .style("opacity",1)
+      .style("z-index",1)
   }
   function hideIntro(){
+    hideBreadCrumbs();
     d3.selectAll(".animationComponents")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
     d3.select("#vis")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
     d3.select("#lineChart")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
     d3.select("#map")
       .transition()
       .style("opacity",0)
+      .style("z-index",-1)
+    // d3.select("#bodyNew")
+    //   .transition()
+    //   .style("opacity",0)
+    //   .style("z-index",-1)
+    // d3.select("#bodyOld")
+    //   .transition()
+    //   .style("opacity",0)
+    //   .style("z-index",-1)
   }
 
   /**
@@ -1599,6 +1714,8 @@ d3.select("#dotBottom")
    * @param index - index of the activated section
    */
   chart.activate = function(index) {
+    d3.selectAll(".crumb").classed("active", false)
+    d3.select("#crumb" + (index-1)).classed("active", true)
     activeIndex = index;
     var sign = (activeIndex - lastIndex) < 0 ? -1 : 1;
     var scrolledSections = d3.range(lastIndex + sign, activeIndex + sign, sign);
@@ -1631,9 +1748,18 @@ d3.select("#dotBottom")
  *
  * @param data - loaded tsv data
  */
+
 function display(animationData, lineData, areaData) {
   // create a new plot and
   // display it
+
+  d3.select("#areaChartText")
+    .style("margin-top",window.innerHeight + "px")
+  d3.select("#firstGap")
+    .style("margin-bottom",window.innerHeight*1.2 + "px")
+  d3.select("#secondGap")
+    .style("margin-bottom",window.innerHeight + "px")
+
   var plot = scrollVis();
   d3.select("#vis")
     .datum([animationData, lineData, areaData])
@@ -1653,14 +1779,17 @@ function display(animationData, lineData, areaData) {
   // setup event handling
   scroll.on('resized', function(){
     d3.select("#vis svg").remove()
+    d3.select("#breadCrumb svg").remove()
     d3.select("#introAreaContainer svg").remove()
     d3.select("#lineChart svg").remove()
     display(animationData, lineData, areaData)
+
   })
   scroll.on('active', function(index) {
     // highlight current step text
-    // d3.selectAll('.step')
-      // .style('opacity',  function(d,i) { return i == index ? 1 : 0.1; });
+    d3.selectAll('.step')
+      .transition()
+      .style('opacity',  function(d,i) { return i == index ? 1 : 0.1; });
 
     var stepText = d3.select(d3.selectAll(".step")[0][index]).html()
 
@@ -1668,37 +1797,41 @@ function display(animationData, lineData, areaData) {
     // var opacityOld = (index%2 == 0) ? 1 : 0;
 
 
-    if(index%2 == 0){
-      d3.select("#bodyNew")
-        .html(stepText)
-        .transition()
-        .duration(2000)
-        .style("opacity",1)
+    // if(index%2 == 0){
+    //   d3.select("#bodyNew")
+    //     .html(stepText)
+    //     .transition()
+    //     .duration(2000)
+    //     .style("opacity",1)
+    //     .style("z-index",1)
 
-      d3.select("#bodyOld")
-        // .html(stepText)
-        .transition()
-        .duration(1000)
-        .style("opacity",0)
-        .each("end", function(){
-          d3.select(this).html(stepText)
-        })
-      }else{
-      d3.select("#bodyOld")
-        .html(stepText)
-        .transition()
-        .duration(2000)
-        .style("opacity",1)
+    //   d3.select("#bodyOld")
+    //     // .html(stepText)
+    //     .transition()
+    //     .duration(1000)
+    //     .style("opacity",0)
+    //     .style("z-index",-1)
+    //     .each("end", function(){
+    //       d3.select(this).html(stepText)
+    //     })
+    //   }else{
+    //   d3.select("#bodyOld")
+    //     .html(stepText)
+    //     .transition()
+    //     .duration(2000)
+    //     .style("opacity",1)
+    //     .style("z-index",1)
 
-      d3.select("#bodyNew")
-        // .html(stepText)
-        .transition()
-        .duration(1000)
-        .style("opacity",0)
-        .each("end", function(){
-          d3.select(this).html(stepText)
-        })
-      }
+    //   d3.select("#bodyNew")
+    //     // .html(stepText)
+    //     .transition()
+    //     .duration(1000)
+    //     .style("opacity",0)
+    //     .style("z-index",-1)
+    //     .each("end", function(){
+    //       d3.select(this).html(stepText)
+    //     })
+    //   }
 
     // activate current section
     plot.activate(index);
@@ -1719,3 +1852,13 @@ d3.csv("data/introData.csv", function(animationData){
 });
 
 
+var nextpage = d3.select(".next-page-div")
+nextpage
+    .on("mouseover", function() {
+        nextpage.select(".next-arrow")
+            .attr("class", "next-arrow-hovered")
+    })
+    .on("mouseout", function() {
+        nextpage.select(".next-arrow-hovered")
+            .attr("class", "next-arrow")
+    })

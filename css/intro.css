@@ -22,14 +22,10 @@ a{
   color: #1696d2;
   text-decoration: none;
 }
-#topGap{
-  height: 10px;
-}
-#secondGap{
-  height: 500px;
-}
+
 #areaSvg{
   position: fixed;
+  z-index: 2;
 }
 .area.x.axis line, .area.x.axis path{
   display: none;
@@ -65,7 +61,8 @@ a{
   }
 }
 #areaChartText1, #areaChartText2-1, #areaChartText2-2{
-  opacity: 0;
+  opacity: 1;
+	/*z-index:-1;*/
 }
 #areaChartText1{
   padding-bottom: 30px;
@@ -74,13 +71,14 @@ a{
   font-weight: bold;
 }
 #areaChartText{
-    position: fixed;
+    position: absolute;
+    margin-top: 200%;
     width: 530px;
     top: 100px;
     left: 40px;
     font-size: 25px;
     line-height: 34px;
-    z-index: 999;
+    z-index: 1;
 }
 #areaChartText a{
   color: #1696d2;
@@ -94,28 +92,32 @@ a{
   left: 810px;
   top: calc(50% - 20px);
   width: 350px;
-  font-size: 16px;
-  line-height: 1.35;
+}
+#bodyText p{
+  font-size: 16px !important;
+  line-height: 1.35 !important;
+  margin-bottom: 20px !important;
+  margin-top: 20px !important;
 }
 #bodyNew, #bodyNew{
   opacity: 0;
+	z-index:-1;
   position: absolute;
   top: 0px;
 }
-.step{
-  visibility: hidden;
-}
+
 .textAppear{
-  opacity: 0;
+  /*opacity: 0;*/
+	/*z-index:-1;*/
 }
 
 
 
 #legend{
   position: fixed;
-  top: calc(50% - 276px);
-  left: 350px;
-  font-size: 14px;
+  top: calc(50% - 169px);
+  left: 26px;
+  font-size: 13px;
 }
 .legendContainer, .legendContainer div, .legendContainer span{
   display: inline-block;
@@ -131,9 +133,62 @@ a{
   background-color: #000000;
 }
 #legendTen span{
-  margin-left: 50px;
+  margin-left: 20px;
   background-color: #73bfe2;
 }
 .animationComponents{
   opacity: 0;
+	z-index:-1;
+}
+.row{
+  z-index: 99;
+  position: relative;
+}
+.full-wrapper{
+  position: absolute;
+  bottom: -65px;
+}
+.conclusion-div{
+  margin-top: 0;
+}
+
+.step p{
+  font-size: 20px !important;
+  line-height: 28px !important;
+  color:  #696969 !important;
+}
+.step p strong{
+  color:  #000 !important;
+}
+.step {
+  margin-bottom: 400px;
+}
+#firstGap{
+  margin-bottom: 3000px;
+  opacity: 0 !important;
+}
+#secondGap{
+  margin-bottom: 3000px;
+  opacity: 0 !important;
+}
+
+#sections {
+  width: 350px !important;
+}
+
+
+#breadCrumb{
+  position: fixed;
+  left: 810px;
+  z-index: 99;
+}
+.crumb{
+  fill: #d2d2d2;
+  stroke: #9d9d9d;
+  stroke-width: 1px;
+  cursor: pointer;
+}
+.crumb.active{
+  fill: #1696d2;
+  stroke: #000;
 }

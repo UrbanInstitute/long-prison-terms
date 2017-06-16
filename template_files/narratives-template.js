@@ -1,22 +1,17 @@
-console.log(window.scrollY)
 
 var duration = 300; 
 
-var arrowTransitionMin = 200,
-    arrowTransitionMax = 1300,
-    transition1Max = 2700,
-    transition3Max = 3700,
-    transition4Max = 4500,
-    transition6Max = 5000,
-    transition2Max = 6300,
-    transition7Max = 7000,
-    transition8Max = 8000,
-    transition9Max = 9600,
-    transition13Max = 10900,
-    transition14Max = 11800
-
-
 var isTransitioning = [null, false, false, false, false, false, false, false, false, false, false, false, false, false, false]
+
+var inViewMin = 350
+
+
+function getViewMin(element) {
+    var offset = $(element).offset().top,
+        scrollTop = $(window).scrollTop();
+        return offset - scrollTop;
+}
+
 
 function quoteTransition(number) { 
 
@@ -26,98 +21,100 @@ function quoteTransition(number) {
         .transition()
         .duration(duration)
         .style("opacity", 1)
-        .on("start", function(){ console.log(number); isTransitioning[number] = true })
-        .on("end", function(){ console.log(number); isTransitioning[number] = false })
+        .style("pointer-events", "all")
+        .style("z-index", 1)
+        .on("start", function(){ isTransitioning[number] = true })
+        .on("end", function(){ isTransitioning[number] = false })
         .on("interrupt", function() {isTransitioning[number] = false})
 
     d3.selectAll(".note-container:not(.con-quote" + number + ")")
         .transition()
         .duration(duration)
         .style("opacity", 0)
+        .style("z-index", -1)
+
 }
 
+
 window.onscroll = function() {
-    if(window.scrollY < arrowTransitionMin){
-        d3.select("#introArrow")
-            .style("opacity", 1)
+    if(
+        d3.select(".left-col").node().getBoundingClientRect().bottom <= d3.select(".con-quote11").node().getBoundingClientRect().bottom ||
+        d3.select(".left-col").node().getBoundingClientRect().top >= d3.select(".con-quote11").node().getBoundingClientRect().top
+        ){
         d3.selectAll(".note-container")
-            .style("opacity", 0)
-    }  else if(window.scrollY >= arrowTransitionMin && window.scrollY <arrowTransitionMax) {
-        //MAKE ARROW DISAPPEAR BEFORE FIRST QUOTE
-        d3.selectAll(".note-container")
-            .style("opacity", 0)
-        d3.select("#introArrow")
-            .style("opacity", 0)
-    } else if(window.scrollY >= arrowTransitionMax && window.scrollY <transition1Max){     
+            .style("opacity", 0)            
+            .style("pointer-events", "none")
+            .style("z-index", -1)
+    }
+    else if (getViewMin("#sidebar1") <= inViewMin && getViewMin("#sidebar3") > inViewMin) {
         //FIRST QUOTE APPEARS
         if (!isTransitioning[1])  {
             quoteTransition(1)
         }  
- 
-    } else if(window.scrollY >= transition1Max && window.scrollY <transition3Max){  
-        //THIRD QUOTE APPEARS
+    }
+    else if (getViewMin("#sidebar3") <= inViewMin && getViewMin("#sidebar4") > inViewMin) {
+        //SIDEBAR 3 APPEARS
         if (!isTransitioning[3]) {
             quoteTransition(3)
         } 
-          
-
-    } else if(window.scrollY >= transition3Max && window.scrollY <transition4Max){  
-        //FOURTH QUOTE APPEARS
+    }
+    else if (getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar6") > inViewMin) {
+        //SIDEBAR 4 APPEARS
         if (!isTransitioning[4]) {
             quoteTransition(4)
         } 
-          
-
-
-    } else if(window.scrollY >= transition4Max && window.scrollY <transition6Max){ 
-                //SIXTH QUOTE APPEARS
+    }
+    else if (getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar7") > inViewMin) {
+        //SIDEBAR 6 APPEARS
         if (!isTransitioning[6]) {
             quoteTransition(6)
         } 
-
-
-    } else if(window.scrollY >= transition6Max && window.scrollY <transition2Max){ 
-                //SIDEBAR 2 APPEARS
-        if (!isTransitioning[2]) {
-            quoteTransition(2)
-        } 
-
-    } else if(window.scrollY >= transition2Max && window.scrollY <transition7Max){ 
-                //SIDEBAR 7 APPEARS
+    }
+    else if (getViewMin("#sidebar7") <= inViewMin && getViewMin("#sidebar8") > inViewMin) {
+        //SIDEBAR 7 APPEARS
         if (!isTransitioning[7]) {
             quoteTransition(7)
         } 
-
-    } else if(window.scrollY >= transition7Max && window.scrollY <transition8Max){ 
-                //SIDEBAR 8 APPEARS
+    }
+    else if (getViewMin("#sidebar8") <= inViewMin && getViewMin("#sidebar9") > inViewMin) {
+        //SIDEBAR 8 APPEARS
         if (!isTransitioning[8]) {
             quoteTransition(8)
         } 
-
-    } else if(window.scrollY >= transition8Max && window.scrollY <transition9Max){ 
-                //SIDEBAR 9 APPEARS
+    }
+    else if (getViewMin("#sidebar9") <= inViewMin && getViewMin("#sidebar13") > inViewMin) {
+        //SIDEBAR 9 APPEARS
         if (!isTransitioning[9]) {
             quoteTransition(9)
         } 
-
-    } else if(window.scrollY >= transition9Max && window.scrollY <transition13Max){ 
-                //SIDEBAR 13 APPEARS
+    }
+    else if (getViewMin("#sidebar13") <= inViewMin && getViewMin("#sidebar14") > inViewMin) {
+        //SIDEBAR 13 APPEARS
         if (!isTransitioning[13]) {
             quoteTransition(13)
         } 
-
-    } else if(window.scrollY >= transition13Max && window.scrollY <transition14Max){ 
-                //SIDEBAR 14 APPEARS
-        if (!isTransitioning[14]) {
+    }
+    else if (getViewMin("#sidebar14") <= inViewMin && getViewMin("#sidebar11") > inViewMin) {
+        //SIDEBAR 14 APPEARS
+        if (!isTransitioning[14]) { console.log(window.scrollY)
             quoteTransition(14)
         } 
-   } else if(window.scrollY >= transition14Max){ 
-                //SIDEBAR 11 APPEARS
+   }
+   else if(getViewMin("#sidebar11") <= inViewMin){  
+        //SIDEBAR 11 APPEARS
         if (!isTransitioning[11]) {
             quoteTransition(11)
         } 
-
-    } else {
-        d3.selectAll(".note-container").style("opacity", 0)
     }
 };
+
+var nextpage = d3.select(".next-page-div")
+nextpage
+    .on("mouseover", function() {
+        nextpage.select(".next-arrow")
+            .attr("class", "next-arrow-hovered")
+    })
+    .on("mouseout", function() {
+        nextpage.select(".next-arrow-hovered")
+            .attr("class", "next-arrow")
+    })

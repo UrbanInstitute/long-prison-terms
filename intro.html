@@ -1,11 +1,35 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="navList">
 <head>
-  <title>Scrolling Sections</title>
+
+  <title>A Matter of Time: Intro</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
   <link rel="stylesheet" type="text/css" href="css/intro.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>   
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script> 
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic,900" rel="stylesheet" type="text/css">
+    <!--for the header-->      
+    <link rel="stylesheet" type="text/css" href="template_files/urban-header.css">
+          
+    <!--project style sheet-->
+    <link rel="stylesheet" href="template_files/template.css" type="text/css">
+
+    <!-- sticky Div style sheet -->
+    <link rel="stylesheet" href="template_files/sticky.css" type="text/css">
 </head>
 <body>
+<div ng-include="'template_files/header.html'">
+</div>
+
+    <div id = "breadCrumb"></div>
+
+
     <div id = "titleText" class = "titleElement">
       <span>A matter of time <i class = "titleElement">:</i></span>
       <div id = "subtitleText" class = "titleElement">An Exploration of Time Served in America&rsquo;s Prisons</div>
@@ -23,8 +47,8 @@
   <div id='graphic'>
     <div class = "animationComponents" id = "visTitle">People in prison:<span>0</span></div>
     <div class = "animationComponents" id = "legend">
-      <div id = "legendOne" class = "legendContainer"><span></span><div>One year sentences</div></div>
-      <div id = "legendTen" class = "legendContainer"><span></span><div>Ten and twenty year sentences</div></div>
+      <div id = "legendOne" class = "legendContainer"><span></span><div>One year prison terms</div></div>
+      <div id = "legendTen" class = "legendContainer"><span></span><div>Ten and twenty year prison terms</div></div>
     </div>
     <div id='vis'>
   </div>
@@ -34,71 +58,50 @@
     <div id='sections'>
     <div id ='lineChart'>
       <div id = "lineLabel_3" data-key="3" class = "lineLabel">Equilibrium</div>
-      <div id = "lineLabel_4" data-key="4" class = "lineLabel">Longer Sentences</div>
-      <div id = "lineLabel_5" data-key="5" class = "lineLabel">Larger admission rates</div>
+      <div id = "lineLabel_4" data-key="4" class = "lineLabel">Longer prison terms</div>
+      <div id = "lineLabel_5" data-key="5" class = "lineLabel">Higher admission rates</div>
       <div id = "lineLabel_6" data-key="6" class = "lineLabel">Reduced admission rates</div>
-      <div id = "lineLabel_7" data-key="7" class = "lineLabel">Shorter short sentences</div>
+      <div id = "lineLabel_7" data-key="7" class = "lineLabel">Shorter prison terms</div>
       <div id = "axisLabelX"  class = "axisLabel">Years</div>
       <div id = "axisLabelY"  class = "axisLabel">People in prison</div>
     </div>
-      <div id = "bodyText">
-        <div id = "bodyNew"></div>
-        <div id = "bodyOld"></div>
-      </div>
-      <section class="step">
-        <div id = "topGap"></div>
+
+
+
+      <section class="step" id = "firstGap">
+        <div>first gap</div>
       </section>
-<!--       <section class="step">
-        <div id = "secondGap"></div>
-      </section> -->
-      <section class="step">
-        <div>&nbsp;</div>
+      <section class="step" id = "secondGap">
+        <div>second gap</div>
       </section>
       <section class="step">
         <p>
-          One dot moving across the box to the left represents a person&rsquo;s time in prison. The slower the dot, the longer the prison term.
+          <strong>One dot moving across the box to the left represents a person&rsquo;s time in prison</strong>. The slower the dot, the longer the prison term.
         </p>
       </section>
       <section class="step">
         <p>
-          Imagine if everyone in prison stayed there for one year.
-        </p>
-        <p class = "textAppear" id = "appear2-1">If the rate of people going to prison stays roughly the same, then as new people enter, others leave&mdash;and the prison population stays fairly stable.
+          <strong>Imagine if everyone in prison stayed there for one year</strong>. If the rate of people going to prison stays roughly the same, then as new people enter, others leave&mdash;and the prison population stays fairly stable.
         </p>
       </section>
       <section class="step">
         <p>
-          Now imagine that some of these people begin to stay longer&mdash;say, 10 or 20 years.
-        </p>
-        <p class = "textAppear" id = "appear3-1">
-          At first, this doesn&rsquo;t have much of an effect on the prison population.
-        </p>
-        <p class = "textAppear" id = "appear3-2">
-          But over time, it does.
-        </p>
-        <p class = "textAppear" id = "appear3-3">
-          When people stay longer, they start to stack up.
+          Now imagine that some of these people begin to stay longer&mdash;say, 10 or 20 years. At first, this doesn&rsquo;t have a large effect on the prison population. But over time, it does. <strong>When people stay longer, they start to stack up</strong>.
         </p>
       </section>
       <section class="step">
         <p>
-          And when more people start serving more time, the combined effect is huge.
-        </p>
-        <p class = "textAppear" id = "appear4-1">
-          These trends are real&mdash;except they involve roughly 2.2 million people behind bars rather than the 40 or so people imprisoned in our fictional example. In the United States, more people have been going to prison and staying there longer, mostly because of “tough-on-crime” policies that swept the country in the 1980s and &rsquo;90s. The prison population boomed as <a target = "_blank" href = "/policies.html">sentences got longer and release policies got more restrictive.</a>
+          <strong>And when more people start serving more time, the combined effect is huge</strong>. These trends are real&mdash;except they involve roughly 2.2 million people behind bars rather than the 40 or so people imprisoned in our fictional example. In the United States, more people have been going to prison and staying there longer, mostly because of “tough-on-crime” policies that swept the country in the 1980s and &rsquo;90s. The prison population boomed as <a target = "_blank" href = "/policies.html">sentences got longer and release policies got more restrictive.</a>
         </p>
       </section>
       <section class="step">
         <p>
-          Recent <a href = "https://apps.urban.org/features/reducing-mass-incarceration/" target = "_blank">efforts to reduce the number of people</a> who are sent to prison in the first place, like alternatives to incarceration for drug offenses, have <a href = "http://apps.urban.org/features/justice-reinvestment/" target = "_blank">helped stem the flow</a> in some states and prisons.
-        </p>
-        <p class = "textAppear" id = "appear5-1">
-          But these efforts typically only affect people who wouldn&rsquo;t be in prison for very long anyway.
+          <strong>Recent <a href = "https://apps.urban.org/features/reducing-mass-incarceration/" target = "_blank">efforts to reduce the number of people</a> who are sent to prison</strong> in the first place, like alternatives to incarceration for drug offenses, have <a href = "http://apps.urban.org/features/justice-reinvestment/" target = "_blank">helped stem the flow</a> in some states and prisons. But these efforts typically only affect people who wouldn&rsquo;t be in prison for very long anyway.
         </p>
       </section>
       <section class="step">
         <p>
-          Other reforms limit how long people can stay in prison for low-level crimes, but that also doesn&rsquo;t affect people with the longest prison terms.
+          <strong>Other reforms limit how long people can stay in prison</strong> for low-level crimes, but that also doesn&rsquo;t affect people with the longest prison terms.
         </p>
       </section>
       <section class="step">
@@ -106,29 +109,63 @@
 
     </div>
 
-      <div id="extra-space">
-        <p>
-          This is a problem. So, what can be done?
-        </p>
-        <p>
-          To start, we looked at prison term trends <a href = "/about.html" target = "_blank">in a new way</a> and found that the longest terms are getting longer, particularly for violent offenses. But how long is too long? What is long enough? And do longer prison terms really translate into justice, rehabilitation, and public safety?
-        </p>
-        <p>
-          Efforts to meaningfully reduce the prison population must consider these questions, which may mean rethinking how we treat people convicted of serious crimes. 
-        </p>
 
+    <div class="row">
+      <div class="conclusion-div">
+        <div class="conclusion-header">
+        <!--CONCLUSION HEADLINE-->
+          This is a problem. So, what can be done?
+        </div>
+        <p class="conclusion-text">To start, we looked at prison term trends <a href = "about.html" target = "_blank">in a new way</a> and found that the longest terms are getting longer, particularly for violent offenses. But how long is too long? What is long enough? And do longer prison terms really translate into justice, rehabilitation, and public safety?</p>
+        <p class="conclusion-text bottom-p">
+        Efforts to meaningfully reduce the prison population must consider these questions, which may mean rethinking how we treat people convicted of serious crimes. 
+        </p>
       </div>
+      <div class="next-page-div">
+        <a href="trends.html"> 
+        <div class="next-page-column-1">
+          <div class="next-page-text">
+            The longest prison terms have been growing in length and in number. To better understand these trends state by state, we took a new approach to measuring how much time people spend in prison.
+          </div>
+          <div class="next-page-next-up">
+            NEXT UP
+          </div>
+          <div class="next-page-title">
+            Trends
+          </div>
+        </div>
+        <div class="next-page-column-2">
+        <div class="next-arrow"></div>
+        </div>
+        </a>
+      </div>
+      <div class="full-wrapper">
+        <div class="copyright-footer">
+        Copyright &copy; <a href="http://www.urban.org" target="_blank">Urban Instuitute 2017</a>. <a href="http://www.urban.org" target="_blank">View this project on Github</a>.
+        </div>
+      </div>
+    </div>
+
 
   </div>
 
 </div>
 
 
+      
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="template_files/app.js"></script>
 <script src="js/d3.min.js"></script>
 <script src="js/countup.min.js"></script>
-
 <script src="data/stateData.js"></script>
 <script src="js/scroller.js"></script>
 <script src="js/intro.js"></script>
+<script src="js/vendor/header.js"></script>  
+
 </body>
 </html>

@@ -2,7 +2,7 @@
   
        
           <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
-            <div class="title"><span class="feature-link"><a href="http://www.urban.org/features" class="title-linkback" alt="Urban Institute logo">Features</a> <span>: :</span> </span><a href="index.html" class="title-linkback">A Matter of Time: An Exploration of Time Served in America's Prisons</a>
+            <div class="title"><span class="feature-link"><a href="http://www.urban.org/features" class="title-linkback" alt="Urban Institute logo">Features</a> <span>: :</span> </span><a href="intro.html" class="title-linkback">A Matter of Time: An Exploration of Time Served in America's Prisons</a>
             </div>
             <div class="share-icons">
                 <div class="shareThisP">
@@ -28,12 +28,12 @@
                     
          </div>   
 
-        <div class="subnav">
+        <div class="subnav" ng-controller="navCtrl">
             
 <!--          <div class="subnav">
 <ul> -->
               <ul class="nav-list">           
-                <li ng-class="navClass('intro')"><a href="intro.html">Intro</a></li>
+                <li ng-class="navClass('intro')" id="left-nav-item"><a href="intro.html">Intro</a></li>
                 <li ng-class="navClass('trends')"><a href="trends.html">Trends</a></li>
                 <li ng-class="navClass('demographics')"><a href="demographics.html">Demographics</a></li>
                 <li ng-class="navClass('narratives')"><a href="narratives.html">Narratives</a></li>
@@ -47,7 +47,7 @@
                   
                         
       <div id="mobilenavcontainer" class="show-menu">
-           <label for="show-menu">Chapters &#9660;</label>
+           <label for="show-menu">Chapters <span class="subnav-arrow"></span></label>
            <input type="checkbox" id="show-menu" class="checkbox" role="button">
                 <ul id="menu">
                 <li><a href="intro.html" ng-click="$root.title = 'Intro'">Intro</a></li>
@@ -70,7 +70,9 @@
                 </ul>
             <div id="current-page-navbar">
             VIEWING <br />
-            <div class="current-page-name"></div>
+              <div class="current-page-name" ng-controller="navRightCtrl">
+              {{pageName}}
+              </div>
             </div>
       </div>  
 
