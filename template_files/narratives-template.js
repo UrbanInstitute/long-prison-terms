@@ -64,16 +64,10 @@ window.onscroll = function() {
             quoteTransition(4)
         } 
     }
-    else if (getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar2") > inViewMin) {
+    else if (getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar7") > inViewMin) {
         //SIDEBAR 6 APPEARS
         if (!isTransitioning[6]) {
             quoteTransition(6)
-        } 
-    }
-    else if (getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar7") > inViewMin) {
-        //SIDEBAR 2 APPEARS
-        if (!isTransitioning[2]) {
-            quoteTransition(2)
         } 
     }
     else if (getViewMin("#sidebar7") <= inViewMin && getViewMin("#sidebar8") > inViewMin) {
