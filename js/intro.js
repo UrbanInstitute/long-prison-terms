@@ -9,13 +9,13 @@ var scrollVis = function() {
   // constants to define the size
   // and margins of the vis area.
   var WIDTH = 826,
-    HEIGHT = 500,
+    HEIGHT = 300,
     margin = {top: 2, right: 85, bottom: 10, left: 25},
     width = WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom
 
   var lineMargin = {top: 30, right: 60, bottom: 30, left: 50},
-    lineWidth = 300 - lineMargin.left - lineMargin.right,
+    lineWidth = 500 - lineMargin.left - lineMargin.right,
     lineHeight = 216 - lineMargin.top - lineMargin.bottom;
 
   var YEAR_IN_MS = 2000,

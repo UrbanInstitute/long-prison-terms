@@ -78,15 +78,15 @@ body{
 #lineChart{
   display: inline-block;
   position: fixed;
-  bottom: 20px;
+  bottom: 107px;
   z-index: -1;
   margin-left: 0;  
   width: 530px;
   background: transparent;
   height: 207px;
-  top: calc(50% - 267px);
+  /*top: calc(50% - 267px);*/
   border-left: 46px solid transparent;
-  left: 734px;
+  left: -46px;
   height: 239px;
 }
 #vis .title {
