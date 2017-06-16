@@ -20,12 +20,15 @@
     <!--project style sheet-->
     <link rel="stylesheet" href="template_files/template.css" type="text/css">
 
-    <!--sticky Div style sheet-->
+    <!-- sticky Div style sheet -->
     <link rel="stylesheet" href="template_files/sticky.css" type="text/css">
 </head>
 <body>
 <div ng-include="'template_files/header.html'">
 </div>
+
+    <div id = "breadCrumb"></div>
+
 
     <div id = "titleText" class = "titleElement">
       <span>A matter of time <i class = "titleElement">:</i></span>
@@ -62,64 +65,43 @@
       <div id = "axisLabelX"  class = "axisLabel">Years</div>
       <div id = "axisLabelY"  class = "axisLabel">People in prison</div>
     </div>
-      <div id = "bodyText">
-        <div id = "bodyNew"></div>
-        <div id = "bodyOld"></div>
-      </div>
-      <section class="step">
-        <div id = "topGap"></div>
+
+
+
+      <section class="step" id = "firstGap">
+        <div>first gap</div>
       </section>
-<!--       <section class="step">
-        <div id = "secondGap"></div>
-      </section> -->
-      <section class="step">
-        <div id = "secondGap">&nbsp;</div>
+      <section class="step" id = "secondGap">
+        <div>second gap</div>
       </section>
       <section class="step">
         <p>
-          One dot moving across the box to the left represents a person&rsquo;s time in prison. The slower the dot, the longer the prison term.
+          <strong>One dot moving across the box to the left represents a person&rsquo;s time in prison</strong>. The slower the dot, the longer the prison term.
         </p>
       </section>
       <section class="step">
         <p>
-          Imagine if everyone in prison stayed there for one year.
-        </p>
-        <p class = "textAppear" id = "appear2-1">If the rate of people going to prison stays roughly the same, then as new people enter, others leave&mdash;and the prison population stays fairly stable.
+          <strong>Imagine if everyone in prison stayed there for one year</strong>. If the rate of people going to prison stays roughly the same, then as new people enter, others leave&mdash;and the prison population stays fairly stable.
         </p>
       </section>
       <section class="step">
         <p>
-          Now imagine that some of these people begin to stay longer&mdash;say, 10 or 20 years.
-        </p>
-        <p class = "textAppear" id = "appear3-1">
-          At first, this doesn&rsquo;t have much of an effect on the prison population.
-        </p>
-        <p class = "textAppear" id = "appear3-2">
-          But over time, it does.
-        </p>
-        <p class = "textAppear" id = "appear3-3">
-          When people stay longer, they start to stack up.
+          Now imagine that some of these people begin to stay longer&mdash;say, 10 or 20 years. At first, this doesn&rsquo;t have a large effect on the prison population. But over time, it does. <strong>When people stay longer, they start to stack up</strong>.
         </p>
       </section>
       <section class="step">
         <p>
-          And when more people start serving more time, the combined effect is huge.
-        </p>
-        <p class = "textAppear" id = "appear4-1">
-          These trends are real&mdash;except they involve roughly 2.2 million people behind bars rather than the 40 or so people imprisoned in our fictional example. In the United States, more people have been going to prison and staying there longer, mostly because of “tough-on-crime” policies that swept the country in the 1980s and &rsquo;90s. The prison population boomed as <a target = "_blank" href = "/policies.html">sentences got longer and release policies got more restrictive.</a>
+          <strong>And when more people start serving more time, the combined effect is huge</strong>. These trends are real&mdash;except they involve roughly 2.2 million people behind bars rather than the 40 or so people imprisoned in our fictional example. In the United States, more people have been going to prison and staying there longer, mostly because of “tough-on-crime” policies that swept the country in the 1980s and &rsquo;90s. The prison population boomed as <a target = "_blank" href = "/policies.html">sentences got longer and release policies got more restrictive.</a>
         </p>
       </section>
       <section class="step">
         <p>
-          Recent <a href = "https://apps.urban.org/features/reducing-mass-incarceration/" target = "_blank">efforts to reduce the number of people</a> who are sent to prison in the first place, like alternatives to incarceration for drug offenses, have <a href = "http://apps.urban.org/features/justice-reinvestment/" target = "_blank">helped stem the flow</a> in some states and prisons.
-        </p>
-        <p class = "textAppear" id = "appear5-1">
-          But these efforts typically only affect people who wouldn&rsquo;t be in prison for very long anyway.
+          <strong>Recent <a href = "https://apps.urban.org/features/reducing-mass-incarceration/" target = "_blank">efforts to reduce the number of people</a> who are sent to prison</strong> in the first place, like alternatives to incarceration for drug offenses, have <a href = "http://apps.urban.org/features/justice-reinvestment/" target = "_blank">helped stem the flow</a> in some states and prisons. But these efforts typically only affect people who wouldn&rsquo;t be in prison for very long anyway.
         </p>
       </section>
       <section class="step">
         <p>
-          Other reforms limit how long people can stay in prison for low-level crimes, but that also doesn&rsquo;t affect people with the longest prison terms.
+          <strong>Other reforms limit how long people can stay in prison</strong> for low-level crimes, but that also doesn&rsquo;t affect people with the longest prison terms.
         </p>
       </section>
       <section class="step">
