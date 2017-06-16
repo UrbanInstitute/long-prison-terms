@@ -58,18 +58,6 @@ var scrollVis = function() {
             .attr("transform", 
                   "translate(" + mapMargin.left + "," + mapMargin.top + ")");
 
-
-// <defs>
-//     <filter id="blurFilter2" y="-10" height="40" x="-10" width="150">
-//         <feOffset in="SourceAlpha" dx="3" dy="3" result="offset2" />
-//         <feGaussianBlur in="offset2" stdDeviation="3"  result="blur2"/>
-
-//         <feMerge>
-//             <feMergeNode in="blur2" />
-//             <feMergeNode in="SourceGraphic" />
-//         </feMerge>
-//     </filter>
-// </defs>
       var chartWidth = mapSizes[pageSize]["chartWidth"]
       var chartMargin = mapSizes[pageSize]["chartMargin"]
 
@@ -126,21 +114,353 @@ var scrollVis = function() {
   };
 
 
-
+  var NUMERIC = d3.format(".2f")
+  var PERCENT = d3.format(".2%")
+  var PEOPLE = d3.format(".0f")
   function hoverState(obj, d){
-    console.log(d, activeIndex ,obj)
+    d.values = d.values.filter(function(o){ return parseInt(o.Year) >= 2000})
     var chartWidth = mapSizes[pageSize]["chartWidth"]
     var chartMargin = mapSizes[pageSize]["chartMargin"]
-
+    console.log(d3.select(obj).attr("transform"))
     var tt = mapSvg.append("g")
       .attr("transform", d3.select(obj).attr("transform") + " translate(" + (chartMargin-2) + " , " + (chartMargin + chartWidth-3) + ")")
-    tt.append("rect")
       .attr("id", "mapTooltip")
-      .attr("width", (chartWidth )*3)
-      .attr("height", (chartWidth )*3)
-      .style("fill","#fff")
-      .style("filter","url(#drop-shadow-right)")
 
+
+
+    // var keys = [null, "LOS_Mean",""]
+    if(activeIndex == 1){
+      tt.append("rect")
+        .attr("width", (chartWidth )*3)
+        .attr("height", (chartWidth )*3)
+        .style("fill","#fff")
+        .style("filter","url(#drop-shadow-right)")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30)
+        .text(d.values[0]["Year"] + " time served")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16)
+        .text(NUMERIC(d.values[0]["LOS_Mean"]) + " years")
+      
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*2.5)
+        .text(d.values[d.values.length - 1]["Year"] + " time served")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*3.5)
+        .text(NUMERIC(d.values[d.values.length - 1]["LOS_Mean"]) + " years")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*5)
+        .text("Raw change")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*6)
+        .text(NUMERIC(d.values[d.values.length - 1]["LOS_Mean"] - d.values[0]["LOS_Mean"]) + " years")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*7.5)
+        .text("Percent change")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*8.5)
+        .text(function(){
+          var change = d.values[d.values.length - 1]["LOS_Mean"] - d.values[0]["LOS_Mean"];
+          var percent = change/ d.values[0]["LOS_Mean"];
+          var changeWord = (percent < 0) ? "decrease" : "increase";
+
+          return PERCENT(Math.abs(percent)) + " " + changeWord;
+        })
+    }
+    else if(activeIndex == 2){
+      tt.append("rect")
+        .attr("width", (chartWidth )*4)
+        .attr("height", (chartWidth )*4)
+        .style("fill","#fff")
+        .style("filter","url(#drop-shadow-right)")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30)
+        .text(d.values[0]["Year"] + " time served")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16)
+        .text("Violent: " + NUMERIC(d.values[0]["LOS_MeanViolent"]) + " years")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*2)
+        .text("All except violent: " + NUMERIC(d.values[0]["LOS_MeanAllExceptViol"]))
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*3.5)
+        .text(d.values[d.values.length - 1]["Year"] + " time served")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*4.5)
+        .text("Violent: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanViolent"]) + " years")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*5.5)
+        .text("All except violent: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanAllExceptViol"]) + " years")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*7)
+        .text("Raw change")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*8)
+        .text("Violent: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanViolent"] - d.values[0]["LOS_MeanViolent"]) + " years")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*9)
+        .text("All except violent: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanAllExceptViol"] - d.values[0]["LOS_MeanAllExceptViol"]) + " years")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*10.5)
+        .text("Percent change")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*11.5)
+        .text(function(){
+          var change = d.values[d.values.length - 1]["LOS_MeanViolent"] - d.values[0]["LOS_MeanViolent"];
+          var percent = change/ d.values[0]["LOS_MeanViolent"];
+          var changeWord = (percent < 0) ? "decrease" : "increase";
+
+          return "Violent: " + PERCENT(Math.abs(percent)) + " " + changeWord;
+        })
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*12.5)
+        .text(function(){
+          var change = d.values[d.values.length - 1]["LOS_MeanAllExceptViol"] - d.values[0]["LOS_MeanAllExceptViol"];
+          var percent = change/ d.values[0]["LOS_MeanViolent"];
+          var changeWord = (percent < 0) ? "decrease" : "increase";
+
+          return "All except violent: " + PERCENT(Math.abs(percent)) + " " + changeWord;
+        })
+
+    }
+    else if(activeIndex == 3){
+      tt.append("rect")
+        .attr("width", (chartWidth )*4)
+        .attr("height", (chartWidth )*4)
+        .style("fill","#fff")
+        .style("filter","url(#drop-shadow-right)")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30)
+        .text(d.values[0]["Year"] + " time served")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16)
+        .text("Top 10%: " + NUMERIC(d.values[0]["LOS_MeanTop10"]) + " years")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*2)
+        .text("Bottom 90%: " + NUMERIC(d.values[0]["LOS_MeanBottom90"]))
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*3.5)
+        .text(d.values[d.values.length - 1]["Year"] + " time served")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*4.5)
+        .text("Top 10%: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanTop10"]) + " years")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*5.5)
+        .text("Bottom 90%: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanBottom90"]) + " years")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*7)
+        .text("Raw change")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*8)
+        .text("Top 10%: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanTop10"] - d.values[0]["LOS_MeanTop10"]) + " years")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*9)
+        .text("Bottom 90%: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanBottom90"] - d.values[0]["LOS_MeanBottom90"]) + " years")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*10.5)
+        .text("Percent change")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*11.5)
+        .text(function(){
+          var change = d.values[d.values.length - 1]["LOS_MeanTop10"] - d.values[0]["LOS_MeanTop10"];
+          var percent = change/ d.values[0]["LOS_MeanTop10"];
+          var changeWord = (percent < 0) ? "decrease" : "increase";
+
+          return "Top 10%: " + PERCENT(Math.abs(percent)) + " " + changeWord;
+        })
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*12.5)
+        .text(function(){
+          var change = d.values[d.values.length - 1]["LOS_MeanBottom90"] - d.values[0]["LOS_MeanBottom90"];
+          var percent = change/ d.values[0]["LOS_MeanTop10"];
+          var changeWord = (percent < 0) ? "decrease" : "increase";
+
+          return "Bottom 90%: " + PERCENT(Math.abs(percent)) + " " + changeWord;
+        })
+    }
+    else if(activeIndex == 4){
+      tt.append("rect")
+        .attr("width", (chartWidth )*3.5)
+        .attr("height", (chartWidth )*2.5)
+        .style("fill","#fff")
+        .style("filter","url(#drop-shadow-right)")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30)
+        .text(d.values[0]["Year"] + " share of population")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16)
+        .text(NUMERIC(d.values[0]["LOS_10plus_Pct"]) + "%")
+      
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*2.5)
+        .text(d.values[d.values.length - 1]["Year"] + " share of population")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*3.5)
+        .text(NUMERIC(d.values[d.values.length - 1]["LOS_10plus_Pct"]) + "%")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*5)
+        .text("Raw change")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*6)
+        .text(NUMERIC(d.values[d.values.length - 1]["LOS_10plus_Pct"] - d.values[0]["LOS_10plus_Pct"]) + " percentage points")
+    }
+    else if(activeIndex == 5){
+      tt.append("rect")
+        .attr("width", (chartWidth )*3.7)
+        .attr("height", (chartWidth )*3.7)
+        .style("fill","#fff")
+        .style("filter","url(#drop-shadow-right)")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30)
+        .text("Y axis maximum")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16)
+        .text(PEOPLE(Math.ceil(1.1* d3.max(d.values, function(d) { return d["LOS_10plus_Num"]; }))) + " people")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*2.5)
+        .text(d.values[0]["Year"] + " population")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*3.5)
+        .text(PEOPLE(d.values[0]["LOS_10plus_Num"]) + " people")
+      
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*5)
+        .text(d.values[d.values.length - 1]["Year"] + " population")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*6)
+        .text(PEOPLE(d.values[d.values.length - 1]["LOS_10plus_Num"]) + " people")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*7.5)
+        .text("Raw change")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*8.5)
+        .text(PEOPLE(d.values[d.values.length - 1]["LOS_10plus_Num"] - d.values[0]["LOS_10plus_Num"]) + " people")
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",16)
+        .attr("y",30+16*10)
+        .text("Percent change")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",16)
+        .attr("y",30+16*11)
+        .text(function(){
+          var change = d.values[d.values.length - 1]["LOS_10plus_Num"] - d.values[0]["LOS_10plus_Num"];
+          var percent = change/ d.values[0]["LOS_10plus_Num"];
+          var changeWord = (percent < 0) ? "decrease" : "increase";
+
+          return PERCENT(Math.abs(percent)) + " " + changeWord;
+        })
+    }
 
       // .attr("x", obj.getBoundingClientRect().left)
       // .attr("y", obj.getBoundingClientRect().bottom)
@@ -263,7 +583,7 @@ var scrollVis = function() {
 
   d3.select("#vis")
     .append("div")
-    .attr("class","chartNote")
+    .attr("class","chartNote visElement")
     .style("position", "absolute")
     .style("top",noteY + "px")
     .style("left",noteX + "px")
@@ -271,7 +591,7 @@ var scrollVis = function() {
 
   var legend =   d3.select("#vis")
     .append("div")
-    .attr("class","legendContainer legendContainerA")
+    .attr("class","legendContainer legendContainerA visElement")
     .style("position", "absolute")
     .style("top",legendY + "px")
     .style("left",legendX + "px")
@@ -318,7 +638,7 @@ var scrollVis = function() {
 
   d3.select("#vis")
     .append("div")
-    .attr("class","chartTitle chartTitleA")
+    .attr("class","chartTitle chartTitleA visElement")
     .style("position", "absolute")
     .style("top",titleY + "px")
     .style("left",titleX + "px")
@@ -326,7 +646,7 @@ var scrollVis = function() {
 
   d3.select("#vis")
     .append("div")
-    .attr("class","chartTitle chartTitleB")
+    .attr("class","chartTitle chartTitleB visElement")
     .style("position", "absolute")
     .style("top",titleY + "px")
     .style("left",titleX + "px")
@@ -335,7 +655,7 @@ var scrollVis = function() {
 
   d3.select("#vis")
     .append("div")
-    .attr("class","explainer explainerA")
+    .attr("class","explainer explainerA visElement")
     .style("position", "absolute")
     .style("top",explainerY + "px")
     .style("left",explainerX + "px")
@@ -343,7 +663,7 @@ var scrollVis = function() {
   
   d3.select("#vis")
     .append("div")
-    .attr("class","explainer explainerB")
+    .attr("class","explainer explainerB visElement")
     .style("position", "absolute")
     .style("top",explainerY + "px")
     .style("left",explainerX + "px")
@@ -455,7 +775,6 @@ var scrollVis = function() {
         .call(mapXAxis.tickValues([2000,2014]).tickFormat(
           // d3.format(".0f")) 
           function(t){
-            // console.log(t)
             if(t == 2000){ return "'00"}
             else{ return "'14"}
           }
@@ -513,7 +832,6 @@ var scrollVis = function() {
       altvar = "LOS_MeanTop10";
     }else{
       altvar = variable;
-      // console.log(altvar)
     }
     if(variable == "LOS_10plus_Num"){
       for(var i = 0; i < trendsDataNest.length; i++){
@@ -881,6 +1199,7 @@ function display(trendsData) {
 
   scroll.on('resized', function(){
     d3.select("#vis svg").remove()
+    d3.selectAll(".visElement").remove()
     // d3.selectAll(".scatterButton").remove()
     // d3.select("#buttonContainer").remove()
     // d3.selectAll(".mapImg").remove()
@@ -889,7 +1208,6 @@ function display(trendsData) {
 
   // setup event handling
   scroll.on('active', function(index) {
-    console.log(index)
     // highlight current step text
     // d3.selectAll('.step')
     //   .style('opacity',  function(d,i) { return i == index ? 1 : 1; });

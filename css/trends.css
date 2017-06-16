@@ -99,7 +99,10 @@ body{
   font-size:80px;
   text-anchor: middle;
 }
-
+#vis svg{
+  z-index: 2;
+  position: relative;
+}
 
 
 
@@ -317,4 +320,15 @@ section p{
   line-height: 26px;
   margin-top: 30px;
   margin-bottom: 0px;
+}
+
+
+.tt-header{
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.tt-value{
+  font-size: 13px;
+  font-weight: normal;
 }
