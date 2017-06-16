@@ -121,9 +121,29 @@ var scrollVis = function() {
     d.values = d.values.filter(function(o){ return parseInt(o.Year) >= 2000})
     var chartWidth = mapSizes[pageSize]["chartWidth"]
     var chartMargin = mapSizes[pageSize]["chartMargin"]
-    console.log(d3.select(obj).attr("transform"))
+    
+    var state = d.values[0]["State"]
+
+    var ttX,
+        ttY,
+        filter;
+
+    if(state == "ME" || state == "NH" || state == "RI" || state == "MA" || state == "DE" || state == "NY" || state == "NJ" || state == "MD" || state == "DC" || state == "FL" ){
+      ttX = -1*(chartWidth *3) - chartMargin -2
+      filter = "url(#drop-shadow-left)"
+    }else{
+      ttX = chartMargin -2
+      filter = "url(#drop-shadow-right)"
+    }
+
+    if(state == "CA" || state == "UT" || state == "CO" || state == "NE" || state == "MO" || state == "KY" || state == "WV" || state == "MD" || state == "DE" || state == "AZ" ||  state == "NM" || state == "KS" || state == "TN" || state == "NC" || state == "SC" || state == "DC" || state == "OK" || state == "MS" || state == "AL" || state == "GA" || state == "TX" || state == "FL"){
+      ttY = -1*(chartWidth *4)  -2
+    }else{
+      ttY = chartMargin + chartWidth-3;
+    }
+
     var tt = mapSvg.append("g")
-      .attr("transform", d3.select(obj).attr("transform") + " translate(" + (chartMargin-2) + " , " + (chartMargin + chartWidth-3) + ")")
+      .attr("transform", d3.select(obj).attr("transform") + " translate(" + (ttX) + " , " + (ttY) + ")")
       .attr("id", "mapTooltip")
 
 
@@ -134,7 +154,7 @@ var scrollVis = function() {
         .attr("width", (chartWidth )*3)
         .attr("height", (chartWidth )*3)
         .style("fill","#fff")
-        .style("filter","url(#drop-shadow-right)")
+        .style("filter",filter)
 
       tt.append("text")
         .attr("class","tt-header")
@@ -191,7 +211,7 @@ var scrollVis = function() {
         .attr("width", (chartWidth )*4)
         .attr("height", (chartWidth )*4)
         .style("fill","#fff")
-        .style("filter","url(#drop-shadow-right)")
+        .style("filter",filter)
 
       tt.append("text")
         .attr("class","tt-header")
@@ -275,7 +295,7 @@ var scrollVis = function() {
         .attr("width", (chartWidth )*4)
         .attr("height", (chartWidth )*4)
         .style("fill","#fff")
-        .style("filter","url(#drop-shadow-right)")
+        .style("filter",filter)
 
       tt.append("text")
         .attr("class","tt-header")
@@ -358,7 +378,7 @@ var scrollVis = function() {
         .attr("width", (chartWidth )*3.5)
         .attr("height", (chartWidth )*2.5)
         .style("fill","#fff")
-        .style("filter","url(#drop-shadow-right)")
+        .style("filter",filter)
 
       tt.append("text")
         .attr("class","tt-header")
@@ -398,7 +418,7 @@ var scrollVis = function() {
         .attr("width", (chartWidth )*3.7)
         .attr("height", (chartWidth )*3.7)
         .style("fill","#fff")
-        .style("filter","url(#drop-shadow-right)")
+        .style("filter",filter)
 
       tt.append("text")
         .attr("class","tt-header")
