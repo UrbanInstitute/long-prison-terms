@@ -9,17 +9,17 @@ var scrollVis = function() {
   // constants to define the size
   // and margins of the vis area.
   var WIDTH = 826,
-    HEIGHT = 300,
+    HEIGHT = 500,
     margin = {top: 2, right: 85, bottom: 10, left: 25},
     width = WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom
 
   var lineMargin = {top: 30, right: 60, bottom: 30, left: 50},
-    lineWidth = 500 - lineMargin.left - lineMargin.right,
+    lineWidth = 300 - lineMargin.left - lineMargin.right,
     lineHeight = 216 - lineMargin.top - lineMargin.bottom;
 
   var YEAR_IN_MS = 2000,
-    MAX_BARS = 55
+    MAX_BARS = 85
 
   var FILLED_TRACK_COLOR = "#e3e3e3"
   var EMPTY_TRACK_COLOR = "#12719e"
@@ -184,28 +184,28 @@ var scrollVis = function() {
 
     var dotTop = colonWrapper.append("circle")
       .attr("id", "dotTop")
-      .attr("cx", rightEdge -18)
-      .attr("cy", topEdge + 13)
+      .attr("cx", rightEdge -18 +8)
+      .attr("cy", topEdge + 13 - 141)
       .attr("r",5)
 
     var dotBottom = colonWrapper.append("circle")
       .attr("id", "dotBottom")
-      .attr("cx", rightEdge - 18)
-      .attr("cy", topEdge + 43)
+      .attr("cx", rightEdge - 18 +8)
+      .attr("cy", topEdge + 43 - 141)
       .attr("r",5)
 
     var dummyTopDot = dummyWrapper.append("circle")
       .attr("id", "dummyTopDot")
-      .attr("cx", rightEdge  -18)
-      .attr("cy", topEdge + 13)
+      .attr("cx", rightEdge  -18 +8)
+      .attr("cy", topEdge + 13 -141)
       .attr("r",5)
       .style("opacity",1)
       .style("z-index",1)
 
     var dummyBottomDot = dummyWrapper.append("circle")
       .attr("id", "dummyBottomDot")
-      .attr("cx", rightEdge - 18)
-      .attr("cy", topEdge + 43)
+      .attr("cx", rightEdge - 18 + 8)
+      .attr("cy", topEdge + 43 -141)
       .attr("r",5)
       .style("opacity",1)
       .style("z-index",1)
@@ -511,7 +511,7 @@ var scrollVis = function() {
       .attr("y", -2)
       .attr("width", lineWidth)
       .attr("height", lineHeight+2)
-      .style("fill", "#ffffff")
+      .style("fill", "#f2f2f2")
       .attr("class", "curtain_" + d.key)
 
     });
@@ -1271,7 +1271,7 @@ d3.select("#dotBottom")
     d3.select("#areaSvg")
       .transition()
       .style("opacity", 0)
-      .style("z-index",-1)
+      // .style("z-index",-1)
 
     // d3.select("#areaChartText")
     //   .transition()
@@ -1687,6 +1687,10 @@ function display(animationData, lineData, areaData) {
 
   d3.select("#areaChartText")
     .style("margin-top",window.innerHeight + "px")
+  d3.select("#firstGap")
+    .style("margin-bottom",window.innerHeight*1.2 + "px")
+  d3.select("#secondGap")
+    .style("margin-bottom",window.innerHeight + "px")
 
   var plot = scrollVis();
   d3.select("#vis")

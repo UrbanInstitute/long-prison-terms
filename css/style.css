@@ -76,18 +76,18 @@ body{
   /* background-color: #ddd; */
 }
 #lineChart{
-  display: inline-block;
-  position: fixed;
-  bottom: 107px;
-  z-index: -1;
-  margin-left: 0;  
-  width: 530px;
-  background: transparent;
-  height: 207px;
-  /*top: calc(50% - 267px);*/
-  border-left: 46px solid transparent;
-  left: -46px;
-  height: 239px;
+display: inline-block;
+    position: fixed;
+    bottom: 467px;
+    z-index: -1;
+    margin-left: 0;
+    width: 530px;
+    background: transparent;
+    height: 207px;
+    /* top: calc(50% - 267px); */
+    border-left: 46px solid transparent;
+    left: 370px;
+    height: 239px;
 }
 #vis .title {
   font-size:120px;

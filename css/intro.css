@@ -161,8 +161,10 @@ a{
   margin-bottom: 400px;
 }
 #firstGap{
-  margin-bottom: 2000px !important;
+  margin-bottom: 3000px;
+  opacity: 0 !important;
 }
 #secondGap{
-  margin-bottom: 400px !important;
+  margin-bottom: 3000px;
+  opacity: 0 !important;
 }
