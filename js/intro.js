@@ -311,6 +311,7 @@ var scrollVis = function() {
 
 
     trackHeight = d3.max([height/data.length, height/MAX_BARS])
+    singleTrackHeight = trackHeight * 3;
 
     //intro background
     g.append("rect")
@@ -335,20 +336,20 @@ var scrollVis = function() {
       .append("g")
       .attr("class", "singleTrackGroup")
       .attr("transform", function(d, i){
-        return "translate(0, " + (height-trackHeight) + ")"
+        return "translate(0, " + (height-singleTrackHeight) + ")"
       })
     var slowSingleTrack = g
       .append("g")
       .attr("class", "slowSingleTrackGroup")
       .attr("transform", function(d, i){
-        return "translate(0, " + (height-2*trackHeight) + ")"
+        return "translate(0, " + (height-2*singleTrackHeight) + ")"
       })
 
     singleTrack.append("rect")
       .attr("class", "singleTrackEmpty singleDotElement")
       .attr("width", width + "px")
-      .attr("height", (trackHeight*trackRatio) + "px")
-      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("height", (singleTrackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*singleTrackHeight)
       .attr("fill", EMPTY_TRACK_COLOR)
       .style("opacity", 0)
       .style("z-index",-1)
@@ -356,8 +357,8 @@ var scrollVis = function() {
     singleTrack.append("rect")
       .attr("class", "singleTrackFilled singleDotElement")
       .attr("width", "0px")
-      .attr("height", (trackHeight*trackRatio) + "px")
-      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("height", (singleTrackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*singleTrackHeight)
       .attr("fill", FILLED_TRACK_COLOR)
       .style("opacity", 0)
       .style("z-index",-1)
@@ -367,9 +368,9 @@ var scrollVis = function() {
       .append("rect")
       .attr("class","singleDot singleDotElement")
       .attr("x", 0)
-      .attr("y", trackHeight*(1-dotRatio)*.5)
-      .attr("height", trackHeight * dotRatio )
-      .attr("width", trackHeight * dotRatio )
+      .attr("y", singleTrackHeight*(1-dotRatio)*.5)
+      .attr("height", singleTrackHeight * dotRatio )
+      .attr("width", singleTrackHeight * dotRatio )
       .style("fill", function(d){ return dotColor(1) })
       .style("opacity", 0)
       .style("z-index",-1)
@@ -379,8 +380,8 @@ var scrollVis = function() {
     slowSingleTrack.append("rect")
       .attr("class", "slowSingleTrackEmpty singleDotElement")
       .attr("width", width + "px")
-      .attr("height", (trackHeight*trackRatio) + "px")
-      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("height", (singleTrackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*singleTrackHeight)
       .attr("fill", EMPTY_TRACK_COLOR)
       .style("opacity", 0)
       .style("z-index",-1)
@@ -388,8 +389,8 @@ var scrollVis = function() {
     slowSingleTrack.append("rect")
       .attr("class", "slowSingleTrackFilled singleDotElement")
       .attr("width", "0px")
-      .attr("height", (trackHeight*trackRatio) + "px")
-      .attr("y",(1-trackRatio)*.5*trackHeight)
+      .attr("height", (singleTrackHeight*trackRatio) + "px")
+      .attr("y",(1-trackRatio)*.5*singleTrackHeight)
       .attr("fill", FILLED_TRACK_COLOR)
       .style("opacity", 0)
       .style("z-index",-1)
@@ -399,9 +400,9 @@ var scrollVis = function() {
       .append("rect")
       .attr("class","slowSingleDot singleDotElement")
       .attr("x", 0)
-      .attr("y", trackHeight*(1-dotRatio)*.5)
-      .attr("height", trackHeight * dotRatio )
-      .attr("width", trackHeight * dotRatio )
+      .attr("y", singleTrackHeight*(1-dotRatio)*.5)
+      .attr("height", singleTrackHeight * dotRatio )
+      .attr("width", singleTrackHeight * dotRatio )
       .style("fill", function(d){ return dotColor(1) })
       .style("opacity", 0)
       .style("z-index",-1)
@@ -1021,6 +1022,10 @@ d3.selectAll(".titleElement")
     .transition()
     .style("opacity",0)
     .style("z-index",-1)
+   d3.select("#areaSvg")
+    .transition()
+    .style("opacity",1)
+    .style("z-index",2)
 
 var x = d3.scale.linear().domain([1925, 2015]).range([0, areaWidth]);
 var y = d3.scale.linear().domain([1600000,0]).range([0, areaHeight]);
@@ -1034,31 +1039,7 @@ function translateAlong(path) {
   };
 }
 
-d3.select("#areaChartText")
-  .transition()
-  .style("opacity", 0)
-  .style("z-index",1)
 
-d3.select("#areaChartText1")
-  .transition()
-  .duration(1000)
-  .delay(5000)
-  .style("opacity",1)
-  .style("z-index",1)
-
-d3.select("#areaChartText2-1")
-  .transition()
-  .duration(1000)
-  .delay(7000)
-  .style("opacity",1)
-  .style("z-index",1)
-
-d3.select("#areaChartText2-2")
-  .transition()
-  .duration(2000)
-  .delay(9500)
-  .style("opacity",1)
-  .style("z-index",1)
 
   d3.select("#popTextNum")
     .transition()
@@ -1132,7 +1113,7 @@ var rightEdge = d3.select("#titleText span").node().getBoundingClientRect().righ
 var topEdge = d3.select("#titleText span").node().getBoundingClientRect().top
 d3.select("#areaSvg")
 .transition()
-.style("opacity","1")
+.style("opacity",1)
 d3.selectAll(".titleElement")
 .transition()
 .style("opacity","0")
@@ -1292,10 +1273,10 @@ d3.select("#dotBottom")
       .style("opacity", 0)
       .style("z-index",-1)
 
-    d3.select("#areaChartText")
-      .transition()
-      .style("opacity", 0)
-      .style("z-index",-1)
+    // d3.select("#areaChartText")
+    //   .transition()
+    //   .style("opacity", 0)
+    //   .style("z-index",-1)
   }
 
   function hideSingleDot(){
@@ -1323,12 +1304,12 @@ d3.select("#dotBottom")
       d3.select(".slowSingleTrackGroup")
         .transition("reset-single")
           .attr("transform", function(d, i){
-            return "translate(0, " + (height-2*trackHeight) + ")"
+            return "translate(0, " + (height-2*singleTrackHeight) + ")"
           })
       d3.select(".singleTrackGroup")
         .transition("reset-single")
           .attr("transform", function(d, i){
-            return "translate(0, " + (height-trackHeight) + ")"
+            return "translate(0, " + (height-singleTrackHeight) + ")"
           })
 
 
@@ -1364,18 +1345,18 @@ d3.select("#dotBottom")
       .style("opacity",1)
       .style("z-index",1)
       .ease("linear")
-      .attr("height", 2*trackHeight)
-      .attr("y", height - 2*trackHeight)
+      .attr("height", 2*singleTrackHeight)
+      .attr("y", height - 2*singleTrackHeight)
       .transition()
       .delay(2900)
       .ease("linear")
-      .attr("height", 1*trackHeight)
-      .attr("y", height - 1*trackHeight)
+      .attr("height", 1*singleTrackHeight)
+      .attr("y", height - 1*singleTrackHeight)
       .transition()
       .delay(8500 + 1400)
       .ease("linear")
-      .attr("height", 0*trackHeight)
-      .attr("y", height - 0*trackHeight)
+      .attr("height", 0*singleTrackHeight)
+      .attr("y", height - 0*singleTrackHeight)
 
 
     d3.selectAll(".trackEmpty").transition().style("opacity",0)
@@ -1426,7 +1407,7 @@ d3.select("#dotBottom")
       .delay(1400)
       .duration(1500)
       .ease("linear")
-      .attr("x", function(){ return (width- .5*(trackHeight * dotRatio)) + "px"})
+      .attr("x", function(){ return (width- .5*(singleTrackHeight * dotRatio)) + "px"})
       .each("end", function(){
         flyOut(this)
         d3.select(".singleTrackFilled")
@@ -1452,7 +1433,7 @@ d3.select("#dotBottom")
         d3.select(".slowSingleTrackGroup")
           .transition()
             .attr("transform", function(d, i){
-              return "translate(0, " + (height-trackHeight) + ")"
+              return "translate(0, " + (height-singleTrackHeight) + ")"
             })
       })
 
@@ -1479,7 +1460,7 @@ d3.select("#dotBottom")
       .delay(1400)
       .duration(8500)
       .ease("linear")
-      .attr("x", function(){ return (width- .5*(trackHeight * dotRatio)) + "px"})
+      .attr("x", function(){ return (width- .5*(singleTrackHeight * dotRatio)) + "px"})
       .each("end", function(){
         flyOut(this)
         d3.select(".slowSingleTrackFilled")
@@ -1699,9 +1680,14 @@ d3.select("#dotBottom")
  *
  * @param data - loaded tsv data
  */
+
 function display(animationData, lineData, areaData) {
   // create a new plot and
   // display it
+
+  d3.select("#areaChartText")
+    .style("margin-top",window.innerHeight + "px")
+
   var plot = scrollVis();
   d3.select("#vis")
     .datum([animationData, lineData, areaData])
@@ -1724,11 +1710,14 @@ function display(animationData, lineData, areaData) {
     d3.select("#introAreaContainer svg").remove()
     d3.select("#lineChart svg").remove()
     display(animationData, lineData, areaData)
+
   })
   scroll.on('active', function(index) {
     // highlight current step text
-    // d3.selectAll('.step')
-      // .style('opacity',  function(d,i) { return i == index ? 1 : 0.1; });
+    console.log(index)
+    d3.selectAll('.step')
+      .transition()
+      .style('opacity',  function(d,i) { return i == index ? 1 : 0.1; });
 
     var stepText = d3.select(d3.selectAll(".step")[0][index]).html()
 
