@@ -1229,8 +1229,9 @@ function display(trendsData) {
   // setup event handling
   scroll.on('active', function(index) {
     // highlight current step text
-    // d3.selectAll('.step')
-    //   .style('opacity',  function(d,i) { return i == index ? 1 : 1; });
+    d3.selectAll('.step')
+      .transition()
+      .style('opacity',  function(d,i) { return i == index ? 1 : .1; });
 
     // activate current section
     plot.activate(index);

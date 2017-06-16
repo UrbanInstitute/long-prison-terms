@@ -48,18 +48,12 @@ window.onscroll = function() {
             quoteTransition(11)
         }  
     }
-    else if (getViewMin("#sidebar1") <= inViewMin && getViewMin("#sidebar2") > inViewMin){ 
+    else if (getViewMin("#sidebar1") <= inViewMin && getViewMin("#sidebar3") > inViewMin){ 
         //FIRST QUOTE APPEARS
         if (!isTransitioning[1])  {
             quoteTransition(1)
         }  
     } 
-    else if (getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar3") > inViewMin){
-        //SECOND QUOTE APPEARS
-        if (!isTransitioning[2]) {  
-            quoteTransition(2)
-        } 
-    }
     else if (getViewMin("#sidebar3") <= inViewMin && getViewMin("#sidebar4") > inViewMin){
         //THIRD QUOTE APPEARS
         if (!isTransitioning[3]) {
