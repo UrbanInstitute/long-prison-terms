@@ -116,7 +116,7 @@ var scrollVis = function() {
 
   var NUMERIC = d3.format(".2f")
   var PERCENT = d3.format(".2%")
-  var PEOPLE = d3.format(".0f")
+  var PEOPLE = d3.format(",.0f")
   function hoverState(obj, d){
     d.values = d.values.filter(function(o){ return parseInt(o.Year) >= 2000})
     var chartWidth = mapSizes[pageSize]["chartWidth"]
@@ -233,7 +233,7 @@ var scrollVis = function() {
         .attr("class","tt-value")
         .attr("x",16)
         .attr("y",30+16*2)
-        .text("All except violent: " + NUMERIC(d.values[0]["LOS_MeanAllExceptViol"]))
+        .text("All except violent: " + NUMERIC(d.values[0]["LOS_MeanAllExceptViol"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
@@ -317,7 +317,7 @@ var scrollVis = function() {
         .attr("class","tt-value")
         .attr("x",16)
         .attr("y",30+16*2)
-        .text("Bottom 90%: " + NUMERIC(d.values[0]["LOS_MeanBottom90"]))
+        .text("Bottom 90%: " + NUMERIC(d.values[0]["LOS_MeanBottom90"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
@@ -430,7 +430,7 @@ var scrollVis = function() {
         .attr("class","tt-header")
         .attr("x",16)
         .attr("y",30)
-        .text("Y axis maximum")
+        .text("Y-axis maximum")
       tt.append("text")
         .attr("class","tt-value")
         .attr("x",16)
@@ -613,7 +613,7 @@ var scrollVis = function() {
     .style("position", "absolute")
     .style("top",noteY + "px")
     .style("left",noteX + "px")
-    .html("States shown in grey did not report complete data")
+    .html("States shown in gray did not report complete data.")
 
   var legend =   d3.select("#vis")
     .append("div")
@@ -694,7 +694,7 @@ var scrollVis = function() {
     .style("top",explainerY + "px")
     .style("left",explainerX + "px")
     .style("opacity",0)
-    .html("Data for all states on the same x scale.<br/><span>Y axis scales differ for each state.</span><br/>Hover on a state for detailed data")
+    .html("Data for all states on the same x scale.<br/><span>Y-axis scales differ for each state.</span><br/>Hover on a state for detailed data.")
 
 
   var map = mapSvg
