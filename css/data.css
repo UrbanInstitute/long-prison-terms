@@ -67,4 +67,20 @@ th {
 	text-transform:uppercase;
 }
 
-td {  border:1px solid black;  font-size:14px; text-align:center; padding:6px; }
+td {
+	border:1px solid black;
+	font-size:14px;
+	text-align:center;
+	padding:6px;
+	vertical-align: middle;
+}
+.numerator, .denominator{
+	display: inline-block;
+}
+.numerator{
+	border-bottom: 2px solid black;
+	padding-bottom: 5px;
+}
+.denominator{
+	padding-top: 5px;
+}
