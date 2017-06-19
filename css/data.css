@@ -52,6 +52,9 @@
 	overflow-x: visible;
 	margin-bottom: 0px;
 }
+.dd-container{
+	position: relative;
+}
 
 
 
@@ -83,4 +86,28 @@ td {
 }
 .denominator{
 	padding-top: 5px;
+}
+.dd_scrollArrow img{
+	height: 21px;
+    padding-left: 9px;
+    padding-top: 4px;
+}
+.dd_scrollArrow{
+	border: 2px solid #1696d2;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    background: white;
+    cursor: pointer;
+    top: 0px;
+	top: 21px;
+    right: 0px;
+}
+
+.dd_left{
+	right: 40px;
+	transform: rotate(180deg);
+}
+.dd_right{
+	right: 0px;
 }

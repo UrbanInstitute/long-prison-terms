@@ -5,7 +5,7 @@ function initDepot(){
 	var NUMERIC = d3.format(".2f")
 	var INTEGERS = d3.format(",")
 	function buildSnapshotTable(){
-		var table = d3.select("#snapshot-table").insert("table", ".button-div")
+		var table = d3.select("#snapshot-table").append("table")
 		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
 		h1.append("th").attr("rowspan",2).html("Year")
@@ -60,7 +60,7 @@ function initDepot(){
 		})
 	}
 	function buildTimeServedTable(){
-		var table = d3.select("#timeserved-table").insert("table", ".button-div")
+		var table = d3.select("#timeserved-table").append("table")
 		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
 		h1.append("th").attr("rowspan",2).html("Year")
@@ -103,7 +103,7 @@ function initDepot(){
 		})
 	}
 	function buildBreakdownTable(){
-		var table = d3.select("#breakdown-table").insert("table", ".button-div")
+		var table = d3.select("#breakdown-table").append("table")
 		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
 		h1.append("th").attr("rowspan",2).html("Year")
@@ -181,7 +181,7 @@ function initDepot(){
 		})
 	}
 	function buildTrendsTable(){
-		var table = d3.select("#trends-table").insert("table", ".button-div")
+		var table = d3.select("#trends-table").append("table")
 		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
 		h1.append("th").attr("rowspan",2).html("Year")
@@ -259,6 +259,7 @@ function initDepot(){
 		.on("click", function(){
 			if(d3.select(this).classed("closed")){
 				d3.select($(this).next()[0])
+					.select(".dd-table")
 					.transition().duration(dd_duration)
 						.style("height",function(){
 							console.log(d3.select(this).node())
@@ -273,8 +274,13 @@ function initDepot(){
 				d3.select(this)
 					.classed("closed", false)
 					.classed("open", true)
+				d3.select($(this).next()[0])
+					.selectAll(".dd_scrollElement")
+					.transition()
+					.style("opacity",1)
 			}else{
 				d3.select($(this).next()[0])
+					.select(".dd-table")
 					.transition().duration(dd_duration)
 						.style("height","0px")
 						.style("margin-bottom","0px")
@@ -286,6 +292,93 @@ function initDepot(){
 				d3.select(this)
 					.classed("closed", true)
 					.classed("open", false)
+				d3.select($(this).next()[0])
+					.selectAll(".dd_scrollElement")
+					.transition()
+					.style("opacity",0)
 			}
 		})
+
+	function addScrollButtons(){
+		console.log("foo")
+		d3.selectAll(".dd-table")
+			.each(function(){
+				var containerWidth = this.getBoundingClientRect().width
+				var tableWidth = d3.select(this).select("table").node().getBoundingClientRect().width
+				var opacity = (d3.select($(this.parentNode).prev()[0]).classed("open")) ? 1 : 0
+				// console.log(containerWidth, tableWidth)
+				if(tableWidth > containerWidth){
+					d3.select(this.parentNode).selectAll(".dd_scrollElement").remove();
+					var ddLeft = d3.select(this.parentNode)
+						.append("div")
+						.style("opacity", opacity)
+						.attr("class","dd_scrollElement dd_scrollArrow dd_left")
+					ddLeft.append("img")
+						.attr("src","img/arrow.png")
+					ddLeft.on("click", function(){
+							var tableWidth = (this.parentNode.getBoundingClientRect().width - 30)
+							$(d3.select(this.parentNode).select(".dd-table").node()).animate({
+								scrollLeft: '-=' + tableWidth
+							}, 1000);
+						})
+
+					var ddRight = d3.select(this.parentNode)
+						.append("div")
+						.style("opacity", opacity)
+						.attr("class","dd_scrollElement dd_scrollArrow dd_right")
+					ddRight.append("img")
+						.attr("src","img/arrow.png")
+					ddRight.on("click", function(){
+							var tableWidth = (this.parentNode.getBoundingClientRect().width - 30)
+							console.log(tableWidth)
+							$(d3.select(this.parentNode).select(".dd-table").node()) .animate({
+								scrollLeft: '+=' + tableWidth
+							}, 1000);
+						})
+				}else{
+					d3.select(this.parentNode).selectAll(".dd_scrollElement").remove();
+				}
+			})
+	}
+
+
+  // $('#right-button').click(function() {
+  //     event.preventDefault();
+  //     $('#content').animate({
+  //       marginLeft: "+=200px"
+  //     }, "slow");
+  //  });
+
+  //    $('#left-button').click(function() {
+  //     event.preventDefault();
+  //     $('#content').animate({
+  //       marginLeft: "-=200px"
+  //     }, "slow");
+  //  });
+
+	addScrollButtons();
+	(function() {
+	    var throttle = function(type, name, obj) {
+	        obj = obj || window;
+	        var running = false;
+	        var func = function() {
+	            if (running) { return; }
+	            running = true;
+	             requestAnimationFrame(function() {
+	                obj.dispatchEvent(new CustomEvent(name));
+	                running = false;
+	            });
+	        };
+	        obj.addEventListener(type, func);
+	    };
+
+	    /* init - you can init any event */
+	    throttle("resize", "optimizedResize");
+	})();
+
+	// handle event
+	window.addEventListener("optimizedResize", function() {
+	    addScrollButtons();
+	});
 }
+
