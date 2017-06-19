@@ -1079,6 +1079,15 @@ footer h3, footer h4{
     margin-bottom: 1em;
 }
 
+.chart-mobile-case-study {
+  display: none;
+}
+
+.chart-desktop-case-study {
+  display: block;
+}
+
+
 @media (max-width: 1300px) {
   .sidebar-quote{
     font-size: 18px;
@@ -1100,6 +1109,18 @@ footer h3, footer h4{
 
 /*browser windows smaller than 850px*/
 @media (max-width: 900px) {
+
+  .chart-mobile-case-study {
+    display: block;
+  }
+
+  .chart-desktop-case-study {
+  display: none;
+  }
+
+  .graph-div {
+    width: 100%;
+  }
 
   .copyright-footer {
     text-align: center;
