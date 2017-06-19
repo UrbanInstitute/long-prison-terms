@@ -183,6 +183,10 @@ h3{
   background-color: #094c6b;
 }
 
+.hovered-category-mobile {
+  color: #1796d3 !important;
+}
+
 
 /*****************mobile chapter (replacing the subnav for smaller screens) ******************/
 
@@ -731,6 +735,7 @@ ul#menu li a {
 /*Hover state for top level links*/
 ul#menu li:hover a {
   background-color: #0096d2;
+  color: #fff;
 }
 
 /*Style for dropdown links*/
@@ -1079,6 +1084,15 @@ footer h3, footer h4{
     margin-bottom: 1em;
 }
 
+.chart-mobile-case-study {
+  display: none;
+}
+
+.chart-desktop-case-study {
+  display: block;
+}
+
+
 @media (max-width: 1300px) {
   .sidebar-quote{
     font-size: 18px;
@@ -1100,6 +1114,18 @@ footer h3, footer h4{
 
 /*browser windows smaller than 850px*/
 @media (max-width: 900px) {
+
+  .chart-mobile-case-study {
+    display: block;
+  }
+
+  .chart-desktop-case-study {
+  display: none;
+  }
+
+  .graph-div {
+    width: 100%;
+  }
 
   .copyright-footer {
     text-align: center;
