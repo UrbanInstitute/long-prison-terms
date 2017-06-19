@@ -183,6 +183,10 @@ h3{
   background-color: #094c6b;
 }
 
+.hovered-category-mobile {
+  color: #1796d3 !important;
+}
+
 
 /*****************mobile chapter (replacing the subnav for smaller screens) ******************/
 
@@ -731,6 +735,7 @@ ul#menu li a {
 /*Hover state for top level links*/
 ul#menu li:hover a {
   background-color: #0096d2;
+  color: #fff;
 }
 
 /*Style for dropdown links*/

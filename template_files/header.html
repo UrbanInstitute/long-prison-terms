@@ -46,18 +46,18 @@
  
                   
                         
-      <div id="mobilenavcontainer" class="show-menu">
+      <div id="mobilenavcontainer" class="show-menu" ng-controller="navLeftCtrl">
            <label for="show-menu">Chapters <span class="subnav-arrow"></span></label>
            <input type="checkbox" id="show-menu" class="checkbox" role="button">
                 <ul id="menu">
-                <li><a href="intro.html" ng-click="$root.title = 'Intro'">Intro</a></li>
-                <li><a href="trends.html" ng-click="$root.title = 'Trends'">Trends</a></li>
-                <li><a href="demographics.html" ng-click="$root.title = 'Demographics'">Demographics</a></li>
-                <li><a href="narratives.html" ng-click="$root.title = 'Narratives'">Narratives</a></li>
-                <li><a href="policies.html" ng-click="$root.title = 'Policies'">Policies</a></li>
-                <li><a href="reform.html" ng-click="$root.title = 'Reform'">Reform</a></li>
-                <li><a href="about.html" ng-click="$root.title = 'About'">About</a></li>
-                <li><a href="data.html" ng-click="$root.title = 'Data'">Data</a></li>
+                <li><a ng-class="navClassMobile('intro')" href="intro.html" ng-click="$root.title = 'Intro'">Intro</a></li>
+                <li ><a ng-class="navClassMobile('trends')" href="trends.html" ng-click="$root.title = 'Trends'">Trends</a></li>
+                <li><a ng-class="navClassMobile('demographics')" href="demographics.html" ng-click="$root.title = 'Demographics'">Demographics</a></li>
+                <li><a ng-class="navClassMobile('narratives')" href="narratives.html" ng-click="$root.title = 'Narratives'">Narratives</a></li>
+                <li><a ng-class="navClassMobile('policies')" href="policies.html" ng-click="$root.title = 'Policies'">Policies</a></li>
+                <li><a ng-class="navClassMobile('reform')" href="reform.html" ng-click="$root.title = 'Reform'">Reform</a></li>
+                <li><a ng-class="navClassMobile('about')" href="about.html" ng-click="$root.title = 'About'">About</a></li>
+                <li ng-class="navClassMobile('data')"><a href="data.html" ng-click="$root.title = 'Data'">Data</a></li>
 
 <!-- 
                   <li><a href="">Intro</a></li>
