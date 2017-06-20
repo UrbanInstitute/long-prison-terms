@@ -9,6 +9,7 @@ var scrollVis = function() {
   // constants to define the size
   // and margins of the vis area.
 
+  var AREA_ANIMATING = false;
   var WIDTH = 420,
     HEIGHT = 517,
     margin = {top: 72, right: 5, bottom: 10, left: 25},
@@ -30,11 +31,11 @@ var scrollVis = function() {
   var areaMargin = {
   top: 160,
   right: 0,
-  bottom: 33,
+  bottom: 36,
   left: 0
   };
   var screenHeight = window.innerHeight - 200
-  var areaWidth = window.innerWidth - areaMargin.left - areaMargin.right - 10,
+  var areaWidth = window.innerWidth - areaMargin.left - areaMargin.right - 0,
   areaHeight = Math.min(screenHeight, window.innerHeight - areaMargin.top - areaMargin.bottom - 20);
 
 
@@ -1060,6 +1061,10 @@ d3.selectAll(".titleElement")
   .transition()
   .style("opacity",1)
   .style("z-index",1)
+d3.select("#areaChartText")
+    .transition()
+    .style("opacity",0)
+
 // d3.select("#titleText span i")
 // .transition()
 // .style("opacity",1)
@@ -1076,30 +1081,60 @@ d3.selectAll(".titleElement")
     .transition()
     .style("opacity",1)
     .style("z-index",2)
-
-var x = d3.scale.linear().domain([1925, 2015]).range([0, areaWidth]);
-var y = d3.scale.linear().domain([1600000,0]).range([0, areaHeight]);
-function translateAlong(path) {
-  var l = path.getTotalLength();
-  return function(d, i, a) {
-    return function(t) {
-      var p = path.getPointAtLength(t * l);
-      return "translate(" + p.x + "," + p.y + ")";
-    };
-  };
-}
+   d3.select("#areaChartText")
+    .transition()
+    .style("opacity",1)
 
 
 
+    var x = d3.scale.linear().domain([1925, 2015]).range([0, areaWidth]);
+    var y = d3.scale.linear().domain([1600000,0]).range([0, areaHeight]);
+    function translateAlong(path) {
+      var l = path.getTotalLength();
+      return function(d, i, a) {
+        return function(t) {
+          var p = path.getPointAtLength(t * l);
+          return "translate(" + p.x + "," + p.y + ")";
+        };
+      };
+    }
+
+    d3.select("#lineChart")
+      .transition()
+      .style("opacity",0)
+      .style("z-index",-1)
+
+d3.select("#areaSvg")
+.transition()
+.style("opacity",1)
+d3.selectAll(".titleElement")
+.transition()
+.style("opacity","0")
+
+d3.select("#backgroundBlocker")
+.transition()
+.delay(1500)
+.duration(1000)
+.style("background-color", "rgba(255,255,255,1)")
+
+d3.select("html")
+.transition()
+.attr("class","noBg")
+
+if(!AREA_ANIMATING){
   d3.select("#popTextNum")
     .transition()
-    .delay(5000)
+    .delay(1800)
     .style("opacity","1")
     .transition()
-    .delay(7000)
-    .attr("dx",-75)
+    .delay(3400)
+    .attr("dx",-90)
     .attr("dy",-30)  
     .style("opacity","1")
+    .each("start", function(){
+      AREA_ANIMATING = true;
+    })
+
   
 
 
@@ -1114,24 +1149,23 @@ function translateAlong(path) {
   var amount_countup = new CountUp("popTextNum", 79526, 1476847, 0, 2, countup_options);
   setTimeout(function(){
   amount_countup.start();  
-}, 5700)
+}, 2000)
   
     // .style("opacity",0)
     // .style("z-index",-1)
 
   d3.select("#popTextCircle")
     .transition()
-    .delay(5000)
+    .delay(1800)
     .style("opacity",1)
     .style("z-index",1)
     .transition()
     .delay(8000)
     .attr("stroke","#094c6b")
-    // .style("opacity",0)
-    // .style("z-index",-1)
+
   d3.select("#popText")
       .transition()
-        .delay(5700)
+        .delay(1800)
         .duration(2000)
         .ease("linear")
         .attrTween("transform", translateAlong(d3.select("#extractedLine").node()))
@@ -1139,10 +1173,7 @@ function translateAlong(path) {
 
 
 
-    d3.select("#lineChart")
-      .transition()
-      .style("opacity",0)
-      .style("z-index",-1)
+
 
 
 
@@ -1161,12 +1192,7 @@ function translateAlong(path) {
 
 var rightEdge = d3.select("#titleText span").node().getBoundingClientRect().right
 var topEdge = d3.select("#titleText span").node().getBoundingClientRect().top
-d3.select("#areaSvg")
-.transition()
-.style("opacity",1)
-d3.selectAll(".titleElement")
-.transition()
-.style("opacity","0")
+
 
 
     hideSingleDot()
@@ -1183,23 +1209,25 @@ d3.selectAll(".titleElement")
 
 d3.select("#leftBorder")
 .transition()
-.delay(4200)
-.duration(2000)
+.delay(1600)
+.duration(200)
 .attr("y2",y(79526.05109))
 .each("end", function(){
 d3.select(this)
 .transition()
+.delay(2000)
 .attr("stroke","#094c6b")
 })
 d3.select("#rightBorder")
 .transition()
-.delay(7000)
-.duration(400)
+.delay(1600)
+.duration(200)
 .ease("linear")
 .attr("y2",y(1476847))
 .each("end", function(){
 d3.select(this)
 .transition()
+.delay(2000)
 .attr("stroke","#094c6b")
 })
 
@@ -1208,7 +1236,7 @@ d3.select(this)
 
 d3.select("#extractedLine")
 .transition()
-.delay(5700)
+.delay(1800)
 .duration(2000)
 .ease("linear")
 .attr("stroke-dashoffset", 0)
@@ -1219,8 +1247,8 @@ d3.select(this)
 })
 d3.select("#extractedArea")
 .transition()
-.delay(6100)
-.duration(2000)
+.delay(3300)
+.duration(1200)
 .ease("circleOut")
 .style("opacity", "1")
 .each("end", function(){
@@ -1229,33 +1257,14 @@ d3.select(this)
 .attr("stroke","#094c6b")
 })
 
-// d3.select("#bar")
-//  .transition()
-//  .delay(3400)
-//  .duration(2000)
-//  .attr("width", width)
-
-
-d3.select("#backgroundBlocker")
-.transition()
-.delay(1000)
-.duration(1000)
-.style("background-color", "rgba(255,255,255,1)")
-
-// setTimeout(function(){
-d3.select("html")
-.transition()
-.attr("class","noBg")
-// }, 1700)
-
 
 
 
 var newLoc = (areaHeight + topEdge + 10)*.5
 d3.select("#dummyTopDot")
 .transition()
-.delay(1000)
-.duration(1200)
+.delay(500)
+.duration(500)
 .ease("linear")
 .attr("cy", newLoc)
 .transition()
@@ -1265,8 +1274,8 @@ d3.select("#dummyTopDot")
 
 d3.select("#dummyBottomDot")
 .transition()
-.delay(1000)
-.duration(1200)
+.delay(500)
+.duration(500)
 .ease("linear")
 .attr("cy", newLoc)
 .transition()
@@ -1276,44 +1285,43 @@ d3.select("#dummyBottomDot")
 
 d3.select("#areChartBaseline")
 .transition()
-.delay(3050)
-.duration(2100)
+.delay(1200)
+.duration(800)
 .attr("width", areaWidth+200)
 .attr("x",-100)
 .each("end", function(){
 d3.select(this)
 .transition()
-.delay(2000)
+.delay(1200)
 .attr("fill","#094c6b")
 })
 
 d3.select("#dotTop")
 .attr("cy", newLoc)
 .transition()
-.delay(1600)
-.duration(1000)
+.delay(700)
+.duration(500)
 .ease("linear")
-
 .attr("r",15)
 .attr("cy", newLoc+15)
 .transition()
-.duration(1200)
+.duration(500)
 .ease("linear")
 .attr("cy", areaHeight + 60)
 
 d3.select("#dotBottom")
 .attr("cy", newLoc-60)
 .transition()
-.delay(1600)
-.duration(1000)
+.delay(700)
+.duration(500)
 .ease("linear")
-
 .attr("r",15)
 .attr("cy", newLoc+15)
 .transition()
-.duration(1200)
+.duration(500)
 .ease("linear")
 .attr("cy", areaHeight + 60)
+}
     
   }
 
@@ -1389,6 +1397,7 @@ d3.select("#dotBottom")
 
   function showSingleDot(){
     showBreadcrumbs()
+
     d3.select("#lineChart")
       .style("opacity",0)
       .style("z-index",-1)
@@ -1428,6 +1437,8 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
+      .style("left","180px")
+
 
     d3.selectAll(".animationComponents")
       .transition()
@@ -1569,6 +1580,9 @@ d3.select("#dotBottom")
 
 
   function oneYearSentences(){
+    d3.select("#vis")
+      .transition()
+      .style("left","0px")
     d3.selectAll(".axisLabel")
       .transition()
       .style("opacity",1)
@@ -1753,10 +1767,10 @@ function display(animationData, lineData, areaData) {
   // create a new plot and
   // display it
 
-  d3.select("#areaChartText")
-    .style("margin-top",window.innerHeight + "px")
+  // d3.select("#areaChartText")
+  //   .style("margin-top",window.innerHeight + "px")
   d3.select("#firstGap")
-    .style("margin-bottom",window.innerHeight*1.2 + "px")
+    .style("margin-bottom",window.innerHeight*.4 + "px")
   d3.select("#secondGap")
     .style("margin-bottom",window.innerHeight + "px")
 
