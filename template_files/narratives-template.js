@@ -36,15 +36,27 @@ function quoteTransition(number) {
 }
 
 
-window.onscroll = function() {
+var scrollTimer = null;
+$(window).scroll(function () {
+    scrollCheck(); // fire on scroll
+    if (scrollTimer) {
+        clearTimeout(scrollTimer);   // clear pending timer
+    }
+    scrollTimer = setTimeout(scrollCheck, 500);   // set new timer to fire 500 ms after scroll ends
+});
+
+function scrollCheck() { 
     if(
         d3.select(".left-col").node().getBoundingClientRect().bottom <= d3.select(".con-quote11").node().getBoundingClientRect().bottom ||
         d3.select(".left-col").node().getBoundingClientRect().top >= d3.select(".con-quote11").node().getBoundingClientRect().top
         ){
-        d3.selectAll(".note-container")
-            .style("opacity", 0)            
-            .style("pointer-events", "none")
-            .style("z-index", -1)
+        if($.inArray(true, isTransitioning) == -1){
+          d3.selectAll(".note-container")
+                .transition()
+                .style("opacity", 0)            
+                .style("pointer-events", "none")
+                .style("z-index", -1)
+        }
     }
     else if (getViewMin("#sidebar1") <= inViewMin && getViewMin("#sidebar3") > inViewMin) {
         //FIRST QUOTE APPEARS
@@ -58,13 +70,13 @@ window.onscroll = function() {
             quoteTransition(3)
         } 
     }
-    else if (getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar2") > inViewMin) { console.log('4')
+    else if (getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar2") > inViewMin) { 
         //SIDEBAR 4 APPEARS
         if (!isTransitioning[4]) {
             quoteTransition(4)
         } 
     }
-    else if (getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar6") > inViewMin) { console.log('2')
+    else if (getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar6") > inViewMin) { 
         //SIDEBAR 2 APPEARS
         if (!isTransitioning[2]) {
             quoteTransition(2)
@@ -102,7 +114,7 @@ window.onscroll = function() {
     }
     else if (getViewMin("#sidebar14") <= inViewMin && getViewMin("#sidebar11") > inViewMin) {
         //SIDEBAR 14 APPEARS
-        if (!isTransitioning[14]) { console.log(window.scrollY)
+        if (!isTransitioning[14]) { 
             quoteTransition(14)
         } 
    }

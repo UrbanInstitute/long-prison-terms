@@ -32,15 +32,28 @@ function quoteTransition(number) {
 }
 
 
-window.onscroll = function() {
+var scrollTimer = null;
+$(window).scroll(function () {
+    scrollCheck(); // fire on scroll
+    if (scrollTimer) {
+        clearTimeout(scrollTimer);   // clear pending timer
+    }
+    scrollTimer = setTimeout(scrollCheck, 500);   // set new timer to fire 500 ms after scroll ends
+});
+
+
+function scrollCheck() { 
     if(
         d3.select(".left-col").node().getBoundingClientRect().bottom <= d3.select(".pol-quote10").node().getBoundingClientRect().bottom ||
         d3.select(".left-col").node().getBoundingClientRect().top >= d3.select(".pol-quote10").node().getBoundingClientRect().top
-        ){ 
-        d3.selectAll(".note-container")
-            .style("opacity", 0)            
-            .style("pointer-events", "none")
-            .style("z-index", -1)
+        ){
+        if($.inArray(true, isTransitioning) == -1){
+            d3.selectAll(".note-container")
+                .transition()
+                .style("opacity", 0)            
+                .style("pointer-events", "none")
+                .style("z-index", -1)
+        }
     }
     else if (getViewMin("#sidebar11") <= inViewMin && getViewMin("#sidebar1") > inViewMin){ 
         //ELEVENTH SIDEBAR APPEARS
