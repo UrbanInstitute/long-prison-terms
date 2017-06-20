@@ -70,16 +70,10 @@ function scrollCheck() {
             quoteTransition(3)
         } 
     }
-    else if (getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar2") > inViewMin) { 
+    else if (getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar6") > inViewMin) { 
         //SIDEBAR 4 APPEARS
         if (!isTransitioning[4]) {
             quoteTransition(4)
-        } 
-    }
-    else if (getViewMin("#sidebar2") <= inViewMin && getViewMin("#sidebar6") > inViewMin) { 
-        //SIDEBAR 2 APPEARS
-        if (!isTransitioning[2]) {
-            quoteTransition(2)
         } 
     }
     else if (getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar7") > inViewMin) {
