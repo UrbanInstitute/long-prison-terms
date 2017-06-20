@@ -380,5 +380,8 @@ function initDepot(){
 	window.addEventListener("optimizedResize", function() {
 	    addScrollButtons();
 	});
+	d3.selectAll(".dd-table").on("scroll",function() { 
+		console.log(this.scrollLeft)
+	})
 }
 
