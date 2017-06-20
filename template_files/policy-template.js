@@ -1,7 +1,7 @@
 
 var duration = 300; 
 
-var isTransitioning = [null, false, false, false, false, false, false, false, false, false, false]
+var isTransitioning = [null, false, false, false, false, false, false, false, false, false, false, false]
 
 var inViewMin = 350
 
@@ -36,7 +36,7 @@ window.onscroll = function() {
     if(
         d3.select(".left-col").node().getBoundingClientRect().bottom <= d3.select(".pol-quote10").node().getBoundingClientRect().bottom ||
         d3.select(".left-col").node().getBoundingClientRect().top >= d3.select(".pol-quote10").node().getBoundingClientRect().top
-        ){
+        ){ 
         d3.selectAll(".note-container")
             .style("opacity", 0)            
             .style("pointer-events", "none")

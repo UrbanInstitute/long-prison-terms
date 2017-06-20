@@ -35,7 +35,7 @@ window.onscroll = function() {
     if(
         d3.select(".left-col").node().getBoundingClientRect().bottom <= d3.select(".alt-quote11").node().getBoundingClientRect().bottom ||
         d3.select(".left-col").node().getBoundingClientRect().top >= d3.select(".alt-quote11").node().getBoundingClientRect().top
-        ){
+        ){ console.log('hi');
         d3.selectAll(".note-container")
             .style("opacity", 0)            
             .style("pointer-events", "none")
