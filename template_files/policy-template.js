@@ -1,7 +1,7 @@
 
 var duration = 300; 
 
-var isTransitioning = [null, false, false, false, false, false, false, false, false, false, false]
+var isTransitioning = [null, false, false, false, false, false, false, false, false, false, false, false]
 
 var inViewMin = 350
 
