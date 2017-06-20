@@ -589,7 +589,9 @@ div.sidebar-quote p {
 
 }
 
-
+.audio-title {
+  font-size: 14px;
+}
 
 .audio-div {
   border-bottom: solid 1px #d0d2d3;
