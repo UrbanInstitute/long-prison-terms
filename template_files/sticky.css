@@ -39,3 +39,14 @@
     width: 1140px;
   }
 }
+@media(max-width: 1140px){
+  .left-col {
+    width: 100%;
+  }
+  .right-col {
+    display: none;
+  } 
+  .container.clearfix{
+    width: 100%;
+  }
+}

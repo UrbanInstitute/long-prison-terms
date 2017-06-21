@@ -1116,7 +1116,7 @@ footer h3, footer h4{
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1140px) {
   .chart-mobile-case-study {
     display: block;
   }
