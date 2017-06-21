@@ -27,7 +27,7 @@ body, html {
 }
 
 .container {
-  padding: 0 30px;
+  padding: 0 70px;
 }
 
 .row {
@@ -411,8 +411,6 @@ li.spacing {
   opacity: 0;
   z-index: -1;
   pointer-events: none;
-  padding-right: 30px;
-  padding-left: 60px;
 }
 
 .note-container.show {
@@ -758,7 +756,7 @@ border-right-color: #222;
 
 /***********structure***********/
 .wrapper{
-    max-width: 1300px;
+    max-width: 1440px;
     margin:0 auto;
     padding-top: 50px;
 }
@@ -773,7 +771,7 @@ border-right-color: #222;
 }
 
 .content{
-    width:1300px;
+    width:1440px;
     margin: 0 auto;
     padding: 0px 30px;
 

@@ -3,51 +3,39 @@
 
 .left-col {
   float: left;
-  width: 63.85%;
-  max-width: 830px;
-
+  width: 825px;
 }
-
-
 .right-col {
-  width: 36.15%;
-  max-width: 470px;
- z-index:100;
- position: fixed;
- top: 20px;
- left: 63.85%
-
- 
-  
+  width: 400px;
+  z-index:100;
+  position: fixed;
+  top: 20px;
+  left: calc(50% + 250px);
 }
-
-@media  (max-width: 1200px) {
+.container.clearfix{
+  width: 1440px;
+  margin: 0 auto;
+}
+@media(max-width: 1440px){
   .left-col {
-    width: 66.66%;
+    width: 800px;
   }
-
   .right-col {
-    width: 26.25%;
-    left: 70.83%;
+    width: 350px;
+  } 
+  .container.clearfix{
+    width: 13400px;
   }
-
 }
-
-
-
-@media  (max-width: 900px) {
+@media(max-width: 1340px){
   .left-col {
-    width: 100%;
+    width: 650px;
   }
-
-
+  .right-col {
+    width: 300px;
+    left: calc(50% + 200px)
+  } 
+  .container.clearfix{
+    width: 1140px;
+  }
 }
-
-
-
-
-@media  (max-width: 600px) {
-    
-    
-}
-
