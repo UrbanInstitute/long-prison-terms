@@ -1028,9 +1028,6 @@ footer .content{
   padding-bottom: 2em;
 }
     
-   
-    
-}
 
 #left {
   float: left;
@@ -1097,7 +1094,12 @@ footer h3, footer h4{
   display: block;
 }
 
+.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
+
+/***********************************************************************************/
+/********************************** MEDIA QUERIES **********************************/
+/***********************************************************************************/
 @media (max-width: 1300px) {
   .sidebar-quote{
     font-size: 18px;
@@ -1105,44 +1107,52 @@ footer h3, footer h4{
 }
 
 @media (max-width: 1100px) {
-   .subnav a{
+  .subnav a{
     font-size:16px;
-    }
+  }
 }
 
 @media (max-width: 950px) {
-   .subnav a{
+  .subnav a{
     font-size:14px;
-    }
+  }
 }
 
-
-/*browser windows smaller than 850px*/
 @media (max-width: 900px) {
-
   .chart-mobile-case-study {
     display: block;
   }
-
   .chart-desktop-case-study {
-  display: none;
+    display: none;
   }
-
   .graph-div {
     width: 100%;
   }
-
   .copyright-footer {
     text-align: center;
   }
-  .wrapper {width:100%; padding-top:20px;}
-  .container {width:auto; padding:0px 70px; margin-bottom: 40px;}
-  ul {margin-left: 15px;}
-  li {padding-left:0px;}
-    .overhalf{margin-right:0px; margin-left:30px; width:70%;}
-    
+  .wrapper {
+    width:100%;
+    padding-top:20px;
+  }
+  .container {
+    width:auto;
+    padding:0px 70px;
+    margin-bottom: 40px;
+  }
+  ul {
+    margin-left: 15px;
+  }
+  li {
+    padding-left:0px;
+  }
+  .overhalf{
+    margin-right:0px;
+    margin-left:30px;
+    width:70%;
+  }
   .subnav {
-  display: none;
+    display: none;
   }
   .show-menu{
     display: block;
@@ -1153,7 +1163,7 @@ footer h3, footer h4{
     background: #052635;
     text-align: left;
     padding: 10px 10px;   
-    } 
+  } 
   #current-page-navbar {
     display: block;
     float: right;
@@ -1164,159 +1174,144 @@ footer h3, footer h4{
     font-weight: 800;
     text-align: right;
     margin-right: 15px;
-
-
   }
   .chart-title {
-  font-size: 18px;
+    font-size: 18px;
   }
-
   .pie-header {
     font-size: 16px;
   }
-
   .chart-info {
     font-size: 11px;
   }
-
   #mobilenavcontainer {
-  width: 100%;
-  position: fixed;
-  top: 0px;
-  height: 45px;
-  display: block;  
-      z-index: 11;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    height: 45px;
+    display: block;  
+    z-index: 11;
   }
-      
-      
   /*Hide checkbox*/
   input[type=checkbox]:unchecked ~ #menu{
-  display: none;
-  visibility:hidden;
-
-      
+    display: none;
+    visibility:hidden;
   }
-
   /*Show menu when invisible checkbox is checked*/
   input[type=checkbox]:checked ~ #menu{
-      display: block;
-      position: absolute;
-      top: 45px;
-      height: 150px;
-      z-index: 10;
-      width: 20%;
-      left: 0px;
-     
+    display: block;
+    position: absolute;
+    top: 45px;
+    height: 150px;
+    z-index: 10;
+    width: 20%;
+    left: 0px;
   }
-
-    
-.checkbox {
-  display: none;
-}
-
-.current-page-name {
-  color: #1795d2;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.5em;
-  text-transform: capitalize;
-  text-align: right;
-
-}
-
-ul#menu {
+  .checkbox {
+    display: none;
+  }
+  .current-page-name {
+    color: #1795d2;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5em;
+    text-transform: capitalize;
+    text-align: right;
+  }
+  ul#menu {
     float:none;
     display: none; 
     text-align: center;
     list-style:none;
     margin:0px;
-}
-
-#menu li{
+  }
+  #menu li{
     margin-bottom:0px;
     list-style:none;
     padding-left:0px; 
-}
-
-.headerimage{
-        top:44px;
-    }
-.sidebar-quote-mobile {
-  display: block;
-  width: 52%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-div.sidebar-author-title a {
+  }
+  .headerimage{
+    top:44px;
+  }
+  .sidebar-quote-mobile {
+    display: block;
+    width: 52%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  div.sidebar-author-title a {
     pointer-events: all;
     cursor: pointer;
-
+  }
+  .sidebar-div-mobile {
+    border-left: 70px solid #094c6b;
+    border-right: 70px solid #094c6b;
+    margin: 50px -70px;
+  }
+  .right-col{
+    display: none;
+  }
+  #left{
+    width:100%;
+  }
+  #right{
+    width:100%;
+    margin-top:30px;
+  }
 }
-
-.sidebar-div-mobile {
-  border-left: 70px solid #094c6b;
-  border-right: 70px solid #094c6b;
-  margin: 50px -70px;
-}
-.right-col{
-  display: none;
-}
-    
-    #left{ width:100%;}
-    #right{ width:100%; margin-top:30px;}
-}
-
-.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 @media (max-width: 768px) {
-
   .next-page-div {
     width: 100%;
     margin-right: 0px;
     height: 180px;
   }
-
   .next-page-column-1 {
     width: 78%;
     margin-left: 2%;
   }
-
   .next-page-column-2 {
     width: 20%;
     padding-left: 0%;
   }
-
   .next-arrow {
     margin: 33% 25%;
     padding-left: 10%;
     max-width: 54px;
   }
-
   .next-page-text {
     margin-top: 3%;
     padding-left: 2%;
   }
-
   .next-page-next-up {
     font-size: 14px;
   }
-
   .next-page-title {
     font-size: 28px;
   }
   .container {
     padding: 0 34px; 
   }
-
   .sidebar-div-mobile {
     margin: 50px -34px;
     border-left: 34px solid #094c6b;
     border-right: 34px solid #094c6b;
   }
+}
 
-  .center-div-initial {
-
+@media (max-width: 600px) {
+  .wrapper {
+    padding-top:10px;
+  } 
+  .headerimage {
+    height:250px;
+  }
+  h1 {
+    font-size: 45px;
+    padding-top: 100px;
+  }
+  .overhalf{
+    width:100%;
   }
 }
 
@@ -1326,16 +1321,10 @@ div.sidebar-author-title a {
   }
   input[type=checkbox]:checked ~ #menu{
     width: 100%;
-   
-}
-
-
-
+  }
 }
 
 @media (max-width: 320px) {
-
-    
   .container {
     padding: 0 20px; 
   }
@@ -1347,19 +1336,9 @@ div.sidebar-author-title a {
     border-left: 20px solid #094c6b;
     border-right: 20px solid #094c6b;
   }
-
   .center-div-initial {
     width: 90%;
     left: 5%;
     right: 5%;
   }
 }
-/*browser windows smaller than 850px*/
-@media (max-width: 600px) {
-   .wrapper {padding-top:10px;} 
-   .headerimage{ height:250px;}
-    h1{font-size: 45px;padding-top: 100px;}
-    .overhalf{width:100%;}
-
-
-
