@@ -16,6 +16,28 @@
   width: 1440px;
   margin: 0 auto;
 }
+
+/************ Audio play widths ************/
+.audioplayer{
+  width: 420px;
+}
+.timeline{
+  width: 320px;
+}
+.center-case-study-div .audioplayer-full-width{
+  width: 435px;
+}
+.center-case-study-div .timeline{
+  width: 375px;
+}
+.note-container .audioplayer{
+  width: 400px;
+}
+.note-container .timeline{
+  width: 353px;
+}
+/***************************************/
+
 @media(max-width: 1440px){
   .left-col {
     width: 800px;
@@ -26,6 +48,29 @@
   .container.clearfix{
     width: 1340px;
   }
+  /************ Audio play widths ************/
+  .audioplayer{
+    width: 407px;
+  }
+  .timeline{
+    width: 307px;
+  }
+  .audio-bar-text-full-width{
+    width: 395px;
+  }
+  .center-case-study-div .audioplayer-full-width{
+    width: 410px;
+  }
+  .center-case-study-div .timeline{
+    width: 358px;
+  }
+  .note-container .audioplayer{
+    width: 350px;
+  }
+  .note-container .timeline{
+    width: 303px;
+  }
+  /***************************************/
 }
 @media(max-width: 1340px){
   .left-col {
@@ -38,10 +83,30 @@
   .container.clearfix{
     width: 1140px;
   }
-
-  .timeline{
-      width: 260px;
+  /************ Audio play widths ************/
+  .audioplayer{
+    width: 407px;
   }
+  .timeline{
+    width: 297px;
+  }
+  .audio-bar-text-full-width{
+    width: 415px;
+  }
+  .center-case-study-div .audioplayer-full-width{
+    width: 430px;
+  }
+  .center-case-study-div .timeline{
+    width: 371px;
+  }
+  .note-container .audioplayer{
+    width: 300px;
+  }
+  .note-container .timeline{
+    width: 253px;
+  }
+  /***************************************/
+
 }
 @media(max-width: 1140px){
   .left-col {
