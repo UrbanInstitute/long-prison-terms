@@ -82,7 +82,9 @@ p{
     margin-bottom:10px;
     line-height: 1.3;
 }
-
+.no-margin-bottom{
+  margin-bottom: 0px !important;
+}
 h3{
     font-size: 24px;
     font-weight: 400;
@@ -208,7 +210,7 @@ h3{
   display: inline-block;
   width: 100%;
   padding-top: 20px;
-  padding-bottom: 35px;
+  padding-bottom: 43px;
 }
 .data_button {
     padding: 5 10 5 0px;
@@ -280,14 +282,15 @@ h3{
 }
 /*Style for left column*/
 .section-header {
-  margin-top: 5em;
+  /*margin-top: 140px;*/
   font-size: 26px;
-  margin-bottom: -4em;
+  margin-bottom: 17px;
   color: #094c6b;
 }
 
 .section-header-no-margin{
-  margin-top: 5em;
+  margin-top: 100px;
+  margin-bottom: 33px;
   font-size: 26px;
   color: #094c6b;
 }
@@ -295,8 +298,7 @@ h3{
 .left-col-header {
   font-size: 26px;
   font-weight: 600;
-  margin-bottom: 1.5em;
-  margin-top: 5em;
+  margin-bottom: 43px;
 
 }
 
@@ -339,11 +341,11 @@ li.spacing {
 /*Style for next page div*/
 
 .next-page-div {
-  width: 56%;
+  width: 768px;
   float: right;
   height: 342px;
   background-color: #094c6b;
-  margin-right: 35px;
+  margin-right: 0px;
   cursor: pointer;
   pointer-events: all;
   margin-top: 150px;
@@ -539,11 +541,9 @@ div.sidebar-quote p {
 }
 
 
-.pButton{
-
-}
 
 .play{
+  cursor: pointer;
   background: url('../img/play.png') ;
   height:60px; 
   width: 60px;
@@ -557,6 +557,7 @@ div.sidebar-quote p {
   z-index: 10;
 }
 .pause{
+  cursor: pointer;
   background: url('../img/pause.png') ;
   height:60px; 
   width: 60px;
@@ -572,7 +573,7 @@ div.sidebar-quote p {
 }
 
 .timeline{
-  width: 285px;
+  width: 245px;
   height: 13px;
   margin-top: 23px;
   float: left;
@@ -659,11 +660,12 @@ div.sidebar-quote p {
 }
 
 .audio-cell {
-  background-color: #f2f2f2;
-  display: table-cell;
-  vertical-align: middle;
-  padding: 5% 0% 5% 5%;
-
+    background-color: #f2f2f2;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 46px;
+    padding-top: 28px;
+    padding-bottom: 36px;
 }
 
 .audio-cell-full-width {
@@ -758,7 +760,7 @@ border-right-color: #222;
 .wrapper{
     max-width: 1440px;
     margin:0 auto;
-    padding-top: 50px;
+    padding-top: 150px;
 }
 
 
@@ -797,7 +799,7 @@ border-right-color: #222;
 .full-div {
 	background-color: #fff;
   width: 100%;
-  margin-bottom: 200px;
+  margin-bottom: 150px;
 }
 
 blockquote.blockquoteClass {
@@ -856,6 +858,7 @@ blockquote:after {
 
 .case-study-header {
   font-size: 26px;
+  margin-bottom: 33px;
 }
 
 .case-study-state {
@@ -948,8 +951,8 @@ blockquote:after {
 
 .photo-caption {
   font-size: 14px;
-  margin-top: 1em;
-  margin-bottom: 3em;
+  margin-top: 15px;
+  margin-bottom: 76px;
   color: #4d4d4d;
 }
 
@@ -1046,9 +1049,8 @@ footer .content{
 }
 
 p {
-  line-height: 1.5em;
-  margin-bottom: 1.8em;
-  margin-top: 1.8em;
+  line-height: 1.6;
+  margin-bottom: 43px;
 
 }
 

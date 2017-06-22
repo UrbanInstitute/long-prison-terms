@@ -24,7 +24,7 @@
     width: 350px;
   } 
   .container.clearfix{
-    width: 13400px;
+    width: 1340px;
   }
 }
 @media(max-width: 1340px){
@@ -37,6 +37,10 @@
   } 
   .container.clearfix{
     width: 1140px;
+  }
+
+  .timeline{
+      width: 260px;
   }
 }
 @media(max-width: 1140px){
