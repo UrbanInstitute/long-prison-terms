@@ -1117,39 +1117,12 @@ footer h3, footer h4{
     font-size:14px;
   }
 }
-
-@media (max-width: 1140px) {
-  .chart-mobile-case-study {
-    display: block;
-  }
-  .chart-desktop-case-study {
-    display: none;
-  }
-  .graph-div {
-    width: 100%;
-  }
-  .copyright-footer {
-    text-align: center;
-  }
-  .wrapper {
-    width:100%;
-    padding-top:20px;
-  }
-  .container {
-    width:auto;
-    padding:0px 70px;
-    margin-bottom: 40px;
-  }
+@media (max-width: 880px) {
   ul {
     margin-left: 15px;
   }
   li {
     padding-left:0px;
-  }
-  .overhalf{
-    margin-right:0px;
-    margin-left:30px;
-    width:70%;
   }
   .subnav {
     display: none;
@@ -1175,15 +1148,6 @@ footer h3, footer h4{
     text-align: right;
     margin-right: 15px;
   }
-  .chart-title {
-    font-size: 18px;
-  }
-  .pie-header {
-    font-size: 16px;
-  }
-  .chart-info {
-    font-size: 11px;
-  }
   #mobilenavcontainer {
     width: 100%;
     position: fixed;
@@ -1192,12 +1156,10 @@ footer h3, footer h4{
     display: block;  
     z-index: 11;
   }
-  /*Hide checkbox*/
   input[type=checkbox]:unchecked ~ #menu{
     display: none;
     visibility:hidden;
   }
-  /*Show menu when invisible checkbox is checked*/
   input[type=checkbox]:checked ~ #menu{
     display: block;
     position: absolute;
@@ -1229,6 +1191,44 @@ footer h3, footer h4{
     margin-bottom:0px;
     list-style:none;
     padding-left:0px; 
+  }
+}
+
+@media (max-width: 1140px) {
+  .chart-mobile-case-study {
+    display: block;
+  }
+  .chart-desktop-case-study {
+    display: none;
+  }
+  .graph-div {
+    width: 100%;
+  }
+  .copyright-footer {
+    text-align: center;
+  }
+  .wrapper {
+    width:100%;
+    padding-top:20px;
+  }
+  .container {
+    width:auto;
+    padding:0px 70px;
+    margin-bottom: 40px;
+  }
+  .chart-title {
+    font-size: 18px;
+  }
+  .pie-header {
+    font-size: 16px;
+  }
+  .chart-info {
+    font-size: 11px;
+  }
+  .overhalf{
+    margin-right:0px;
+    margin-left:30px;
+    width:70%;
   }
   .headerimage{
     top:44px;
