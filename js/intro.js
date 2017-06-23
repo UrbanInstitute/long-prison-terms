@@ -21,7 +21,7 @@ var scrollVis = function() {
     lineHeight = 537 - lineMargin.top - lineMargin.bottom;
 
   var YEAR_IN_MS = 2000,
-    MAX_BARS = 60
+    MAX_BARS = 50
 
   var FILLED_TRACK_COLOR = "#e3e3e3"
   var EMPTY_TRACK_COLOR = "#12719e"
@@ -502,10 +502,10 @@ var scrollVis = function() {
     var lineY = d3.scale.linear().range([lineHeight, 0]);
 
     var lineXAxis = d3.svg.axis().scale(lineX)
-        .orient("bottom").ticks(5);
+        .orient("bottom").ticks(0).outerTickSize(0);
 
     var lineYAxis = d3.svg.axis().scale(lineY)
-        .orient("left").ticks(8);
+        .orient("left").ticks(0).outerTickSize(0);
 
     var countline = d3.svg.line()
         .x(function(d) { return lineX(d.time); })
@@ -519,7 +519,7 @@ var scrollVis = function() {
 
     // Scale the range of the data
     lineX.domain([0,9]);
-    lineY.domain([0, 60]); 
+    lineY.domain([0, MAX_BARS]); 
 
     // Nest the entries by step
     var lineDataNest = d3.nest()
@@ -675,8 +675,6 @@ var scrollVis = function() {
         }
       })
     }
-    var comma = d3.format(",")
-    d3.select("#visTitle span").text(comma(tracks))
     d3.select(".stackBackground")
       .transition()
       .ease("linear")
@@ -784,7 +782,6 @@ d3.selectAll(".dot")
 .each("start", function(d,i){
   if(i == 0){
     var comma = d3.format(",")
-    d3.select("#visTitle span").text(0)
     d3.select(".stackBackground")
       .transition()
       .ease("linear")

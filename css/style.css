@@ -135,12 +135,10 @@ body{
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
-.introLineChart .y.axis path{
+.introLineChart .axis .tick{
   display: none;
 }
-.introLineChart .axis .tick text{
-  font-size: 12px;
-}
+
 
 
 
@@ -185,29 +183,29 @@ body{
   font-weight: bold;
 }
 #lineLabel_3{
-  left: 263px;
-  bottom: -159px;
+  left: 251px;
+  bottom: -170px;
 }
 #lineLabel_4{
-  left: 228px;
-  bottom: 22px;
+  left: 244px;
+  bottom: 72px;
   width: 80px;
 }
 #lineLabel_5{
-  left: 125px;
+  left: 86px;
   width: 105px;
-  bottom: 55px;
+  bottom: 53px;
 }
 #lineLabel_6{
-  left: 256px;
-  bottom: -82px;
+  left: 260px;
+  bottom: -57px;
   width: 100px;
   line-height: 13px;
 }
 #lineLabel_7{
   width: 80px;
-  left: 313px;
-  bottom: -30px;
+  left: 308px;
+  bottom: 3px;
   line-height: 13px;
 }
 .axisLabel{
@@ -216,8 +214,8 @@ body{
   position: absolute;
 }
 #axisLabelY{
-  left: 7px;
-  top: 47px;
+  left: 29px;
+  top: 54px;
   opacity: 0;
 }
 #axisLabelX{
