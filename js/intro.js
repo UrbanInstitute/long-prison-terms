@@ -1803,7 +1803,7 @@ function display(animationData, lineData, areaData) {
     // highlight current step text
     d3.selectAll('.step')
       .transition()
-      .style('opacity',  function(d,i) { return i == index ? 1 : 0.1; });
+      .style('opacity',  function(d,i) { return i == index ? 1 : 0.2; });
 
     var stepText = d3.select(d3.selectAll(".step")[0][index]).html()
 

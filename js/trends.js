@@ -1237,7 +1237,7 @@ function display(trendsData) {
     // highlight current step text
     d3.selectAll('.step')
       .transition()
-      .style('opacity',  function(d,i) { return i == index ? 1 : .1; });
+      .style('opacity',  function(d,i) { return i == index ? 1 : .2; });
 
     // activate current section
     plot.activate(index);
