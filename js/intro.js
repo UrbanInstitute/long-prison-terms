@@ -1601,14 +1601,23 @@ d3.select("#dotBottom")
     animateIntro(3)
   }
   function longerSentences(){
+    d3.select("#vis")
+      .transition()
+      .style("left","0px")
     drawBackCurtain(4)
     animateIntro(4)
   }
   function longerSentencesFasterAdmission(){
+    d3.select("#vis")
+      .transition()
+      .style("left","0px")
     drawBackCurtain(5)
     animateIntro(5)
   }
   function fewerShortSentences(){
+    d3.select("#vis")
+      .transition()
+      .style("left","0px")
     d3.select("#legendOne div")
       .text("One year prison terms")
     d3.select("#legend")
@@ -1636,6 +1645,7 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
+      .style("left","0px")
     d3.select("#lineChart")
       .transition()
       .style("opacity",1)
