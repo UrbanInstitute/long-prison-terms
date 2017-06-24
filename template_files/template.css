@@ -131,7 +131,7 @@ h3{
     position: fixed;
     top: 51px;
     background-color: #052635;
-    z-index: 100;
+    z-index: 99999;
 
 }
 
@@ -1096,6 +1096,14 @@ footer h3, footer h4{
 
 .embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
+.bottomRow, .topRow{
+  background: rgba(255,255,255,1);
+  z-index: 9999;
+  position: relative;
+}
+.topRow{
+  border-bottom: 150px solid white;
+}
 
 /***********************************************************************************/
 /********************************** MEDIA QUERIES **********************************/

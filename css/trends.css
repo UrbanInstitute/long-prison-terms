@@ -332,3 +332,9 @@ section p{
   font-size: 13px;
   font-weight: normal;
 }
+.tt-statename{
+  fill: #1696d2;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
