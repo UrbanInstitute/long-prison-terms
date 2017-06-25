@@ -485,6 +485,15 @@ div.sidebar-quote p {
   padding: 0 1%;
 }
 
+.graph-row-3 .graph-div{
+  width: 33%;
+}
+.graph-row-full .graph-div{
+  width: 100%;
+}
+.graph-row-3{
+  margin: 65px 0px 95px 0px;
+}
 
 
 .graph-div img {
@@ -502,6 +511,21 @@ div.sidebar-quote p {
 .graph-subhead {
   margin: 0 3%;
   text-align: center;
+  height: 40px;
+  font-weight: bold;
+}
+.graph-row-3 .graph-subhead{
+  height: 105px;
+  font-size: 17px;
+  font-weight: bold;
+}
+.graph-row-full .graph-subhead{
+    width: calc(50% - 10px);
+    height: 80px;
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    margin: 0px;
 }
 
 
