@@ -1786,9 +1786,11 @@ function display(animationData, lineData, areaData) {
   // d3.select("#areaChartText")
   //   .style("margin-top",window.innerHeight + "px")
   d3.select("#firstGap")
-    .style("margin-bottom",window.innerHeight*.4 + "px")
+    .style("margin-bottom",window.innerHeight*.6 + "px")
   d3.select("#secondGap")
     .style("margin-bottom",window.innerHeight + "px")
+  d3.select("#firstStep")
+    .style("margin-top",window.innerHeight* -0.5 + "px")
 
   var plot = scrollVis();
   d3.select("#vis")
@@ -1819,7 +1821,10 @@ function display(animationData, lineData, areaData) {
     // highlight current step text
     d3.selectAll('.step')
       .transition()
-      .style('opacity',  function(d,i) { return i == index ? 1 : 0.2; });
+      .style('opacity',  function(d,i) {
+        var low = (i == 2) ? 0 : 0.2
+        return i == index ? 1 : low;
+      });
 
     var stepText = d3.select(d3.selectAll(".step")[0][index]).html()
 

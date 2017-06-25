@@ -139,6 +139,31 @@ a{
   margin-left: 20px;
   background-color: #73bfe2;
 }
+#animationLabel{
+  position: fixed;
+  top: calc(50% + 315px);
+  left: 185px;
+  font-size: 13px;
+}
+#animationTick0{
+  position: fixed;
+  top: calc(50% + 296px);
+  left: 23px;
+  font-size: 13px;
+}
+#animationTick50{
+  position: fixed;
+  top: calc(50% + 296px);
+  left: 211.5px;
+  font-size: 13px;
+}
+#animationTick100{
+  position: fixed;
+  top: calc(50% + 296px);
+  left: 400px;
+  font-size: 13px;
+}
+
 .animationComponents{
   opacity: 0;
 	z-index:-1;
@@ -174,7 +199,9 @@ a{
   margin-bottom: 3000px;
   opacity: 0 !important;
 }
-
+#firstStep{
+  opacity: 0;
+}
 #sections {
   width: 350px !important;
 }
