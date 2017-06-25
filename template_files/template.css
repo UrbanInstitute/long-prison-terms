@@ -337,7 +337,9 @@ li.spacing {
 .bottom-p{
   margin-bottom: 0px;
 }
-
+.nar-bottom-p{
+  border-bottom: 150px solid white;
+}
 /*Style for next page div*/
 
 .next-page-div {
@@ -348,8 +350,8 @@ li.spacing {
   margin-right: 0px;
   cursor: pointer;
   pointer-events: all;
-  margin-top: 150px;
-
+  z-index: 9999;
+  position: relative;
 }
 
 .next-page-column-1 {
@@ -1127,6 +1129,12 @@ footer h3, footer h4{
 }
 .topRow{
   border-bottom: 150px solid white;
+}
+.bottomRow{
+  padding-bottom: 150px;
+}
+.refBottomRow{
+  padding-bottom: 0px;
 }
 
 /***********************************************************************************/
