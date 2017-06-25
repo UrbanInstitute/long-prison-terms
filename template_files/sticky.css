@@ -73,6 +73,11 @@
   /***************************************/
 }
 @media(max-width: 1340px){
+  @media(max-height: 900px){
+    .note-container{
+      top: 130px;
+    }
+  }
   .left-col {
     width: 650px;
   }
@@ -117,5 +122,10 @@
   } 
   .container.clearfix{
     width: 100%;
+  }
+}
+@media(max-height: 800px){
+  .note-container{
+    top: 130px;
   }
 }
