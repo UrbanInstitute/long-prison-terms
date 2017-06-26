@@ -37,13 +37,13 @@ function initDepot(){
 			tr.append("td")
 				.html(function(d){ return d.year })
 			tr.append("td")
-				.html(function(d){ return PERCENT(d.pctblackprisonpop/100) })
+				.html(function(d){ return PERCENT(d.pctblackprisonpop) })
 			tr.append("td")
-				.html(function(d){ return PERCENT(d.pctblacktop10/100) })
+				.html(function(d){ return PERCENT(d.pctblacktop10) })
 			tr.append("td")
 				.html(function(d){ return INTEGERS(d.numinchalflife) })
 			tr.append("td")
-				.html(function(d){ return PERCENT(d.top10pct25und/100) })
+				.html(function(d){ return PERCENT(d.top10pct25und) })
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.pct55plus_top10) })
 			tr.append("td")
@@ -153,6 +153,10 @@ function initDepot(){
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.los_0_2_pct) })
 			tr.append("td")
+				.html(function(d){ return INTEGERS(d.los_2_5_count) })
+			tr.append("td")
+				.html(function(d){ return PERCENT(d.los_2_5_pct) })
+			tr.append("td")
 				.html(function(d){ return INTEGERS(d.los_5_10_count) })
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.los_5_10_pct) })
@@ -168,10 +172,6 @@ function initDepot(){
 				.html(function(d){ return INTEGERS(d.los_20_25_count) })
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.los_20_25_pct) })
-			tr.append("td")
-				.html(function(d){ return INTEGERS(d.los_2_5_count) })
-			tr.append("td")
-				.html(function(d){ return PERCENT(d.los_2_5_pct) })
 			tr.append("td")
 				.html(function(d){ return INTEGERS(d.los_25plus_count) })
 			tr.append("td")
@@ -199,7 +199,7 @@ function initDepot(){
 		h2.append("th").html("10 or more years")
 
 		var PERCENT = d3.format(".2%")
-		d3.csv("data/dd-time_6-12.csv", function(data){
+		d3.csv("data/dd-trends-6-25.csv", function(data){
 			var tr = table
 				.selectAll(".dataRow")
 				.data(data)
@@ -240,8 +240,8 @@ function initDepot(){
 	var dd_duration = 1500;
 	var HEIGHTS = {
 		"snapshot-table": 1640,
-		"timeserved-table": 14679,
-		"breakdown-table": 14760,
+		"timeserved-table": 16929,
+		"breakdown-table": 16990,
 		"trends-table": 14770
 	}
 
