@@ -179,6 +179,9 @@ a{
 .conclusion-div{
   margin-top: 0;
 }
+.bottom-p{
+  margin-bottom: 150px !important;
+}
 
 .step p{
   font-size: 20px !important;

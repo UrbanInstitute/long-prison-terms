@@ -314,6 +314,13 @@ text.mapLable.blank{
 .conclusion-div{
   margin-top: 0;
 }
+.bottom-p{
+  margin-bottom: 150px !important;
+}
+.bottomRow {
+    padding-bottom: 0px !important;
+}
+
 
 section p{
   font-size: 16px;

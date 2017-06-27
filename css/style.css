@@ -8,8 +8,9 @@ body{
 
 #graphic {
   position: absolute;
-  left: 14px;
+  left: 0px;
   padding-top: 60px;
+  width: 100%;
 }
 
 
