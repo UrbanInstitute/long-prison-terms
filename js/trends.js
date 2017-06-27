@@ -114,7 +114,7 @@ var scrollVis = function() {
   };
 
 
-  var NUMERIC = d3.format(".2f")
+  var NUMERIC = d3.format(".1f")
   var PERCENT = d3.format(".1%")
   var PEOPLE = d3.format(",.0f")
   function hoverState(obj, d){

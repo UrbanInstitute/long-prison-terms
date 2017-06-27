@@ -1,8 +1,8 @@
 // d3.select(".dd-table").transition().duration(2000).style("height","0px")
 // d3.select(".dd-arrow").transition().duration(2000).style("transform","rotate(180deg)")
 function initDepot(){
-	var PERCENT = d3.format(".2%")
-	var NUMERIC = d3.format(".2f")
+	var PERCENT = d3.format(".1%")
+	var NUMERIC = d3.format(".1f")
 	var INTEGERS = d3.format(",")
 	function buildSnapshotTable(){
 		var table = d3.select("#snapshot-table").append("table")
@@ -133,7 +133,7 @@ function initDepot(){
 		h2.append("th").html("People")
 		h2.append("th").html("Share of population")
 
-		var PERCENT = d3.format(".2%")
+		var PERCENT = d3.format(".1%")
 		d3.csv("data/dd-time_6-12.csv", function(data){
 			var tr = table
 				.selectAll(".dataRow")
@@ -198,7 +198,7 @@ function initDepot(){
 		h2.append("th").html("Less than 10 years")
 		h2.append("th").html("10 or more years")
 
-		var PERCENT = d3.format(".2%")
+		var PERCENT = d3.format(".1%")
 		d3.csv("data/dd-trends-6-25.csv", function(data){
 			var tr = table
 				.selectAll(".dataRow")
