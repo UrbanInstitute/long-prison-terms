@@ -5,8 +5,6 @@
  * http://bost.ocks.org/mike/chart/
  */
 var scrollVis = function() {
-
-
   var pageSize = "large"
   var mapSizes = {
     "huge": { "width": 900, "height": 1270, "scale": 3800, "translate": [380,220], "chartWidth": 76, "chartMargin": 8},
@@ -1294,3 +1292,13 @@ nextpage
         nextpage.select(".next-arrow-hovered")
             .attr("class", "next-arrow")
     })
+
+
+$(document).ready(function(){
+    if(d3.select("section").node().getBoundingClientRect().top + 50 > window.innerHeight){
+        d3.select(".introArrowWrapper")
+            .transition()
+            .duration(0)
+            .style("opacity",1)
+    }    
+})

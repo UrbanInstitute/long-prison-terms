@@ -345,3 +345,9 @@ section p{
   font-weight: bold;
   text-transform: uppercase;
 }
+.introArrowWrapper.trends{
+  /*opacity: 1  ;*/
+}
+.topRow{
+  border-bottom: 90px solid white !important;
+}

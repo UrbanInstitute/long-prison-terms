@@ -123,6 +123,10 @@
   .container.clearfix{
     width: 100%;
   }
+  .left-col ul {
+    padding: 10px 90px 25px 55px;
+    margin: 0;
+  }
 }
 @media(max-height: 800px){
   .note-container{

@@ -22,7 +22,7 @@ body, html {
 }
 
 .left-col ul {
-  padding: 10px 90px 25px 55px;
+  padding: 0px 90px 0px 55px;
   margin: 0;
 }
 
@@ -104,24 +104,29 @@ h3{
 }
 
 #introArrow {
-    position: relative;
-    bottom: -150px;
-    left: calc(50% - 50px);
-    width: 50px;
-    animation: MoveUpDownMain 2s linear infinite;
+    position: fixed;
+    bottom: 80px;
+    left: calc(50% - 16px);
     opacity: 1;
 }
-@keyframes MoveUpDownMain {
-  0% {
-    bottom: -150px;
-  }
-  50% {
-    bottom: -160px;
-  }
-  100% {
-    bottom: -150;
-  }
+.introArrowWrapper{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 130px;
+    background: rgba(255,255,255,.8);
+    opacity: 0;
 }
+#scrollText{
+  position: fixed;
+  font-size: 16px;
+  color: #b3b3b3;
+  font-style: italic;
+  left: calc(50% - 54px);
+  bottom: 45px;
+
+}
+
 
 .dem-quote5{
 }
@@ -299,6 +304,8 @@ h3{
   font-size: 26px;
   font-weight: 600;
   margin-bottom: 43px;
+  margin-top:80px;
+  margin-bottom:30px;
 
 }
 
@@ -786,7 +793,7 @@ border-right-color: #222;
 .wrapper{
     max-width: 1440px;
     margin:0 auto;
-    padding-top: 150px;
+    padding-top: 60px;
 }
 
 
@@ -1076,7 +1083,7 @@ footer .content{
 
 p {
   line-height: 1.6;
-  margin-bottom: 43px;
+  margin-bottom: 30px;
 
 }
 

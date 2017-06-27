@@ -8,6 +8,8 @@
  */
 function scroller() {
 
+  var scrollStarted = false;
+
   var container = d3.select('body');
 
   // event dispatcher
@@ -65,6 +67,7 @@ function scroller() {
    *  through by user.
    */
   function scroll(els) {
+
     sections = els;
 
     // when window is scrolled call
@@ -218,6 +221,13 @@ function scroller() {
       dispatch.call('active', this, sectionIndex);
       currentIndex = sectionIndex;
       d3.select("#sectionIndex").attr("data-index",currentIndex)
+    }
+
+    if(window.pageYOffset != 0 && ! scrollStarted){
+        scrollStarted = true;
+        d3.select(".introArrowWrapper")
+            .transition()
+            .style("opacity",0)
     }
 
     var prevIndex = Math.max(sectionIndex - 1, 0);
