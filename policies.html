@@ -8,8 +8,6 @@
     
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <title>A Matter of Time: Policies</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>   
-     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script> 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic,900" rel="stylesheet" type="text/css">
       
 
@@ -29,12 +27,75 @@
 <body>
 
   <!--HEADER -->
-<div ng-include="'template_files/header.html'" ng-controller="navCtrl">
-</div>
- 
- 
+    <div id="header-pinned" class="no-touch">
+  
+       
+          <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
+            <div class="title"><span class="feature-link"><a href="http://www.urban.org/features" class="title-linkback" alt="Urban Institute logo">Features</a> <span>: :</span> </span><a href="intro.html" class="title-linkback">A Matter of Time: The Causes and Consequences of Rising Time Served in America&rsquo;s Prisons</a>
+            </div>
+            <div class="share-icons">
+                <div class="shareThisP">
+                    <span onclick="toggle_visibility('shareBox');">
+                            <div class="shareThisB"></div>
+                        </span>
+                    <div class="shareThisW" id="shareBox">
 
- <!--END-->
+                        <div class="addthis_toolbox addthis_default_style  "addthis:title="" addthis:url="">
+                            <a href="#" target="_blank" class="addthis_button_facebook at300b" title="Facebook" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-facebook" style="background-color: rgb(48, 88, 145);"><span class="at_a11y">Share on facebook</span></span></a>
+
+                            <a href="#" target="_blank" class="addthis_button_twitter at300b" title="Tweet" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-twitter" style="background-color: rgb(44, 168, 210);"><span class="at_a11y">Share on twitter</span></span></a>
+
+                            <a href="#" target="_blank" class="addthis_button_email at300b" target="_blank" title="Email" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-email" style="background-color: rgb(115, 138, 141);"><span class="at_a11y">Share on email</span></span></a>
+                            <div class="atclear"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+  
+                  
+                    
+         </div>   
+
+        <div class="subnav">
+              <ul class="nav-list">           
+                <li id="left-nav-item"><a href="intro.html">Intro</a></li>
+                <li><a href="trends.html">Trends</a></li>
+                <li><a href="demographics.html">Demographics</a></li>
+                <li><a href="narratives.html">Narratives</a></li>
+                <li class = "hovered-category"><a href="policies.html">Policies</a></li>
+                <li><a href="reform.html">Reform</a></li>
+                <li><a href="about.html">About</a></li>
+                <li id="no-border"><a href="data.html">Data</a></li>
+              </ul>
+        </div>
+ 
+                  
+                        
+      <div id="mobilenavcontainer" class="show-menu">
+           <label for="show-menu">Chapters <span class="subnav-arrow"></span></label>
+           <input type="checkbox" id="show-menu" class="checkbox" role="button">
+                <ul id="menu">
+                <li><a href="intro.html">Intro</a></li>
+                <li><a href="trends.html">Trends</a></li>
+                <li><a href="demographics.html">Demographics</a></li>
+                <li><a href="narratives.html">Narratives</a></li>
+                <li class = "hovered-category-mobile"><a href="policies.html">Policies</a></li>
+                <li><a href="reform.html">Reform</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="data.html">Data</a></li>
+
+                </ul>
+            <div id="current-page-navbar">
+            VIEWING <br />
+              <div class="current-page-name" ng-controller="navRightCtrl">
+              Policies
+              </div>
+            </div>
+      </div>  
+
+
+ <!--END HEADER-->
 
 
 <!--CENTER TEXT-->
@@ -811,28 +872,20 @@
 
 
 
+
+
+<div class="full-wrapper">
+  <div class = "summary-footer">Read <a href = "img/plan.png">executive summary</a></div>
+  <div class="copyright-footer">
+  Copyright &copy; July 2017. <a href="http://www.urban.org" target="_blank">Urban Institute</a>. <a href="https://github.com/urbaninstitute/long-prison-terms" target="_blank">View this project on Github</a>.
+  </div>
+</div>
+      
+
  
 
-   <div ng-include="'template_files/footer.html'">
-    
-    <!-- <div class="content">     
-
-                <div id="left">
-                    <h2>About the data</h2>
-                    
-
-                </div>
-                <div id="right">
-
-                    <h2>Project credits</h2>
-
-                    
-         
-    </div> -->
-    </div> 
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="template_files/app.js"></script>
     <script src="template_files/policy-template.js"></script>
     <script src="template_files/audio.js"></script>
     
