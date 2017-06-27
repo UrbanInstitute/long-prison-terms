@@ -46,6 +46,8 @@ $(document).ready(function(){
             .transition()
             .duration(0)
             .style("opacity",1)
+            .style("z-index",1)
+
     }    
 })
 $(window).scroll(function () {
@@ -54,6 +56,9 @@ $(window).scroll(function () {
         d3.select(".introArrowWrapper")
             .transition()
             .style("opacity",0)
+            .on("end", function(){
+                this.remove()
+            })
     }
     scrollCheck(); // fire on scroll
     if (scrollTimer) {

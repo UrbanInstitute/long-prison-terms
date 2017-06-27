@@ -116,6 +116,8 @@ h3{
     height: 130px;
     background: rgba(255,255,255,.8);
     opacity: 0;
+    z-index: -1;
+    /*pointer-events: none;*/ 
 }
 #scrollText{
   position: fixed;
@@ -799,6 +801,7 @@ border-right-color: #222;
 
 
 .full-wrapper{
+    z-index: 10;  
     width:100%;
     margin:0 auto;
     padding-top: 20px;
@@ -1060,6 +1063,17 @@ footer .content{
   margin-left: 1%;
   font-size: 14px;
   padding-bottom: 2em;
+  width: 430px;
+  float: right;
+  margin-right: 70px;
+}
+.summary-footer{
+  font-size: 16px;
+  font-weight: bold;
+  width: 180px;
+  margin-left: 70px;
+  clear: both;
+  float: left;
 }
     
 

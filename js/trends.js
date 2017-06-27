@@ -1300,5 +1300,6 @@ $(document).ready(function(){
             .transition()
             .duration(0)
             .style("opacity",1)
+            .style("z-index",10)
     }    
 })

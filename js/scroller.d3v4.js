@@ -228,6 +228,10 @@ function scroller() {
         d3.select(".introArrowWrapper")
             .transition()
             .style("opacity",0)
+            .style("z-index",-1)
+            .on("end", function(){
+              this.remove()
+            })
     }
 
     var prevIndex = Math.max(sectionIndex - 1, 0);
