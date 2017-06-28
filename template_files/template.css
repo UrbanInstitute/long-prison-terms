@@ -114,7 +114,7 @@ h3{
     bottom: 0px;
     width: 100%;
     height: 130px;
-    background: rgba(255,255,255,.8);
+    background: rgba(255,255,255,.9);
     opacity: 0;
     z-index: -1;
     /*pointer-events: none;*/ 
@@ -122,7 +122,7 @@ h3{
 #scrollText{
   position: fixed;
   font-size: 16px;
-  color: #b3b3b3;
+  color:#9d9d9d;;
   font-style: italic;
   left: calc(50% - 54px);
   bottom: 45px;
@@ -261,6 +261,7 @@ h3{
   font-size: 26px;
   font-weight: 600;
   margin-bottom: 34px;
+  margin-top:52px;
 }
 .about-h3 {
   font-size: 20px;

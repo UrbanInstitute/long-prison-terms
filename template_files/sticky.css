@@ -39,6 +39,11 @@
 /***************************************/
 
 @media(max-width: 1440px){
+  @media(max-height: 900px){
+    .note-container{
+      top: 130px;
+    }
+  }
   .left-col {
     width: 800px;
   }
