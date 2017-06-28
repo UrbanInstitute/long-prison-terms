@@ -8,6 +8,7 @@
 
 .table-container{
 	cursor: pointer;
+	pointer-events: none;
 }
 
 #dd-content{
@@ -25,6 +26,10 @@
 	font-weight: bold;
 	margin-top: 20px;
 	margin-bottom: 20px;
+	color: #b3b3b3;
+}
+.dd-title.loaded{
+	color: #000;
 }
 .dd-arrow{
 	margin-left: 20px;
