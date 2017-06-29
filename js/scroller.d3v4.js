@@ -232,10 +232,35 @@ function scroller() {
    */
   function position() {
     visPosition()
-    var pos = window.pageYOffset + 200 - containerStart ;
+    var pos = window.pageYOffset  + 200 - containerStart ;
     // fixVis();
-    var sectionIndex = d3.bisect(sectionPositions, pos) - 1;
-    sectionIndex = Math.max(0,Math.min(sections.size() -1, sectionIndex));
+    var sectionIndex;
+    if(IS_MOBILE()){
+      // console.log(sectionPositions, containerStart)
+      // sectionIndex = 1;
+      // sectionIndex = d3.bisect(sectionPositions, pos-200) - 1;
+      // sectionIndex = Math.max(0,Math.min(sections.size() -1, sectionIndex));
+      // console.log(sectionIndex)
+      // console.log(window.pageYOffset, "BREAK1")
+      var stop = false;
+      d3.selectAll(".step").each(function(d, i){
+        var t = this.getBoundingClientRect().top
+        // console.log(i, t)
+        // if(stop){
+        //   return false;
+        // }
+        // else 
+        if (i != 0 && i != 6 && ((t-150) < 0)){
+          sectionIndex = i;
+          stop = true;
+        }
+      })
+    }else{
+      sectionIndex = d3.bisect(sectionPositions, pos) - 1;
+      sectionIndex = Math.max(0,Math.min(sections.size() -1, sectionIndex));
+    }
+    // console.log(sectionIndex)
+    if(typeof(sectionIndex) == "undefined"){ sectionIndex = 0;}
 
     if (currentIndex !== sectionIndex) {
       // @v4 you now `.call` the dispatch callback
