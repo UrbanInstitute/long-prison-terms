@@ -5,15 +5,27 @@
  * http://bost.ocks.org/mike/chart/
  */
 var scrollVis = function() {
-  var pageSize = "large"
+  var pageSize;
+  if(IS_PHONE()){
+    pageSize = "small"
+  }
+  else if(IS_TABLET()){
+    pageSize = "medium"
+  }else{
+    pageSize = "large"
+  }
   var mapSizes = {
-    "huge": { "width": 900, "height": 1270, "scale": 3800, "translate": [380,220], "chartWidth": 76, "chartMargin": 8},
     "large": { "width": 750, "height": 600, "scale": 3100, "translate": [300,200], "chartWidth": 62, "chartMargin": 5},
-    "medium": { "width": 900, "height": 1270, "scale": 3800, "translate": [380,220], "chartWidth": 76, "chartMargin": 8},
-    "small": { "width": 900, "height": 1270, "scale": 3800, "translate": [380,220], "chartWidth": 76, "chartMargin": 8}
+    "medium": { "width": 750*.666666, "height": 600*.666666, "scale": 3100*.666666, "translate": [300*.666666,200*.666666], "chartWidth": 62*.666666, "chartMargin": 5*.666666},
+    "small": { "width": 750*.42666, "height": 600*.42666, "scale": 3100*.42666, "translate": [300*.42666,200*.42666], "chartWidth": 62*.42666, "chartMargin": 5*.42666}
   }
 
-  var mapMargin = {top: 30, right: 20, bottom: 30, left: 50},
+  var mapMargins = {
+    "large": {top: 30, right: 20, bottom: 30, left: 50},
+    "medium": {top: 30, right: 20, bottom: 30, left: 50},
+    "small": {top: 30, right: 20, bottom: 30, left: 20}
+  } 
+  var mapMargin = mapMargins[pageSize]
     mapWidth = mapSizes[pageSize]["width"] - mapMargin.left - mapMargin.right,
     mapHeight = mapSizes[pageSize]["height"] - mapMargin.top - mapMargin.bottom;
 
@@ -1265,7 +1277,13 @@ function display(trendsData) {
     // highlight current step text
     d3.selectAll('.step')
       .transition()
-      .style('opacity',  function(d,i) { return i == index ? 1 : .2; });
+      .style('opacity',  function(d,i) {
+        if(IS_MOBILE()){
+          return 1
+        }else{
+          return i == index ? 1 : .2;
+        }
+      });
 
     // activate current section
     plot.activate(index);

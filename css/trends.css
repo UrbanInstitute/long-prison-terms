@@ -2,10 +2,12 @@ body{
   font-family: Lato;
   background: none !important;
 }
-.container {
+div.container {
   width: 890px;
 }
-
+#featureContainer{
+  height: 40000px;
+}
 #graphic {
   position: absolute;
   left: 14px;
@@ -245,9 +247,30 @@ text.mapLable.blank{
   background-color: rgba(255,255,255,0)
 }
 
+#break1Marker, #isMobile, #isPhone, #isTablet{
+  display: none;
+  width: 0;
+  height: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+@media (max-width: 1240px){
+  #sections{
+    width: 350px;
+  }
+  #break1Marker{
+    display: block;
+  }
+}
 
-@media (max-width: 1170px){
-  .container{
+@media (max-width: 1140px){
+  #first-step, #last-step{
+    margin-bottom: 0px;
+    display: none;
+  }
+  div.container{
     margin-left: auto;
     width: 100%;
   }
@@ -263,7 +286,7 @@ text.mapLable.blank{
   .step {
     margin-bottom: 1000px;
     opacity: 1;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     box-shadow: rgb(136, 136, 136) 4px 4px 16px;
     padding: 30px;
     z-index: 2;
@@ -272,6 +295,12 @@ text.mapLable.blank{
 @media (max-width: 768px){
   .step {
     margin-bottom: 1200px;
+  }
+  #isTablet{
+    display: block;
+  }
+  .mapLable{
+    display: none;
   }
 }
 @media (max-width: 350px){
@@ -292,6 +321,9 @@ text.mapLable.blank{
     /*left: -20px;*/
     pointer-events: none;
   }
+  #isPhone{
+    display: block;
+  }
 }
 
 .chartTitle{
@@ -307,10 +339,7 @@ text.mapLable.blank{
   z-index: 99;
   position: relative;
 }
-.full-wrapper{
-  position: absolute;
-  bottom: -65px;
-}
+
 .conclusion-div{
   margin-top: 0;
 }

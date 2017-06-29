@@ -7,6 +7,12 @@ var IS_PHONE = function(){
 var IS_MOBILE = function(){
   return (d3.select("#isMobile").style("display") == "block")
 }
+var IS_TABLET = function(){
+  return (d3.select("#isTablet").style("display") == "block")
+}
+var BREAK1 = function(){
+  return (d3.select("#break1Marker").style("display") == "block")
+}
 var SECTION_INDEX = function(){
   return d3.select("#sectionIndex").attr("data-index")
 }
