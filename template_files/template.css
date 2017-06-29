@@ -422,6 +422,10 @@ li.spacing {
 .border {
   border-bottom: solid 1px #d0d2d3;
 }
+.custom.border{
+  margin-top: 45px;
+  margin-bottom: 15px;
+}
 
 .note-container {
   position: absolute;
@@ -1239,7 +1243,7 @@ footer h3, footer h4{
     top: 0px;
     height: 45px;
     display: block;  
-    z-index: 11;
+    z-index: 99999;
   }
   input[type=checkbox]:unchecked ~ #menu{
     display: none;
