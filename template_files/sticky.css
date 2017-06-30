@@ -133,7 +133,7 @@
     margin: 0;
   }
 }
-@media(max-height: 800px){
+@media(max-height: 850px){
   .note-container{
     top: 130px;
   }

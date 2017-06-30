@@ -292,7 +292,7 @@ text.mapLable.blank{
     z-index: 2;
   }
 }
-@media (max-width: 768px){
+@media (max-width: 766px){
   .step {
     margin-bottom: 1200px;
   }

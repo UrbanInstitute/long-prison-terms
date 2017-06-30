@@ -16,8 +16,8 @@ var scrollVis = function() {
   }
   var mapSizes = {
     "large": { "width": 750, "height": 600, "scale": 3100, "translate": [300,200], "chartWidth": 62, "chartMargin": 5},
-    "medium": { "width": 750*.666666, "height": 600*.666666, "scale": 3100*.666666, "translate": [300*.666666,200*.666666], "chartWidth": 62*.666666, "chartMargin": 5*.666666},
-    "small": { "width": 750*.42666, "height": 600*.42666, "scale": 3100*.42666, "translate": [300*.42666,200*.42666], "chartWidth": 62*.42666, "chartMargin": 5*.42666}
+    "medium": { "width": 750*.666666, "height": 500, "scale": 3100*.666666, "translate": [300*.666666,200*.666666], "chartWidth": 62*.666666, "chartMargin": 5*.666666},
+    "small": { "width": 750*.42666, "height": 500, "scale": 3100*.42666, "translate": [300*.42666,200*.42666], "chartWidth": 62*.42666, "chartMargin": 5*.42666}
   }
 
   var mapMargins = {
@@ -127,10 +127,10 @@ var scrollVis = function() {
   var NUMERIC = d3.format(".1f")
   var PERCENT = d3.format(".1%")
   var PEOPLE = d3.format(",.0f")
-  function hoverState(obj, d){
+  function selectState(obj, d, action){
     d.values = d.values.filter(function(o){ return parseInt(o.Year) >= 2000})
-    var chartWidth = mapSizes[pageSize]["chartWidth"]
-    var chartMargin = mapSizes[pageSize]["chartMargin"]
+    var chartWidth = mapSizes["large"]["chartWidth"]
+    var chartMargin = mapSizes["large"]["chartMargin"]
     
     var state = d.values[0]["State"]
 
@@ -158,9 +158,17 @@ var scrollVis = function() {
       ttY = chartMargin + chartWidth-3;
     }
 
-    var tt = mapSvg.append("g")
-      .attr("transform", d3.select(obj).attr("transform") + " translate(" + (ttX) + " , " + (ttY) + ")")
-      .attr("id", "mapTooltip")
+
+    if(action == "hover"){
+      var tt = mapSvg.append("g")
+        .attr("transform", d3.select(obj).attr("transform") + " translate(" + (ttX) + " , " + (ttY) + ")")
+        .attr("id", "mapTooltip")
+    }
+    else if(action == "click"){
+      var tt = mapSvg.append("g")
+        .attr("transform", d3.select(obj).attr("transform") + " translate(0,0)")
+        .attr("id", "mapTooltip") 
+    }
 
 
 
@@ -541,7 +549,7 @@ var scrollVis = function() {
       .transition()
       .style("opacity",0)
   }
-  function deHoverState(obj, d){
+  function deselectState(obj, d){
     d3.select("#mapTooltip").remove()
     d3.select(obj)
       .selectAll("rect")
@@ -623,6 +631,7 @@ var scrollVis = function() {
     .on("mouseout", function(){
       d3.selectAll(".explainer span").classed("active",false)      
     })
+
   info.append("circle")
     .attr("r", infoR)
     .attr("cx",0)
@@ -749,12 +758,26 @@ var scrollVis = function() {
 
         })
     .on("mouseover", function(d){
-      hoverState(this, d)
+      if(IS_TABLET()){
+        return false
+      }else{
+        selectState(this, d, "hover")
+      }
     })
     .on("mouseout", function(d){
-      deHoverState(this, d)
+      if(IS_TABLET()){
+        return false;
+      }else{
+        deselectState(this, d, "hover")
+      }
     })
-
+    .on("click", function(d){
+      if(IS_TABLET()){
+        selectState(this, d, "click")
+      }else{
+        return false;
+      }
+    })
     var blank = mapSvg
     .selectAll(".blank")
     .data(blankStateData)
