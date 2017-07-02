@@ -306,6 +306,29 @@ text.mapLable.blank{
   .mapLable{
     display: none;
   }
+  .explainer{
+    left: 40px !important;
+    top: -7px !important;
+    opacity: 1;
+    font-size: 14px;
+  }
+  .legendContainer{
+    top: 33px !important;
+    left: 100px !important;
+  }
+  .chartNote{
+    top: 375px !important;
+    left: 45px !important;
+  }
+  #expl1, #expl2{
+    display: inline-block;
+  }
+  #expl1{
+    margin-right: 4px;
+  }
+  .chartTitle{
+    top: -40px !important;
+  }
 }
 @media (max-width: 350px){
   #sections{
@@ -373,10 +396,9 @@ section p{
   font-weight: normal;
 }
 .tt-statename{
-  fill: #1696d2;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
-  text-transform: uppercase;
+  font-style: italic;
 }
 .introArrowWrapper.trends{
   /*opacity: 1  ;*/

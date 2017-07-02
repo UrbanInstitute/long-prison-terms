@@ -153,7 +153,7 @@ var scrollVis = function() {
   var PEOPLE = d3.format(",.0f")
   function selectState(obj, d, action){
     d.values = d.values.filter(function(o){ return parseInt(o.Year) >= 2000})
-    var scalar = (IS_MOBILE()) ? 1.2 : 1
+    var scalar = (IS_TABLET()) ? 1.2 : 1
     var chartWidth = mapSizes["large"]["chartWidth"] * scalar
     var chartMargin = mapSizes["large"]["chartMargin"] * scalar
     
@@ -589,10 +589,15 @@ var scrollVis = function() {
         })
     }
 
-      // .attr("x", obj.getBoundingClientRect().left)
-      // .attr("y", obj.getBoundingClientRect().bottom)
-
-
+    if(IS_TABLET()){
+      tt.append("svg:image")
+         .attr('x',ttWidth - 25)
+         .attr('y',12)
+         .attr('width', 13)
+         .attr('height', 13)
+         .attr("xlink:href","img/close-button.png")
+         .on("click", function(){ deselectState()})
+    }
 
     d3.select(obj)
       .selectAll("rect")
@@ -797,7 +802,7 @@ var scrollVis = function() {
     .style("top",explainerY + "px")
     .style("left",explainerX + "px")
     .style("opacity",0)
-    .html("Data for all states on the same x-axis scale.<br/><span>Y-axis scales differ for each state.</span><br/>" + actionWords + " state for detailed data.")
+    .html("<div id = \"expl1\">Data for all states on the same x-axis scale.</div><div id = \"expl2\"><span>Y-axis scales differ for each state.</span></div id = \"expl3\"><div>" + actionWords + " state for detailed data.</div>")
 
 
   var map = mapSvg
