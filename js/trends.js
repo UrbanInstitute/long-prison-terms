@@ -788,7 +788,7 @@ var scrollVis = function() {
     .style("position", "absolute")
     .style("top",explainerY + "px")
     .style("left",explainerX + "px")
-    .html("Data for all line charts on the same x and y scales.<br/>" + actionWords + " state for detailed data.")
+    .html("Data for all line charts on the same x- and y-axis scales.<br/>" + actionWords + " state for detailed data.")
   
   d3.select("#vis")
     .append("div")
@@ -797,7 +797,7 @@ var scrollVis = function() {
     .style("top",explainerY + "px")
     .style("left",explainerX + "px")
     .style("opacity",0)
-    .html("Data for all states on the same x scale.<br/><span>Y-axis scales differ for each state.</span><br/>" + actionWords + " state for detailed data.")
+    .html("Data for all states on the same x-axis scale.<br/><span>Y-axis scales differ for each state.</span><br/>" + actionWords + " state for detailed data.")
 
 
   var map = mapSvg
