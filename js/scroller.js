@@ -126,20 +126,8 @@ function scroller() {
           .style("left", ((window.innerWidth - 205)*.5 + 53) + "px")
         d3.select("#animationLabel")
           .style("left", ((window.innerWidth - 205)*.5 + 28) + "px")
-  // #animationLabel{
-  //   left: calc(50% - 105px)
-  // }
-  // #animationTick0{
-  //   left: 23px;
-  // }
-  // #animationTick50{
-  //   left: calc(50% - 78.5px);
-  // }
-  // #animationTick100{
-  //   left: calc(50% + 110px);
-  // }
-
- 
+        d3.selectAll(".lineLabel")
+          .style("transform", "translateX(" + (window.innerWidth - 240 - 14 - 395) + "px)")
       }
 
     }else if(IS_MOBILE()){
@@ -160,6 +148,8 @@ function scroller() {
         .style("left", null)
       d3.select("#animationLabel")
         .style("left", null)
+      d3.selectAll(".lineLabel")
+        .style("transform", "translateX(0px)")
     }else{
       var gutter = visGutter(false);
       var bGutter = visGutter(true)
@@ -177,6 +167,8 @@ function scroller() {
         .style("left", null)
       d3.select("#animationLabel")
         .style("left", null)
+      d3.selectAll(".lineLabel")
+        .style("transform", "translateX(0px)")
 
     }
     d3.select("#featureContainer")

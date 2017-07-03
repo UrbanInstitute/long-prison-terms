@@ -45,10 +45,10 @@ function scroller() {
         return ( (window.innerWidth - 320)*.5) + "px"
       }
       else if(IS_TABLET()){
-        return ( (window.innerWidth - 500)*.5) + "px"
+        return ( (window.innerWidth - 545)*.5) + "px"
       }
       else if(IS_MOBILE()){
-        return ( (window.innerWidth - 750)*.5) + "px"
+        return ( (window.innerWidth - 770)*.5) + "px"
       }else{
         var shift = BREAK1() ? 40 : 0;
         return (.5*(window.innerWidth - 800 - 400 + shift)) + "px"

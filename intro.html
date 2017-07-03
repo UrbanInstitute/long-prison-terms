@@ -140,6 +140,12 @@
     <div id = "break1Marker"></div>
 
     <div id = "breadCrumb"></div>
+    <div id = "mobileSwitchContainer" class = "mobileSwitch">
+      <div id = "animationButton" class = "mobileSwitch switchButton animationButtonElement active">Animation</div>
+      <div class = "animationButtonElement switchUnderline active"></div>
+      <div id = "lineButton" class = "mobileSwitch lineButtonElement switchButton">Line Chart</div>
+      <div class = "lineButtonElement switchUnderline"></div>
+    </div>
 
 
     <div id = "titleText" class = "titleElement">
@@ -174,18 +180,6 @@
 
   
     <div id='sections'>
-    <div id ='lineChart'>
-      <div id = "lineLabel_3" data-key="3" class = "lineLabel">Equilibrium</div>
-      <div id = "lineLabel_4" data-key="4" class = "lineLabel">Longer prison terms</div>
-      <div id = "lineLabel_5" data-key="5" class = "lineLabel">Higher admission rates</div>
-      <div id = "lineLabel_6" data-key="6" class = "lineLabel">Reduced admission rates</div>
-      <div id = "lineLabel_7" data-key="7" class = "lineLabel">Shorter prison terms</div>
-      <div id = "axisLabelX"  class = "axisLabel">Years</div>
-      <div id = "axisLabelY"  class = "axisLabel">People in prison</div>
-    </div>
-
-
-
       <section class="step" id = "firstGap">
         <div>first gap</div>
       </section>
@@ -194,7 +188,7 @@
       </section>
       <section class="step" id = "firstStep">
         <p>
-          <strong>One bar moving across the box to the left represents a person&rsquo;s time in prison</strong>. The slower the bar, the longer the prison term.
+          <strong>One bar moving across <span id = "beyonceBox">the box to the left</span> represents a person&rsquo;s time in prison</strong>. The slower the bar, the longer the prison term.
         </p>
       </section>
       <section class="step">
@@ -220,14 +214,22 @@
           <strong>Recent <a href = "https://apps.urban.org/features/reducing-mass-incarceration/" target = "_blank">efforts to reduce the number of people</a> who are sent to prison</strong> in the first place, like alternatives to incarceration for drug offenses, have <a href = "http://apps.urban.org/features/justice-reinvestment/" target = "_blank">helped stem the flow</a> in some states and prisons. But these efforts typically only affect people who wouldn&rsquo;t be in prison for very long anyway.
         </p>
       </section>
-      <section class="step">
+      <section class="step" id ="penultimateStep">
         <p>
           <strong>Other reforms limit how long people can stay in prison</strong> for low-level crimes, but that also doesn&rsquo;t affect people with the longest prison terms.
         </p>
       </section>
-      <section class="step">
+      <section class="step" id = "lastStep">
       </section>
-
+      <div id ='lineChart'>
+        <div id = "lineLabel_3" data-key="3" class = "lineLabel">Equilibrium</div>
+        <div id = "lineLabel_4" data-key="4" class = "lineLabel">Longer prison terms</div>
+        <div id = "lineLabel_5" data-key="5" class = "lineLabel">Higher admission rates</div>
+        <div id = "lineLabel_6" data-key="6" class = "lineLabel">Reduced admission rates</div>
+        <div id = "lineLabel_7" data-key="7" class = "lineLabel">Shorter prison terms</div>
+        <div id = "axisLabelX"  class = "axisLabel">Years</div>
+        <div id = "axisLabelY"  class = "axisLabel">People in prison</div>
+      </div>
     </div>
   </div>
 

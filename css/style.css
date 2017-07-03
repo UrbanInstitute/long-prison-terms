@@ -3,7 +3,7 @@ body{
   background: none !important;
 }
 .container {
-  width: 890px;
+  /*width: 890px;*/
 }
 
 #graphic {
@@ -87,7 +87,8 @@ body{
      top: calc(50% - 217.5px); 
     border-left: 46px solid transparent;
     left: 370px;
-    height: 239px;
+    /*height: 239px;*/
+    height: 550px;
 }
 #vis .title {
   font-size:120px;
@@ -185,28 +186,28 @@ body{
 }
 #lineLabel_3{
   left: 251px;
-  bottom: -170px;
+  bottom: 141px;
 }
 #lineLabel_4{
   left: 244px;
-  bottom: 72px;
+  bottom: 383px;
   width: 80px;
 }
 #lineLabel_5{
   left: 86px;
   width: 105px;
-  bottom: 53px;
+  bottom: 364px;
 }
 #lineLabel_6{
   left: 260px;
-  bottom: -57px;
+  bottom: 254px;
   width: 100px;
   line-height: 13px;
 }
 #lineLabel_7{
   width: 80px;
   left: 308px;
-  bottom: 3px;
+  bottom: 313px;
   line-height: 13px;
 }
 .axisLabel{

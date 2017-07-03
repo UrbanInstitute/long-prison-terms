@@ -1,3 +1,137 @@
+var IS_SHORT = function(){
+  return (d3.select("#isShort").style("display") == "block")
+}
+var IS_PHONE = function(){
+  return (d3.select("#isPhone").style("display") == "block")
+}
+var IS_MOBILE = function(){
+  return (d3.select("#isMobile").style("display") == "block")
+}
+var IS_TABLET = function(){
+  return (d3.select("#isTablet").style("display") == "block")
+}
+var BREAK1 = function(){
+  return (d3.select("#break1Marker").style("display") == "block")
+}
+var SECTION_INDEX = function(){
+  return d3.select("#sectionIndex").attr("data-index")
+}
+var ACTIVE_CONTAINER = function(){
+  if(d3.select("#animationButton").classed("active")){
+    return "animation"
+  }else{
+    return "linechart"
+  }
+}
+d3.select("#animationButton")
+  .on("click", function(){
+    if(d3.select(this).classed("active")){
+      return false
+    }else{
+      d3.selectAll(".lineButtonElement").classed("active", false)
+      d3.selectAll(".animationButtonElement").classed("active", true)
+      showAnimation();
+    }
+  })
+d3.select("#lineButton")
+  .on("click", function(){
+    if(d3.select(this).classed("active")){
+      return false
+    }else{
+      d3.selectAll(".lineButtonElement").classed("active", true)
+      d3.selectAll(".animationButtonElement").classed("active", false)
+      showLine();
+    }
+  })
+
+
+var visGutter = function(animationComp){
+  if(IS_PHONE()){
+
+  }
+  else if(IS_TABLET()){
+    return 0
+  }
+  else if(IS_MOBILE()){
+    return (window.innerWidth - 698)*.5
+  }
+  else if(BREAK1()){
+    if(animationComp){
+      return (window.innerWidth - 1226 + 100)*.5
+    }else{
+      return (window.innerWidth - 1226)*.5
+    }
+  }else{
+    return (window.innerWidth - 1226)*.5
+  }
+}
+
+var getAnimationLeft = function(singleDot){
+  console.log(singleDot)
+  if(singleDot){
+    if(IS_TABLET()){
+      return "92.5px"
+    }
+    else if(IS_MOBILE()){
+      return (visGutter(true) + 160) + "px"  
+    }else{
+      return (visGutter(true) + 180) + "px"  
+    }
+  }
+  else if(IS_TABLET()){
+    if(ACTIVE_CONTAINER() == "animation"){
+      return "53px"
+    }else{
+      return ((180 + 10) - (window.innerWidth - 240 + 35 ))  + "px"
+    }
+  }
+  else{
+    return visGutter(true) + "px"
+  }
+
+
+
+        
+}
+
+function showLine(){
+  d3.select("#vis")
+    .transition()
+    .style("left", function(){
+      return ((180 + 10) - (window.innerWidth - 240 + 35 ))  + "px"
+    })
+  d3.selectAll(".animationComponents")
+    .transition()
+    .style("transform", function(){
+      return "translateX(" + ((180 - 40) - (window.innerWidth - 240 + 35 )) + "px)"
+    })
+  d3.select("#lineChart")
+    .transition()
+    .style("width", function(){
+      return (window.innerWidth - 300 + 90) + "px"
+    })
+    .style("left", "163px")
+
+}
+function showAnimation(){
+  d3.select("#vis")
+    .transition()
+    .style("left", function(){
+      return getAnimationLeft(false);
+    })
+  d3.selectAll(".animationComponents")
+    .transition()
+    .style("transform", function(){
+      return "translateX(0px)"
+    })
+  d3.select("#lineChart")
+    .transition()
+    .style("width", "180px")
+    .style("left", (window.innerWidth - 180) + "px")
+}
+
+
+
 
 /**
  * scrollVis - encapsulates
@@ -10,14 +144,29 @@ var scrollVis = function() {
   // and margins of the vis area.
 
   var AREA_ANIMATING = false;
-  var WIDTH = 420,
-    HEIGHT = 517,
+  var WIDTH, LINEWIDTH;
+  if(IS_TABLET()){
+    WIDTH = window.innerWidth - 240 + 35;
+    LINEWIDTH = window.innerWidth - 240 - 14; 
+  }
+  else if(IS_MOBILE()){
+    WIDTH = 370;
+    LINEWIDTH = 390;
+  }
+  else if (BREAK1()){
+    WIDTH = 370;
+    LINEWIDTH = 390;
+  }else{
+    WIDTH = 420;
+    LINEWIDTH = 390;
+  }
+   var HEIGHT = 517,
     margin = {top: 72, right: 5, bottom: 10, left: 25},
     width = WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom
 
   var lineMargin = {top: 75, right: 60, bottom: 30, left: 30},
-    lineWidth = 390 - lineMargin.left - lineMargin.right,
+    lineWidth = LINEWIDTH - lineMargin.left - lineMargin.right,
     lineHeight = 537 - lineMargin.top - lineMargin.bottom;
 
   var YEAR_IN_MS = 2000,
@@ -127,7 +276,13 @@ var scrollVis = function() {
       breadCrumbSvg = d3.select("#breadCrumb")
         .append("svg")
             .attr("class","introLineChart")
-            .attr("width", 16)
+            .attr("width", function(){
+              if(IS_TABLET()){
+                return 79
+              }else{
+                return 16
+              }
+            })
             .attr("height", window.innerHeight)
         .append("g")
 
@@ -169,21 +324,59 @@ var scrollVis = function() {
 
   setupVis = function(allData, lineData, areaData) {
     //temp line
-
+    if(IS_MOBILE()){
+      d3.select("#beyonceBox")
+        .text("the box below")
+    }else{
+      d3.select("#beyonceBox")
+        .text("the box to the left")
+    }
     breadCrumbSvg
       .style("opacity",0)
     breadCrumbSvg.append("rect")
-      .attr("width",1)
+      .attr("width",function(){
+        if(IS_TABLET()){
+          return 75;
+        }else{
+          return 1;
+        }
+      })
       .attr("height", 0)
-      .style("fill","#d2d2d2")
-      .attr("x",8)
+      .style("fill", function(){
+        if(IS_TABLET()){
+          return "#ffffff"
+        }else{
+          return "#d2d2d2"
+        }
+      })
+      .attr("x",function(){
+        if(IS_TABLET()){
+          return 0;
+        }else{
+          return 8;
+        }
+      })
       .attr("y",0)
+      .style("opacity", function(){
+        if(IS_MOBILE() && !IS_TABLET()){
+          return 0;
+        }else{
+          return 1;
+        }
+      })
+
     for(var i = 1; i < 7; i++){
       breadCrumbSvg.append("circle")
         .attr("class", "crumb")
         .attr("id", "crumb" + i)
         .datum(i)
-        .attr("cx", 8)
+        .attr("cx", function(){
+          if(IS_TABLET()){
+            return 40;
+          }else{
+            return 8
+          }
+        })
         .attr("cy", 0)
         .attr("r",6.5)
         .on("click", function(d){
@@ -644,8 +837,14 @@ var scrollVis = function() {
         .duration(1000)
         .delay(100)
         .attr("cy", function(d){
-          var crumbStart = window.innerHeight*.5 - 217.5 +  80
-          return crumbStart + (d-1)*64.5
+          if(IS_MOBILE()){
+            var crumbStart = window.innerHeight*.5 - 217.5 +  80 + 114
+            return crumbStart + (d-1)*36   
+          }else{
+            var crumbStart = window.innerHeight*.5 - 217.5 +  80
+            return crumbStart + (d-1)*64.5            
+          }
+
         })
   }
   function hideBreadCrumbs(){
@@ -1119,6 +1318,7 @@ d3.select("html")
 .attr("class","noBg")
 
 if(!AREA_ANIMATING){
+  var ptDy = (IS_MOBILE()) ? -40 : -30;
   d3.select("#popTextNum")
     .transition()
     .delay(1800)
@@ -1126,7 +1326,7 @@ if(!AREA_ANIMATING){
     .transition()
     .delay(3400)
     .attr("dx",-90)
-    .attr("dy",-30)  
+    .attr("dy",ptDy)  
     .style("opacity","1")
     .each("start", function(){
       AREA_ANIMATING = true;
@@ -1432,14 +1632,19 @@ d3.select("#dotBottom")
     d3.selectAll(".trackEmpty").transition().style("opacity",0)
     d3.selectAll(".trackFilled").transition().style("opacity",0)
     d3.selectAll(".dot").transition().style("opacity",0)
+    
     d3.select("#vis")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
-      .style("left","180px")
+      .style("left", getAnimationLeft(true))
 
 
     d3.selectAll(".animationComponents")
+      .transition()
+      .style("opacity",0)
+      .style("z-index",-1)
+    d3.selectAll(".mobileSwitch")
       .transition()
       .style("opacity",0)
       .style("z-index",-1)
@@ -1581,7 +1786,7 @@ d3.select("#dotBottom")
   function oneYearSentences(){
     d3.select("#vis")
       .transition()
-      .style("left","0px")
+      .style("left",getAnimationLeft(false))
     d3.selectAll(".axisLabel")
       .transition()
       .style("opacity",1)
@@ -1590,6 +1795,12 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
+if(IS_TABLET()){
+			d3.selectAll(".mobileSwitch")
+      .transition()
+      .style("opacity",1)
+      .style("z-index",99)
+}
 
     d3.select("#lineChart")
       .transition()
@@ -1606,7 +1817,7 @@ d3.select("#dotBottom")
   function longerSentences(){
     d3.select("#vis")
       .transition()
-      .style("left","0px")
+      .style("left",getAnimationLeft(false))
     d3.select("#legendTen")
       .transition()
       .style("opacity",1)
@@ -1616,14 +1827,14 @@ d3.select("#dotBottom")
   function longerSentencesFasterAdmission(){
     d3.select("#vis")
       .transition()
-      .style("left","0px")
+      .style("left",getAnimationLeft(false))
     drawBackCurtain(5)
     animateIntro(5)
   }
   function fewerShortSentences(){
     d3.select("#vis")
       .transition()
-      .style("left","0px")
+      .style("left",getAnimationLeft(false))
     d3.select("#legendOne div")
       .text("1-year prison terms")
     d3.select("#legend")
@@ -1639,6 +1850,12 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
+if(IS_TABLET()){
+			d3.selectAll(".mobileSwitch")
+      .transition()
+      .style("opacity",1)
+      .style("z-index",99)
+}
     d3.select("#legend")
       .transition()
       .style("opacity",1)
@@ -1651,7 +1868,7 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
-      .style("left","0px")
+      .style("left",getAnimationLeft(false))
     d3.select("#lineChart")
       .transition()
       .style("opacity",1)
@@ -1660,6 +1877,10 @@ d3.select("#dotBottom")
   function hideIntro(){
     hideBreadCrumbs();
     d3.selectAll(".animationComponents")
+      .transition()
+      .style("opacity",0)
+      .style("z-index",-1)
+    d3.selectAll(".mobileSwitch")
       .transition()
       .style("opacity",0)
       .style("z-index",-1)
@@ -1822,8 +2043,12 @@ function display(animationData, lineData, areaData) {
     d3.selectAll('.step')
       .transition()
       .style('opacity',  function(d,i) {
-        var low = (i == 2) ? 0 : 0.2
-        return i == index ? 1 : low;
+        if(IS_MOBILE()){
+          return 1
+        }else{
+          var low = (i == 2) ? 0 : 0.2
+          return i == index ? 1 : low;
+        }
       });
 
     var stepText = d3.select(d3.selectAll(".step")[0][index]).html()
