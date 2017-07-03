@@ -103,6 +103,11 @@ function scroller() {
     var prevTop = sectionPositions[prevIndex];
     var progress = (pos - prevTop) / (sectionPositions[sectionIndex] - prevTop);
     dispatch.progress(currentIndex, progress);
+
+        d3.select("#featureContainer")
+      .style("height", function(){
+        return d3.select("#graphic").node().getBoundingClientRect().height + "px"
+      })
   }
 
   /**
