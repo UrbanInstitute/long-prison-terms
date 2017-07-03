@@ -3,6 +3,8 @@ body{
     margin:0px;
 }
 #header-pinned {
+    position: fixed;
+    top: 0px;
     font: 16px Lato;
     color: #333;
     font-weight: 400;
