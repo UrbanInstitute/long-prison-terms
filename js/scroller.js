@@ -90,7 +90,8 @@ function scroller() {
    *
    */
   function position() {
-    var pos = window.pageYOffset - 10 - containerStart;
+    var off = (IS_MOBILE) ? 150 : 10;
+    var pos = window.pageYOffset - off - containerStart;
     var sectionIndex = d3.bisect(sectionPositions, pos);
     sectionIndex = Math.min(sections.size() - 1, sectionIndex);
 
@@ -104,7 +105,81 @@ function scroller() {
     var progress = (pos - prevTop) / (sectionPositions[sectionIndex] - prevTop);
     dispatch.progress(currentIndex, progress);
 
-        d3.select("#featureContainer")
+    if(IS_PHONE()){
+
+    }
+    else if(IS_TABLET()){
+      if(ACTIVE_CONTAINER() == "animation"){
+        d3.select("#lineChart")
+          .style("left", (window.innerWidth - 180) + "px")
+        d3.select("#breadCrumb")
+          .style("left", "0px")
+        d3.select("#legend")
+          .style("margin-left", "53px")
+        d3.select("#animationTick0")
+          .style("margin-left", "53px")
+        d3.select("#sections")
+          .style("left", ((window.innerWidth - 400)*.5) + "px") 
+        d3.select("#animationTick100")
+          .style("left", ((window.innerWidth - 205 + 33) + "px")) 
+        d3.select("#animationTick50")
+          .style("left", ((window.innerWidth - 205)*.5 + 53) + "px")
+        d3.select("#animationLabel")
+          .style("left", ((window.innerWidth - 205)*.5 + 28) + "px")
+  // #animationLabel{
+  //   left: calc(50% - 105px)
+  // }
+  // #animationTick0{
+  //   left: 23px;
+  // }
+  // #animationTick50{
+  //   left: calc(50% - 78.5px);
+  // }
+  // #animationTick100{
+  //   left: calc(50% + 110px);
+  // }
+
+ 
+      }
+
+    }else if(IS_MOBILE()){
+
+      var gutter = visGutter(false);
+      var bGutter = visGutter(true)
+      d3.selectAll(".animationComponents")
+        .style("margin-left", bGutter + "px")
+      d3.select("#lineChart")
+        .style("left", (320 + gutter) + "px")
+      d3.select("#breadCrumb")
+        .style("left", (-21 + gutter) + "px")
+      d3.select("#sections")
+        .style("left", ((window.innerWidth - 400)*.5) + "px") 
+      d3.select("#animationTick100")
+        .style("left", null) 
+      d3.select("#animationTick50")
+        .style("left", null)
+      d3.select("#animationLabel")
+        .style("left", null)
+    }else{
+      var gutter = visGutter(false);
+      var bGutter = visGutter(true)
+      d3.selectAll(".animationComponents")
+        .style("margin-left", bGutter + "px")
+      d3.select("#lineChart")
+        .style("left", (370 + gutter) + "px")
+      d3.select("#breadCrumb")
+        .style("left", (810 + gutter) + "px")
+      d3.select("#sections")
+        .style("left", (850 + gutter) + "px")
+      d3.select("#animationTick100")
+        .style("left", null) 
+      d3.select("#animationTick50")
+        .style("left", null)
+      d3.select("#animationLabel")
+        .style("left", null)
+
+    }
+    d3.select("#featureContainer")
       .style("height", function(){
         return d3.select("#graphic").node().getBoundingClientRect().height + "px"
       })
