@@ -10,7 +10,7 @@ div.container {
 }
 #graphic {
   position: absolute;
-  left: 14px;
+  left: 0px;
   padding-top: 60px;
 }
 
@@ -67,7 +67,7 @@ div.container {
 #vis {
   display: inline-block;
   position: fixed;
-  top: calc(50% - 222px);
+  top: calc(50% - 195px);
   left: 0px;
   /*z-index: 1;*/
   margin-left: 0;
@@ -329,6 +329,9 @@ text.mapLable.blank{
   .chartTitle{
     top: -40px !important;
   }
+  #vis{
+    top: calc(50% - 129px) !important;
+  }
 }
 @media (max-width: 350px){
   #sections{
@@ -350,6 +353,28 @@ text.mapLable.blank{
   }
   #isPhone{
     display: block;
+  }
+  .chartTitle{
+    font-size: 18px;
+    top: -80px !important;
+  }
+  #vis{
+    top: calc(50% - 45px) !important;
+  }
+  .explainer{
+    left: 10px !important;
+    top: -26px !important;
+    font-size: 12px;
+    width: 270px;
+  }
+  .legendContainer {
+    top: 20px !important;
+    font-size: 14px;
+    left: 103px !important;
+  }
+  .chartNote {
+      top: 249px !important;
+      left: 10px !important;
   }
 }
 
