@@ -5,7 +5,9 @@ body{
 .container {
   /*width: 890px;*/
 }
-
+a{
+  cursor: pointer;
+}
 #graphic {
   position: absolute;
   left: 0px;

@@ -1515,6 +1515,7 @@ d3.select("#areaSvg")
 d3.selectAll(".titleElement")
 .transition()
 .style("opacity","0")
+.style("z-index",-1)
 
 d3.select("#backgroundBlocker")
 .transition()

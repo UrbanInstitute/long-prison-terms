@@ -1071,10 +1071,10 @@ footer .content{
 .copyright-footer {
   margin-left: 1%;
   font-size: 14px;
-  padding-bottom: 2em;
   width: 430px;
   float: right;
   margin-right: 70px;
+  padding-top: 3px;
 }
 .summary-footer{
   font-size: 16px;
@@ -1083,6 +1083,7 @@ footer .content{
   margin-left: 70px;
   clear: both;
   float: left;
+  padding-bottom: 20px;
 }
     
 
@@ -1406,6 +1407,25 @@ footer h3, footer h4{
     padding-left: 5px;
     margin-bottom: 20px;
   }
+  .copyright-footer {
+      margin-left: 0px; 
+      font-size: 14px;
+      width: initial;
+      float: initial;
+      margin-right: 0px; 
+      padding-top: 0px; 
+      clear: both;
+      padding-bottom: 30px;
+  }
+  .summary-footer {
+      width: inherit;
+      margin-left: 0;
+      clear: both;
+      float: inherit;
+      padding-bottom: 21px;
+      padding-top: 7px;
+      text-align: center;
+  }
   .container {
     padding: 0 34px; 
   }
@@ -1414,6 +1434,8 @@ footer h3, footer h4{
     border-left: 34px solid #094c6b;
     border-right: 34px solid #094c6b;
   }
+
+
 }
 
 @media (max-width: 600px) {
