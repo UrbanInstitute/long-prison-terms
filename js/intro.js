@@ -1,3 +1,18 @@
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+};
+
 var IS_SHORT = function(){
   return (d3.select("#isShort").style("display") == "block")
 }
@@ -2027,13 +2042,18 @@ function display(animationData, lineData, areaData) {
   scroll(d3.selectAll('.step'));
 
   // setup event handling
-  scroll.on('resized', function(){
-    d3.select("#vis svg").remove()
+
+  // var timer = null;
+  var test = debounce(function(){
+    console.log("resizing")
+        d3.select("#vis svg").remove()
     d3.select("#breadCrumb svg").remove()
     d3.select("#introAreaContainer svg").remove()
     d3.select("#lineChart svg").remove()
     display(animationData, lineData, areaData)
-
+  }, 1000)
+  scroll.on('resized', function(){
+    test();
   })
   scroll.on('active', function(index) {
     // highlight current step text
