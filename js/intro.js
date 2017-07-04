@@ -425,6 +425,8 @@ var scrollVis = function() {
         .style("left", ((window.innerWidth - 130)*.5 + 40) + "px")
       d3.select("#animationLabel")
         .style("left", ((window.innerWidth - 180)*.5 + 40) + "px")
+      d3.select("#axisLabelX")
+        .style("left", ((window.innerWidth - 63 + 14)*.5 - 29)+ "px")
       // d3.selectAll(".lineLabel")
       //   .style("transform", "translateX(" + (window.innerWidth - 240 - 14 - 395) + "px)")
 
@@ -452,6 +454,8 @@ var scrollVis = function() {
         .style("left", ((window.innerWidth - 205)*.5 + 28) + "px")
       d3.selectAll(".lineLabel")
         .style("transform", "translateX(" + (window.innerWidth - 240 - 14 - 395) + "px)")
+      d3.select("#axisLabelX")
+        .style("left", "210px")
     }else if(IS_MOBILE()){
 
       var gutter = visGutter(false);

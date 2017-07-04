@@ -432,6 +432,9 @@ a{
   #animationLabel{
     top: calc(50% + 204px);
   }
+  #axisLabelX{
+    top: calc(50% + 30px);
+  }
   #animationTick0, #animationTick50, #animationTick100  {
     top: calc(50% + 177px);
   }
