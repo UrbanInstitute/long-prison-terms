@@ -1452,6 +1452,12 @@ footer h3, footer h4{
 
 }
 @media (max-width: 670px) {
+  .introArrowWrapper{
+    display: none;
+  }
+  .next-page-text{
+    font-size: 16px;
+  }
   .center-div-initial{
     width: 100%;
     padding-left: 34px;
@@ -1462,7 +1468,7 @@ footer h3, footer h4{
     font-size: 18px;
     margin-bottom: 20px;
   }
-  .center-div-large-text{
+  .center-div-large-text, .conclusion-header{
     font-size: 26px;
     line-height: 1.2;
   }
@@ -1476,6 +1482,16 @@ footer h3, footer h4{
   .center-quote-div{
     margin-right: 0;
     margin-left: 0;
+  }
+  .center-div-small-text, .conclusion-text{
+    font-size: 20px;
+    line-height: 1.5
+  }
+  .left-col-header{
+    margin-top: 60px;
+  }
+  .section-header{
+    margin-bottom: 0px;
   }
   blockquote.blockquoteClass{
     font-size: 16px;
@@ -1495,13 +1511,22 @@ footer h3, footer h4{
     line-height: 1.6;
   }
   .left-cell{
-    width: 100%;
+    width: calc(100% - 34px);
     padding-bottom: 0px;
     padding-top: 36px !important;
   }
   .audio-cell{
+    width: calc(100% - 34px);
     display: block;
     padding-top: 0px;
+    padding-left: 30px;
+  }
+  .left-col ul{
+    padding-left: 30px !important; 
+    padding-right: 30px !important;
+  }
+  .conclusion-div{
+    width: 100%;
   }
 }
 
@@ -1550,6 +1575,12 @@ footer h3, footer h4{
     margin: 30px -20px;
     border-left: 20px solid #094c6b;
     border-right: 20px solid #094c6b;
+  }
+  .center-div-initial{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 188px;
   }
 
 }
