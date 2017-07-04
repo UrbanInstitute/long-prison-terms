@@ -1200,9 +1200,6 @@ footer h3, footer h4{
   .chart-mobile-case-study {
     display: block;
   }
-  .chart-desktop-case-study {
-    display: none;
-  }
   .graph-div {
     width: 100%;
   }
@@ -1493,6 +1490,12 @@ footer h3, footer h4{
   .section-header{
     margin-bottom: 0px;
   }
+  .chart-desktop-case-study {
+    display: block;
+    width: calc(100% + 60px);
+    left: -30px;
+    position: relative;
+  }
   blockquote.blockquoteClass{
     font-size: 16px;
     line-height: 1.8;
@@ -1527,6 +1530,34 @@ footer h3, footer h4{
   }
   .conclusion-div{
     width: 100%;
+  }
+  .center-case-study-div{
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+  .case-study-header{
+    font-size: 22px;
+  }
+  .case-study-state{
+    display: inline-block;
+    margin-top: 8px;
+    line-height: 23px;
+  }
+  .center-case-study-div .audio-table, .center-case-study-div .audio-cell-full-width, .center-case-study-div .audio-bar-text-full-width{
+    display: block;
+  }
+  .center-case-study-div .audio-bar-text-full-width {
+      width: 100%;
+      padding: 30px;
+  }
+  .center-case-study-div .audioplayer-full-width{
+    width: 100%;
+    padding-left: 30px;
+    top: -12px;
+    position: relative;
+  }
+  .center-case-study-div .timeline{
+    width: 92px !important;
   }
 }
 
