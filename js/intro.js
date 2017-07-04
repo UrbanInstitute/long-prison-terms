@@ -1312,11 +1312,12 @@ pauseAnimation(width)
         .style("opacity",0)
         .style("pointer-events","none")
     }
+    var lineColor = (IS_PHONE()) ? "#fdbf11" : "#ec008b"
     d3.select(".line.step_" + key)
         .transition()
         .style("opacity",1)
         .style("z-index",1)
-        .style("stroke","#fdbf11")
+        .style("stroke",lineColor)
     d3.select(".curtain_" + key)
         .transition()
         .duration(10)
@@ -1330,6 +1331,7 @@ pauseAnimation(width)
         .attr("x", lineWidth)
       var labelMultiplier = (key == 5) ? 6 : 8;
       var phoneMultiplier = (IS_PHONE()) ? 0 : 1;
+      var textColor = (IS_PHONE()) ? "#fdbf11" : "#000"
       d3.select("#lineLabel_" + key)
         .transition()
         .duration(10)
@@ -1337,7 +1339,7 @@ pauseAnimation(width)
         .transition()
         .delay(labelMultiplier*phoneMultiplier*YEAR_IN_MS)
         .style("opacity",1)
-        .style("color","#fdbf11")
+        .style("color",textColor)
         .style("z-index",1)
         .style("pointer-events","all")
 
