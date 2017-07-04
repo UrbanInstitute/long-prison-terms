@@ -1588,10 +1588,10 @@ if(!AREA_ANIMATING){
 
 
 
-
+    var areaTickCount = (IS_PHONE()) ? 5 : 10
 
     var areaXAxis = d3.svg.axis().scale(x)
-        .orient("bottom").ticks(10)
+        .orient("bottom").ticks(areaTickCount)
         .tickFormat(d3.format('f'));
 
     d3.select("#areaSvg")
