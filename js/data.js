@@ -251,10 +251,10 @@ function initDepot(){
 
 	var dd_duration = 1500;
 	var HEIGHTS = {
-		"snapshot-table": 1640,
-		"timeserved-table": 16929,
-		"breakdown-table": 16990,
-		"trends-table": 14770
+		"snapshot-table": 1680,
+		"timeserved-table": 16989,
+		"breakdown-table": 17000,
+		"trends-table": 14790
 	}
 
 	d3.selectAll(".table-container")
