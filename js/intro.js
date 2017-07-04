@@ -2046,7 +2046,7 @@ function display(animationData, lineData, areaData) {
   // var timer = null;
   var test = debounce(function(){
     console.log("resizing")
-        d3.select("#vis svg").remove()
+    d3.select("#vis svg").remove()
     d3.select("#breadCrumb svg").remove()
     d3.select("#introAreaContainer svg").remove()
     d3.select("#lineChart svg").remove()
@@ -2124,6 +2124,20 @@ d3.csv("data/introData.csv", function(animationData){
   d3.csv("data/lineData.csv", function(lineData){
     d3.csv("data/extracted-animation-data.csv", function(areaData){
       display(animationData, lineData, areaData)
+      //startSimulation and pauseSimulation defined elsewhere
+      function handleVisibilityChange() {
+        if (!document.hidden) {
+          d3.select("#vis svg").remove()
+          d3.select("#breadCrumb svg").remove()
+          d3.select("#introAreaContainer svg").remove()
+          d3.select("#lineChart svg").remove()
+          display(animationData, lineData, areaData)
+        }
+      }
+
+      document.addEventListener("visibilitychange", handleVisibilityChange, false);
+
+
     });
   });
 });
