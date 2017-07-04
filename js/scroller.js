@@ -175,6 +175,34 @@ function scroller() {
       .style("height", function(){
         return d3.select("#graphic").node().getBoundingClientRect().height + "px"
       })
+
+    if(IS_TABLET()){
+      d3.select("#sections")
+        .on("click", function(e){
+          var my = event.clientY;
+          var mx = event.clientX;
+
+          if((my > window.innerHeight*.5 - 246.5) && (my < window.innerHeight*.5 - 236.5 + 40)){
+            if(mx > d3.select("#animationButton").node().getBoundingClientRect().left - 25 && mx < d3.select("#animationButton").node().getBoundingClientRect().right + 25){
+              showAnimation();
+            }else{
+              showLine();  
+            }
+          }else{
+            return false;
+          }
+        })
+        .on("mousemove", function(e){
+          var my = event.clientY;
+          var mx = event.clientX;
+
+          if((my > window.innerHeight*.5 - 246.5) && (my < window.innerHeight*.5 - 236.5 + 40) && mx > d3.select("#animationButton").node().getBoundingClientRect().left - 25 && mx < d3.select("#lineButton").node().getBoundingClientRect().right + 25){
+            d3.select(this).style("cursor","pointer")
+          }else{
+            d3.select(this).style("cursor","default")
+          }
+        })
+      }
   }
 
   /**

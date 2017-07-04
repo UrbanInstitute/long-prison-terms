@@ -25,23 +25,11 @@ var ACTIVE_CONTAINER = function(){
 }
 d3.select("#animationButton")
   .on("click", function(){
-    if(d3.select(this).classed("active")){
-      return false
-    }else{
-      d3.selectAll(".lineButtonElement").classed("active", false)
-      d3.selectAll(".animationButtonElement").classed("active", true)
-      showAnimation();
-    }
+    showAnimation();
   })
 d3.select("#lineButton")
   .on("click", function(){
-    if(d3.select(this).classed("active")){
-      return false
-    }else{
-      d3.selectAll(".lineButtonElement").classed("active", true)
-      d3.selectAll(".animationButtonElement").classed("active", false)
       showLine();
-    }
   })
 
 
@@ -67,7 +55,6 @@ var visGutter = function(animationComp){
 }
 
 var getAnimationLeft = function(singleDot){
-  console.log(singleDot)
   if(singleDot){
     if(IS_TABLET()){
       return "92.5px"
@@ -95,6 +82,11 @@ var getAnimationLeft = function(singleDot){
 }
 
 function showLine(){
+  if(d3.select("#lineButton").classed("active")){
+      return false
+  }
+  d3.selectAll(".lineButtonElement").classed("active", true)
+  d3.selectAll(".animationButtonElement").classed("active", false)
   d3.select("#vis")
     .transition()
     .style("left", function(){
@@ -114,6 +106,11 @@ function showLine(){
 
 }
 function showAnimation(){
+  if(d3.select("#animationButton").classed("active")){
+      return false
+  }
+  d3.selectAll(".lineButtonElement").classed("active", false)
+  d3.selectAll(".animationButtonElement").classed("active", true)
   d3.select("#vis")
     .transition()
     .style("left", function(){
