@@ -352,11 +352,7 @@ a{
   }
 }
 @media(max-width: 1140px){
-  .next-page-div{
-    width: 10px !important;
-    left: 0px !important;
-    float: left !important;
-  }
+
   #isMobile{
     display: block;
   }
