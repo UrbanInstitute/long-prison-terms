@@ -105,72 +105,7 @@ function scroller() {
     var progress = (pos - prevTop) / (sectionPositions[sectionIndex] - prevTop);
     dispatch.progress(currentIndex, progress);
 
-    if(IS_PHONE()){
 
-    }
-    else if(IS_TABLET()){
-      if(ACTIVE_CONTAINER() == "animation"){
-        d3.select("#lineChart")
-          .style("left", (window.innerWidth - 180) + "px")
-        d3.select("#breadCrumb")
-          .style("left", "0px")
-        d3.select("#legend")
-          .style("margin-left", "53px")
-        d3.select("#animationTick0")
-          .style("margin-left", "53px")
-        d3.select("#sections")
-          .style("left", ((window.innerWidth - 400)*.5) + "px") 
-        d3.select("#animationTick100")
-          .style("left", ((window.innerWidth - 205 + 33) + "px")) 
-        d3.select("#animationTick50")
-          .style("left", ((window.innerWidth - 205)*.5 + 53) + "px")
-        d3.select("#animationLabel")
-          .style("left", ((window.innerWidth - 205)*.5 + 28) + "px")
-        d3.selectAll(".lineLabel")
-          .style("transform", "translateX(" + (window.innerWidth - 240 - 14 - 395) + "px)")
-      }
-
-    }else if(IS_MOBILE()){
-
-      var gutter = visGutter(false);
-      var bGutter = visGutter(true)
-      d3.selectAll(".animationComponents")
-        .style("margin-left", bGutter + "px")
-      d3.select("#lineChart")
-        .style("left", (320 + gutter) + "px")
-      d3.select("#breadCrumb")
-        .style("left", (-21 + gutter) + "px")
-      d3.select("#sections")
-        .style("left", ((window.innerWidth - 400)*.5) + "px") 
-      d3.select("#animationTick100")
-        .style("left", null) 
-      d3.select("#animationTick50")
-        .style("left", null)
-      d3.select("#animationLabel")
-        .style("left", null)
-      d3.selectAll(".lineLabel")
-        .style("transform", "translateX(0px)")
-    }else{
-      var gutter = visGutter(false);
-      var bGutter = visGutter(true)
-      d3.selectAll(".animationComponents")
-        .style("margin-left", bGutter + "px")
-      d3.select("#lineChart")
-        .style("left", (370 + gutter) + "px")
-      d3.select("#breadCrumb")
-        .style("left", (810 + gutter) + "px")
-      d3.select("#sections")
-        .style("left", (850 + gutter) + "px")
-      d3.select("#animationTick100")
-        .style("left", null) 
-      d3.select("#animationTick50")
-        .style("left", null)
-      d3.select("#animationLabel")
-        .style("left", null)
-      d3.selectAll(".lineLabel")
-        .style("transform", "translateX(0px)")
-
-    }
     d3.select("#featureContainer")
       .style("height", function(){
         return d3.select("#graphic").node().getBoundingClientRect().height + "px"
@@ -181,9 +116,12 @@ function scroller() {
         .on("click", function(e){
           var my = event.clientY;
           var mx = event.clientX;
+          var yBottom = (IS_PHONE()) ? window.innerHeight*.5 - 150 : window.innerHeight*.5 - 236.5;
+          var xLeft = d3.select("#animationButton").node().getBoundingClientRect().left;
+          var xRight = d3.select("#animationButton").node().getBoundingClientRect().right;
 
-          if((my > window.innerHeight*.5 - 246.5) && (my < window.innerHeight*.5 - 236.5 + 40)){
-            if(mx > d3.select("#animationButton").node().getBoundingClientRect().left - 25 && mx < d3.select("#animationButton").node().getBoundingClientRect().right + 25){
+          if((my > yBottom -10) && (my < yBottom + 40)){
+            if(mx > xLeft - 25 && mx < xRight + 25){
               showAnimation();
             }else{
               showLine();  
@@ -195,8 +133,11 @@ function scroller() {
         .on("mousemove", function(e){
           var my = event.clientY;
           var mx = event.clientX;
+          var yBottom = (IS_PHONE()) ? window.innerHeight*.5 - 150 : window.innerHeight*.5 - 236.5;
+          var xLeft = d3.select("#animationButton").node().getBoundingClientRect().left;
+          var xRight = d3.select("#lineButton").node().getBoundingClientRect().right;
 
-          if((my > window.innerHeight*.5 - 246.5) && (my < window.innerHeight*.5 - 236.5 + 40) && mx > d3.select("#animationButton").node().getBoundingClientRect().left - 25 && mx < d3.select("#lineButton").node().getBoundingClientRect().right + 25){
+          if((my > yBottom -10) && (my < yBottom + 40) && (mx > xLeft - 25) && (mx < xRight + 25)){
             d3.select(this).style("cursor","pointer")
           }else{
             d3.select(this).style("cursor","default")

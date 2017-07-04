@@ -397,4 +397,55 @@ a{
     overflow-x: hidden;
     overflow-y: visible;
   }
+  #titleText{
+    font-size: 62px;
+  }
+}
+@media(max-width: 670px){
+  #isPhone{
+    display: block;
+  }
+  .step{
+    width: 300px;
+  }
+  #areaChartText{
+    width: 300px;
+    font-size: 22px;
+    left: 10px;
+  }
+  #vis{
+    top: calc(50% - 120px);
+  }
+  #lineChart{
+    top: calc(50% - 120px);
+  }
+  #mobileSwitchContainer{
+    top: calc(50% - 150px);
+  }
+  #legend{
+    top: calc(50% - 90px);
+    left: 37px;
+  }
+  #legendTen{
+    clear: both;
+    margin-top: 5px;
+  }
+  #legendTen span{
+    margin-left: 0px;
+  }
+  #animationLabel{
+    top: calc(50% + 204px);
+  }
+  #animationTick0, #animationTick50, #animationTick100  {
+    top: calc(50% + 177px);
+  }
+  #animationTick0 {
+    left: 25px;
+  }
+  .lineLabel{
+    left: 39px !important;
+    bottom: 449px !important;
+    font-size: 18px;
+    width: 180px !important;
+  }
 }
