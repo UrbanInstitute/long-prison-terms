@@ -245,12 +245,19 @@ h3{
 
 
 /**ABOUT PAGE**/
+.full-div.topRow.about{
+  border-bottom: 0px;
+  margin-bottom: 0px;
+}
 .about-column {
-  padding-top: 224px;
+  padding-top: 0px;
   max-width: 740px;
   width: 57%;
   margin-left: auto;
   margin-right: auto;
+}
+.container.clearfix.about{
+  padding: 0px;
 }
 
 .about-div {
@@ -1394,6 +1401,9 @@ footer h3, footer h4{
   }
 }
 @media (max-width: 766px) {
+  .about-column{
+    width: 70%;
+  }
   #one-in-five{
     width: 100%;
   }
@@ -1493,6 +1503,11 @@ footer h3, footer h4{
   }
 }
 @media (max-width: 670px) {
+  .about-column{
+    width: 100%;
+    padding-left: 34px;
+    padding-right: 34px;
+  }
   #one-in-five{
     width: 100%;
   }
@@ -1705,6 +1720,11 @@ footer h3, footer h4{
 }
 
 @media (max-width: 320px) {
+  .about-column{
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
   .next-page-div {
     width: calc(100% + 40px);
     margin-right: 0px;
