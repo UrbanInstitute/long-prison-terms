@@ -357,7 +357,7 @@ li.spacing {
 /*Style for next page div*/
 
 .next-page-div {
-  width: 768px;
+  width: 766px;
   float: right;
   height: 342px;
   background-color: #094c6b;
@@ -667,7 +667,6 @@ div.sidebar-quote p {
   font-size: 9px;
   font-weight: 700;
   color: #919395;
-  padding-top: 4em;
 
 }
 
@@ -1241,6 +1240,17 @@ footer h3, footer h4{
     width: 52%;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 22px;
+    padding-bottom: 32px;    
+  }
+  .sidebar-quote-mobile .audio-header-alone{
+    padding-top: 0px;
+  }
+  .sidebar-quote-mobile .sidebar-author-title{
+    padding-bottom: 0px !important;
+  }
+  .sidebar-quote-mobile .sidebar-quote{
+    margin-bottom: 0px !important;
   }
   div.sidebar-author-title a {
     pointer-events: all;
@@ -1353,7 +1363,7 @@ footer h3, footer h4{
     padding-left:0px; 
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 766px) {
   .next-page-div {
     display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
     display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
@@ -1434,8 +1444,65 @@ footer h3, footer h4{
     border-left: 34px solid #094c6b;
     border-right: 34px solid #094c6b;
   }
+  .center-div-initial{
+    padding-top: 203px;
+    width: 70%;
+  }
 
 
+}
+@media (max-width: 670px) {
+  .center-div-initial{
+    width: 100%;
+    padding-left: 34px;
+    padding-right: 34px;
+    padding-top: 188px;
+  }
+  .center-div-header{
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .center-div-large-text{
+    font-size: 26px;
+    line-height: 1.2;
+  }
+  .center-div-quote-author{
+    font-size: 20px;
+    margin-top: 13px;
+  }
+  .center-div-author-description{
+    font-size: 16px;
+  }
+  .center-quote-div{
+    margin-right: 0;
+    margin-left: 0;
+  }
+  blockquote.blockquoteClass{
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  .topRow{
+    border-bottom: 30px solid white;
+  }
+  .full-div{
+    margin-bottom: 30px;
+  }
+  .image-dual.elvin{
+    width: 100%;
+  }
+  .left-col p{
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .left-cell{
+    width: 100%;
+    padding-bottom: 0px;
+    padding-top: 36px !important;
+  }
+  .audio-cell{
+    display: block;
+    padding-top: 0px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1461,6 +1528,9 @@ footer h3, footer h4{
   input[type=checkbox]:checked ~ #menu{
     width: 100%;
   }
+  .next-arrow, .next-arrow-hovered{
+    margin-left: 10px;
+  }
 }
 
 @media (max-width: 320px) {
@@ -1481,9 +1551,5 @@ footer h3, footer h4{
     border-left: 20px solid #094c6b;
     border-right: 20px solid #094c6b;
   }
-  .center-div-initial {
-    width: 90%;
-    left: 5%;
-    right: 5%;
-  }
+
 }

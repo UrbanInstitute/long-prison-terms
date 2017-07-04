@@ -133,6 +133,14 @@
     margin: 0;
   }
 }
+@media(max-width: 500px){
+  .audioplayer{
+    width: 267px;
+  }
+  .timeline{
+    width: 167px;
+  }
+}
 @media(max-height: 850px){
   .note-container{
     top: 130px;
