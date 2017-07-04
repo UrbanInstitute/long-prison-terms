@@ -1169,6 +1169,9 @@ footer h3, footer h4{
 #one-in-five{
   padding-top: 35px;
 }
+#one-in-five img{
+  width: 440px;
+}
 #one-in-five-text{
   font-size: 24px;
   font-weight: 300;
@@ -1186,17 +1189,36 @@ footer h3, footer h4{
 .excerptWord{
   font-style: normal;
 }
-
+.mobilePie{
+  display: none;
+}
+.desktopPie{
+  display: block;
+}
 
 /***********************************************************************************/
 /********************************** MEDIA QUERIES **********************************/
 /***********************************************************************************/
-@media (max-width: 1300px) {
+@media (max-width: 1340px) {
   .sidebar-quote{
     font-size: 18px;
   }
+  #one-in-five img{
+    width: 390px;
+  }
+  #one-in-five-text{
+    padding-top: 39px;
+    width: 210px;
+  }
 }
 @media (max-width: 1140px) {
+  #one-in-five{
+    width: 690px;
+    margin: 0 auto;
+  }
+  #one-in-five img{
+    width: 430px;
+  }
   .chart-mobile-case-study {
     display: block;
   }
@@ -1268,6 +1290,14 @@ footer h3, footer h4{
     width:100%;
     margin-top:30px;
   }
+  .pie2{
+    width: 50% !important;
+  }
+  #murder-label {
+      width: 310px;
+      top: 110px;
+      left: 130px !important;
+  }
 }
 @media (max-width: 1100px) {
   .subnav a{
@@ -1277,6 +1307,9 @@ footer h3, footer h4{
 @media (max-width: 950px) {
   .subnav a{
     font-size:14px;
+  }
+  #murder-label {
+    left: 70px !important;
   }
 }
 @media (max-width: 908px){
@@ -1361,6 +1394,19 @@ footer h3, footer h4{
   }
 }
 @media (max-width: 766px) {
+  #one-in-five{
+    width: 100%;
+  }
+  #one-in-five img{
+    width: 60%;
+  }
+  #one-in-five-text{
+    width: 30%;
+    margin-left: 10%;
+  }
+  #murder-label{
+    width: 250px !important;
+  }
   .next-page-div {
     display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
     display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
@@ -1445,10 +1491,24 @@ footer h3, footer h4{
     padding-top: 203px;
     width: 70%;
   }
-
-
 }
 @media (max-width: 670px) {
+  #one-in-five{
+    width: 100%;
+  }
+  #one-in-five img{
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+  }
+  #one-in-five-text{
+    width: 100%;
+    margin-bottom: 30px;
+    padding-bottom: 60px;
+    margin: 0 auto;
+    display: block;
+  }
   .introArrowWrapper{
     display: none;
   }
@@ -1559,6 +1619,49 @@ footer h3, footer h4{
   .center-case-study-div .timeline{
     width: 92px !important;
   }
+  .graph-row-3 .graph-div, .pie2{
+    max-width: 300px;
+    width: 100% !important;
+    float: none;
+    display: block;
+    margin: 0 auto;
+  }
+  .graph-row-3 .graph-subhead, .pie2 .graph-subhead{
+    clear: both;
+    height: 75px;
+  }
+  .graph-row-3 img, .pie2 img{
+    margin-bottom: 70px ;
+  }
+  #lastPie3 img{
+    margin-bottom: 0px !important;
+  }
+  .mobilePie{
+    display: block;
+  }
+  .desktopPie{
+    display: none;
+  }
+  .pie2.right img{
+    margin-bottom: 0px;
+  }
+  #doublePieWrapper{
+    max-width: 410px;
+    margin: 0 auto;
+    display: block;
+    float: none;
+  }
+  .graph-row-full .graph-subhead {
+      width: 250px;
+      display: block;
+      margin: 0 auto;
+      height: 30px;
+  }
+  #murder-label {
+    top: 421px !important;
+    left: 3px !important;
+    width: 320px !important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -1586,6 +1689,18 @@ footer h3, footer h4{
   }
   .next-arrow, .next-arrow-hovered{
     margin-left: 10px;
+  }
+}
+@media(max-width: 460px){
+  #doublePieWrapper{
+    width: 290px !important;
+  }
+  .pie2{
+    max-width: 210px;
+  }
+  #murder-label {
+    top: 296px !important;
+    width: 280px !important;
   }
 }
 
