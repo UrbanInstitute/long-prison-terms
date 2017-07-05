@@ -303,6 +303,9 @@ text.mapLable.blank{
   .step {
     margin-bottom: 1200px;
   }
+  #penultimate-step{
+    margin-bottom: 600px;
+  }
   #isTablet{
     display: block;
   }
