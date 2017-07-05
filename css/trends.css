@@ -266,6 +266,9 @@ text.mapLable.blank{
 }
 
 @media (max-width: 1140px){
+  .conclusion-div{
+    margin-top: 20px !important;
+  }
   #first-step, #last-step{
     margin-bottom: 0px;
     display: none;
