@@ -256,6 +256,14 @@ text.mapLable.blank{
   left: 0;
   pointer-events: none;
 }
+.trendsHide{
+  border-left: 70px solid white;
+  border-right: 70px solid white;
+  padding-left: 0;
+  padding-right: 0;
+  z-index: 99999;
+  position: relative;
+}
 @media (max-width: 1240px){
   #sections{
     width: 350px;
@@ -300,6 +308,14 @@ text.mapLable.blank{
   }
 }
 @media (max-width: 766px){
+  .trendsHide{
+    border-left: 34px solid white;
+    border-right: 34px solid white;
+    padding-left: 0;
+    padding-right: 0;
+    z-index: 99999;
+    position: relative;
+  }
   .step {
     margin-bottom: 1200px;
   }
@@ -344,6 +360,16 @@ text.mapLable.blank{
     /*width: 300px;*/
     left: -20px;
     /*pointer-events: none;*/
+  }
+}
+@media(max-width: 320px){
+  .trendsHide{
+    border-left: 20px solid white;
+    border-right: 20px solid white;
+    padding-left: 0;
+    padding-right: 0;
+    z-index: 99999;
+    position: relative;
   }
 }
 
