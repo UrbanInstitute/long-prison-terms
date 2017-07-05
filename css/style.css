@@ -125,6 +125,7 @@ a{
     stroke: #ec008b;
     stroke-width: 2;
     fill: none;
+    cursor: pointer;
     /*opacity: .2*/
 }
 

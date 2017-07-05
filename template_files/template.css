@@ -630,6 +630,7 @@ div.sidebar-quote p {
   float: left;
   background: rgba(0,0,0,.2);
   z-index: 10;
+  cursor: pointer;
   
 }
 .playhead{
