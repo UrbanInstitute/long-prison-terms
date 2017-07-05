@@ -1532,14 +1532,14 @@ d3.select("html")
 .attr("class","noBg")
 
 if(!AREA_ANIMATING){
-  var ptDy = (IS_MOBILE()) ? -40 : -30;
+  var ptDy = (IS_MOBILE()) ? -40 : -35;
   d3.select("#popTextNum")
     .transition()
     .delay(1800)
     .style("opacity","0")
     .transition()
     .delay(3400)
-    .attr("dx",-90)
+    .attr("dx",-105)
     .attr("dy",ptDy)  
     .style("opacity","1")
     .each("start", function(){
