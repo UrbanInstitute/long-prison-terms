@@ -2272,6 +2272,46 @@ function display(animationData, lineData, areaData) {
 
     var stepText = d3.select(d3.selectAll(".step")[0][index]).html()
 
+    // var opacityNew = (index%2 == 0) ? 0 : 1;
+    // var opacityOld = (index%2 == 0) ? 1 : 0;
+
+
+    // if(index%2 == 0){
+    //   d3.select("#bodyNew")
+    //     .html(stepText)
+    //     .transition()
+    //     .duration(2000)
+    //     .style("opacity",1)
+    //     .style("z-index",1)
+
+    //   d3.select("#bodyOld")
+    //     // .html(stepText)
+    //     .transition()
+    //     .duration(1000)
+    //     .style("opacity",0)
+    //     .style("z-index",-1)
+    //     .each("end", function(){
+    //       d3.select(this).html(stepText)
+    //     })
+    //   }else{
+    //   d3.select("#bodyOld")
+    //     .html(stepText)
+    //     .transition()
+    //     .duration(2000)
+    //     .style("opacity",1)
+    //     .style("z-index",1)
+
+    //   d3.select("#bodyNew")
+    //     // .html(stepText)
+    //     .transition()
+    //     .duration(1000)
+    //     .style("opacity",0)
+    //     .style("z-index",-1)
+    //     .each("end", function(){
+    //       d3.select(this).html(stepText)
+    //     })
+    //   }
+
     // activate current section
     plot.activate(index);
   });
@@ -2327,6 +2367,7 @@ var yDown = null;
 
 function handleTouchStart(evt) {                                         
     xDown = evt.touches[0].clientX;                                      
+    yDown = evt.touches[0].clientY;                                      
 };                                                
 
 function handleTouchMove(evt) {
@@ -2335,8 +2376,10 @@ function handleTouchMove(evt) {
     }
 
     var xUp = evt.touches[0].clientX;                                    
+    var yUp = evt.touches[0].clientY;
 
     var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
 
     if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
         if ( xDiff > 0 ) {
@@ -2350,7 +2393,15 @@ function handleTouchMove(evt) {
               showLine();
             }
         }                       
+    } else {
+        // if ( yDiff > 0 ) {
+        //     /* up swipe */ 
+        // } else { 
+        //     /* down swipe */
+        // }
+        return;                                                              
     }
+    /* reset values */
     xDown = null;
     yDown = null;                                             
 };
