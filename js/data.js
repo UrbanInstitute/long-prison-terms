@@ -349,22 +349,6 @@ function initDepot(){
 			})
 	}
 
-
-  // $('#right-button').click(function() {
-  //     event.preventDefault();
-  //     $('#content').animate({
-  //       marginLeft: "+=200px"
-  //     }, "slow");
-  //  });
-
-  //    $('#left-button').click(function() {
-  //     event.preventDefault();
-  //     $('#content').animate({
-  //       marginLeft: "-=200px"
-  //     }, "slow");
-  //  });
-
-	
 	(function() {
 	    var throttle = function(type, name, obj) {
 	        obj = obj || window;
@@ -388,8 +372,5 @@ function initDepot(){
 	window.addEventListener("optimizedResize", function() {
 	    addScrollButtons();
 	});
-	d3.selectAll(".dd-table").on("scroll",function() { 
-		console.log(this.scrollLeft)
-	})
 }
 

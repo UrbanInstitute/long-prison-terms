@@ -136,7 +136,6 @@ function scroller() {
       }
       sectionPositions.push(top - startPos);
     });
-    // console.log(d3.select("body").node())
     containerStart = d3.select("body").node().getBoundingClientRect().top + window.pageYOffset + d3.select(".full-div").node().getBoundingClientRect().height;
     dispatch.call('resized', this);
   }
@@ -250,7 +249,6 @@ function scroller() {
       sectionIndex = d3.bisect(sectionPositions, pos) - 1;
       sectionIndex = Math.max(0,Math.min(sections.size() -1, sectionIndex));
     }
-    // console.log(sectionIndex)
     if(typeof(sectionIndex) == "undefined"){ sectionIndex = 0;}
 
     if (currentIndex !== sectionIndex) {

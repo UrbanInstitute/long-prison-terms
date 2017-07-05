@@ -1015,7 +1015,6 @@ var scrollVis = function() {
           var xx = node.getBoundingClientRect().left
           var xy = node.getBoundingClientRect().top
           var angle = Math.abs((Math.round(Math.random()) * 2 - 1) * Math.random() * 100)
-          // console.log(angle)
           var dist = Math.random() * 1000
           return "translate(" +dist+ ") rotate(" + angle + " " + xx + " " + xy + ")"
         })
@@ -2249,7 +2248,6 @@ function display(animationData, lineData, areaData) {
 
   // var timer = null;
   var test = debounce(function(){
-    console.log("resizing")
     d3.select("#vis svg").remove()
     d3.select("#breadCrumb svg").remove()
     d3.select("#introAreaContainer svg").remove()
@@ -2273,46 +2271,6 @@ function display(animationData, lineData, areaData) {
       });
 
     var stepText = d3.select(d3.selectAll(".step")[0][index]).html()
-
-    // var opacityNew = (index%2 == 0) ? 0 : 1;
-    // var opacityOld = (index%2 == 0) ? 1 : 0;
-
-
-    // if(index%2 == 0){
-    //   d3.select("#bodyNew")
-    //     .html(stepText)
-    //     .transition()
-    //     .duration(2000)
-    //     .style("opacity",1)
-    //     .style("z-index",1)
-
-    //   d3.select("#bodyOld")
-    //     // .html(stepText)
-    //     .transition()
-    //     .duration(1000)
-    //     .style("opacity",0)
-    //     .style("z-index",-1)
-    //     .each("end", function(){
-    //       d3.select(this).html(stepText)
-    //     })
-    //   }else{
-    //   d3.select("#bodyOld")
-    //     .html(stepText)
-    //     .transition()
-    //     .duration(2000)
-    //     .style("opacity",1)
-    //     .style("z-index",1)
-
-    //   d3.select("#bodyNew")
-    //     // .html(stepText)
-    //     .transition()
-    //     .duration(1000)
-    //     .style("opacity",0)
-    //     .style("z-index",-1)
-    //     .each("end", function(){
-    //       d3.select(this).html(stepText)
-    //     })
-    //   }
 
     // activate current section
     plot.activate(index);
