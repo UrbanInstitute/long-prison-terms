@@ -334,7 +334,7 @@ a{
 .customWrapper{
   background: white;
   position: relative;
-  z-index: 99;
+  z-index: 9999;
 }
 @media(max-width: 1240px){
   #break1Marker{

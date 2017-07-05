@@ -1363,6 +1363,9 @@ footer h3, footer h4{
     display: block;  
     z-index: 99999;
   }
+  #mobilenavcontainer label{
+    cursor: pointer;
+  }
   input[type=checkbox]:unchecked ~ #menu{
     display: none;
     visibility:hidden;

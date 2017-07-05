@@ -118,6 +118,7 @@ body{
     width: 32px;
     float: none;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 #header-pinned .share-icons .shareThisB:hover {
