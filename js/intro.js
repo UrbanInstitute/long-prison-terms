@@ -940,9 +940,9 @@ var scrollVis = function() {
 
     lineSvg.append("rect")
       .attr("x", 0)
-      .attr("y", -2)
+      .attr("y", -3)
       .attr("width", lineWidth)
-      .attr("height", lineHeight+2)
+      .attr("height", lineHeight+6)
       .style("fill", "#ffffff")
       .attr("class", "curtain_" + d.key)
 
