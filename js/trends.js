@@ -807,6 +807,103 @@ var scrollVis = function() {
     .html("<div id = \"expl1\">Data for all states on the same x-axis scale.</div><div id = \"expl2\"><span>Y-axis scales differ for each state.</span></div id = \"expl3\"><div>" + actionWords + " state for detailed data.</div>")
 
 
+
+function mouse_event_over_element(evt, elem) {
+  // console.log(elem[])
+
+  if(typeof(elem[0]) == "undefined"){
+    return false
+  }else{
+    var o= elem.offset();
+    var w= elem[0].getBoundingClientRect().width;
+    var h= elem[0].getBoundingClientRect().height;
+    return evt.pageX >= o.left && evt.pageX <= o.left + w && evt.pageY >= o.top && evt.pageY <= o.top + h;
+  }
+}
+
+// $("#sections").click(function(e){
+//   $("g.state").each(function() {
+//     if (mouse_event_over_element(e, $(this))) {
+//       // $(this).click(); // trigger a jQuery click() handler
+//       // quickDelegate(e, this); // not in IE8
+//       // this.click(); // maybe not in Mozilla pre-HTML5
+//       // window.location.href= this.href;
+//       // return false;
+//       console.log(this)
+//     }
+//   });
+// });
+
+    // .on("mouseover", function(d){
+    //   if(IS_TABLET()){
+    //     return false
+    //   }else{
+    //     selectState(this, d, "hover")
+    //   }
+    // })
+    // .on("mouseout", function(d){
+    //   if(IS_TABLET()){
+    //     return false;
+    //   }else{
+    //     deselectState()
+    //   }
+    // })
+    // .on("click", function(d){
+    //   if(IS_TABLET()){
+    //     deselectState()
+    //     selectState(this, d, "click")
+    //   }else{
+    //     return false;
+    //   }
+    // })
+  if(IS_MOBILE()){
+    $("#sections").click(function(e){
+      if(($('.step:hover').length) != 0){
+        return false;
+      }
+      else if(IS_TABLET()){
+        if (mouse_event_over_element(e, $("#mapTooltip image"))) {
+          deselectState()
+        }else{
+          $("g.state").each(function() {
+            if (mouse_event_over_element(e, $(this))) {
+              deselectState()
+              selectState(this, d3.select(this).datum(), "click")
+              return false;
+            }
+          });
+        }
+      }else{
+        return false;
+      }
+    });
+    $("#sections").mousemove(function(e){
+      if(($('.step:hover').length) != 0){
+        return false;
+      }
+      else if(IS_TABLET()){
+        return false
+      }else{
+        $("g.state").each(function() {
+          if (mouse_event_over_element(e, $(this))) {
+            deselectState()
+            selectState(this, d3.select(this).datum(), "hover")
+            return false;
+          }
+        });
+      }
+    });
+    $("#sections").mouseout(function(e){
+      if(IS_TABLET()){
+        return false;
+      }else{
+        deselectState();
+      }
+    });
+  }
+
+
+
   var map = mapSvg
     .selectAll(".state")
     .data(trendsDataNest)

@@ -292,7 +292,6 @@ text.mapLable.blank{
     display: inherit;
     width: 400px;
     margin: 0 auto;
-    pointer-events: none;
   }
   .step {
     margin-bottom: 1000px;
