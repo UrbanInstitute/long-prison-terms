@@ -26,6 +26,12 @@ body, html {
     top: -100px;
     visibility: hidden;
 }
+.anchor-large {
+    display: block;
+    position: relative;
+    top: -200px;
+    visibility: hidden;
+}
 .left-col ul {
   padding: 0px 90px 0px 55px;
   margin: 0;
