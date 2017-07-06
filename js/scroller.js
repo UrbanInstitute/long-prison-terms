@@ -96,7 +96,6 @@ function scroller() {
     sectionIndex = Math.min(sections.size() - 1, sectionIndex);
 
     if (currentIndex !== sectionIndex) {
-      console.log(sectionIndex)
       if(sectionIndex < 3){
         dispatch.active(sectionIndex);
       }else{

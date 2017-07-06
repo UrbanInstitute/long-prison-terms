@@ -809,7 +809,6 @@ var scrollVis = function() {
 
 
 function mouse_event_over_element(evt, elem) {
-  // console.log(elem[])
 
   if(typeof(elem[0]) == "undefined"){
     return false
@@ -820,42 +819,6 @@ function mouse_event_over_element(evt, elem) {
     return evt.pageX >= o.left && evt.pageX <= o.left + w && evt.pageY >= o.top && evt.pageY <= o.top + h;
   }
 }
-
-// $("#sections").click(function(e){
-//   $("g.state").each(function() {
-//     if (mouse_event_over_element(e, $(this))) {
-//       // $(this).click(); // trigger a jQuery click() handler
-//       // quickDelegate(e, this); // not in IE8
-//       // this.click(); // maybe not in Mozilla pre-HTML5
-//       // window.location.href= this.href;
-//       // return false;
-//       console.log(this)
-//     }
-//   });
-// });
-
-    // .on("mouseover", function(d){
-    //   if(IS_TABLET()){
-    //     return false
-    //   }else{
-    //     selectState(this, d, "hover")
-    //   }
-    // })
-    // .on("mouseout", function(d){
-    //   if(IS_TABLET()){
-    //     return false;
-    //   }else{
-    //     deselectState()
-    //   }
-    // })
-    // .on("click", function(d){
-    //   if(IS_TABLET()){
-    //     deselectState()
-    //     selectState(this, d, "click")
-    //   }else{
-    //     return false;
-    //   }
-    // })
   if(IS_MOBILE()){
     $("#sections").click(function(e){
       if(($('.step:hover').length) != 0){
