@@ -92,18 +92,18 @@ function scrollCheck() {
             quoteTransition(3)
         } 
     } 
-    else if (getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar6") > inViewMin){
+    else if (getViewMin("#sidebar4") <= inViewMin && getViewMin("#sidebar7") > inViewMin){
         //FOURTH QUOTE APPEARS
         if (!isTransitioning[4]) {
             quoteTransition(4)
         }  
     }
-    else if (getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar7") > inViewMin){
-        //SIXTH QUOTE APPEARS
-        if (!isTransitioning[6]) {
-            quoteTransition(6)
-        } 
-    } 
+    // else if (getViewMin("#sidebar6") <= inViewMin && getViewMin("#sidebar7") > inViewMin){
+    //     //SIXTH QUOTE APPEARS
+    //     if (!isTransitioning[6]) {
+    //         quoteTransition(6)
+    //     } 
+    // } 
     else if (getViewMin("#sidebar7") <= inViewMin && getViewMin("#sidebar8") > inViewMin){
         //SEVENTH QUOTE APPEARS
         if (!isTransitioning[7]) {
