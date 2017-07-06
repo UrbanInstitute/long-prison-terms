@@ -777,7 +777,7 @@ var scrollVis = function() {
     .style("position", "absolute")
     .style("top",titleY + "px")
     .style("left",titleX + "px")
-    .html("Average time served for all offense categories")
+    .html("Average Time Served for All Offense Categories")
 
   d3.select("#vis")
     .append("div")
@@ -785,7 +785,7 @@ var scrollVis = function() {
     .style("position", "absolute")
     .style("top",titleY + "px")
     .style("left",titleX + "px")
-    .html("Average time served by offense type")
+    .html("Average Time Served by Offense Type")
     .style("opacity",0)
 
   var actionWords = (IS_TABLET()) ? "Tap on a" : "Hover on a"
@@ -1199,13 +1199,13 @@ function mouse_event_over_element(evt, elem) {
       .style("z-index",1)
 
     d3.select(".chartTitleA")
-      .text("Average time served for all offense categories")
+      .text("Average Time Served for All Offense Categories")
       .transition()
       .style("opacity",1)
     d3.select(".chartTitleB")
       .transition()
       .style("opacity",0)
-      .on("end", function(){ d3.select(this).html("Average time served by offense type") })
+      .on("end", function(){ d3.select(this).html("Average Time Served by Offense Type") })
 
     d3.select(".legendContainerA").transition().style("opacity",0)
     d3.select(".legendContainerB").transition().style("opacity",0)
@@ -1216,13 +1216,13 @@ function mouse_event_over_element(evt, elem) {
   }
   function mapTimeServedByOffense(){
     d3.select(".chartTitleB")
-      .text("Average time served by offense type")
+      .text("Average Time Served by Offense Type")
       .transition()
       .style("opacity",1)
     d3.select(".chartTitleA")
       .transition()
       .style("opacity",0)
-      .on("end", function(){ d3.select(this).html("Average time served for all offense categories") })
+      .on("end", function(){ d3.select(this).html("Average Time Served for All Offense Categories") })
 
 
     d3.select(".legendContainerA").transition().style("opacity",1)
@@ -1234,13 +1234,13 @@ function mouse_event_over_element(evt, elem) {
   }
   function mapTimeServedTop10Percent(){
     d3.select(".chartTitleA")
-      .text("Average time served")
+      .text("Average Time Served")
       .transition()
       .style("opacity",1)
     d3.select(".chartTitleB")
       .transition()
       .style("opacity",0)
-      .on("end", function(){ d3.select(this).html("Share of population serving 10 or more years") })
+      .on("end", function(){ d3.select(this).html("Share of Population Serving 10 or More Years") })
 
     d3.select(".legendContainerA").transition().style("opacity",0)
     d3.select(".legendContainerB").transition().style("opacity",1)
@@ -1251,13 +1251,13 @@ function mouse_event_over_element(evt, elem) {
   }
   function map10YearsPercent(){
     d3.select(".chartTitleB")
-      .text("Share of population serving 10 or more years")
+      .text("Share of Population Serving 10 or More Years")
       .transition()
       .style("opacity",1)
     d3.select(".chartTitleA")
       .transition()
       .style("opacity",0)
-      .on("end", function(){ d3.select(this).html("People serving 10 or more years") })
+      .on("end", function(){ d3.select(this).html("People Serving 10 or More Years") })
 
     d3.select("#infoGroup")
       .transition()
@@ -1285,13 +1285,13 @@ function mouse_event_over_element(evt, elem) {
       .style("z-index",1)
       
     d3.select(".chartTitleA")
-      .text("People serving 10 or more years")
+      .text("People Serving 10 or More Years")
       .transition()
       .style("opacity",1)
     d3.select(".chartTitleB")
       .transition()
       .style("opacity",0)
-      .on("end", function(){ d3.select(this).html("People serving 10 or more years") })
+      .on("end", function(){ d3.select(this).html("People Serving 10 or More Years") })
 
     d3.select("#infoGroup")
       .transition()
