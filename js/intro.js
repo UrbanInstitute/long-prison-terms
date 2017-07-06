@@ -2405,3 +2405,30 @@ function handleTouchMove(evt) {
     xDown = null;
     yDown = null;                                             
 };
+
+
+function mouse_event_over_element(evt, elem) {
+
+  if(typeof(elem[0]) == "undefined"){
+    return false
+  }else{
+    var o= elem.offset();
+    var w= elem[0].getBoundingClientRect().width;
+    var h= elem[0].getBoundingClientRect().height;
+    return evt.pageX >= o.left && evt.pageX <= o.left + w && evt.pageY >= o.top && evt.pageY <= o.top + h;
+  }
+}
+$("body").click(function(e){
+    if (mouse_event_over_element(e, $(".next-page-div"))) {
+      window.location.href = 'trends.html';
+    }
+});
+$("body").mousemove(function(e){
+    if (mouse_event_over_element(e, $(".next-page-div"))) {
+      d3.select(".next-arrow")
+            .attr("class", "next-arrow-hovered")
+    }else{
+      d3.select(".next-arrow-hovered")
+            .attr("class", "next-arrow")
+    }
+});
