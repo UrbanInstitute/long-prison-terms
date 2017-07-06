@@ -1410,6 +1410,9 @@ footer h3, footer h4{
   }
 }
 @media (max-width: 766px) {
+  #footer-pdf-word:before{
+    content: "Download" !important;
+  }
   .about-column{
     width: 70%;
   }
@@ -1758,4 +1761,7 @@ footer h3, footer h4{
     padding-top: 188px;
   }
 
+}
+#footer-pdf-word:before{
+  content: "Read";
 }
