@@ -318,7 +318,7 @@ var scrollVis = function() {
         .attr("class","tt-value")
         .attr("x",(15)*scalar)
         .attr("y",(45+15*2)*scalar+15)
-        .text("All except violent: " + NUMERIC(d.values[0]["LOS_MeanAllExceptViol"]) + " years")
+        .text("All others: " + NUMERIC(d.values[0]["LOS_MeanAllExceptViol"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
@@ -334,7 +334,7 @@ var scrollVis = function() {
         .attr("class","tt-value")
         .attr("x",(15)*scalar)
         .attr("y",(45+15*5.5)*scalar+15)
-        .text("All except violent: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanAllExceptViol"]) + " years")
+        .text("All others: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanAllExceptViol"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
@@ -350,7 +350,7 @@ var scrollVis = function() {
         .attr("class","tt-value")
         .attr("x",(15)*scalar)
         .attr("y",(45+15*9)*scalar+15)
-        .text("All except violent: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanAllExceptViol"] - d.values[0]["LOS_MeanAllExceptViol"]) + " years")
+        .text("All others: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanAllExceptViol"] - d.values[0]["LOS_MeanAllExceptViol"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
@@ -377,7 +377,7 @@ var scrollVis = function() {
           var percent = change/ d.values[0]["LOS_MeanViolent"];
           var changeWord = (percent < 0) ? "decrease" : "increase";
 
-          return "All except violent: " + PERCENT(Math.abs(percent)) + " " + changeWord;
+          return "All others: " + PERCENT(Math.abs(percent)) + " " + changeWord;
         })
 
     }
@@ -743,7 +743,7 @@ var scrollVis = function() {
 
   legend.append("div")
     .attr("class", "legendText")
-    .html("All except violent")
+    .html("All others")
 
 
   var legendB =   d3.select("#vis")

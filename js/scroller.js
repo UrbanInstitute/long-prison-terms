@@ -90,7 +90,8 @@ function scroller() {
    *
    */
   function position() {
-    var off = (IS_MOBILE) ? 150 : 10;
+    var off = (IS_MOBILE()) ? 150 : 10;
+    var minus = (IS_TABLET()) ? 1 : 0
     var pos = window.pageYOffset - off - containerStart;
     var sectionIndex = d3.bisect(sectionPositions, pos);
     sectionIndex = Math.min(sections.size() - 1, sectionIndex);
@@ -99,7 +100,7 @@ function scroller() {
       if(sectionIndex < 3){
         dispatch.active(sectionIndex);
       }else{
-        dispatch.active(sectionIndex -1);
+        dispatch.active(sectionIndex - minus);
       }
       currentIndex = sectionIndex;
     }
