@@ -217,6 +217,22 @@ a{
   left: 810px;
   z-index: 99;
 }
+#skip{
+  position: fixed;
+  background: #1696d2;
+  width: 100px;
+  height: 45px;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  right: 30px;
+  top: 95px;
+  display: none;
+  z-index: -1;
+  opacity: 0;
+}
 .crumb{
   fill: #d2d2d2;
   stroke: #9d9d9d;
@@ -393,6 +409,13 @@ a{
   #isTablet{
     display: block;
   }
+  #skip{
+    display: block;
+    z-index: 99998;
+  }
+  #legend{
+    left: 79px;
+  }
   #lineChart{
         width: 180px;
     overflow-x: hidden;
@@ -412,7 +435,7 @@ a{
     padding-right: 40px;
   }
   #titleText{
-    top: 20%;
+    top: 160px;
   }
   #isPhone{
     display: block;
@@ -426,16 +449,16 @@ a{
     left: 10px;
   }
   #vis{
-    top: calc(50% - 120px);
+    top: calc(50% - 100px);
   }
   #lineChart{
-    top: calc(50% - 120px);
+    top: calc(50% - 100px);
   }
   #mobileSwitchContainer{
-    top: calc(50% - 150px);
+    top: calc(50% - 130px);
   }
   #legend{
-    top: calc(50% - 90px);
+    top: calc(50% - 70px);
     left: 37px;
   }
   #legendTen{
@@ -446,13 +469,13 @@ a{
     margin-left: 0px;
   }
   #animationLabel{
-    top: calc(50% + 204px);
+    top: calc(50% + 224px);
   }
   #axisLabelX{
     top: calc(50% + 30px);
   }
   #animationTick0, #animationTick50, #animationTick100  {
-    top: calc(50% + 177px);
+    top: calc(50% + 197px);
   }
   #animationTick0 {
     left: 25px;

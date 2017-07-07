@@ -250,8 +250,9 @@ var scrollVis = function() {
   var EXITING_TRACK_COLOR = "#052635"
 
 
+  var areaTop = (IS_TABLET()) ? 180: 160;
   var areaMargin = {
-  top: 160,
+  top: areaTop,
   right: 0,
   bottom: 36,
   left: 0
@@ -1038,7 +1039,7 @@ var scrollVis = function() {
         .delay(100)
         .attr("cy", function(d){
           if(IS_PHONE()){
-            var crumbStart = window.innerHeight*.5 - 120 + 114;
+            var crumbStart = window.innerHeight*.5 - 100 + 114;
             return crumbStart + (d-1)*22   
           }
           else if(IS_MOBILE()){
@@ -1449,6 +1450,9 @@ pauseAnimation(width)
 
 
 function topOfPage(){
+  d3.select("#skip")
+    .transition()
+    .style("opacity",0)
 d3.select("html")
 // .classed("imgBg", true)
 // .classed("noBg", false)
@@ -1481,6 +1485,9 @@ d3.select("#areaChartText")
 }
 
   function introAreaChart() {
+  d3.select("#skip")
+    .transition()
+    .style("opacity",1)
     hideBreadCrumbs()
    d3.select("#vis")
     .transition()
