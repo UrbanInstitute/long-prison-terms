@@ -2392,12 +2392,12 @@ function handleTouchMove(evt) {
         if ( xDiff > 0 ) {
             /* left swipe */
             if(parseInt(d3.select("#mobileSwitchContainer").style("opacity")) == 1){
-              showAnimation();
+              showLine();
             }
         } else {
             /* right swipe */
             if(parseInt(d3.select("#mobileSwitchContainer").style("opacity")) == 1){
-              showLine();
+              showAnimation();
             }
         }                       
     } else {
