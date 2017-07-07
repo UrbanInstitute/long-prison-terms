@@ -32,7 +32,9 @@ div.container {
   line-height: 23px;
   color: #000;
 }
-
+#penultimate-step{
+  margin-bottom: 300px;
+}
 #sections .title {
   font-size:26px;
   line-height: 33px;

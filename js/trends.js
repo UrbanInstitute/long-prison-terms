@@ -17,7 +17,7 @@ var scrollVis = function() {
   var mapSizes = {
     "large": { "width": 750, "height": 600, "scale": 3100, "translate": [300,200], "chartWidth": 62, "chartMargin": 5},
     "medium": { "width": 750*.666666, "height": 500, "scale": 3100*.666666, "translate": [300*.666666,200*.666666], "chartWidth": 62*.666666, "chartMargin": 5*.666666},
-    "small": { "width": 750*.42666, "height": 500, "scale": 2900*.42666, "translate": [300*.42666,200*.42666], "chartWidth": 59*.42666, "chartMargin": 5*.42666}
+    "small": { "width": 750*.42666, "height": 280, "scale": 2900*.42666, "translate": [300*.42666,200*.42666], "chartWidth": 59*.42666, "chartMargin": 5*.42666}
   }
 
   var mapMargins = {

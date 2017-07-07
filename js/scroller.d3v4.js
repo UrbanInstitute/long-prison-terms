@@ -250,9 +250,12 @@ function scroller() {
       sectionIndex = Math.max(0,Math.min(sections.size() -1, sectionIndex));
     }
     if(typeof(sectionIndex) == "undefined"){ sectionIndex = 0;}
-
+    if(d3.select(".row").node().getBoundingClientRect().top <= d3.select("#vis").node().getBoundingClientRect().bottom){
+      console.log("Foo")
+      sectionIndex = 6;
+    }
     if (currentIndex !== sectionIndex) {
-      // @v4 you now `.call` the dispatch callback
+      // @v4 you now `.call` the dispatch callback      
       dispatch.call('active', this, sectionIndex);
       currentIndex = sectionIndex;
       d3.select("#sectionIndex").attr("data-index",currentIndex)

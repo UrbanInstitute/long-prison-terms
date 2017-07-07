@@ -95,6 +95,10 @@ function scroller() {
     var pos = window.pageYOffset - off - containerStart;
     var sectionIndex = d3.bisect(sectionPositions, pos);
     sectionIndex = Math.min(sections.size() - 1, sectionIndex);
+    if(d3.select(".row").node().getBoundingClientRect().top <= d3.select("#vis").node().getBoundingClientRect().bottom){
+      sectionIndex = 8 + minus;
+    }
+    
 
     if (currentIndex !== sectionIndex) {
       if(sectionIndex < 3){
@@ -108,6 +112,8 @@ function scroller() {
     var prevIndex = Math.max(sectionIndex - 1, 0);
     var prevTop = sectionPositions[prevIndex];
     var progress = (pos - prevTop) / (sectionPositions[sectionIndex] - prevTop);
+    // console.log(currentIndex)
+
     dispatch.progress(currentIndex, progress);
 
 
