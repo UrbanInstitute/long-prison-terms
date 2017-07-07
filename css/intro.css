@@ -10,6 +10,8 @@ html.imgBg {
   -moz-background-size: cover;
   -o-background-size: cover;
 }
+
+
 html.noBg { 
   background: rgb(255,255,255);
   background-attachment: fixed;
@@ -406,6 +408,9 @@ a{
   }
 }
 @media(max-width: 766px), (max-height: 670px){
+  html.imgBg { 
+    background: url(../img/intro-background_mobile.jpeg);
+  }
   #isTablet{
     display: block;
   }
