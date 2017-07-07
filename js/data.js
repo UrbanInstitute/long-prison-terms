@@ -36,7 +36,7 @@ function initDepot(){
 		h1.append("th").attr("rowspan",2).html("People incarcerated for half of their life or more")
 		h1.append("th").attr("colspan",2).html("Of those serving longest 10% of prison terms")
 		h1.append("th").attr("colspan",4).html("Of those serving longest 10% of prison terms who were incarcerated before age 25")
-		h1.append("th").html("Of those serving 10 or more years:")
+		h1.append("th").html("Of those serving 10 or more years")
 
 		var h2 = table.append("tr").attr("class", "header_row2")
 		h2.append("th").html("Share incarcerated before age 25")
