@@ -95,7 +95,8 @@
   } 
   .container.clearfix{
     width: 1140px;
-    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
   .right-col{
     width: 340px;
