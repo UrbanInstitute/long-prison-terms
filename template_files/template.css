@@ -269,6 +269,8 @@ h3{
 }
 .container.clearfix.about{
   padding: 0px;
+  margin: 0px;
+  width: inherit;
 }
 
 .about-div {
@@ -411,6 +413,7 @@ li.spacing {
   font-size: 16px;
   text-align: right;
   margin: 10px 0;
+  margin-bottom: 0px;
   width: 100%;
 }
 
@@ -418,6 +421,7 @@ li.spacing {
   font-size: 48px;
   text-align: right;
   margin: 5px 0;
+  margin-top:0px;
   width: 100%;
 }
 
@@ -834,7 +838,9 @@ border-right-color: #222;
     margin:0 auto;
     padding-top: 60px;
 }
-
+.wrapper.about{
+  padding-top: 0px;
+}
 
 
 .full-wrapper{
@@ -1451,14 +1457,15 @@ footer h3, footer h4{
     width: 250px !important;
   }
   .next-page-div {
-    width: 100%;
+    width: calc(100% + 68px);
     margin-right: 0px;
     height: initial;
-    right: 0px;
+    right: -34px;
+    padding-bottom: 15px;
   }
   .next-page-column-1 {
     width: 75%;
-    margin-left: 2%;
+    margin-left: 0px;
   }
   .next-page-column-2 {
     width: 23%;
@@ -1476,21 +1483,22 @@ footer h3, footer h4{
     /* height: 50%; */
     top: calc(50% - 41px);
     position: absolute;
+    right: 34px;
   }
   .next-page-text {
     margin-top: 23px;
-    padding-left: 5px;
+    padding-left: 34px;
   }
   .next-page-next-up {
     font-size: 14px;
     text-align: left;
-    padding-left: 5px;
+    padding-left: 34px;
     margin-top: 20px;
   }
   .next-page-title {
     font-size: 28px;
     text-align: left;
-    padding-left: 5px;
+    padding-left: 34px;
     margin-bottom: 0px;
   }
   .copyright-footer {
@@ -1741,17 +1749,28 @@ footer h3, footer h4{
 }
 
 @media (max-width: 320px) {
+  .next-arrow, .next-arrow-hovered{
+    right: 30px;
+  }
+  .next-page-text {
+    padding-left: 30px;
+  }
+  .next-page-next-up {
+    padding-left: 30px;
+  }
+  .next-page-title {
+    padding-left: 30px;
+  }
   .about-column{
     width: 100%;
     padding-left: 30px;
     padding-right: 30px;
   }
   .next-page-div {
-    width: 100%;
+    width: calc(100% + 60px);
     margin-right: 0px;
     height: initial;
-    /* right: -20px; */
-    left: 0px;
+     right: -30px; 
   }
   .container {
     padding: 0 20px; 
