@@ -427,7 +427,13 @@ a{
     overflow-y: visible;
   }
   #titleText{
-    font-size: 62px;
+    font-size: 58px;
+  }
+  #subtitleText{
+    font-size: 18px;
+  }
+  #titleText i{
+    bottom: 0px;
   }
 }
 
