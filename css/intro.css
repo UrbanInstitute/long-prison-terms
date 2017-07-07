@@ -352,7 +352,7 @@ a{
   position: relative;
   z-index: 9999;
 }
-@media(max-width: 1240px){
+@media(max-width: 1240px), (max-height: 670px){
   #break1Marker{
     display: block;
   }
@@ -372,7 +372,7 @@ a{
     left: 350px;
   }
 }
-@media(max-width: 1140px){
+@media(max-width: 1140px), (max-height: 670px){
 
   #isMobile{
     display: block;
@@ -405,7 +405,7 @@ a{
     z-index: -1 !important;
   }
 }
-@media(max-width: 766px){
+@media(max-width: 766px), (max-height: 670px){
   #isTablet{
     display: block;
   }
@@ -425,7 +425,8 @@ a{
     font-size: 62px;
   }
 }
-@media(max-width: 670px){
+
+@media(max-width: 670px), (max-height: 670px){
   #areaChartText{
     background: rgba(255, 255, 255, 0.65);
     box-shadow: rgb(136, 136, 136) 4px 4px 16px;

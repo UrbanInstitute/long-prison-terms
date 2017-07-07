@@ -77,7 +77,7 @@
   }
   /***************************************/
 }
-@media(max-width: 1340px){
+@media(max-width: 1340px), (max-height: 670px){
   .sidebar-quote{
     font-size: 17px;
   }
@@ -130,7 +130,7 @@
   /***************************************/
 
 }
-@media(max-width: 1140px){
+@media(max-width: 1140px), (max-height: 670px){
   .left-col {
     width: 100%;
   }
@@ -145,7 +145,7 @@
     margin: 0;
   }
 }
-@media(max-width: 500px){
+@media(max-width: 500px), (max-height: 670px){
   .audioplayer{
     width: 267px;
   }
@@ -156,5 +156,10 @@
 @media(max-height: 850px){
   .note-container{
     top: 130px;
+  }
+}
+@media(max-height: 680px){
+  .note-container{
+    top: 120px;
   }
 }
