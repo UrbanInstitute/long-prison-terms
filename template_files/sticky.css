@@ -78,6 +78,9 @@
   /***************************************/
 }
 @media(max-width: 1340px){
+  .sidebar-quote{
+    font-size: 17px;
+  }
   @media(max-height: 900px){
     .note-container{
       top: 130px;
@@ -92,6 +95,10 @@
   } 
   .container.clearfix{
     width: 1140px;
+    padding: 30px;
+  }
+  .right-col{
+    width: 340px;
   }
   /************ Audio play widths ************/
   .audioplayer{

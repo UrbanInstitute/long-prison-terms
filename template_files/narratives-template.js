@@ -66,7 +66,7 @@ $(window).scroll(function () {
 
 function scrollCheck() { 
     if(
-        d3.select(".left-col").node().getBoundingClientRect().bottom <= d3.select(".con-quote11").node().getBoundingClientRect().bottom ||
+        d3.select(".left-col").node().getBoundingClientRect().bottom <= d3.select(".con-quote11").node().getBoundingClientRect().bottom + 150 ||
         d3.select(".left-col").node().getBoundingClientRect().top >= d3.select(".con-quote11").node().getBoundingClientRect().top
         ){
         if($.inArray(true, isTransitioning) == -1){

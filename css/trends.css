@@ -273,7 +273,12 @@ text.mapLable.blank{
   }
 }
 
-@media (max-width: 1140px){
+@media(max-height: 740px){
+  #vis{
+    top: calc(50% - 224px);
+  }
+}
+@media (max-width: 1140px), (max-height: 670px){
   .conclusion-div{
     margin-top: 20px !important;
   }
@@ -306,7 +311,7 @@ text.mapLable.blank{
     padding-right: 40px;
   }
 }
-@media (max-width: 766px){
+@media (max-width: 766px), (max-height: 670px){
   .trendsHide{
     border-left: 34px solid white;
     border-right: 34px solid white;
@@ -354,14 +359,14 @@ text.mapLable.blank{
     top: calc(50% - 129px) !important;
   }
 }
-@media (max-width: 350px){
+@media (max-width: 350px), (max-height: 560px){
   #sections{
     /*width: 300px;*/
     left: -20px;
     /*pointer-events: none;*/
   }
 }
-@media(max-width: 320px){
+@media(max-width: 320px), (max-height: 560px){
   .trendsHide{
     border-left: 20px solid white;
     border-right: 20px solid white;
@@ -372,7 +377,7 @@ text.mapLable.blank{
   }
 }
 
-@media (max-width: 500px){
+@media (max-width: 500px), (max-height: 560px){
   #topText{
     margin-top: -90px;
     padding: 20px;

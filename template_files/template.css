@@ -279,7 +279,7 @@ h3{
   font-size: 26px;
   font-weight: 600;
   margin-bottom: 34px;
-  margin-top:52px;
+  margin-top:25px;
 }
 .about-h3 {
   font-size: 20px;
@@ -409,7 +409,7 @@ li.spacing {
 .next-page-next-up {
   font-size: 16px;
   text-align: right;
-  margin: 5px 0;
+  margin: 10px 0;
   width: 100%;
 }
 
@@ -496,7 +496,10 @@ div.sidebar-quote p {
   color: #5c5859;
   font-style: italic;
   line-height: 1.5em;
-
+}
+.sidebar-author-title span{
+  display: inline-block;
+  margin-bottom: 10px;
 }
 
 /*STYLES FOR CHARTS*/
@@ -672,7 +675,7 @@ div.sidebar-quote p {
   font-style: italic;
   font-size: 14px;
   color: #59595c;
-  line-height: 1.2em;
+  line-height: 1.3em;
 }
 
 .audio-header {
@@ -925,8 +928,7 @@ blockquote:after {
 }
 
 .case-study-state {
-  color: #25a9e0;
-  font-weight: 600;
+  font-weight: 300;
 }
 
 .quotation-blue {
@@ -1251,6 +1253,9 @@ footer h3, footer h4{
     width:100%;
     padding-top:20px;
   }
+  .about.wrapper{
+    padding-top: 0px !important;
+  }
   .container {
     width:auto;
     padding:0px 70px;
@@ -1486,7 +1491,7 @@ footer h3, footer h4{
     font-size: 28px;
     text-align: left;
     padding-left: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
   .copyright-footer {
       margin-left: 0px; 
