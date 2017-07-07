@@ -437,6 +437,7 @@ li.spacing {
 
 /*Style for sticky text*/
 
+
 .border {
   border-bottom: solid 1px #d0d2d3;
 }
@@ -444,7 +445,10 @@ li.spacing {
   margin-top: 45px;
   margin-bottom: 15px;
 }
-
+.sidebar-div-mobile .border{
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
 .note-container {
   position: absolute;
   top: 200px;

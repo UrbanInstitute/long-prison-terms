@@ -265,7 +265,7 @@ function scroller() {
             .style("opacity",0)
             .style("z-index",-1)
             .on("end", function(){
-              this.remove()
+              this.parentNode.removeChild(this);
             })
     }
 

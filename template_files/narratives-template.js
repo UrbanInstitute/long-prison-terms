@@ -54,7 +54,7 @@ $(window).scroll(function () {
             .transition()
             .style("opacity",0)
             .on("end", function(){
-                this.remove()
+                this.parentNode.removeChild(this);
             })
     }
     scrollCheck(); // fire on scroll
