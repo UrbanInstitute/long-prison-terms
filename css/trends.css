@@ -404,6 +404,7 @@ text.mapLable.blank{
   .chartTitle{
     font-size: 18px;
     top: -80px !important;
+    width: 300px !important;
   }
   #vis{
     top: calc(50% - 45px) !important;
@@ -428,6 +429,7 @@ text.mapLable.blank{
 .chartTitle{
   font-size: 22px;
   font-weight: bold;
+  width: 500px;
 }
 .chartNote{
   font-size: 13px;
