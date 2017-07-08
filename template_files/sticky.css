@@ -164,3 +164,8 @@
     top: 120px;
   }
 }
+@media(max-height: 650px){
+  .almightyTallest p{
+    line-height: 1.5;
+  }
+}

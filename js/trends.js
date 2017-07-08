@@ -12,16 +12,22 @@ var scrollVis = function() {
   else if(IS_TABLET()){
     pageSize = "medium"
   }else{
-    pageSize = "large"
+    if(IS_SHORT()){
+      pageSize = "short"
+    }else{
+      pageSize = "large"
+    }
   }
   var mapSizes = {
     "large": { "width": 750, "height": 600, "scale": 3100, "translate": [300,200], "chartWidth": 62, "chartMargin": 5},
+    "short": { "width": 750, "height": 600, "scale": 2700, "translate": [300,200], "chartWidth": 53, "chartMargin": 4},
     "medium": { "width": 750*.666666, "height": 500, "scale": 3100*.666666, "translate": [300*.666666,200*.666666], "chartWidth": 62*.666666, "chartMargin": 5*.666666},
     "small": { "width": 750*.42666, "height": 280, "scale": 2900*.42666, "translate": [300*.42666,200*.42666], "chartWidth": 59*.42666, "chartMargin": 5*.42666}
   }
 
   var mapMargins = {
     "large": {top: 30, right: 20, bottom: 30, left: 50},
+    "short": {top: 30, right: 20, bottom: 30, left: 50},
     "medium": {top: 30, right: 20, bottom: 30, left: 50},
     "small": {top: 30, right: 20, bottom: 30, left: 25}
   } 
@@ -172,6 +178,10 @@ var scrollVis = function() {
       else if(activeIndex == 3 || activeIndex == 2){ ttX = -1*(chartWidth *3)  -2 }
       else if(activeIndex == 4){ ttX = -1*(chartWidth *2.5)  -2 }
       else{ ttX = -1*(chartWidth *2.7) -2 } 
+
+      if(IS_SHORT() && !IS_TABLET()){
+        ttX -= 8;
+      }
       filter = "url(#drop-shadow-left)"
     }else{
       ttX = chartMargin -2
@@ -183,8 +193,15 @@ var scrollVis = function() {
       else if(activeIndex == 3 || activeIndex == 2){ ttY = -1*(chartWidth *4)  -2 -20}
       else if(activeIndex == 4){ ttY = -1*(chartWidth *2.5)  -2 -20}
       else{ ttY = -1*(chartWidth *3.7) -2 -20} 
+      if(IS_SHORT() && !IS_TABLET()){
+        ttY += 5;
+      }
+
     }else{
       ttY = chartMargin + chartWidth-3;
+      if(IS_SHORT() && !IS_TABLET()){
+        ttY -= 10;
+      }
     }
 
     var tt;
@@ -679,8 +696,15 @@ var scrollVis = function() {
   var chartMargin = mapSizes[pageSize]["chartMargin"]
 
   var infoR = 9;
-  var infoX = (IS_PHONE()) ? -10 : -22;
-  var infoY = 13;
+  var infoX;
+  if(IS_PHONE()){
+    infoX = -10;
+  }else if(IS_SHORT() && !IS_TABLET()){
+    infoX = 15
+  }else{
+    infoX = -22;
+  }
+  var infoY = (IS_SHORT() && !IS_TABLET()) ? 37 : 13;
   var info = mapSvg.append("g")
     .attr("id", "infoGroup")
     .attr("transform", "translate(" + infoX + "," + infoY  + ")")
@@ -704,17 +728,25 @@ var scrollVis = function() {
     .text("i")
 
 
-  var explainerX = 120;
-  var explainerY = 38;
+  var explainerX = (IS_SHORT() && !IS_TABLET()) ? 150 : 120;
+  var explainerY = (IS_SHORT() && !IS_TABLET()) ? 62 : 38;
 
-  var titleX = (IS_PHONE()) ? 10 : 40;
-  var titleY = 0;
+  var titleX;
+   if(IS_PHONE()){
+    titleX = 10;
+   }
+   else if(IS_SHORT() && !IS_TABLET()){
+    titleX = 69;
+   }else{
+    titleX = 40;
+   }
+  var titleY = (IS_SHORT() && !IS_TABLET()) ? 29 : 0;
 
   var noteX = 40;
   var noteY = mapHeight;
 
   var legendX = explainerX;
-  var legendY = 100;
+  var legendY = (IS_SHORT() && !IS_TABLET()) ? 120 : 100;
 
   d3.select("#vis")
     .append("div")

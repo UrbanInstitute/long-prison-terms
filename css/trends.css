@@ -249,7 +249,7 @@ text.mapLable.blank{
   background-color: rgba(255,255,255,0)
 }
 
-#break1Marker, #isMobile, #isPhone, #isTablet{
+#break1Marker, #isMobile, #isPhone, #isTablet, #isShort{
   display: none;
   width: 0;
   height: 0;
@@ -265,6 +265,15 @@ text.mapLable.blank{
   padding-right: 0 !important;
   z-index: 999;
   position: relative;
+}
+@media (max-height: 740px){
+  #isShort{
+    display: block;
+  }
+  .chartNote{
+    top: 505px;
+    left: 86px
+  }
 }
 @media (max-width: 1240px){
   #sections{

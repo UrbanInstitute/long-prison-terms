@@ -473,7 +473,7 @@ li.spacing {
   font-family: Georgia;
   font-style: italic;
   font-size: 20px;
-  line-height: 1.5em;
+  line-height: 1.6;
   color: #231f20;
   margin-bottom: 35px;
 }
@@ -1222,6 +1222,9 @@ footer h3, footer h4{
 }
 .excerptWord{
   font-style: normal;
+}
+.excerptWord.large{
+  font-family: Lato;
 }
 .mobilePie{
   display: none;
