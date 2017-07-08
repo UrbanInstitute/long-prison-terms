@@ -280,7 +280,7 @@ text.mapLable.blank{
     top: calc(50% - 224px);
   }
 }
-@media (max-width: 1140px), (max-height: 670px){
+@media (max-width: 1140px), (max-height: 635px){
   .conclusion-div{
     margin-top: 20px !important;
   }
@@ -313,7 +313,7 @@ text.mapLable.blank{
     padding-right: 40px;
   }
 }
-@media (max-width: 766px), (max-height: 670px){
+@media (max-width: 766px), (max-height: 635px){
   .trendsHide{
     border-left: 34px solid white;
     border-right: 34px solid white;

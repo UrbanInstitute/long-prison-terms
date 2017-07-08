@@ -122,7 +122,7 @@ a{
 
 #legend{
   position: fixed;
-  top: calc(50% - 169px);
+  top: calc(50% - 189px);
   left: 26px;
   font-size: 13px;
 }
@@ -145,25 +145,25 @@ a{
 }
 #animationLabel{
   position: fixed;
-  top: calc(50% + 315px);
+  top: calc(50% + 295px);
   left: 185px;
   font-size: 13px;
 }
 #animationTick0{
   position: fixed;
-  top: calc(50% + 296px);
+  top: calc(50% + 276px);
   left: 23px;
   font-size: 13px;
 }
 #animationTick50{
   position: fixed;
-  top: calc(50% + 296px);
+  top: calc(50% + 276px);
   left: 211.5px;
   font-size: 13px;
 }
 #animationTick100{
   position: fixed;
-  top: calc(50% + 296px);
+  top: calc(50% + 276px);
   left: 400px;
   font-size: 13px;
 }
@@ -354,7 +354,7 @@ a{
   position: relative;
   z-index: 9999;
 }
-@media(max-width: 1240px), (max-height: 670px){
+@media(max-width: 1240px), (max-height: 635px){
   #break1Marker{
     display: block;
   }
@@ -374,7 +374,7 @@ a{
     left: 350px;
   }
 }
-@media(max-width: 1140px), (max-height: 670px){
+@media(max-width: 1140px), (max-height: 635px){
 
   #isMobile{
     display: block;
@@ -407,7 +407,7 @@ a{
     z-index: -1 !important;
   }
 }
-@media(max-width: 766px), (max-height: 670px){
+@media(max-width: 766px), (max-height: 635px){
   html.imgBg { 
     background: url(../img/intro-background_mobile.jpeg);
   }
@@ -437,7 +437,7 @@ a{
   }
 }
 
-@media(max-width: 670px), (max-height: 670px){
+@media(max-width: 670px), (max-height: 635px){
   #areaChartText{
     background: rgba(255, 255, 255, 0.65);
     box-shadow: rgb(136, 136, 136) 4px 4px 16px;

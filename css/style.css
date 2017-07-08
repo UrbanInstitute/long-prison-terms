@@ -70,7 +70,7 @@ a{
 #vis {
   display: inline-block;
   position: fixed;
-  top: calc(50% - 217.5px);
+  top: calc(50% - 237.5px);
   left: 180px;
   z-index: 1;
   margin-left: 0;
@@ -86,7 +86,7 @@ a{
     width: 530px;
     background: transparent;
     height: 207px;
-     top: calc(50% - 217.5px); 
+     top: calc(50% - 237.5px); 
     border-left: 46px solid transparent;
     left: 370px;
     /*height: 239px;*/
