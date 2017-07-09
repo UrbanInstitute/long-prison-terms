@@ -275,7 +275,7 @@ a{
 
 
 
-#break1Marker, #isMobile, #isPhone, #isTablet{
+#break1Marker, #isMobile, #isPhone, #isTablet, #isShort{
   display: none;
   width: 0;
   height: 0;
@@ -374,6 +374,73 @@ a{
     left: 350px;
   }
 }
+@media(max-height: 635px){
+  #isShort{
+    display: block;
+  }
+  #legend{
+    left: 79px;
+  }
+  #titleText{
+    font-size: 58px;
+  }
+  #subtitleText{
+    font-size: 18px;
+  }
+  #titleText i{
+    bottom: 0px;
+  }
+  #areaChartText{
+    background: rgba(255, 255, 255, 0.65);
+    box-shadow: rgb(136, 136, 136) 4px 4px 16px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  #skip{
+    display: block;
+    z-index: 99998;
+  }
+  #titleText{
+    top: 160px;
+  }
+  #vis{
+    top: calc(50% - 100px);
+  }
+  #lineChart{
+    top: calc(50% - 100px);
+  }
+  #legend{
+    top: calc(50% - 70px);
+    left: 37px;
+  }
+  #legendTen{
+    clear: both;
+    margin-top: 5px;
+  }
+  #legendTen span{
+    margin-left: 0px;
+  }
+  #animationLabel{
+    top: calc(50% + 224px);
+  }
+  #axisLabelX{
+    top: calc(50% + 30px);
+  }
+  #animationTick0, #animationTick50, #animationTick100  {
+    top: calc(50% + 197px);
+  }
+  #animationTick0 {
+    left: 25px;
+  }
+  .lineLabel{
+    left: 39px !important;
+    bottom: 449px !important;
+    font-size: 18px;
+    width: 180px !important;
+  }
+}
 @media(max-width: 1140px), (max-height: 635px){
 
   #isMobile{
@@ -407,7 +474,7 @@ a{
     z-index: -1 !important;
   }
 }
-@media(max-width: 766px), (max-height: 635px){
+@media(max-width: 766px){
   html.imgBg { 
     background: url(../img/intro-background_mobile.jpeg);
   }
@@ -422,7 +489,7 @@ a{
     left: 79px;
   }
   #lineChart{
-        width: 180px;
+    width: 180px;
     overflow-x: hidden;
     overflow-y: visible;
   }
@@ -437,7 +504,7 @@ a{
   }
 }
 
-@media(max-width: 670px), (max-height: 635px){
+@media(max-width: 670px){
   #areaChartText{
     background: rgba(255, 255, 255, 0.65);
     box-shadow: rgb(136, 136, 136) 4px 4px 16px;

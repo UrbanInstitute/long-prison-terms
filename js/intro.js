@@ -227,7 +227,7 @@ var scrollVis = function() {
     LINEWIDTH = 390;
   }
 
-  if(IS_PHONE()){
+  if(IS_PHONE() || IS_SHORT()){
     HEIGHT = 300;
     LINEHEIGHT = 320;
   }else{
@@ -1038,8 +1038,8 @@ var scrollVis = function() {
         .duration(1000)
         .delay(100)
         .attr("cy", function(d){
-          if(IS_PHONE()){
-            var crumbStart = window.innerHeight*.5 - 100 + 114;
+          if(IS_PHONE() || IS_SHORT()){
+            var crumbStart = window.innerHeight*.5 - 100 + 124;
             return crumbStart + (d-1)*22   
           }
           else if(IS_MOBILE()){
@@ -1290,7 +1290,7 @@ pauseAnimation(width)
 
 
   function drawBackCurtain(key){
-    var lowOpacity = (IS_PHONE()) ? 0 : .2
+    var lowOpacity = (IS_PHONE() || IS_SHORT()) ? 0 : .2
     for(var k = key-1; k >= 3; k--){
       d3.select(".curtain_" + k)
         .transition()
@@ -1317,7 +1317,7 @@ pauseAnimation(width)
         .style("opacity",0)
         .style("pointer-events","none")
     }
-    var lineColor = (IS_PHONE()) ? "#fdbf11" : "#ec008b"
+    var lineColor = (IS_PHONE() ||  IS_SHORT()) ? "#fdbf11" : "#ec008b"
     d3.select(".line.step_" + key)
         .transition()
         .style("opacity",1)
@@ -1335,8 +1335,8 @@ pauseAnimation(width)
         .attr("width",0)
         .attr("x", lineWidth)
       var labelMultiplier = (key == 5) ? 6 : 8;
-      var phoneMultiplier = (IS_PHONE()) ? 0 : 1;
-      var textColor = (IS_PHONE()) ? "#fdbf11" : "#000"
+      var phoneMultiplier = (IS_PHONE() || IS_SHORT()) ? 0 : 1;
+      var textColor = (IS_PHONE() || IS_SHORT()) ? "#fdbf11" : "#000"
       d3.select("#lineLabel_" + key)
         .transition()
         .duration(10)

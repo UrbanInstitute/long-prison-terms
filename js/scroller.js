@@ -91,7 +91,7 @@ function scroller() {
    */
   function position() {
     var off = (IS_MOBILE()) ? 150 : 10;
-    var minus = (IS_TABLET()) ? 1 : 0
+    var minus = (IS_TABLET() || IS_SHORT()) ? 1 : 0
     var pos = window.pageYOffset - off - containerStart;
     var sectionIndex = d3.bisect(sectionPositions, pos);
     sectionIndex = Math.min(sections.size() - 1, sectionIndex);
@@ -122,7 +122,7 @@ function scroller() {
         return d3.select("#graphic").node().getBoundingClientRect().height + "px"
       })
 
-    if(IS_TABLET()){
+    if(IS_TABLET() || IS_SHORT()){
       d3.select("#sections")
         .on("click", function(e){
           var my = event.clientY;
