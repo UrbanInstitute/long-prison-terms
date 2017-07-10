@@ -412,6 +412,7 @@ var scrollVis = function() {
    */
 
   setupVis = function(allData, lineData, areaData) {
+    var transY = (IS_VERY_SHORT() && !IS_SHORT() && !IS_TABLET()) ? -20 : 0;
 
     if(IS_PHONE()){
       if(ACTIVE_CONTAINER() == "animation"){
@@ -436,8 +437,8 @@ var scrollVis = function() {
         .style("left", ((window.innerWidth - 180)*.5 + 40) + "px")
       d3.select("#axisLabelX")
         .style("left", ((window.innerWidth - 63 + 14)*.5 - 29)+ "px")
-      // d3.selectAll(".lineLabel")
-      //   .style("transform", "translateX(" + (window.innerWidth - 240 - 14 - 395) + "px)")
+      d3.selectAll(".lineLabel")
+        .style("transform", "translate(0px," + (transY) + "px)")
 
     }
     else if(IS_TABLET()){
@@ -462,7 +463,7 @@ var scrollVis = function() {
       d3.select("#animationLabel")
         .style("left", ((window.innerWidth - 205)*.5 + 28) + "px")
       d3.selectAll(".lineLabel")
-        .style("transform", "translateX(" + (window.innerWidth - 240 - 14 - 395) + "px)")
+        .style("transform", "translate(" + (window.innerWidth - 240 - 14 - 395) + "px,0px)")
       d3.select("#axisLabelX")
         .style("left", "210px")
     }else if(IS_MOBILE()){
@@ -484,7 +485,7 @@ var scrollVis = function() {
       d3.select("#animationLabel")
         .style("left", null)
       d3.selectAll(".lineLabel")
-        .style("transform", "translateX(0px)")
+        .style("transform", "translate(0px," + (transY) + "px)")
     }else{
       var gutter = visGutter(false);
       var bGutter = visGutter(true)
@@ -503,7 +504,7 @@ var scrollVis = function() {
       d3.select("#animationLabel")
         .style("left", null)
       d3.selectAll(".lineLabel")
-        .style("transform", "translateX(0px)")
+        .style("transform", "translate(0px,  " + transY+ "px)")
 
     }
     //temp line

@@ -374,74 +374,7 @@ a{
     left: 350px;
   }
 }
-@media(max-height: 599px){
-  #isShort{
-    display: block;
-  }
-  #legend{
-    left: 79px;
-  }
-  #titleText{
-    font-size: 58px;
-  }
-  #subtitleText{
-    font-size: 18px;
-  }
-  #titleText i{
-    bottom: 0px;
-  }
-  #areaChartText{
-    background: rgba(255, 255, 255, 0.65);
-    box-shadow: rgb(136, 136, 136) 4px 4px 16px;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-  #skip{
-    display: block;
-    z-index: 99998;
-  }
-  #titleText{
-    top: 160px;
-  }
-  #vis{
-    top: calc(50% - 100px);
-  }
-  #lineChart{
-    top: calc(50% - 100px);
-  }
-  #legend{
-    top: calc(50% - 70px);
-    left: 37px;
-  }
-  #legendTen{
-    clear: both;
-    margin-top: 5px;
-  }
-  #legendTen span{
-    margin-left: 0px;
-  }
-  #animationLabel{
-    top: calc(50% + 224px);
-  }
-  #axisLabelX{
-    top: calc(50% + 30px);
-  }
-  #animationTick0, #animationTick50, #animationTick100  {
-    top: calc(50% + 197px);
-  }
-  #animationTick0 {
-    left: 25px;
-  }
-  .lineLabel{
-    left: 39px !important;
-    bottom: 449px !important;
-    font-size: 18px;
-    width: 180px !important;
-    transform: translateY(0px);
-  }
-}
+
 @media(max-width: 1140px), (max-height: 599px){
 
   #isMobile{
@@ -568,10 +501,102 @@ a{
   }
 }
 @media(max-height: 635px){
-  #isVeryShort{
-    display: block;
+  @media (min-width: 766px){
+    #isVeryShort{
+      display: block;
+    }
+  /*  .lineLabel{
+     transform: translateY(-20px);
+    }*/
+    #vis{
+      top: calc(50% - 227.5px);
+    }
+    #lineChart{
+      top: calc(50% - 227.5px);
+    }
+    #legend{
+      top: calc(50% - 179px);
+    }
+
+    #animationLabel{
+      top: calc(50% + 285px);
+    }
+    #axisLabelX{
+      top: 493px;
+    }
+    #animationTick0, #animationTick50, #animationTick100  {
+      top: calc(50% + 266px);
+    }
   }
-  .lineLabel{
-   transform: translateY(-20px);
+
+}
+@media(max-height: 599px){
+   @media(min-width: 766px){
+    #isShort{
+      display: block;
+    }
+    #legend{
+      left: 79px;
+    }
+    #titleText{
+      font-size: 58px;
+    }
+    #subtitleText{
+      font-size: 18px;
+    }
+    #titleText i{
+      bottom: 0px;
+    }
+    #areaChartText{
+      background: rgba(255, 255, 255, 0.65);
+      box-shadow: rgb(136, 136, 136) 4px 4px 16px;
+      padding-top: 30px;
+      padding-bottom: 20px;
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+    #skip{
+      display: block;
+      z-index: 99998;
+    }
+    #titleText{
+      top: 160px;
+    }
+    #vis{
+      top: calc(50% - 100px);
+    }
+    #lineChart{
+      top: calc(50% - 100px);
+    }
+    #legend{
+      top: calc(50% - 70px);
+      left: 37px;
+    }
+    #legendTen{
+      clear: both;
+      margin-top: 5px;
+    }
+    #legendTen span{
+      margin-left: 0px;
+    }
+    #animationLabel{
+      top: calc(50% + 224px);
+    }
+    #axisLabelX{
+      top: calc(50% + 30px);
+    }
+    #animationTick0, #animationTick50, #animationTick100  {
+      top: calc(50% + 197px);
+    }
+    #animationTick0 {
+      left: 25px;
+    }
+    .lineLabel{
+      left: 39px !important;
+      bottom: 449px !important;
+      font-size: 18px;
+      width: 180px !important;
+      transform: translateY(0px);
+    }
   }
 }
