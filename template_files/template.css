@@ -229,6 +229,9 @@ h3{
   width: 100%;
   padding-top: 20px;
   padding-bottom: 43px;
+  max-width: 766px;
+  display: block;
+  margin: 0 auto;
 }
 .data_button {
     padding: 5 10 5 0px;
@@ -1188,7 +1191,11 @@ footer h3, footer h4{
 .chart-desktop-case-study {
   display: block;
 }
-
+.chart-desktop-case-study img{
+  max-width: 766px;
+  display: block;
+  margin: 0 auto;
+}
 .embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 .bottomRow, .topRow{
