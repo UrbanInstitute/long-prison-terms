@@ -1,4 +1,6 @@
-
+body{
+  overflow-x: hidden;
+}
 
 html.imgBg { 
   background: url(../img/intro-background.jpg);

@@ -519,6 +519,8 @@ div.sidebar-quote p {
   font-size: 22px;
   line-height: 1.2em;
   margin-bottom: 1em;
+  max-width: 766px;
+  margin: 0 auto;
 }
 
 .chart-info {
@@ -550,7 +552,10 @@ div.sidebar-quote p {
 
 .graph-div img {
   width: 100%;
-  float: left;
+  /*float: left;*/
+  max-width: 766px;
+  margin: 0 auto;
+  display: block;
 
 }
 .pie-header {
@@ -1810,14 +1815,14 @@ footer h3, footer h4{
 
 @media(max-height: 635px){
   .sidebar-quote p, .sidebar-quote{
-    line-height: 1.4;
+    line-height: 1.4 !important;
   }
   .almightyTallest{
     margin-top: -35px;
   }
 }
-@media(max-height: 600px){
+@media(max-height: 599px){
    .sidebar-quote p, .sidebar-quote{
-    line-height: 1.6;
+    line-height: 1.6 !important;
   } 
 }

@@ -749,7 +749,7 @@ var scrollVis = function() {
     noteY = 496;
     noteX = 83;
   }
-  if(IS_SHORT() && ! IS_TABLET()){
+  else if(IS_SHORT() && ! IS_TABLET()){
     noteY = 505;
     noteX = 86;
   }
