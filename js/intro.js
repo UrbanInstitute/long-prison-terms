@@ -16,6 +16,9 @@ function debounce(func, wait, immediate) {
 var IS_SHORT = function(){
   return (d3.select("#isShort").style("display") == "block")
 }
+var IS_VERY_SHORT = function(){
+  return (d3.select("#isVeryShort").style("display") == "block")
+}
 var IS_PHONE = function(){
   return (d3.select("#isPhone").style("display") == "block")
 }
@@ -230,7 +233,12 @@ var scrollVis = function() {
   if(IS_PHONE() || IS_SHORT()){
     HEIGHT = 300;
     LINEHEIGHT = 320;
-  }else{
+  }
+  else if(IS_VERY_SHORT()){
+    HEIGHT = 497;
+    LINEHEIGHT = 517    
+  }
+  else{
     HEIGHT = 517;
     LINEHEIGHT = 537
   }

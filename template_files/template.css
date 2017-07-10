@@ -1816,3 +1816,8 @@ footer h3, footer h4{
     margin-top: -35px;
   }
 }
+@media(max-height: 600px){
+   .sidebar-quote p, .sidebar-quote{
+    line-height: 1.6;
+  } 
+}

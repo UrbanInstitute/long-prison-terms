@@ -275,7 +275,7 @@ a{
 
 
 
-#break1Marker, #isMobile, #isPhone, #isTablet, #isShort{
+#break1Marker, #isMobile, #isPhone, #isTablet, #isShort, #isVeryShort{
   display: none;
   width: 0;
   height: 0;
@@ -439,6 +439,7 @@ a{
     bottom: 449px !important;
     font-size: 18px;
     width: 180px !important;
+    transform: translateY(0px);
   }
 }
 @media(max-width: 1140px), (max-height: 599px){
@@ -566,6 +567,11 @@ a{
     width: 180px !important;
   }
 }
-
-
+@media(max-height: 635px){
+  #isVeryShort{
+    display: block;
+  }
+  .lineLabel{
+   transform: translateY(-20px);
+  }
 }

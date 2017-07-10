@@ -742,8 +742,8 @@ var scrollVis = function() {
    }
   var titleY = (IS_SHORT() && !IS_TABLET()) ? 29 : 0;
 
-  var noteX = 40;
-  var noteY = mapHeight;
+  var noteX = (IS_SHORT() && !IS_TABLET()) ? 86 : 40;
+  var noteY = (IS_SHORT() && !IS_TABLET()) ? mapHeight - 40 : mapHeight;
 
   var legendX = explainerX;
   var legendY = (IS_SHORT() && !IS_TABLET()) ? 120 : 100;

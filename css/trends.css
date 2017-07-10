@@ -271,8 +271,8 @@ text.mapLable.blank{
     display: block;
   }
   .chartNote{
-    top: 505px;
-    left: 86px
+    /*top: 505px !important;*/
+    /*left: 86px !important;*/
   }
 }
 @media (max-width: 1240px){
@@ -354,8 +354,8 @@ text.mapLable.blank{
     left: 100px !important;
   }
   .chartNote{
-    top: 375px !important;
-    left: 45px !important;
+    /*top: 375px !important;*/
+    /*left: 45px !important;*/
   }
   #expl1, #expl2{
     display: inline-block;
@@ -421,8 +421,8 @@ text.mapLable.blank{
     left: 103px !important;
   }
   .chartNote {
-      top: 249px !important;
-      left: 10px !important;
+      /*top: 249px !important;*/
+      /*left: 10px !important;*/
   }
 }
 
@@ -487,7 +487,7 @@ section p{
     top: calc(50% - 215px);
   }
   .chartNote{
-    top: 496px !important;
-    left: 83px !important;
+    /*top: 496px;*/
+    /*left: 83px;*/
   }
 }
