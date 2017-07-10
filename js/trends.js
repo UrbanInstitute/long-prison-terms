@@ -742,8 +742,30 @@ var scrollVis = function() {
    }
   var titleY = (IS_SHORT() && !IS_TABLET()) ? 29 : 0;
 
-  var noteX = (IS_SHORT() && !IS_TABLET()) ? 86 : 40;
-  var noteY = (IS_SHORT() && !IS_TABLET()) ? mapHeight - 40 : mapHeight;
+  // var noteX = (IS_SHORT() && !IS_TABLET()) ? 86 : 40;
+  // var noteY = (IS_SHORT() && !IS_TABLET()) ? mapHeight - 40 : mapHeight;
+  var noteX, noteY;
+  if(IS_VERY_SHORT() && !IS_TABLET()){
+    noteY = 496;
+    noteX = 83;
+  }
+  if(IS_SHORT() && ! IS_TABLET()){
+    noteY = 505;
+    noteX = 86;
+  }
+  else if(IS_PHONE()){
+    noteY = 249
+    noteX = 10;
+  }
+  else if(IS_TABLET()){
+    noteY = 375;
+    noteX = 45;
+  }
+  else{
+    noteX = 40;
+    noteY = mapHeight;
+  }
+
 
   var legendX = explainerX;
   var legendY = (IS_SHORT() && !IS_TABLET()) ? 120 : 100;

@@ -1,6 +1,9 @@
 var IS_SHORT = function(){
   return (d3.select("#isShort").style("display") == "block")
 }
+var IS_VERY_SHORT = function(){
+  return (d3.select("#isVeryShort").style("display") == "block")
+}
 var IS_PHONE = function(){
   return (d3.select("#isPhone").style("display") == "block")
 }

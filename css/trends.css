@@ -249,7 +249,7 @@ text.mapLable.blank{
   background-color: rgba(255,255,255,0)
 }
 
-#break1Marker, #isMobile, #isPhone, #isTablet, #isShort{
+#break1Marker, #isMobile, #isPhone, #isTablet, #isShort, #isVeryShort{
   display: none;
   width: 0;
   height: 0;
@@ -489,5 +489,8 @@ section p{
   .chartNote{
     /*top: 496px;*/
     /*left: 83px;*/
+  }
+  #isVeryShort{
+    display: block;
   }
 }
