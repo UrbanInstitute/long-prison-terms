@@ -354,7 +354,7 @@ a{
   position: relative;
   z-index: 9999;
 }
-@media(max-width: 1240px), (max-height: 635px){
+@media(max-width: 1240px), (max-height: 599px){
   #break1Marker{
     display: block;
   }
@@ -374,7 +374,7 @@ a{
     left: 350px;
   }
 }
-@media(max-height: 635px){
+@media(max-height: 599px){
   #isShort{
     display: block;
   }
@@ -441,7 +441,7 @@ a{
     width: 180px !important;
   }
 }
-@media(max-width: 1140px), (max-height: 635px){
+@media(max-width: 1140px), (max-height: 599px){
 
   #isMobile{
     display: block;
@@ -568,3 +568,4 @@ a{
 }
 
 
+}

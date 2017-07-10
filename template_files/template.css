@@ -1236,7 +1236,7 @@ footer h3, footer h4{
 /***********************************************************************************/
 /********************************** MEDIA QUERIES **********************************/
 /***********************************************************************************/
-@media (max-width: 1340px), (max-height: 635px) {
+@media (max-width: 1340px), (max-height: 599px) {
   .sidebar-quote{
     font-size: 18px;
   }
@@ -1248,7 +1248,7 @@ footer h3, footer h4{
     width: 210px;
   }
 }
-@media (max-width: 1140px), (max-height: 635px) {
+@media (max-width: 1140px), (max-height: 599px) {
   #one-in-five{
     width: 690px;
     margin: 0 auto;
@@ -1339,7 +1339,7 @@ footer h3, footer h4{
       left: 130px !important;
   }
 }
-@media (max-width: 1100px), (max-height: 635px) {
+@media (max-width: 1100px), (max-height: 599px) {
   .subnav a{
     font-size:16px;
   }
@@ -1357,7 +1357,7 @@ footer h3, footer h4{
     width: 100%;
   }
 }
-@media (max-width: 880px), (max-height: 635px) {
+@media (max-width: 880px), (max-height: 599px) {
   ul {
     margin-left: 15px;
   }
@@ -1436,7 +1436,7 @@ footer h3, footer h4{
     padding-left:0px; 
   }
 }
-@media (max-width: 766px), (max-height: 635px) {
+@media (max-width: 766px), (max-height: 599px) {
   .center-div-initial{
     width:70%;
   }
@@ -1540,7 +1540,7 @@ footer h3, footer h4{
     width: 70%;
   }
 }
-@media (max-width: 670px), (max-height: 635px) {
+@media (max-width: 670px), (max-height: 599px) {
   .about-column{
     width: 100%;
     padding-left: 34px;
@@ -1805,4 +1805,14 @@ footer h3, footer h4{
 }
 #footer-pdf-word:before{
   content: "Read";
+}
+
+
+@media(max-height: 635px){
+  .sidebar-quote p, .sidebar-quote{
+    line-height: 1.4;
+  }
+  .almightyTallest{
+    margin-top: -35px;
+  }
 }

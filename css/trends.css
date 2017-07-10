@@ -289,7 +289,7 @@ text.mapLable.blank{
     top: calc(50% - 224px);
   }
 }
-@media (max-width: 1140px), (max-height: 635px){
+@media (max-width: 1140px), (max-height: 599px){
   .conclusion-div{
     margin-top: 20px !important;
   }
@@ -322,7 +322,7 @@ text.mapLable.blank{
     padding-right: 40px;
   }
 }
-@media (max-width: 766px), (max-height: 635px){
+@media (max-width: 766px), (max-height: 599px){
   .trendsHide{
     border-left: 34px solid white;
     border-right: 34px solid white;
@@ -479,4 +479,15 @@ section p{
 }
 .topRow{
   border-bottom: 90px solid white !important;
+}
+
+
+@media(max-height: 635px){
+  #vis {
+    top: calc(50% - 215px);
+  }
+  .chartNote{
+    top: 496px !important;
+    left: 83px !important;
+  }
 }
