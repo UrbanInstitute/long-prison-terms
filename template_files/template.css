@@ -552,8 +552,12 @@ div.sidebar-quote p {
   margin: 65px 0px 95px 0px;
 }
 
+.graph-row-3 img, .pie2 img, #doublePieWrapper img{
+  width: 100%;
+}
 
-.graph-div img {
+
+.graphImg {
   width: 100%;
   /*float: left;*/
   max-width: 766px;
