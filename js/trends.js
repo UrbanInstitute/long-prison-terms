@@ -5,17 +5,33 @@
  * http://bost.ocks.org/mike/chart/
  */
 var scrollVis = function() {
-
-
-  var pageSize = "large"
+  var pageSize;
+  if(IS_PHONE()){
+    pageSize = "small"
+  }
+  else if(IS_TABLET()){
+    pageSize = "medium"
+  }else{
+    if(IS_SHORT()){
+      pageSize = "short"
+    }else{
+      pageSize = "large"
+    }
+  }
   var mapSizes = {
-    "huge": { "width": 900, "height": 1270, "scale": 3800, "translate": [380,220], "chartWidth": 76, "chartMargin": 8},
     "large": { "width": 750, "height": 600, "scale": 3100, "translate": [300,200], "chartWidth": 62, "chartMargin": 5},
-    "medium": { "width": 900, "height": 1270, "scale": 3800, "translate": [380,220], "chartWidth": 76, "chartMargin": 8},
-    "small": { "width": 900, "height": 1270, "scale": 3800, "translate": [380,220], "chartWidth": 76, "chartMargin": 8}
+    "short": { "width": 750, "height": 600, "scale": 2700, "translate": [300,200], "chartWidth": 53, "chartMargin": 4},
+    "medium": { "width": 750*.666666, "height": 500, "scale": 3100*.666666, "translate": [300*.666666,200*.666666], "chartWidth": 62*.666666, "chartMargin": 5*.666666},
+    "small": { "width": 750*.42666, "height": 280, "scale": 2900*.42666, "translate": [300*.42666,200*.42666], "chartWidth": 59*.42666, "chartMargin": 5*.42666}
   }
 
-  var mapMargin = {top: 30, right: 20, bottom: 30, left: 50},
+  var mapMargins = {
+    "large": {top: 30, right: 20, bottom: 30, left: 50},
+    "short": {top: 30, right: 20, bottom: 30, left: 50},
+    "medium": {top: 30, right: 20, bottom: 30, left: 50},
+    "small": {top: 30, right: 20, bottom: 30, left: 25}
+  } 
+  var mapMargin = mapMargins[pageSize]
     mapWidth = mapSizes[pageSize]["width"] - mapMargin.left - mapMargin.right,
     mapHeight = mapSizes[pageSize]["height"] - mapMargin.top - mapMargin.bottom;
 
@@ -103,6 +119,30 @@ var scrollVis = function() {
       feMergeRight.append("feMergeNode")
           .attr("in", "SourceGraphic");
 
+
+      var filterBoth = defs.append("filter")
+        .attr("id", "drop-shadow-both")
+        .attr("height", "160%");
+      filterBoth.append("feGaussianBlur")
+          .attr("in", "SourceAlpha")
+          .attr("stdDeviation", 5)
+      filterBoth.append("feOffset")
+          .attr("dx", 2)
+          .attr("dy", 2)
+      filterBoth.append("feComponentTransfer")
+          .append("feFuncA")
+          .attr("type", "linear")
+          .attr("slope",.6)
+
+      var feMergeBoth = filterBoth.append("feMerge");
+
+      feMergeBoth.append("feMergeNode")
+      feMergeBoth.append("feMergeNode")
+          .attr("in", "SourceGraphic");
+
+
+
+
       // perform some preprocessing on raw data
       var trendsData = rawData[0]
       mapSvg.data([trendsData])
@@ -114,25 +154,34 @@ var scrollVis = function() {
   };
 
 
-  var NUMERIC = d3.format(".2f")
-  var PERCENT = d3.format(".2%")
+  var NUMERIC = d3.format(".1f")
+  var PERCENT = d3.format(".1%")
   var PEOPLE = d3.format(",.0f")
-  function hoverState(obj, d){
+  function selectState(obj, d, action){
     d.values = d.values.filter(function(o){ return parseInt(o.Year) >= 2000})
-    var chartWidth = mapSizes[pageSize]["chartWidth"]
-    var chartMargin = mapSizes[pageSize]["chartMargin"]
+    var scalar = (IS_TABLET()) ? 1.2 : 1
+    var chartWidth = mapSizes["large"]["chartWidth"] * scalar
+    var chartMargin = mapSizes["large"]["chartMargin"] * scalar
     
     var state = d.values[0]["State"]
 
     var ttX,
         ttY,
         filter;
-
-    if(state == "ME" || state == "NH" || state == "RI" || state == "MA" || state == "DE" || state == "NY" || state == "NJ" || state == "MD" || state == "DC" || state == "FL" ){
+    if(action == "click"){
+      ttX = 0;
+      ttY = 0;
+      filter = "url(#drop-shadow-both)"
+    }
+    else if(state == "ME" || state == "NH" || state == "RI" || state == "MA" || state == "DE" || state == "NY" || state == "NJ" || state == "MD" || state == "DC" || state == "FL" ){
       if(activeIndex == 1 ){ ttX = -1*(chartWidth *2)  -2 }
       else if(activeIndex == 3 || activeIndex == 2){ ttX = -1*(chartWidth *3)  -2 }
       else if(activeIndex == 4){ ttX = -1*(chartWidth *2.5)  -2 }
       else{ ttX = -1*(chartWidth *2.7) -2 } 
+
+      if(IS_SHORT() && !IS_TABLET()){
+        ttX -= 8;
+      }
       filter = "url(#drop-shadow-left)"
     }else{
       ttX = chartMargin -2
@@ -140,70 +189,117 @@ var scrollVis = function() {
     }
     if(state == "CA" || state == "UT" || state == "CO" || state == "NE" || state == "MO" || state == "KY" || state == "WV" || state == "MD" || state == "DE" || state == "AZ" ||  state == "NM" || state == "KS" || state == "TN" || state == "NC" || state == "SC" || state == "DC" || state == "OK" || state == "MS" || state == "AL" || state == "GA" || state == "TX" || state == "FL"){
       // ttY = -1*(chartWidth *4)  -2
-      if(activeIndex == 1 ){ ttY = -1*(chartWidth *3)  -2 }
-      else if(activeIndex == 3 || activeIndex == 2){ ttY = -1*(chartWidth *4)  -2 }
-      else if(activeIndex == 4){ ttY = -1*(chartWidth *2.5)  -2 }
-      else{ ttY = -1*(chartWidth *3.7) -2 } 
+      if(activeIndex == 1 ){ ttY = -1*(chartWidth *3)  -2 -20}
+      else if(activeIndex == 3 || activeIndex == 2){ ttY = -1*(chartWidth *4)  -2 -20}
+      else if(activeIndex == 4){ ttY = -1*(chartWidth *2.5)  -2 -20}
+      else{ ttY = -1*(chartWidth *3.7) -2 -20} 
+      if(IS_SHORT() && !IS_TABLET()){
+        ttY += 5;
+      }
+
     }else{
       ttY = chartMargin + chartWidth-3;
+      if(IS_SHORT() && !IS_TABLET()){
+        ttY -= 10;
+      }
     }
 
-    var tt = mapSvg.append("g")
-      .attr("transform", d3.select(obj).attr("transform") + " translate(" + (ttX) + " , " + (ttY) + ")")
-      .attr("id", "mapTooltip")
+    var tt;
+    var ttWidth;
+    if (activeIndex == 1) { ttWidth = chartWidth *3 }
+    else if (activeIndex == 2) { ttWidth = chartWidth *4 }
+    else if (activeIndex == 3) { ttWidth = chartWidth *4 }
+    else if (activeIndex == 4) { ttWidth = chartWidth *3.5 }
+    else if (activeIndex == 5) { ttWidth = chartWidth *3.7 }
+    ttWidth = ttWidth/scalar
+
+    var ttHeight;
+    if (activeIndex == 1) { ttHeight = chartWidth *3 }
+    else if (activeIndex == 2) { ttHeight = chartWidth *4 }
+    else if (activeIndex == 3) { ttHeight = chartWidth *4 }
+    else if (activeIndex == 4) { ttHeight = chartWidth *2.5 }
+    else if (activeIndex == 5) { ttHeight = chartWidth *3.7 }
+
+    ttHeight += 20;
+
+
+
+    if(action == "hover"){
+      tt = mapSvg.append("g")
+        .attr("transform", d3.select(obj).attr("transform") + " translate(" + (ttX) + " , " + (ttY) + ")")
+        .attr("id", "mapTooltip")
+    }
+    else if(action == "click"){
+      if(IS_PHONE()){
+        tt = mapSvg.append("g")
+          .style("transform", "translate("  +  (mapWidth + 8 -ttWidth)*.5 + "px," + (-50)*.5 + "px)")
+          .attr("id", "mapTooltip") 
+      }else{
+        var w;
+        tt = mapSvg.append("g")
+          .style("transform", "translate("  +  (mapWidth + 18 -ttWidth)*.5 + "px," + (mapHeight - 50 - ttHeight)*.5 + "px)")
+          .attr("id", "mapTooltip");
+      }
+    }
 
 
 
     // var keys = [null, "LOS_Mean",""]
     if(activeIndex == 1){
       tt.append("rect")
-        .attr("width", (chartWidth )*3)
-        .attr("height", (chartWidth )*3)
+        .attr("width", ttWidth)
+        .attr("height", ttHeight)
         .style("fill","#fff")
         .style("filter",filter)
 
       tt.append("text")
+        .attr("class","tt-statename")
+        .attr("x",(15)*scalar)
+        .attr("y",(25)*scalar)
+        .text(STATE_NAMES[d.key])
+
+      tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30)
+        .attr("x",(15)*scalar)
+        .attr("y",(45)*scalar+15)
         .text(d.values[0]["Year"] + " time served")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15)*scalar+15)
         .text(NUMERIC(d.values[0]["LOS_Mean"]) + " years")
       
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*2.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*2.5)*scalar+15)
         .text(d.values[d.values.length - 1]["Year"] + " time served")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*3.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*3.5)*scalar+15)
         .text(NUMERIC(d.values[d.values.length - 1]["LOS_Mean"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*5)
-        .text("Raw change")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*5)*scalar+15)
+        .text("Absolute change")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*6)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*6)*scalar+15)
         .text(NUMERIC(d.values[d.values.length - 1]["LOS_Mean"] - d.values[0]["LOS_Mean"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*7.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*7.5)*scalar+15)
         .text("Percent change")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*8.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*8.5)*scalar+15)
         .text(function(){
           var change = d.values[d.values.length - 1]["LOS_Mean"] - d.values[0]["LOS_Mean"];
           var percent = change/ d.values[0]["LOS_Mean"];
@@ -214,68 +310,74 @@ var scrollVis = function() {
     }
     else if(activeIndex == 2){
       tt.append("rect")
-        .attr("width", (chartWidth )*4)
-        .attr("height", (chartWidth )*4)
+        .attr("width", ttWidth)
+        .attr("height", ttHeight)
         .style("fill","#fff")
         .style("filter",filter)
+      
+      tt.append("text")
+        .attr("class","tt-statename")
+        .attr("x",(15)*scalar)
+        .attr("y",(25)*scalar)
+        .text(STATE_NAMES[d.key])
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30)
+        .attr("x",(15)*scalar)
+        .attr("y",(45)*scalar+15)
         .text(d.values[0]["Year"] + " time served")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15)*scalar+15)
         .text("Violent: " + NUMERIC(d.values[0]["LOS_MeanViolent"]) + " years")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*2)
-        .text("All except violent: " + NUMERIC(d.values[0]["LOS_MeanAllExceptViol"]) + " years")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*2)*scalar+15)
+        .text("All others: " + NUMERIC(d.values[0]["LOS_MeanAllExceptViol"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*3.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*3.5)*scalar+15)
         .text(d.values[d.values.length - 1]["Year"] + " time served")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*4.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*4.5)*scalar+15)
         .text("Violent: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanViolent"]) + " years")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*5.5)
-        .text("All except violent: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanAllExceptViol"]) + " years")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*5.5)*scalar+15)
+        .text("All others: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanAllExceptViol"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*7)
-        .text("Raw change")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*7)*scalar+15)
+        .text("Absolute change")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*8)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*8)*scalar+15)
         .text("Violent: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanViolent"] - d.values[0]["LOS_MeanViolent"]) + " years")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*9)
-        .text("All except violent: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanAllExceptViol"] - d.values[0]["LOS_MeanAllExceptViol"]) + " years")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*9)*scalar+15)
+        .text("All others: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanAllExceptViol"] - d.values[0]["LOS_MeanAllExceptViol"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*10.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*10.5)*scalar+15)
         .text("Percent change")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*11.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*11.5)*scalar+15)
         .text(function(){
           var change = d.values[d.values.length - 1]["LOS_MeanViolent"] - d.values[0]["LOS_MeanViolent"];
           var percent = change/ d.values[0]["LOS_MeanViolent"];
@@ -285,81 +387,87 @@ var scrollVis = function() {
         })
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*12.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*12.5)*scalar+15)
         .text(function(){
           var change = d.values[d.values.length - 1]["LOS_MeanAllExceptViol"] - d.values[0]["LOS_MeanAllExceptViol"];
           var percent = change/ d.values[0]["LOS_MeanViolent"];
           var changeWord = (percent < 0) ? "decrease" : "increase";
 
-          return "All except violent: " + PERCENT(Math.abs(percent)) + " " + changeWord;
+          return "All others: " + PERCENT(Math.abs(percent)) + " " + changeWord;
         })
 
     }
     else if(activeIndex == 3){
       tt.append("rect")
-        .attr("width", (chartWidth )*4)
-        .attr("height", (chartWidth )*4)
+        .attr("width", ttWidth)
+        .attr("height", ttHeight)
         .style("fill","#fff")
         .style("filter",filter)
 
       tt.append("text")
+        .attr("class","tt-statename")
+        .attr("x",(15)*scalar)
+        .attr("y",(25)*scalar)
+        .text(STATE_NAMES[d.key])
+
+      tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30)
+        .attr("x",(15)*scalar)
+        .attr("y",(45)*scalar+15)
         .text(d.values[0]["Year"] + " time served")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15)*scalar+15)
         .text("Top 10%: " + NUMERIC(d.values[0]["LOS_MeanTop10"]) + " years")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*2)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*2)*scalar+15)
         .text("Bottom 90%: " + NUMERIC(d.values[0]["LOS_MeanBottom90"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*3.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*3.5)*scalar+15)
         .text(d.values[d.values.length - 1]["Year"] + " time served")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*4.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*4.5)*scalar+15)
         .text("Top 10%: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanTop10"]) + " years")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*5.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*5.5)*scalar+15)
         .text("Bottom 90%: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanBottom90"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*7)
-        .text("Raw change")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*7)*scalar+15)
+        .text("Absolute change")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*8)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*8)*scalar+15)
         .text("Top 10%: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanTop10"] - d.values[0]["LOS_MeanTop10"]) + " years")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*9)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*9)*scalar+15)
         .text("Bottom 90%: " + NUMERIC(d.values[d.values.length - 1]["LOS_MeanBottom90"] - d.values[0]["LOS_MeanBottom90"]) + " years")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*10.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*10.5)*scalar+15)
         .text("Percent change")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*11.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*11.5)*scalar+15)
         .text(function(){
           var change = d.values[d.values.length - 1]["LOS_MeanTop10"] - d.values[0]["LOS_MeanTop10"];
           var percent = change/ d.values[0]["LOS_MeanTop10"];
@@ -369,8 +477,8 @@ var scrollVis = function() {
         })
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*12.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*12.5)*scalar+15)
         .text(function(){
           var change = d.values[d.values.length - 1]["LOS_MeanBottom90"] - d.values[0]["LOS_MeanBottom90"];
           var percent = change/ d.values[0]["LOS_MeanTop10"];
@@ -381,104 +489,116 @@ var scrollVis = function() {
     }
     else if(activeIndex == 4){
       tt.append("rect")
-        .attr("width", (chartWidth )*3.5)
-        .attr("height", (chartWidth )*2.5)
+        .attr("width", ttWidth)
+        .attr("height", ttHeight)
         .style("fill","#fff")
         .style("filter",filter)
 
       tt.append("text")
-        .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30)
-        .text(d.values[0]["Year"] + " share of population")
-      tt.append("text")
-        .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16)
-        .text(NUMERIC(d.values[0]["LOS_10plus_Pct"]) + "%")
-      
-      tt.append("text")
-        .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*2.5)
-        .text(d.values[d.values.length - 1]["Year"] + " share of population")
-      tt.append("text")
-        .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*3.5)
-        .text(NUMERIC(d.values[d.values.length - 1]["LOS_10plus_Pct"]) + "%")
+        .attr("class","tt-statename")
+        .attr("x",(15)*scalar)
+        .attr("y",(25)*scalar)
+        .text(STATE_NAMES[d.key])
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*5)
-        .text("Raw change")
+        .attr("x",(15)*scalar)
+        .attr("y",(45)*scalar+15)
+        .text(d.values[0]["Year"] + " share of population")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*6)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15)*scalar+15)
+        .text(PERCENT(d.values[0]["LOS_10plus_Pct"]/100))
+      
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*2.5)*scalar+15)
+        .text(d.values[d.values.length - 1]["Year"] + " share of population")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*3.5)*scalar+15)
+        .text(PERCENT(d.values[d.values.length - 1]["LOS_10plus_Pct"]/100))
+
+      tt.append("text")
+        .attr("class","tt-header")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*5)*scalar+15)
+        .text("Absolute change")
+      tt.append("text")
+        .attr("class","tt-value")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*6)*scalar+15)
         .text(NUMERIC(d.values[d.values.length - 1]["LOS_10plus_Pct"] - d.values[0]["LOS_10plus_Pct"]) + " percentage points")
     }
     else if(activeIndex == 5){
       tt.append("rect")
-        .attr("width", (chartWidth )*3.7)
-        .attr("height", (chartWidth )*3.7)
+        .attr("width", ttWidth)
+        .attr("height", ttHeight)
         .style("fill","#fff")
         .style("filter",filter)
 
       tt.append("text")
+        .attr("class","tt-statename")
+        .attr("x",(15)*scalar)
+        .attr("y",(25)*scalar)
+        .text(STATE_NAMES[d.key])
+
+      tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30)
+        .attr("x",(15)*scalar)
+        .attr("y",(45)*scalar+15)
         .text("Y-axis maximum")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15)*scalar+15)
         .text(PEOPLE(Math.ceil(1.1* d3.max(d.values, function(d) { return d["LOS_10plus_Num"]; }))) + " people")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*2.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*2.5)*scalar+15)
         .text(d.values[0]["Year"] + " population")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*3.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*3.5)*scalar+15)
         .text(PEOPLE(d.values[0]["LOS_10plus_Num"]) + " people")
       
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*5)*scalar+15)
         .text(d.values[d.values.length - 1]["Year"] + " population")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*6)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*6)*scalar+15)
         .text(PEOPLE(d.values[d.values.length - 1]["LOS_10plus_Num"]) + " people")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*7.5)
-        .text("Raw change")
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*7.5)*scalar+15)
+        .text("Absolute change")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*8.5)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*8.5)*scalar+15)
         .text(PEOPLE(d.values[d.values.length - 1]["LOS_10plus_Num"] - d.values[0]["LOS_10plus_Num"]) + " people")
 
       tt.append("text")
         .attr("class","tt-header")
-        .attr("x",16)
-        .attr("y",30+16*10)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*10)*scalar+15)
         .text("Percent change")
       tt.append("text")
         .attr("class","tt-value")
-        .attr("x",16)
-        .attr("y",30+16*11)
+        .attr("x",(15)*scalar)
+        .attr("y",(45+15*11)*scalar+15)
         .text(function(){
           var change = d.values[d.values.length - 1]["LOS_10plus_Num"] - d.values[0]["LOS_10plus_Num"];
           var percent = change/ d.values[0]["LOS_10plus_Num"];
@@ -488,10 +608,15 @@ var scrollVis = function() {
         })
     }
 
-      // .attr("x", obj.getBoundingClientRect().left)
-      // .attr("y", obj.getBoundingClientRect().bottom)
-
-
+    if(IS_TABLET()){
+      tt.append("svg:image")
+         .attr('x',ttWidth - 25)
+         .attr('y',12)
+         .attr('width', 13)
+         .attr('height', 13)
+         .attr("xlink:href","img/close-button.png")
+         .on("click", function(){ deselectState()})
+    }
 
     d3.select(obj)
       .selectAll("rect")
@@ -501,12 +626,12 @@ var scrollVis = function() {
       .transition()
       .style("opacity",0)
   }
-  function deHoverState(obj, d){
+  function deselectState(){
     d3.select("#mapTooltip").remove()
-    d3.select(obj)
+    d3.selectAll(".state")
       .selectAll("rect")
       .style("fill", "#1696d2")
-    d3.select(obj)
+    d3.selectAll(".state")
       .selectAll(".mapLable")
       .transition()
       .style("opacity",1)
@@ -571,8 +696,15 @@ var scrollVis = function() {
   var chartMargin = mapSizes[pageSize]["chartMargin"]
 
   var infoR = 9;
-  var infoX = -22;
-  var infoY = 13;
+  var infoX;
+  if(IS_PHONE()){
+    infoX = -10;
+  }else if(IS_SHORT() && !IS_TABLET()){
+    infoX = 15
+  }else{
+    infoX = -22;
+  }
+  var infoY = (IS_SHORT() && !IS_TABLET()) ? 37 : 13;
   var info = mapSvg.append("g")
     .attr("id", "infoGroup")
     .attr("transform", "translate(" + infoX + "," + infoY  + ")")
@@ -583,6 +715,7 @@ var scrollVis = function() {
     .on("mouseout", function(){
       d3.selectAll(".explainer span").classed("active",false)      
     })
+
   info.append("circle")
     .attr("r", infoR)
     .attr("cx",0)
@@ -595,17 +728,47 @@ var scrollVis = function() {
     .text("i")
 
 
-  var explainerX = 120;
-  var explainerY = 38;
+  var explainerX = (IS_SHORT() && !IS_TABLET()) ? 150 : 120;
+  var explainerY = (IS_SHORT() && !IS_TABLET()) ? 62 : 38;
 
-  var titleX = 40;
-  var titleY = 0;
+  var titleX;
+   if(IS_PHONE()){
+    titleX = 10;
+   }
+   else if(IS_SHORT() && !IS_TABLET()){
+    titleX = 69;
+   }else{
+    titleX = 40;
+   }
+  var titleY = (IS_SHORT() && !IS_TABLET()) ? 29 : 0;
 
-  var noteX = 40;
-  var noteY = mapHeight;
+  // var noteX = (IS_SHORT() && !IS_TABLET()) ? 86 : 40;
+  // var noteY = (IS_SHORT() && !IS_TABLET()) ? mapHeight - 40 : mapHeight;
+  var noteX, noteY;
+  if(IS_VERY_SHORT() && !IS_TABLET()){
+    noteY = 496;
+    noteX = 83;
+  }
+  else if(IS_SHORT() && ! IS_TABLET()){
+    noteY = 505;
+    noteX = 86;
+  }
+  else if(IS_PHONE()){
+    noteY = 249
+    noteX = 10;
+  }
+  else if(IS_TABLET()){
+    noteY = 375;
+    noteX = 45;
+  }
+  else{
+    noteX = 40;
+    noteY = mapHeight;
+  }
+
 
   var legendX = explainerX;
-  var legendY = 100;
+  var legendY = (IS_SHORT() && !IS_TABLET()) ? 120 : 100;
 
   d3.select("#vis")
     .append("div")
@@ -634,12 +797,12 @@ var scrollVis = function() {
 
   legend.append("div")
     .attr("class", "legendText")
-    .html("All except violent")
+    .html("All others")
 
 
   var legendB =   d3.select("#vis")
     .append("div")
-    .attr("class","legendContainer legendContainerB")
+    .attr("class","legendContainer legendContainerB visElement")
     .style("position", "absolute")
     .style("top",legendY + "px")
     .style("left",legendX + "px")
@@ -668,7 +831,7 @@ var scrollVis = function() {
     .style("position", "absolute")
     .style("top",titleY + "px")
     .style("left",titleX + "px")
-    .html("Average time served for all offense categories")
+    .html("Average Time Served for All Offense Categories")
 
   d3.select("#vis")
     .append("div")
@@ -676,16 +839,17 @@ var scrollVis = function() {
     .style("position", "absolute")
     .style("top",titleY + "px")
     .style("left",titleX + "px")
-    .html("Average time served by offense type")
+    .html("Average Time Served by Offense Type")
     .style("opacity",0)
 
+  var actionWords = (IS_TABLET()) ? "Tap on a" : "Hover on a"
   d3.select("#vis")
     .append("div")
     .attr("class","explainer explainerA visElement")
     .style("position", "absolute")
     .style("top",explainerY + "px")
     .style("left",explainerX + "px")
-    .html("Data for all line charts on the same x and y scales.<br/>Hover on a state for detailed data.")
+    .html("Data for all line charts on the same x- and y-axis scales.<br/>" + actionWords + " state for detailed data.")
   
   d3.select("#vis")
     .append("div")
@@ -694,7 +858,67 @@ var scrollVis = function() {
     .style("top",explainerY + "px")
     .style("left",explainerX + "px")
     .style("opacity",0)
-    .html("Data for all states on the same x scale.<br/><span>Y-axis scales differ for each state.</span><br/>Hover on a state for detailed data.")
+    .html("<div id = \"expl1\">Data for all states on the same x-axis scale.</div><div id = \"expl2\"><span>Y-axis scales differ for each state.</span></div id = \"expl3\"><div>" + actionWords + " state for detailed data.</div>")
+
+
+
+function mouse_event_over_element(evt, elem) {
+
+  if(typeof(elem[0]) == "undefined"){
+    return false
+  }else{
+    var o= elem.offset();
+    var w= elem[0].getBoundingClientRect().width;
+    var h= elem[0].getBoundingClientRect().height;
+    return evt.pageX >= o.left && evt.pageX <= o.left + w && evt.pageY >= o.top && evt.pageY <= o.top + h;
+  }
+}
+  if(IS_MOBILE()){
+    $("#sections").click(function(e){
+      if(($('.step:hover').length) != 0){
+        return false;
+      }
+      else if(IS_TABLET()){
+        if (mouse_event_over_element(e, $("#mapTooltip image"))) {
+          deselectState()
+        }else{
+          $("g.state").each(function() {
+            if (mouse_event_over_element(e, $(this))) {
+              deselectState()
+              selectState(this, d3.select(this).datum(), "click")
+              return false;
+            }
+          });
+        }
+      }else{
+        return false;
+      }
+    });
+    $("#sections").mousemove(function(e){
+      if(($('.step:hover').length) != 0){
+        return false;
+      }
+      else if(IS_TABLET()){
+        return false
+      }else{
+        $("g.state").each(function() {
+          if (mouse_event_over_element(e, $(this))) {
+            deselectState()
+            selectState(this, d3.select(this).datum(), "hover")
+            return false;
+          }
+        });
+      }
+    });
+    $("#sections").mouseout(function(e){
+      if(IS_TABLET()){
+        return false;
+      }else{
+        deselectState();
+      }
+    });
+  }
+
 
 
   var map = mapSvg
@@ -709,12 +933,27 @@ var scrollVis = function() {
 
         })
     .on("mouseover", function(d){
-      hoverState(this, d)
+      if(IS_TABLET()){
+        return false
+      }else{
+        selectState(this, d, "hover")
+      }
     })
     .on("mouseout", function(d){
-      deHoverState(this, d)
+      if(IS_TABLET()){
+        return false;
+      }else{
+        deselectState()
+      }
     })
-
+    .on("click", function(d){
+      if(IS_TABLET()){
+        deselectState()
+        selectState(this, d, "click")
+      }else{
+        return false;
+      }
+    })
     var blank = mapSvg
     .selectAll(".blank")
     .data(blankStateData)
@@ -1014,13 +1253,13 @@ var scrollVis = function() {
       .style("z-index",1)
 
     d3.select(".chartTitleA")
-      .text("Average time served for all offense categories")
+      .text("Average Time Served for All Offense Categories")
       .transition()
       .style("opacity",1)
     d3.select(".chartTitleB")
       .transition()
       .style("opacity",0)
-      .on("end", function(){ d3.select(this).html("Average time served by offense type") })
+      .on("end", function(){ d3.select(this).html("Average Time Served by Offense Type") })
 
     d3.select(".legendContainerA").transition().style("opacity",0)
     d3.select(".legendContainerB").transition().style("opacity",0)
@@ -1031,13 +1270,13 @@ var scrollVis = function() {
   }
   function mapTimeServedByOffense(){
     d3.select(".chartTitleB")
-      .text("Average time served by offense type")
+      .text("Average Time Served by Offense Type")
       .transition()
       .style("opacity",1)
     d3.select(".chartTitleA")
       .transition()
       .style("opacity",0)
-      .on("end", function(){ d3.select(this).html("Average time served for all offense categories") })
+      .on("end", function(){ d3.select(this).html("Average Time Served for All Offense Categories") })
 
 
     d3.select(".legendContainerA").transition().style("opacity",1)
@@ -1049,13 +1288,13 @@ var scrollVis = function() {
   }
   function mapTimeServedTop10Percent(){
     d3.select(".chartTitleA")
-      .text("Average time served")
+      .text("Average Time Served")
       .transition()
       .style("opacity",1)
     d3.select(".chartTitleB")
       .transition()
       .style("opacity",0)
-      .on("end", function(){ d3.select(this).html("Share of population serving 10 or more years") })
+      .on("end", function(){ d3.select(this).html("Share of Population Serving 10 or More Years") })
 
     d3.select(".legendContainerA").transition().style("opacity",0)
     d3.select(".legendContainerB").transition().style("opacity",1)
@@ -1066,13 +1305,13 @@ var scrollVis = function() {
   }
   function map10YearsPercent(){
     d3.select(".chartTitleB")
-      .text("Share of population serving 10 or more years")
+      .text("Share of Population Serving 10 or More Years")
       .transition()
       .style("opacity",1)
     d3.select(".chartTitleA")
       .transition()
       .style("opacity",0)
-      .on("end", function(){ d3.select(this).html("Population serving 10 or more years") })
+      .on("end", function(){ d3.select(this).html("People Serving 10 or More Years") })
 
     d3.select("#infoGroup")
       .transition()
@@ -1100,13 +1339,13 @@ var scrollVis = function() {
       .style("z-index",1)
       
     d3.select(".chartTitleA")
-      .text("Population serving 10 or more years")
+      .text("People Serving 10 or More Years")
       .transition()
       .style("opacity",1)
     d3.select(".chartTitleB")
       .transition()
       .style("opacity",0)
-      .on("end", function(){ d3.select(this).html("Population serving 10 or more years") })
+      .on("end", function(){ d3.select(this).html("People Serving 10 or More Years") })
 
     d3.select("#infoGroup")
       .transition()
@@ -1177,6 +1416,7 @@ var scrollVis = function() {
     var sign = (activeIndex - lastIndex) < 0 ? -1 : 1;
     var scrolledSections = d3.range(lastIndex + sign, activeIndex + sign, sign);
     scrolledSections.forEach(function (i) {
+      deselectState();
       activateFunctions[i]();
     });
     lastIndex = activeIndex;
@@ -1237,7 +1477,13 @@ function display(trendsData) {
     // highlight current step text
     d3.selectAll('.step')
       .transition()
-      .style('opacity',  function(d,i) { return i == index ? 1 : .2; });
+      .style('opacity',  function(d,i) {
+        if(IS_MOBILE()){
+          return 1
+        }else{
+          return i == index ? 1 : .2;
+        }
+      });
 
     // activate current section
     plot.activate(index);
@@ -1264,3 +1510,14 @@ nextpage
         nextpage.select(".next-arrow-hovered")
             .attr("class", "next-arrow")
     })
+
+
+$(document).ready(function(){
+    if(d3.select("section").node().getBoundingClientRect().top + 50 > window.innerHeight){
+        d3.select(".introArrowWrapper")
+            .transition()
+            .duration(0)
+            .style("opacity",1)
+            .style("z-index",10)
+    }    
+})

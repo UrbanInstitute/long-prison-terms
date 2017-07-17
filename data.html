@@ -8,8 +8,6 @@
     
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <title>A Matter of Time: Data</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>   
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script> 
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic,900" rel="stylesheet" type="text/css">
       
 
@@ -26,17 +24,118 @@
   <link rel="stylesheet" href="template_files/sticky.css" type="text/css">
 
   <link rel="stylesheet" href="css/data.css" type="text/css">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@urbaninstitute">
+<meta name="twitter:creator" content="@urbaninstitute">
+<meta name="twitter:title" content="A Matter of Time: Data">
+<meta name="twitter:description" content="Urban's analyses for this project use term record data from the National Corrections Reporting Program, available for 43 states and the District of Columbia.">
+<meta name="twitter:image" content="http://apps.urban.org/features/long-prison-terms/img/social.png">
+<meta property="og:title" content="A Matter of Time: Data" />
+<meta property="og:description" content="Urban's analyses for this project use term record data from the National Corrections Reporting Program, available for 43 states and the District of Columbia." />
+<meta property="og:image" content="http://apps.urban.org/features/long-prison-terms/img/social.png" />
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:url" content="http://urbn.is/2sOjRYJ">
+
+<script src="js/vendor/jquery-1.9.1.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "headline": "A Matter of Time: Data",
+  "url": "apps.urban.org/features/long-prison-terms/data.html",
+  "thumbnailUrl": "http://apps.urban.org/features/long-prison-terms/img/social.png",
+  "dateCreated": "2017-07-13T04:00:00.000Z",
+  "articleSection": "Interactive Feature",
+  "creator": ["Leigh Courtney","Elizabeth Pelletier","Sarah Eppler-Epstein","Ryan King","Leah Sakala","Serena Lei","Matthew Johnson","Lydia Thompson","Michelai Graham","Christina Baird ","Benjamin Chartoff","Vivian Hou"],
+  "keywords": ["Crime and Justice"]
+}
+</script>
+
+
+
   </head>
 
 <body>
+    <!-- Google Tag Manager -->
+    <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MKBD2W"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-MKBD2W');</script>
+    <!-- End Google Tag Manager -->
 
   <!--HEADER -->
-<div ng-include="'template_files/header.html'">
-</div>
- 
- 
+    <div id="header-pinned" class="no-touch">
+  
+       
+          <a target="_blank" href="http://www.urban.org" title="Home" rel="home" class="site-logo"></a>
+            <div class="title"><span class="feature-link"><a href="http://www.urban.org/features" class="title-linkback" alt="Urban Institute logo">Features</a> <span>: :</span> </span><a href="intro.html" class="title-linkback">A Matter of Time: The Causes and Consequences of Rising Time Served in America&rsquo;s Prisons</a>
+            </div>
+            <div class="share-icons">
+                <div class="shareThisP">
+                    <span onclick="toggle_visibility('shareBox');">
+                            <div class="shareThisB"></div>
+                        </span>
+                    <div class="shareThisW" id="shareBox">
 
- <!--END-->
+                        <div class="addthis_toolbox addthis_default_style  "addthis:title="" addthis:url="">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A//urbn.is/2sOjRYJ" target="_blank" class="addthis_button_facebook at300b" title="Facebook" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-facebook" style="background-color: rgb(48, 88, 145);"><span class="at_a11y">Share on facebook</span></span></a>
+
+                            <a href="http://twitter.com/intent/tweet?text=A%20matter%20of%20time%3A%20Data%20http%3A%2F%2Furbn.is%2F2sOjRYJ%20(via%20%40urbaninstitute)" target="_blank" class="addthis_button_twitter at300b" title="Tweet" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-twitter" style="background-color: rgb(44, 168, 210);"><span class="at_a11y">Share on twitter</span></span></a>
+
+                            <a href="mailto:%20?Subject= New Urban Institute feature &amp;Body=Hi! I thought you'd be interested in this new feature from the Urban Institute: “A Matter of Time: Data” http://urbn.is/2sOjRYJ" target="_blank" class="addthis_button_email at300b" target="_blank" title="Email" onclick="toggle_visibility('shareBox');"><span class="at4-icon aticon-email" style="background-color: rgb(115, 138, 141);"><span class="at_a11y">Share on email</span></span></a>
+                            <div class="atclear"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+  
+                  
+                    
+         </div>   
+
+        <div class="subnav">
+              <ul class="nav-list">           
+                <li id="left-nav-item"><a href="intro.html">Intro</a></li>
+                <li><a href="trends.html">Trends</a></li>
+                <li><a href="demographics.html">Demographics</a></li>
+                <li><a href="narratives.html">Narratives</a></li>
+                <li><a href="policies.html">Policies</a></li>
+                <li><a href="reform.html">Reform</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class = "hovered-category" id="no-border"><a href="data.html">Data</a></li>
+              </ul>
+        </div>
+ 
+                  
+                        
+      <div id="mobilenavcontainer" class="show-menu">
+           <label for="show-menu">Chapters <span class="subnav-arrow"></span></label>
+           <input type="checkbox" id="show-menu" class="checkbox" role="button">
+                <ul id="menu">
+                <li><a href="intro.html">Intro</a></li>
+                <li><a href="trends.html">Trends</a></li>
+                <li><a href="demographics.html">Demographics</a></li>
+                <li><a href="narratives.html">Narratives</a></li>
+                <li><a href="policies.html">Policies</a></li>
+                <li><a href="reform.html">Reform</a></li>
+                <li><a href="about.html">About</a></li>
+                <li class = "hovered-category-mobile"><a href="data.html">Data</a></li>
+
+                </ul>
+            <div id="current-page-navbar">
+            VIEWING <br />
+              <div class="current-page-name" ng-controller="navRightCtrl">
+              Data
+              </div>
+            </div>
+      </div>  
+
+
+ <!--END HEADER-->
 
 
 <!--CENTER TEXT-->
@@ -48,7 +147,7 @@
     <strong>DATA</strong>
     </div>
     <div class="center-div-small-text-depot">
-    Our analyses for this project use term record data from the <a href = "https://www.bjs.gov/index.cfm?ty=dcdetail&iid=268" target = "_blank">National Corrections Reporting Program</a>, available for 44 states and Washington, DC. <a href = "about.html" target = "_blank">Read our methodology</a> to learn more about these data and our approach to measuring time served in prison.
+    Our analyses for this project use term record data from the <a href = "https://www.bjs.gov/index.cfm?ty=dcdetail&iid=268" target = "_blank">National Corrections Reporting Program</a>, available for 43 states and the District of Columbia. <a href = "about.html" target = "_blank">Read our methodology</a> to learn more about these data and our approach to measuring time served in prison.
     </div>
   </div>
 </div>
@@ -60,7 +159,7 @@
   <div class = "dd-hr"></div>
 
   <div id = "snapshot-container" class = "snapshot-container table-container closed">
-    <div class = "dd-title">Demographic snapshot</div><img src = "img/dd-arrow.png" class = "dd-arrow"/>
+    <div class = "dd-title">Demographic snapshot</div><img src = "img/dd-arrow-disabled.png" class = "dd-arrow"/>
   </div>
   
   <div class = "dd-container">
@@ -81,7 +180,7 @@
   <div class = "dd-hr"></div>
 
   <div id = "time-served-container" class = "time-container table-container closed">
-    <div class = "dd-title">Time served statistics</div><img src = "img/dd-arrow.png" class = "dd-arrow"/>
+    <div class = "dd-title">Time served statistics</div><img src = "img/dd-arrow-disabled.png" class = "dd-arrow"/>
   </div>
   <div class = "dd-container">
     <div class = "dd-table" id = "timeserved-table">
@@ -95,8 +194,8 @@
   
   <div class = "dd-hr"></div>
 
-  <div id = "time-served-container" class = "time-container table-container closed">
-    <div class = "dd-title">Prison population breakdown by time served</div><img src = "img/dd-arrow.png" class = "dd-arrow"/>
+  <div id = "breakdown-container" class = "time-container table-container closed">
+    <div class = "dd-title">Prison population breakdown by time served</div><img src = "img/dd-arrow-disabled.png" class = "dd-arrow"/>
   </div>
   
   <div class = "dd-container">
@@ -111,8 +210,8 @@
     
   <div class = "dd-hr"></div>
 
-  <div id = "time-served-container" class = "time-container table-container closed">
-    <div class = "dd-title">Demographic trends</div><img src = "img/dd-arrow.png" class = "dd-arrow"/>
+  <div id = "trends-container" class = "time-container table-container closed">
+    <div class = "dd-title">Demographic trends</div><img src = "img/dd-arrow-disabled.png" class = "dd-arrow"/>
   </div>
   
   <div class = "dd-container">
@@ -131,28 +230,19 @@
 
 
 <!--END MAIN CONTENT-->       
+
+
+<div class="full-wrapper">
+  <div class = "summary-footer"><span id="footer-pdf-word"></span> <a href = "a_matter_of_time.pdf" target="_blank">executive summary</a></div>
+  <div class="copyright-footer">
+  Copyright &copy; July 2017. <a href="http://www.urban.org" target="_blank">Urban Institute</a>. <a href="https://github.com/urbaninstitute/long-prison-terms" target="_blank">View this project on Github</a>.
+  </div>
+</div>
+      
+
+
  
-
-   <div ng-include="'template_files/footer.html'">
-    
-    <!-- <div class="content">     
-
-                <div id="left">
-                    <h2>About the data</h2>
-                    
-
-                </div>
-                <div id="right">
-
-                    <h2>Project credits</h2>
-
-                    
-         
-    </div> -->
-    </div> 
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="template_files/app.js"></script>
+    <script src="js/vendor/d3.v4.min.js"></script>
     <script src="js/data.js"></script>
     <script>
       initDepot()
@@ -161,24 +251,41 @@
 
 
 
-  <!-- Include jQuery and jquery.pin -->
-<!--     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
- -->    
-
-
-    <script>
-    //  $(".pinned").pin({containerSelector: ".container", minWidth: 900});
-    </script>
-  
-      
- 
- <!--<script type="text/javascript" src="lib/pym.min.js"></script>-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 
 
       
      
           <script src="js/vendor/header.js"></script>    
-        
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () { 
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),  m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m) 
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga'); 
+            ga('create', 'UA-57529944-1', 'auto'); 
+            ga('send', 'pageview');
+        </script>
+
+<!-- START Parse.ly Include: Standard -->
+<div id="parsely-root" style="display: none">
+  <span id="parsely-cfg" data-parsely-site="urban.org"></span>
+</div>
+<script>
+    (function(s, p, d) {
+      var h=d.location.protocol, i=p+"-"+s,
+          e=d.getElementById(i), r=d.getElementById(p+"-root"),
+          u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+          :"static."+p+".com";
+      if (e) return;
+      e = d.createElement(s); e.id = i; e.async = true;
+      e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+    })("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include: Standard -->
   </body>
 </html>

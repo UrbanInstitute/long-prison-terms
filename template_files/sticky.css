@@ -39,6 +39,11 @@
 /***************************************/
 
 @media(max-width: 1440px){
+  @media(max-height: 900px){
+    .note-container{
+      top: 130px;
+    }
+  }
   .left-col {
     width: 800px;
   }
@@ -72,7 +77,15 @@
   }
   /***************************************/
 }
-@media(max-width: 1340px){
+@media(max-width: 1340px), (max-height: 599px){
+  .sidebar-quote{
+    font-size: 17px;
+  }
+  @media(max-height: 900px){
+    .note-container{
+      top: 130px;
+    }
+  }
   .left-col {
     width: 650px;
   }
@@ -82,6 +95,11 @@
   } 
   .container.clearfix{
     width: 1140px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .right-col{
+    width: 340px;
   }
   /************ Audio play widths ************/
   .audioplayer{
@@ -105,10 +123,15 @@
   .note-container .timeline{
     width: 253px;
   }
+  #murder-label{
+    width: 300px;
+    top: 80px;
+    left: 50px;
+  }
   /***************************************/
 
 }
-@media(max-width: 1140px){
+@media(max-width: 1140px), (max-height: 599px){
   .left-col {
     width: 100%;
   }
@@ -117,5 +140,32 @@
   } 
   .container.clearfix{
     width: 100%;
+  }
+  .left-col ul {
+    padding: 10px 90px 25px 55px;
+    margin: 0;
+  }
+}
+@media(max-width: 500px), (max-height: 599px){
+  .audioplayer{
+    width: 267px;
+  }
+  .timeline{
+    width: 167px;
+  }
+}
+@media(max-height: 850px){
+  .note-container{
+    top: 130px;
+  }
+}
+@media(max-height: 680px){
+  .note-container{
+    top: 120px;
+  }
+}
+@media(max-height: 650px){
+  .almightyTallest p{
+    line-height: 1.5;
   }
 }

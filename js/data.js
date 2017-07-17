@@ -1,10 +1,32 @@
 // d3.select(".dd-table").transition().duration(2000).style("height","0px")
 // d3.select(".dd-arrow").transition().duration(2000).style("transform","rotate(180deg)")
 function initDepot(){
-	var PERCENT = d3.format(".2%")
-	var NUMERIC = d3.format(".2f")
+	var PERCENT = d3.format(".1%")
+	var NUMERIC = d3.format(".1f")
 	var INTEGERS = d3.format(",")
-	function buildSnapshotTable(){
+
+	// var q = d3.queue();
+
+	d3.queue()
+	.defer(d3.csv, "data/dd-snapshot_5-31.csv")
+	.defer(d3.csv, "data/dd-time_6-12.csv")
+	.defer(d3.csv, "data/dd-trends-6-25.csv")
+	.await(buildTables);//here you are calling the function makeChart
+
+
+   function buildTables(error, data1, data2, data3) {//first param is error and not data
+   		buildSnapshotTable(data1)
+   		buildBreakdownTable(data2)
+   		buildTimeServedTable(data2)
+   		buildTrendsTable(data3)
+		d3.selectAll(".dd-title").classed("loaded", true)
+		d3.selectAll(".dd-arrow").attr("src", "img/dd-arrow.png")
+		d3.selectAll(".table-container").style("pointer-events", "auto")
+		addScrollButtons();
+     }; 
+
+
+	function buildSnapshotTable(data){
 		var table = d3.select("#snapshot-table").append("table")
 		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
@@ -14,7 +36,7 @@ function initDepot(){
 		h1.append("th").attr("rowspan",2).html("People incarcerated for half of their life or more")
 		h1.append("th").attr("colspan",2).html("Of those serving longest 10% of prison terms")
 		h1.append("th").attr("colspan",4).html("Of those serving longest 10% of prison terms who were incarcerated before age 25")
-		h1.append("th").html("Of those serving 10 or more years:")
+		h1.append("th").html("Of those serving 10 or more years")
 
 		var h2 = table.append("tr").attr("class", "header_row2")
 		h2.append("th").html("Share incarcerated before age 25")
@@ -24,26 +46,25 @@ function initDepot(){
 		h2.append("th").html("Percent male")
 		h2.append("th").html("Share convicted of violent offenses")
 		h2.append("th").html("Share who are black men incarcerated before age 25")
-
-		d3.csv("data/dd-snapshot_5-31.csv", function(data){
 			var tr = table
 				.selectAll(".dataRow")
 				.data(data)
 				.enter()
 				.append("tr")
 				.attr("class","dataRow")
+
 			tr.append("td")
 				.html(function(d){ return d.state })
 			tr.append("td")
 				.html(function(d){ return d.year })
 			tr.append("td")
-				.html(function(d){ return PERCENT(d.pctblackprisonpop/100) })
+				.html(function(d){ return PERCENT(d.pctblackprisonpop) })
 			tr.append("td")
-				.html(function(d){ return PERCENT(d.pctblacktop10/100) })
+				.html(function(d){ return PERCENT(d.pctblacktop10) })
 			tr.append("td")
 				.html(function(d){ return INTEGERS(d.numinchalflife) })
 			tr.append("td")
-				.html(function(d){ return PERCENT(d.top10pct25und/100) })
+				.html(function(d){ return PERCENT(d.top10pct25und) })
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.pct55plus_top10) })
 			tr.append("td")
@@ -56,10 +77,9 @@ function initDepot(){
 				.html(function(d){ return PERCENT(d.pctviol_top10_u25) })
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.pctblkmaleu25_10plus) })
-
-		})
+		
 	}
-	function buildTimeServedTable(){
+	function buildTimeServedTable(data){
 		var table = d3.select("#timeserved-table").append("table")
 		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
@@ -75,7 +95,6 @@ function initDepot(){
 		h2.append("th").html("Bottom 90%")
 		h2.append("th").html("Top 10%")
 
-		d3.csv("data/dd-time_6-12.csv", function(data){
 			var tr = table
 				.selectAll(".dataRow")
 				.data(data)
@@ -100,9 +119,9 @@ function initDepot(){
 			tr.append("td")
 				.html(function(d){ return NUMERIC(d.los_meantop10) })
 
-		})
+		 	
 	}
-	function buildBreakdownTable(){
+	function buildBreakdownTable(data){
 		var table = d3.select("#breakdown-table").append("table")
 		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
@@ -133,8 +152,7 @@ function initDepot(){
 		h2.append("th").html("People")
 		h2.append("th").html("Share of population")
 
-		var PERCENT = d3.format(".2%")
-		d3.csv("data/dd-time_6-12.csv", function(data){
+		var PERCENT = d3.format(".1%")
 			var tr = table
 				.selectAll(".dataRow")
 				.data(data)
@@ -153,6 +171,10 @@ function initDepot(){
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.los_0_2_pct) })
 			tr.append("td")
+				.html(function(d){ return INTEGERS(d.los_2_5_count) })
+			tr.append("td")
+				.html(function(d){ return PERCENT(d.los_2_5_pct) })
+			tr.append("td")
 				.html(function(d){ return INTEGERS(d.los_5_10_count) })
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.los_5_10_pct) })
@@ -169,18 +191,12 @@ function initDepot(){
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.los_20_25_pct) })
 			tr.append("td")
-				.html(function(d){ return INTEGERS(d.los_2_5_count) })
-			tr.append("td")
-				.html(function(d){ return PERCENT(d.los_2_5_pct) })
-			tr.append("td")
 				.html(function(d){ return INTEGERS(d.los_25plus_count) })
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.los_25plus_pct) })
 
-
-		})
 	}
-	function buildTrendsTable(){
+	function buildTrendsTable(data){
 		var table = d3.select("#trends-table").append("table")
 		var h1 = table.append("tr").attr("class", "header_row1")
 		h1.append("th").attr("rowspan",2).html("State")
@@ -198,8 +214,7 @@ function initDepot(){
 		h2.append("th").html("Less than 10 years")
 		h2.append("th").html("10 or more years")
 
-		var PERCENT = d3.format(".2%")
-		d3.csv("data/dd-time_6-12.csv", function(data){
+		var PERCENT = d3.format(".1%")
 			var tr = table
 				.selectAll(".dataRow")
 				.data(data)
@@ -228,21 +243,18 @@ function initDepot(){
 				.html(function(d){ return INTEGERS(d.numwomen_10plus) })
 			tr.append("td")
 				.html(function(d){ return PERCENT(d.pctwomen_10plus) })
-		})
+
+
 	}
 
-	buildSnapshotTable();
-	buildTimeServedTable();
-	buildBreakdownTable();
-	buildTrendsTable();
 
 
 	var dd_duration = 1500;
 	var HEIGHTS = {
-		"snapshot-table": 1640,
-		"timeserved-table": 14679,
-		"breakdown-table": 14760,
-		"trends-table": 14770
+		"snapshot-table": 1680,
+		"timeserved-table": 16989,
+		"breakdown-table": 17000,
+		"trends-table": 14790
 	}
 
 	d3.selectAll(".table-container")
@@ -262,7 +274,6 @@ function initDepot(){
 					.select(".dd-table")
 					.transition().duration(dd_duration)
 						.style("height",function(){
-							console.log(d3.select(this).node())
 							return HEIGHTS[d3.select(this).attr("id")] + "px"
 						})
 						.style("margin-bottom","20px")
@@ -300,13 +311,11 @@ function initDepot(){
 		})
 
 	function addScrollButtons(){
-		console.log("foo")
 		d3.selectAll(".dd-table")
 			.each(function(){
 				var containerWidth = this.getBoundingClientRect().width
 				var tableWidth = d3.select(this).select("table").node().getBoundingClientRect().width
 				var opacity = (d3.select($(this.parentNode).prev()[0]).classed("open")) ? 1 : 0
-				// console.log(containerWidth, tableWidth)
 				if(tableWidth > containerWidth){
 					d3.select(this.parentNode).selectAll(".dd_scrollElement").remove();
 					var ddLeft = d3.select(this.parentNode)
@@ -330,7 +339,6 @@ function initDepot(){
 						.attr("src","img/arrow.png")
 					ddRight.on("click", function(){
 							var tableWidth = (this.parentNode.getBoundingClientRect().width - 30)
-							console.log(tableWidth)
 							$(d3.select(this.parentNode).select(".dd-table").node()) .animate({
 								scrollLeft: '+=' + tableWidth
 							}, 1000);
@@ -341,22 +349,6 @@ function initDepot(){
 			})
 	}
 
-
-  // $('#right-button').click(function() {
-  //     event.preventDefault();
-  //     $('#content').animate({
-  //       marginLeft: "+=200px"
-  //     }, "slow");
-  //  });
-
-  //    $('#left-button').click(function() {
-  //     event.preventDefault();
-  //     $('#content').animate({
-  //       marginLeft: "-=200px"
-  //     }, "slow");
-  //  });
-
-	addScrollButtons();
 	(function() {
 	    var throttle = function(type, name, obj) {
 	        obj = obj || window;
@@ -380,8 +372,5 @@ function initDepot(){
 	window.addEventListener("optimizedResize", function() {
 	    addScrollButtons();
 	});
-	d3.selectAll(".dd-table").on("scroll",function() { 
-		console.log(this.scrollLeft)
-	})
 }
 

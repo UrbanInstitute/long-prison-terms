@@ -29,7 +29,6 @@ clip.addEventListener("timeupdate", timeUpdate, false);
 // // makes timeline clickable
 timeline.addEventListener("click", function(event) {
     moveplayhead(event);
-    console.log(duration)
     clip.currentTime = duration * clickPercent(event);
 }, false);
 

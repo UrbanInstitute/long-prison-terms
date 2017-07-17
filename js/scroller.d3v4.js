@@ -8,6 +8,8 @@
  */
 function scroller() {
 
+  var scrollStarted = false;
+
   var container = d3.select('body');
 
   // event dispatcher
@@ -38,7 +40,19 @@ function scroller() {
       // }else{
       //   return "inherit"
       // }
-      return (.5*(window.innerWidth - 800 - 400)) + "px"
+
+      if(IS_PHONE()){
+        return ( (window.innerWidth - 320)*.5) + "px"
+      }
+      else if(IS_TABLET()){
+        return ( (window.innerWidth - 545)*.5) + "px"
+      }
+      else if(IS_MOBILE()){
+        return ( (window.innerWidth - 770)*.5) + "px"
+      }else{
+        var shift = BREAK1() ? 40 : 0;
+        return (.5*(window.innerWidth - 800 - 400 + shift)) + "px"
+      }
 
     })
     d3.select("#sections")
@@ -51,8 +65,17 @@ function scroller() {
       // }else{
       //   return "inherit"
       // }
-      return (.5*(window.innerWidth - 800 - 400) +  800) + "px"
+      if(IS_MOBILE()){
+        return "0px";
+      }else{
+        var shift = BREAK1() ? 20 : 0;
+        return (.5*(window.innerWidth - 800 - 400) +  800 - shift) + "px"
+      }
     })
+    d3.select("#featureContainer")
+      .style("height", function(){
+        return d3.select("#graphic").node().getBoundingClientRect().height + "px"
+      })
 
   }
   /**
@@ -65,6 +88,7 @@ function scroller() {
    *  through by user.
    */
   function scroll(els) {
+
     sections = els;
 
     // when window is scrolled call
@@ -112,7 +136,6 @@ function scroller() {
       }
       sectionPositions.push(top - startPos);
     });
-    // console.log(d3.select("body").node())
     containerStart = d3.select("body").node().getBoundingClientRect().top + window.pageYOffset + d3.select(".full-div").node().getBoundingClientRect().height;
     dispatch.call('resized', this);
   }
@@ -208,16 +231,44 @@ function scroller() {
    */
   function position() {
     visPosition()
-    var pos = window.pageYOffset + 200 - containerStart ;
+    var pos = window.pageYOffset  + 200 - containerStart ;
     // fixVis();
-    var sectionIndex = d3.bisect(sectionPositions, pos) - 1;
-    sectionIndex = Math.max(0,Math.min(sections.size() -1, sectionIndex));
-
+    var sectionIndex;
+    if(IS_MOBILE()){
+      d3.selectAll(".step").each(function(d, i){
+        var t = this.getBoundingClientRect().top
+        if( i == 5 && t-150 < -1000){
+          sectionIndex = 6
+        }
+        else if (i != 0 && i != 6 && ((t-150) < 0)){
+          sectionIndex = i;
+          // stop = true;
+        }
+      })
+    }else{
+      sectionIndex = d3.bisect(sectionPositions, pos) - 1;
+      sectionIndex = Math.max(0,Math.min(sections.size() -1, sectionIndex));
+    }
+    if(typeof(sectionIndex) == "undefined"){ sectionIndex = 0;}
+    if(d3.select(".row").node().getBoundingClientRect().top <= d3.select("#vis").node().getBoundingClientRect().bottom){
+      sectionIndex = 6;
+    }
     if (currentIndex !== sectionIndex) {
-      // @v4 you now `.call` the dispatch callback
+      // @v4 you now `.call` the dispatch callback      
       dispatch.call('active', this, sectionIndex);
       currentIndex = sectionIndex;
       d3.select("#sectionIndex").attr("data-index",currentIndex)
+    }
+
+    if(window.pageYOffset != 0 && ! scrollStarted){
+        scrollStarted = true;
+        d3.select(".introArrowWrapper")
+            .transition()
+            .style("opacity",0)
+            .style("z-index",-1)
+            .on("end", function(){
+              this.parentNode.removeChild(this);
+            })
     }
 
     var prevIndex = Math.max(sectionIndex - 1, 0);

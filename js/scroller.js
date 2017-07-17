@@ -90,19 +90,70 @@ function scroller() {
    *
    */
   function position() {
-    var pos = window.pageYOffset - 10 - containerStart;
+    var off = (IS_MOBILE()) ? 150 : 10;
+    var minus = (IS_TABLET() || IS_SHORT()) ? 1 : 0
+    var pos = window.pageYOffset - off - containerStart;
     var sectionIndex = d3.bisect(sectionPositions, pos);
     sectionIndex = Math.min(sections.size() - 1, sectionIndex);
+    if(d3.select(".row").node().getBoundingClientRect().top <= d3.select("#vis").node().getBoundingClientRect().bottom){
+      sectionIndex = 8 + minus;
+    }
+    
 
     if (currentIndex !== sectionIndex) {
-      dispatch.active(sectionIndex);
+      if(sectionIndex < 3){
+        dispatch.active(sectionIndex);
+      }else{
+        dispatch.active(sectionIndex - minus);
+      }
       currentIndex = sectionIndex;
     }
 
     var prevIndex = Math.max(sectionIndex - 1, 0);
     var prevTop = sectionPositions[prevIndex];
     var progress = (pos - prevTop) / (sectionPositions[sectionIndex] - prevTop);
+
     dispatch.progress(currentIndex, progress);
+
+
+    d3.select("#featureContainer")
+      .style("height", function(){
+        return d3.select("#graphic").node().getBoundingClientRect().height + "px"
+      })
+
+    if(IS_TABLET() || IS_SHORT()){
+      d3.select("#sections")
+        .on("click", function(e){
+          var my = event.clientY;
+          var mx = event.clientX;
+          var yBottom = (IS_PHONE()) ? window.innerHeight*.5 - 150 : window.innerHeight*.5 - 236.5;
+          var xLeft = d3.select("#animationButton").node().getBoundingClientRect().left;
+          var xRight = d3.select("#animationButton").node().getBoundingClientRect().right;
+
+          if((my > yBottom -10) && (my < yBottom + 40)){
+            if(mx > xLeft - 25 && mx < xRight + 25){
+              showAnimation();
+            }else{
+              showLine();  
+            }
+          }else{
+            return false;
+          }
+        })
+        .on("mousemove", function(e){
+          var my = event.clientY;
+          var mx = event.clientX;
+          var yBottom = (IS_PHONE()) ? window.innerHeight*.5 - 150 : window.innerHeight*.5 - 236.5;
+          var xLeft = d3.select("#animationButton").node().getBoundingClientRect().left;
+          var xRight = d3.select("#lineButton").node().getBoundingClientRect().right;
+
+          if((my > yBottom -10) && (my < yBottom + 40) && (mx > xLeft - 25) && (mx < xRight + 25)){
+            d3.select(this).style("cursor","pointer")
+          }else{
+            d3.select(this).style("cursor","default")
+          }
+        })
+      }
   }
 
   /**

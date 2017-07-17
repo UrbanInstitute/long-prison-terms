@@ -1,3 +1,202 @@
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function() {
+        var context = this, args = arguments;
+        var later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+};
+
+var IS_SHORT = function(){
+  return (d3.select("#isShort").style("display") == "block")
+}
+var IS_VERY_SHORT = function(){
+  return (d3.select("#isVeryShort").style("display") == "block")
+}
+var IS_PHONE = function(){
+  return (d3.select("#isPhone").style("display") == "block")
+}
+var IS_MOBILE = function(){
+  return (d3.select("#isMobile").style("display") == "block")
+}
+var IS_TABLET = function(){
+  return (d3.select("#isTablet").style("display") == "block")
+}
+var BREAK1 = function(){
+  return (d3.select("#break1Marker").style("display") == "block")
+}
+var SECTION_INDEX = function(){
+  return d3.select("#sectionIndex").attr("data-index")
+}
+var ACTIVE_CONTAINER = function(){
+  if(d3.select("#animationButton").classed("active")){
+    return "animation"
+  }else{
+    return "linechart"
+  }
+}
+d3.select("#animationButton")
+  .on("click", function(){
+    showAnimation();
+  })
+d3.select("#lineButton")
+  .on("click", function(){
+      showLine();
+  })
+
+
+var visGutter = function(animationComp){
+  if(IS_PHONE()){
+    return 0;
+  }
+  else if(IS_TABLET()){
+    return 0;
+  }
+  else if(IS_MOBILE()){
+    return (window.innerWidth - 698)*.5
+  }
+  else if(BREAK1()){
+    if(animationComp){
+      return (window.innerWidth - 1226 + 100)*.5
+    }else{
+      return (window.innerWidth - 1226)*.5
+    }
+  }else{
+    return (window.innerWidth - 1226)*.5
+  }
+}
+
+var getAnimationLeft = function(singleDot){
+  if(singleDot){
+    if(IS_PHONE()){
+      return "22.5px"
+    }
+    else if(IS_TABLET()){
+      return "92.5px"
+    }
+    else if(IS_MOBILE()){
+      return (visGutter(true) + 160) + "px"  
+    }else{
+      return (visGutter(true) + 180) + "px"  
+    }
+  }
+  else if(IS_PHONE()){
+    if(ACTIVE_CONTAINER() == "animation"){
+      return "10px"
+    }else{
+      return ((60 + 10) - (window.innerWidth - 100 + 35 ))  + "px"
+    }
+  }
+  else if(IS_TABLET()){
+    if(ACTIVE_CONTAINER() == "animation"){
+      return "53px"
+    }else{
+      return ((180 + 10) - (window.innerWidth - 240 + 35 ))  + "px"
+    }
+  }
+  else{
+    return visGutter(true) + "px"
+  }
+
+
+
+        
+}
+
+function showLine(){
+  if(d3.select("#lineButton").classed("active")){
+      return false
+  }
+  d3.selectAll(".lineButtonElement").classed("active", true)
+  d3.selectAll(".animationButtonElement").classed("active", false)
+  
+  if(IS_PHONE()){
+    d3.select("#vis")
+      .transition()
+      .style("left", function(){
+        return ((60 + 10) - (window.innerWidth - 100 + 35 ))  + "px"
+      })
+    d3.selectAll(".animationComponents")
+      .transition()
+      .style("transform", function(){
+        return "translateX(" + ((60 + 10) - (window.innerWidth - 100 + 35 ))  + "px)"
+      })
+    d3.select("#lineChart")
+      .transition()
+      .style("width", function(){
+        return (window.innerWidth - 63 + 14) + "px"
+      })
+      .style("left", "13px")
+  }
+  else if(IS_TABLET()){
+    d3.select("#vis")
+      .transition()
+      .style("left", function(){
+        return ((180 + 10) - (window.innerWidth - 240 + 35 ))  + "px"
+      })
+    d3.selectAll(".animationComponents")
+      .transition()
+      .style("transform", function(){
+        return "translateX(" + ((180 - 40) - (window.innerWidth - 240 + 35 )) + "px)"
+      })
+    d3.select("#lineChart")
+      .transition()
+      .style("width", function(){
+        return (window.innerWidth - 300 + 90) + "px"
+      })
+      .style("left", "163px")
+  }
+
+}
+function showAnimation(){
+  if(d3.select("#animationButton").classed("active")){
+      return false
+  }
+  d3.selectAll(".lineButtonElement").classed("active", false)
+  d3.selectAll(".animationButtonElement").classed("active", true)
+
+  if(IS_PHONE()){
+    d3.select("#vis")
+      .transition()
+      .style("left", function(){
+        return getAnimationLeft(false);
+      })
+    d3.selectAll(".animationComponents")
+      .transition()
+      .style("transform", function(){
+        return "translateX(0px)"
+      })
+    d3.select("#lineChart")
+      .transition()
+      .style("width", "180px")
+      .style("left", (window.innerWidth - 110) + "px")
+  }
+  else if(IS_TABLET()){
+    d3.select("#vis")
+      .transition()
+      .style("left", function(){
+        return getAnimationLeft(false);
+      })
+    d3.selectAll(".animationComponents")
+      .transition()
+      .style("transform", function(){
+        return "translateX(0px)"
+      })
+    d3.select("#lineChart")
+      .transition()
+      .style("width", "180px")
+      .style("left", (window.innerWidth - 180) + "px")
+  }
+}
+
+
+
 
 /**
  * scrollVis - encapsulates
@@ -10,26 +209,58 @@ var scrollVis = function() {
   // and margins of the vis area.
 
   var AREA_ANIMATING = false;
-  var WIDTH = 420,
-    HEIGHT = 517,
-    margin = {top: 72, right: 5, bottom: 10, left: 25},
+  var WIDTH, LINEWIDTH, HEIGHT, LINEHEIGHT;
+  if(IS_PHONE()){
+    WIDTH = window.innerWidth - 100 + 35 + 25;
+    LINEWIDTH = window.innerWidth - 63 + 14; 
+  }
+  else if(IS_TABLET()){
+    WIDTH = window.innerWidth - 240 + 35 + 25;
+    LINEWIDTH = window.innerWidth - 240 - 14; 
+  }
+  else if(IS_MOBILE()){
+    WIDTH = 370 +25;
+    LINEWIDTH = 390;
+  }
+  else if (BREAK1()){
+    WIDTH = 370 +25;
+    LINEWIDTH = 390;
+  }else{
+    WIDTH = 420 +25;
+    LINEWIDTH = 390;
+  }
+
+  if(IS_PHONE() || IS_SHORT()){
+    HEIGHT = 300;
+    LINEHEIGHT = 320;
+  }
+  else if(IS_VERY_SHORT()){
+    HEIGHT = 497;
+    LINEHEIGHT = 517    
+  }
+  else{
+    HEIGHT = 517;
+    LINEHEIGHT = 537
+  }
+  var margin = {top: 72, right: 30, bottom: 10, left: 25},
     width = WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom
 
   var lineMargin = {top: 75, right: 60, bottom: 30, left: 30},
-    lineWidth = 390 - lineMargin.left - lineMargin.right,
-    lineHeight = 537 - lineMargin.top - lineMargin.bottom;
+    lineWidth = LINEWIDTH - lineMargin.left - lineMargin.right,
+    lineHeight = LINEHEIGHT - lineMargin.top - lineMargin.bottom;
 
   var YEAR_IN_MS = 2000,
-    MAX_BARS = 60
+    MAX_BARS = 50
 
   var FILLED_TRACK_COLOR = "#e3e3e3"
   var EMPTY_TRACK_COLOR = "#12719e"
   var EXITING_TRACK_COLOR = "#052635"
 
 
+  var areaTop = (IS_TABLET()) ? 180: 160;
   var areaMargin = {
-  top: 160,
+  top: areaTop,
   right: 0,
   bottom: 36,
   left: 0
@@ -78,7 +309,10 @@ var scrollVis = function() {
   var updateFunctions = [];
     d3.selectAll(".lineLabel")
       .on("mouseover", function(){
-        if(d3.select(this).style("opacity") == 0){
+        if(IS_PHONE()){
+          return false;
+        }
+        else if(d3.select(this).style("opacity") == 0){
           return false;
         }else{
           d3.select(this)
@@ -88,7 +322,11 @@ var scrollVis = function() {
         }
       })
       .on("mouseout", function(){
-        d3.selectAll(".highlight").classed("highlight", false)
+        if(IS_PHONE()){
+          return false;
+        }else{
+          d3.selectAll(".highlight").classed("highlight", false)
+        }
       })
   /**
    * chart
@@ -127,7 +365,13 @@ var scrollVis = function() {
       breadCrumbSvg = d3.select("#breadCrumb")
         .append("svg")
             .attr("class","introLineChart")
-            .attr("width", 16)
+            .attr("width", function(){
+              if(IS_TABLET()){
+                return 79
+              }else{
+                return 16
+              }
+            })
             .attr("height", window.innerHeight)
         .append("g")
 
@@ -168,24 +412,175 @@ var scrollVis = function() {
    */
 
   setupVis = function(allData, lineData, areaData) {
-    //temp line
+    var transY = (IS_VERY_SHORT() && !IS_SHORT() && !IS_TABLET()) ? -20 : 0;
 
+    if(IS_PHONE()){
+      if(ACTIVE_CONTAINER() == "animation"){
+        d3.select("#lineChart")
+          .style("left", (window.innerWidth - 110) + "px")
+      }
+      d3.select("#breadCrumb")
+        .style("left", "0px")
+      d3.select("#legend")
+        .style("margin-left", "10px")
+      d3.selectAll(".animationComponents")
+        .style("margin-left", "0px")
+      d3.select("#animationTick0")
+        .style("margin-left", "10px")
+      d3.select("#sections")
+        .style("left", ((window.innerWidth - 300)*.5) + "px") 
+      d3.select("#animationTick100")
+        .style("left", ((window.innerWidth - 75) + "px")) 
+      d3.select("#animationTick50")
+        .style("left", ((window.innerWidth - 130)*.5 + 40) + "px")
+      d3.select("#animationLabel")
+        .style("left", ((window.innerWidth - 180)*.5 + 40) + "px")
+      d3.select("#axisLabelX")
+        .style("left", ((window.innerWidth - 63 + 14)*.5 - 29)+ "px")
+      d3.selectAll(".lineLabel")
+        .style("transform", "translate(0px," + (transY) + "px)")
+
+    }
+    else if(IS_TABLET()){
+      if(ACTIVE_CONTAINER() == "animation"){
+        d3.select("#lineChart")
+          .style("left", (window.innerWidth - 180) + "px")
+      }
+      d3.select("#breadCrumb")
+        .style("left", "0px")
+      d3.select("#legend")
+        .style("margin-left", "53px")
+      d3.selectAll(".animationComponents")
+        .style("margin-left", "0px")
+      d3.select("#animationTick0")
+        .style("margin-left", "53px")
+      d3.select("#sections")
+        .style("left", ((window.innerWidth - 400)*.5) + "px") 
+      d3.select("#animationTick100")
+        .style("left", ((window.innerWidth - 205 + 33) + "px")) 
+      d3.select("#animationTick50")
+        .style("left", ((window.innerWidth - 205)*.5 + 53) + "px")
+      d3.select("#animationLabel")
+        .style("left", ((window.innerWidth - 205)*.5 + 28) + "px")
+      d3.selectAll(".lineLabel")
+        .style("transform", "translate(" + (window.innerWidth - 240 - 14 - 395) + "px,0px)")
+      d3.select("#axisLabelX")
+        .style("left", "210px")
+    }else if(IS_MOBILE()){
+
+      var gutter = visGutter(false);
+      var bGutter = visGutter(true)
+      d3.selectAll(".animationComponents")
+        .style("margin-left", bGutter + "px")
+      d3.select("#lineChart")
+        .style("left", (320 + gutter) + "px")
+      d3.select("#breadCrumb")
+        .style("left", (-21 + gutter) + "px")
+      d3.select("#sections")
+        .style("left", ((window.innerWidth - 400)*.5) + "px") 
+      d3.select("#animationTick100")
+        .style("left", null) 
+      d3.select("#animationTick50")
+        .style("left", null)
+      d3.select("#animationLabel")
+        .style("left", null)
+      d3.selectAll(".lineLabel")
+        .style("transform", "translate(0px," + (transY) + "px)")
+    }else{
+      var gutter = visGutter(false);
+      var bGutter = visGutter(true)
+      d3.selectAll(".animationComponents")
+        .style("margin-left", bGutter + "px")
+      d3.select("#lineChart")
+        .style("left", (370 + gutter) + "px")
+      d3.select("#breadCrumb")
+        .style("left", (810 + gutter) + "px")
+      d3.select("#sections")
+        .style("left", (850 + gutter) + "px")
+      d3.select("#animationTick100")
+        .style("left", null) 
+      d3.select("#animationTick50")
+        .style("left", null)
+      d3.select("#animationLabel")
+        .style("left", null)
+      d3.selectAll(".lineLabel")
+        .style("transform", "translate(0px,  " + transY+ "px)")
+
+    }
+    //temp line
+    if(IS_MOBILE()){
+      d3.select("#beyonceBox")
+        .text("the box below")
+    }else{
+      d3.select("#beyonceBox")
+        .text("the box to the left")
+    }
     breadCrumbSvg
       .style("opacity",0)
     breadCrumbSvg.append("rect")
-      .attr("width",1)
-      .attr("height", 0)
-      .style("fill","#d2d2d2")
-      .attr("x",8)
+      .attr("width",function(){
+        if(IS_PHONE()){
+          return 35;
+        }
+        else if(IS_TABLET()){
+          return 75;
+        }else{
+          return 1;
+        }
+      })
+      .attr("height", function(){
+        if(IS_TABLET()){
+          return window.innerHeight;
+        }else{
+          return 0;
+        }
+      })
+      .style("fill", function(){
+        if(IS_TABLET()){
+          return "#ffffff"
+        }else{
+          return "#d2d2d2"
+        }
+      })
+      .attr("x",function(){
+        if(IS_TABLET()){
+          return 0;
+        }else{
+          return 8;
+        }
+      })
       .attr("y",0)
+      .style("opacity", function(){
+        if(IS_MOBILE() && !IS_TABLET()){
+          return 0;
+        }else{
+          return 1;
+        }
+      })
+
     for(var i = 1; i < 7; i++){
       breadCrumbSvg.append("circle")
         .attr("class", "crumb")
         .attr("id", "crumb" + i)
         .datum(i)
-        .attr("cx", 8)
+        .attr("cx", function(){
+          if(IS_PHONE()){
+            return 18;
+          }
+          else if(IS_TABLET()){
+            return 40;
+          }else{
+            return 8;
+          }
+        })
         .attr("cy", 0)
-        .attr("r",6.5)
+        .attr("r", function(){
+          if(IS_PHONE()){
+            return 5;
+          }else{
+            return 6.5;
+          }
+        })
         .on("click", function(d){
           $('html,body').animate({
                 scrollTop: $($(".step")[d]).offset().top + 200
@@ -502,10 +897,10 @@ var scrollVis = function() {
     var lineY = d3.scale.linear().range([lineHeight, 0]);
 
     var lineXAxis = d3.svg.axis().scale(lineX)
-        .orient("bottom").ticks(5);
+        .orient("bottom").ticks(0).outerTickSize(0);
 
     var lineYAxis = d3.svg.axis().scale(lineY)
-        .orient("left").ticks(8);
+        .orient("left").ticks(0).outerTickSize(0);
 
     var countline = d3.svg.line()
         .x(function(d) { return lineX(d.time); })
@@ -519,7 +914,7 @@ var scrollVis = function() {
 
     // Scale the range of the data
     lineX.domain([0,9]);
-    lineY.domain([0, 60]); 
+    lineY.domain([0, MAX_BARS]); 
 
     // Nest the entries by step
     var lineDataNest = d3.nest()
@@ -534,22 +929,30 @@ var scrollVis = function() {
             .attr("data-key", d.key)
             .attr("d", countline(d.values))
             .on("mouseover", function(){
-                d3.select(this)
-                  .classed("highlight", true)
-                if(d3.select("#lineLabel_" + key).style("opacity") != 0){
-                  d3.select("#lineLabel_" + key)
+                if(IS_PHONE()){
+                  return false;
+                }else{
+                  d3.select(this)
                     .classed("highlight", true)
+                  if(d3.select("#lineLabel_" + key).style("opacity") != 0){
+                    d3.select("#lineLabel_" + key)
+                      .classed("highlight", true)
+                  }
                 }
             })
             .on("mouseout", function(){
-              d3.selectAll(".highlight").classed("highlight", false)
+              if(IS_PHONE()){
+                return false;
+              }else{
+                d3.selectAll(".highlight").classed("highlight", false)
+              }
             })
 
     lineSvg.append("rect")
       .attr("x", 0)
-      .attr("y", -2)
+      .attr("y", -3)
       .attr("width", lineWidth)
-      .attr("height", lineHeight+2)
+      .attr("height", lineHeight+6)
       .style("fill", "#ffffff")
       .attr("class", "curtain_" + d.key)
 
@@ -621,7 +1024,7 @@ var scrollVis = function() {
         .attr("transform",function(){
           var xx = node.getBoundingClientRect().left
           var xy = node.getBoundingClientRect().top
-          var angle = (Math.round(Math.random()) * 2 - 1) * Math.random() * 100
+          var angle = Math.abs((Math.round(Math.random()) * 2 - 1) * Math.random() * 100)
           var dist = Math.random() * 1000
           return "translate(" +dist+ ") rotate(" + angle + " " + xx + " " + xy + ")"
         })
@@ -644,8 +1047,18 @@ var scrollVis = function() {
         .duration(1000)
         .delay(100)
         .attr("cy", function(d){
-          var crumbStart = window.innerHeight*.5 - 217.5 +  80
-          return crumbStart + (d-1)*64.5
+          if(IS_PHONE() || IS_SHORT()){
+            var crumbStart = window.innerHeight*.5 - 100 + 124;
+            return crumbStart + (d-1)*22   
+          }
+          else if(IS_MOBILE()){
+            var crumbStart = window.innerHeight*.5 - 217.5 +  80 + 114
+            return crumbStart + (d-1)*36   
+          }else{
+            var crumbStart = window.innerHeight*.5 - 217.5 +  80
+            return crumbStart + (d-1)*64.5            
+          }
+
         })
   }
   function hideBreadCrumbs(){
@@ -675,8 +1088,6 @@ var scrollVis = function() {
         }
       })
     }
-    var comma = d3.format(",")
-    d3.select("#visTitle span").text(comma(tracks))
     d3.select(".stackBackground")
       .transition()
       .ease("linear")
@@ -784,7 +1195,6 @@ d3.selectAll(".dot")
 .each("start", function(d,i){
   if(i == 0){
     var comma = d3.format(",")
-    d3.select("#visTitle span").text(0)
     d3.select(".stackBackground")
       .transition()
       .ease("linear")
@@ -889,6 +1299,7 @@ pauseAnimation(width)
 
 
   function drawBackCurtain(key){
+    var lowOpacity = (IS_PHONE() || IS_SHORT()) ? 0 : .2
     for(var k = key-1; k >= 3; k--){
       d3.select(".curtain_" + k)
         .transition()
@@ -898,9 +1309,10 @@ pauseAnimation(width)
       d3.select(".line.step_" + k)
         .transition()
         .style("opacity",.5)
+        .style("stroke","#ec008b")
       d3.select("#lineLabel_" + k)
         .transition()
-        .style("opacity",.2)
+        .style("opacity",lowOpacity)
         .style("pointer-events","all")
     }
     for(var k = key+1; k < 8; k++){
@@ -914,10 +1326,12 @@ pauseAnimation(width)
         .style("opacity",0)
         .style("pointer-events","none")
     }
+    var lineColor = (IS_PHONE() ||  IS_SHORT()) ? "#fdbf11" : "#ec008b"
     d3.select(".line.step_" + key)
         .transition()
         .style("opacity",1)
         .style("z-index",1)
+        .style("stroke",lineColor)
     d3.select(".curtain_" + key)
         .transition()
         .duration(10)
@@ -930,15 +1344,20 @@ pauseAnimation(width)
         .attr("width",0)
         .attr("x", lineWidth)
       var labelMultiplier = (key == 5) ? 6 : 8;
+      var phoneMultiplier = (IS_PHONE() || IS_SHORT()) ? 0 : 1;
+      var textColor = (IS_PHONE() || IS_SHORT()) ? "#fdbf11" : "#000"
       d3.select("#lineLabel_" + key)
         .transition()
         .duration(10)
         .style("opacity",0)
         .transition()
-        .delay(labelMultiplier*YEAR_IN_MS)
+        .delay(labelMultiplier*phoneMultiplier*YEAR_IN_MS)
         .style("opacity",1)
+        .style("color",textColor)
         .style("z-index",1)
         .style("pointer-events","all")
+
+
   }
   function dotColor(sentence){
     if(sentence >= 5){
@@ -1040,6 +1459,9 @@ pauseAnimation(width)
 
 
 function topOfPage(){
+  d3.select("#skip")
+    .transition()
+    .style("opacity",0)
 d3.select("html")
 // .classed("imgBg", true)
 // .classed("noBg", false)
@@ -1072,6 +1494,9 @@ d3.select("#areaChartText")
 }
 
   function introAreaChart() {
+  d3.select("#skip")
+    .transition()
+    .style("opacity",1)
     hideBreadCrumbs()
    d3.select("#vis")
     .transition()
@@ -1110,6 +1535,7 @@ d3.select("#areaSvg")
 d3.selectAll(".titleElement")
 .transition()
 .style("opacity","0")
+.style("z-index",-1)
 
 d3.select("#backgroundBlocker")
 .transition()
@@ -1122,14 +1548,15 @@ d3.select("html")
 .attr("class","noBg")
 
 if(!AREA_ANIMATING){
+  var ptDy = (IS_MOBILE()) ? -40 : -35;
   d3.select("#popTextNum")
     .transition()
     .delay(1800)
-    .style("opacity","1")
+    .style("opacity","0")
     .transition()
     .delay(3400)
-    .attr("dx",-90)
-    .attr("dy",-30)  
+    .attr("dx",-105)
+    .attr("dy",ptDy)  
     .style("opacity","1")
     .each("start", function(){
       AREA_ANIMATING = true;
@@ -1155,13 +1582,15 @@ if(!AREA_ANIMATING){
     // .style("z-index",-1)
 
   d3.select("#popTextCircle")
+    .style("transform", "translate(0px,0px)")
     .transition()
     .delay(1800)
     .style("opacity",1)
     .style("z-index",1)
     .transition()
-    .delay(8000)
+    .delay(3800)
     .attr("stroke","#094c6b")
+    .style("transform", "translate(-6px,-3px)")
 
   d3.select("#popText")
       .transition()
@@ -1175,10 +1604,10 @@ if(!AREA_ANIMATING){
 
 
 
-
+    var areaTickCount = (IS_PHONE()) ? 5 : 10
 
     var areaXAxis = d3.svg.axis().scale(x)
-        .orient("bottom").ticks(10)
+        .orient("bottom").ticks(areaTickCount)
         .tickFormat(d3.format('f'));
 
     d3.select("#areaSvg")
@@ -1433,14 +1862,19 @@ d3.select("#dotBottom")
     d3.selectAll(".trackEmpty").transition().style("opacity",0)
     d3.selectAll(".trackFilled").transition().style("opacity",0)
     d3.selectAll(".dot").transition().style("opacity",0)
+    
     d3.select("#vis")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
-      .style("left","180px")
+      .style("left", getAnimationLeft(true))
 
 
     d3.selectAll(".animationComponents")
+      .transition()
+      .style("opacity",0)
+      .style("z-index",-1)
+    d3.selectAll(".mobileSwitch")
       .transition()
       .style("opacity",0)
       .style("z-index",-1)
@@ -1582,7 +2016,7 @@ d3.select("#dotBottom")
   function oneYearSentences(){
     d3.select("#vis")
       .transition()
-      .style("left","0px")
+      .style("left",getAnimationLeft(false))
     d3.selectAll(".axisLabel")
       .transition()
       .style("opacity",1)
@@ -1591,26 +2025,48 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
+if(IS_TABLET()){
+			d3.selectAll(".mobileSwitch")
+      .transition()
+      .style("opacity",1)
+      .style("z-index",99)
+}
 
     d3.select("#lineChart")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
       .style("z-index",1)
+    d3.select("#legendTen")
+      .transition()
+      .style("opacity",0)
+
     drawBackCurtain(3)
     animateIntro(3)
   }
   function longerSentences(){
+    d3.select("#vis")
+      .transition()
+      .style("left",getAnimationLeft(false))
+    d3.select("#legendTen")
+      .transition()
+      .style("opacity",1)
     drawBackCurtain(4)
     animateIntro(4)
   }
   function longerSentencesFasterAdmission(){
+    d3.select("#vis")
+      .transition()
+      .style("left",getAnimationLeft(false))
     drawBackCurtain(5)
     animateIntro(5)
   }
   function fewerShortSentences(){
+    d3.select("#vis")
+      .transition()
+      .style("left",getAnimationLeft(false))
     d3.select("#legendOne div")
-      .text("One year prison terms")
+      .text("1-year prison terms")
     d3.select("#legend")
       .transition()
       .style("opacity",1)
@@ -1624,18 +2080,25 @@ d3.select("#dotBottom")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
+if(IS_TABLET()){
+			d3.selectAll(".mobileSwitch")
+      .transition()
+      .style("opacity",1)
+      .style("z-index",99)
+}
     d3.select("#legend")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
     d3.select("#legendOne div")
-      .text("Six month prison terms")
+      .text("Six-month prison terms")
     drawBackCurtain(7)
     animateIntro(7)
     d3.select("#vis")
       .transition()
       .style("opacity",1)
       .style("z-index",1)
+      .style("left",getAnimationLeft(false))
     d3.select("#lineChart")
       .transition()
       .style("opacity",1)
@@ -1644,6 +2107,10 @@ d3.select("#dotBottom")
   function hideIntro(){
     hideBreadCrumbs();
     d3.selectAll(".animationComponents")
+      .transition()
+      .style("opacity",0)
+      .style("z-index",-1)
+    d3.selectAll(".mobileSwitch")
       .transition()
       .style("opacity",0)
       .style("z-index",-1)
@@ -1769,10 +2236,13 @@ function display(animationData, lineData, areaData) {
 
   // d3.select("#areaChartText")
   //   .style("margin-top",window.innerHeight + "px")
+  var gapScaler = (IS_PHONE()) ? 2 : .6
   d3.select("#firstGap")
-    .style("margin-bottom",window.innerHeight*.4 + "px")
+    .style("margin-bottom",window.innerHeight*gapScaler + "px")
   d3.select("#secondGap")
     .style("margin-bottom",window.innerHeight + "px")
+  d3.select("#firstStep")
+    .style("margin-top",window.innerHeight* -0.5 + "px")
 
   var plot = scrollVis();
   d3.select("#vis")
@@ -1791,19 +2261,30 @@ function display(animationData, lineData, areaData) {
   scroll(d3.selectAll('.step'));
 
   // setup event handling
-  scroll.on('resized', function(){
+
+  // var timer = null;
+  var test = debounce(function(){
     d3.select("#vis svg").remove()
     d3.select("#breadCrumb svg").remove()
     d3.select("#introAreaContainer svg").remove()
     d3.select("#lineChart svg").remove()
     display(animationData, lineData, areaData)
-
+  }, 1000)
+  scroll.on('resized', function(){
+    test();
   })
   scroll.on('active', function(index) {
     // highlight current step text
     d3.selectAll('.step')
       .transition()
-      .style('opacity',  function(d,i) { return i == index ? 1 : 0.2; });
+      .style('opacity',  function(d,i) {
+        if(IS_MOBILE()){
+          return 1
+        }else{
+          var low = (i == 2) ? 0 : 0.2
+          return i == index ? 1 : low;
+        }
+      });
 
     var stepText = d3.select(d3.selectAll(".step")[0][index]).html()
 
@@ -1861,6 +2342,20 @@ d3.csv("data/introData.csv", function(animationData){
   d3.csv("data/lineData.csv", function(lineData){
     d3.csv("data/extracted-animation-data.csv", function(areaData){
       display(animationData, lineData, areaData)
+      //startSimulation and pauseSimulation defined elsewhere
+      function handleVisibilityChange() {
+        if (!document.hidden) {
+          d3.select("#vis svg").remove()
+          d3.select("#breadCrumb svg").remove()
+          d3.select("#introAreaContainer svg").remove()
+          d3.select("#lineChart svg").remove()
+          display(animationData, lineData, areaData)
+        }
+      }
+
+      document.addEventListener("visibilitychange", handleVisibilityChange, false);
+
+
     });
   });
 });
@@ -1876,3 +2371,80 @@ nextpage
         nextpage.select(".next-arrow-hovered")
             .attr("class", "next-arrow")
     })
+
+
+
+
+document.addEventListener('touchstart', handleTouchStart, false);        
+document.addEventListener('touchmove', handleTouchMove, false);
+
+var xDown = null;                                                        
+var yDown = null;                                                        
+
+function handleTouchStart(evt) {                                         
+    xDown = evt.touches[0].clientX;                                      
+    yDown = evt.touches[0].clientY;                                      
+};                                                
+
+function handleTouchMove(evt) {
+    if ( ! xDown || ! yDown ) {
+        return;
+    }
+
+    var xUp = evt.touches[0].clientX;                                    
+    var yUp = evt.touches[0].clientY;
+
+    var xDiff = xDown - xUp;
+    var yDiff = yDown - yUp;
+
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+        if ( xDiff > 0 ) {
+            /* left swipe */
+            if(parseInt(d3.select("#mobileSwitchContainer").style("opacity")) == 1){
+              showLine();
+            }
+        } else {
+            /* right swipe */
+            if(parseInt(d3.select("#mobileSwitchContainer").style("opacity")) == 1){
+              showAnimation();
+            }
+        }                       
+    } else {
+        // if ( yDiff > 0 ) {
+        //     /* up swipe */ 
+        // } else { 
+        //     /* down swipe */
+        // }
+        return;                                                              
+    }
+    /* reset values */
+    xDown = null;
+    yDown = null;                                             
+};
+
+
+function mouse_event_over_element(evt, elem) {
+
+  if(typeof(elem[0]) == "undefined"){
+    return false
+  }else{
+    var o= elem.offset();
+    var w= elem[0].getBoundingClientRect().width;
+    var h= elem[0].getBoundingClientRect().height;
+    return evt.pageX >= o.left && evt.pageX <= o.left + w && evt.pageY >= o.top && evt.pageY <= o.top + h;
+  }
+}
+$("body").click(function(e){
+    if (mouse_event_over_element(e, $(".next-page-div"))) {
+      window.location.href = 'trends.html';
+    }
+});
+$("body").mousemove(function(e){
+    if (mouse_event_over_element(e, $(".next-page-div"))) {
+      d3.select(".next-arrow")
+            .attr("class", "next-arrow-hovered")
+    }else{
+      d3.select(".next-arrow-hovered")
+            .attr("class", "next-arrow")
+    }
+});

@@ -3,6 +3,8 @@ body{
     margin:0px;
 }
 #header-pinned {
+    position: fixed;
+    top: 0px;
     font: 16px Lato;
     color: #333;
     font-weight: 400;
@@ -13,7 +15,7 @@ body{
     width: 100%;
     background: #fff;
     border-bottom: 2px solid #eee;
-    z-index: 999;
+    z-index: 999999;
     -webkit-transition: top 0.25s linear;
     -moz-transition: top 0.25s linear;
     -o-transition: top 0.25s linear;
@@ -116,6 +118,7 @@ body{
     width: 32px;
     float: none;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 #header-pinned .share-icons .shareThisB:hover {

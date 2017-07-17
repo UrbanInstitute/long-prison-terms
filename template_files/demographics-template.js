@@ -39,7 +39,27 @@ function quoteTransition(number) {
 
 
 var scrollTimer = null;
+var scrollStarted = false;
+$(document).ready(function(){
+    if(d3.select(".left-col").node().getBoundingClientRect().top > window.innerHeight){
+        d3.select(".introArrowWrapper")
+            .transition()
+            .duration(0)
+            .style("opacity",1)
+            .style("z-index",1)
+
+    }    
+})
 $(window).scroll(function () {
+    if( ! scrollStarted ){
+        scrollStarted = true;
+        d3.select(".introArrowWrapper")
+            .transition()
+            .style("opacity",0)
+            .on("end", function(){
+                this.parentNode.removeChild(this);
+            })
+    }
     scrollCheck(); // fire on scroll
     if (scrollTimer) {
         clearTimeout(scrollTimer);   // clear pending timer

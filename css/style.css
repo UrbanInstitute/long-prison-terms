@@ -3,13 +3,16 @@ body{
   background: none !important;
 }
 .container {
-  width: 890px;
+  /*width: 890px;*/
 }
-
+a{
+  cursor: pointer;
+}
 #graphic {
   position: absolute;
-  left: 14px;
+  left: 0px;
   padding-top: 60px;
+  width: 100%;
 }
 
 
@@ -67,7 +70,7 @@ body{
 #vis {
   display: inline-block;
   position: fixed;
-  top: calc(50% - 217.5px);
+  top: calc(50% - 237.5px);
   left: 180px;
   z-index: 1;
   margin-left: 0;
@@ -83,10 +86,11 @@ body{
     width: 530px;
     background: transparent;
     height: 207px;
-     top: calc(50% - 217.5px); 
+     top: calc(50% - 237.5px); 
     border-left: 46px solid transparent;
     left: 370px;
-    height: 239px;
+    /*height: 239px;*/
+    height: 550px;
 }
 #vis .title {
   font-size:120px;
@@ -121,6 +125,7 @@ body{
     stroke: #ec008b;
     stroke-width: 2;
     fill: none;
+    cursor: pointer;
     /*opacity: .2*/
 }
 
@@ -135,12 +140,10 @@ body{
     stroke-width: 1;
     shape-rendering: crispEdges;
 }
-.introLineChart .y.axis path{
+.introLineChart .axis .tick{
   display: none;
 }
-.introLineChart .axis .tick text{
-  font-size: 12px;
-}
+
 
 
 
@@ -185,29 +188,29 @@ body{
   font-weight: bold;
 }
 #lineLabel_3{
-  left: 263px;
-  bottom: -159px;
+  left: 251px;
+  bottom: 141px;
 }
 #lineLabel_4{
-  left: 228px;
-  bottom: 22px;
+  left: 244px;
+  bottom: 383px;
   width: 80px;
 }
 #lineLabel_5{
-  left: 125px;
+  left: 86px;
   width: 105px;
-  bottom: 55px;
+  bottom: 364px;
 }
 #lineLabel_6{
-  left: 256px;
-  bottom: -82px;
+  left: 260px;
+  bottom: 254px;
   width: 100px;
   line-height: 13px;
 }
 #lineLabel_7{
   width: 80px;
-  left: 313px;
-  bottom: -30px;
+  left: 308px;
+  bottom: 313px;
   line-height: 13px;
 }
 .axisLabel{
@@ -216,8 +219,8 @@ body{
   position: absolute;
 }
 #axisLabelY{
-  left: 7px;
-  top: 47px;
+  left: 29px;
+  top: 54px;
   opacity: 0;
 }
 #axisLabelX{

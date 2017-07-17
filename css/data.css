@@ -8,6 +8,7 @@
 
 .table-container{
 	cursor: pointer;
+	pointer-events: none;
 }
 
 #dd-content{
@@ -25,6 +26,10 @@
 	font-weight: bold;
 	margin-top: 20px;
 	margin-bottom: 20px;
+	color: #b3b3b3;
+}
+.dd-title.loaded{
+	color: #000;
 }
 .dd-arrow{
 	margin-left: 20px;
@@ -110,4 +115,21 @@ td {
 }
 .dd_right{
 	right: 0px;
+}
+@media(max-width: 766px){
+	#dd-content{
+		width: calc(100% - 68px);
+    	margin-left: 34px;
+	}
+}
+@media(max-width: 670px){
+	.dd-title{
+		font-size: 22px;
+	}
+}
+@media(max-width: 320px){
+	#dd-content{
+		width: calc(100% - 40px);
+    	margin-left: 20px;
+	}
 }
