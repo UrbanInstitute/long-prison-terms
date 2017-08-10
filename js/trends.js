@@ -842,14 +842,14 @@ var scrollVis = function() {
     .html("Average Time Served by Offense Type")
     .style("opacity",0)
 
-  var actionWords = (IS_TABLET()) ? "Tap on a" : "Hover on a"
+  var actionWords = (IS_TABLET()) ? "" : ""
   d3.select("#vis")
     .append("div")
     .attr("class","explainer explainerA visElement")
     .style("position", "absolute")
     .style("top",explainerY + "px")
     .style("left",explainerX + "px")
-    .html("Data for all line charts on the same x- and y-axis scales.<br/>" + actionWords + " state for detailed data.")
+    .html("Data for all line charts on the same x- and y-axis scales.<br/>" + actionWords + "")
   
   d3.select("#vis")
     .append("div")

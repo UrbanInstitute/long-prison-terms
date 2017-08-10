@@ -202,15 +202,15 @@ a{
   bottom: 364px;
 }
 #lineLabel_6{
-  left: 260px;
+  left: 223px;
   bottom: 254px;
   width: 100px;
   line-height: 13px;
 }
 #lineLabel_7{
   width: 80px;
-  left: 308px;
-  bottom: 313px;
+  left: 245px;
+  bottom: 282px;
   line-height: 13px;
 }
 .axisLabel{
@@ -225,7 +225,7 @@ a{
 }
 #axisLabelX{
   top: 532px;
-  left: 172px;
+  left: 272px;
   opacity: 0;
 }
 

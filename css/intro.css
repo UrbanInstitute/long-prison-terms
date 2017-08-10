@@ -1,3 +1,10 @@
+#vis, .animationComponents{
+  /*display: none !important;*/
+}
+#lineChart{
+  display: none !important;
+}
+
 body{
   overflow-x: hidden;
 }
@@ -148,7 +155,7 @@ a{
 #animationLabel{
   position: fixed;
   top: calc(50% + 295px);
-  left: 185px;
+  left: 233px;
   font-size: 13px;
 }
 #animationTick0{
@@ -160,13 +167,13 @@ a{
 #animationTick50{
   position: fixed;
   top: calc(50% + 276px);
-  left: 211.5px;
+  left: 262px;
   font-size: 13px;
 }
 #animationTick100{
   position: fixed;
   top: calc(50% + 276px);
-  left: 400px;
+  left: 547px;
   font-size: 13px;
 }
 
