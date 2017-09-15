@@ -226,8 +226,8 @@ var scrollVis = function() {
     WIDTH = 370 +25;
     LINEWIDTH = 390;
   }else{
-    WIDTH = 590;
-    LINEWIDTH = 590;
+    WIDTH = 420 +25;
+    LINEWIDTH = 390;
   }
 
   if(IS_PHONE() || IS_SHORT()){
@@ -492,7 +492,7 @@ var scrollVis = function() {
       d3.selectAll(".animationComponents")
         .style("margin-left", bGutter + "px")
       d3.select("#lineChart")
-        .style("left", "0px")
+        .style("left", (370 + gutter) + "px")
       d3.select("#breadCrumb")
         .style("left", (810 + gutter) + "px")
       d3.select("#sections")
@@ -504,7 +504,7 @@ var scrollVis = function() {
       d3.select("#animationLabel")
         .style("left", null)
       d3.selectAll(".lineLabel")
-        .style("transform", "translate(190px,  " + transY+ "px)")
+        .style("transform", "translate(0px,  " + transY+ "px)")
 
     }
     //temp line
@@ -2026,7 +2026,7 @@ d3.select("#dotBottom")
       .style("opacity",1)
       .style("z-index",1)
 if(IS_TABLET()){
-			d3.selectAll(".mobileSwitch")
+      d3.selectAll(".mobileSwitch")
       .transition()
       .style("opacity",1)
       .style("z-index",99)
@@ -2081,7 +2081,7 @@ if(IS_TABLET()){
       .style("opacity",1)
       .style("z-index",1)
 if(IS_TABLET()){
-			d3.selectAll(".mobileSwitch")
+      d3.selectAll(".mobileSwitch")
       .transition()
       .style("opacity",1)
       .style("z-index",99)
@@ -2448,7 +2448,3 @@ $("body").mousemove(function(e){
             .attr("class", "next-arrow")
     }
 });
-
-
-
-

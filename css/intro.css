@@ -1,10 +1,3 @@
-#vis, .animationComponents{
-  /*display: none !important;*/
-}
-#lineChart{
-  display: none !important;
-}
-
 body{
   overflow-x: hidden;
 }
@@ -75,7 +68,7 @@ a{
 }
 #areaChartText1, #areaChartText2-1, #areaChartText2-2{
   opacity: 1;
-	/*z-index:-1;*/
+  /*z-index:-1;*/
 }
 #areaChartText1{
   padding-bottom: 30px;
@@ -117,14 +110,14 @@ a{
 }
 #bodyNew, #bodyNew{
   opacity: 0;
-	z-index:-1;
+  z-index:-1;
   position: absolute;
   top: 0px;
 }
 
 .textAppear{
   /*opacity: 0;*/
-	/*z-index:-1;*/
+  /*z-index:-1;*/
 }
 
 
@@ -155,7 +148,7 @@ a{
 #animationLabel{
   position: fixed;
   top: calc(50% + 295px);
-  left: 233px;
+  left: 185px;
   font-size: 13px;
 }
 #animationTick0{
@@ -167,19 +160,19 @@ a{
 #animationTick50{
   position: fixed;
   top: calc(50% + 276px);
-  left: 262px;
+  left: 211.5px;
   font-size: 13px;
 }
 #animationTick100{
   position: fixed;
   top: calc(50% + 276px);
-  left: 547px;
+  left: 400px;
   font-size: 13px;
 }
 
 .animationComponents{
   opacity: 0;
-	z-index:-1;
+  z-index:-1;
 }
 .row{
   z-index: 99;
